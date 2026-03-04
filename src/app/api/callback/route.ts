@@ -45,16 +45,23 @@ export async function GET(request: Request) {
             <head>
                 <title>Authentication Success</title>
                 <script>
-                    const receiveMessage = (message) => {
-                        window.opener.postMessage(
-                            'authorization:github:success:{"token":"${accessToken}","provider":"github"}',
-                            message.origin
-                        );
-                        window.removeEventListener('message', receiveMessage, false);
+                    const msg = 'authorization:github:success:{"token":"${accessToken}","provider":"github"}';
+
+                    if (window.opener) {
+                        // 1. Send the data immediately just in case
+                        window.opener.postMessage(msg, '*');
+                        
+                        // 2. Also send the legacy handshake
+                        window.opener.postMessage('authorizing:github', '*');
                     }
-                    
+
+                    // 3. Keep listening in case the CMS replies to the handshake
+                    const receiveMessage = (e) => {
+                        if (e.data === 'authorizing:github' && window.opener) {
+                            window.opener.postMessage(msg, e.origin);
+                        }
+                    };
                     window.addEventListener('message', receiveMessage, false);
-                    window.opener.postMessage('authorizing:github', '*');
                 </script>
             </head>
             <body>
