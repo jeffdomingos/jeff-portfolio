@@ -45,29 +45,16 @@ export async function GET(request: Request) {
             <head>
                 <title>Authentication Success</title>
                 <script>
-                    const receiveMessage = (message) => {
-                        const origin = message.origin;
-                        if (!origin.includes('localhost') && !origin.includes('vercel.app') && !origin.includes('jeffdomingos.com')) {
-                            console.error('Unauthorized origin:', origin);
-                            return;
-                        }
-
+                    if (window.opener) {
                         window.opener.postMessage(
-                            \`authorization:github:success:{"token":"\${accessToken}","provider":"github"}\`,
-                            origin
+                            "authorization:github:success:{\\"token\\":\\"\${accessToken}\\",\\"provider\\":\\"github\\"}",
+                            window.location.origin
                         );
-                        
-                        window.removeEventListener('message', receiveMessage, false);
                     }
-                    
-                    window.addEventListener('message', receiveMessage, false);
-                    
-                    // Signal to opener that we are ready
-                    window.opener.postMessage('authorizing:github', '*');
                 </script>
             </head>
             <body>
-                <p>Authentication successful! You can close this window if it doesn't close automatically.</p>
+                <p>Authentication successful! You can close this window.</p>
             </body>
             </html>
         `;

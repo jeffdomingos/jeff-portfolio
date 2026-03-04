@@ -2,7 +2,6 @@ backend:
   name: github
   repo: jeffdomingos/jeff-portfolio
   branch: main
-  base_url: https://jeffdomingos.vercel.app
   auth_endpoint: api/auth
 publish_mode: editorial_workflow
 locale: 'pt'
