@@ -47,13 +47,13 @@ export async function GET(request: Request) {
                 <script>
                     const receiveMessage = (message) => {
                         const origin = message.origin;
-                        if (!origin.includes('localhost') && !origin.includes('vercel.app')) {
+                        if (!origin.includes('localhost') && !origin.includes('vercel.app') && !origin.includes('jeffdomingos.com')) {
                             console.error('Unauthorized origin:', origin);
                             return;
                         }
 
                         window.opener.postMessage(
-                            'authorization:github:success:${JSON.stringify({ token: accessToken, provider: 'github' })}',
+                            \`authorization:github:success:{"token":"\${accessToken}","provider":"github"}\`,
                             origin
                         );
                         
