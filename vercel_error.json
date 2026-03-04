@@ -1,0 +1,101 @@
+[
+{"type":"stderr","created":1772657828488,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Error: Vulnerable version of next-mdx-remote detected (4.4.1). Please update to version 6.0.0 or later. Learn More: https://vercel.link/CVE-2026-0969","id":"1772657828488141230304600000","date":1772657828488,"serial":"1772657828488141230304600000"}}
+,
+{"type":"stderr","created":1772657828282,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Build Completed in /vercel/output [48s]","id":"1772657828282141230304600000","date":1772657828282,"serial":"1772657828282141230304600000"}}
+,
+{"type":"stdout","created":1772657828161,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Collected static files (public/, static/, .next/static): 12.021ms","id":"1772657828161141230304600000","date":1772657828161,"serial":"1772657828161141230304600000"}}
+,
+{"type":"stdout","created":1772657828144,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Created all serverless functions in: 317.094ms","id":"1772657828144141230304600000","date":1772657828144,"serial":"1772657828144141230304600000"}}
+,
+{"type":"stdout","created":1772657827827,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Traced Next.js server files in: 33.879ms","id":"1772657827827141230304600000","date":1772657827827,"serial":"1772657827827141230304600000"}}
+,
+{"type":"stdout","created":1772657827727,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657827727141230304600004","date":1772657827727,"serial":"1772657827727141230304600004"}}
+,
+{"type":"stdout","created":1772657827727,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"ƒ  (Dynamic)  server-rendered on demand","id":"1772657827727141230304600003","date":1772657827727,"serial":"1772657827727141230304600003"}}
+,
+{"type":"stdout","created":1772657827727,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"●  (SSG)      prerendered as static HTML (uses getStaticProps)","id":"1772657827727141230304600002","date":1772657827727,"serial":"1772657827727141230304600002"}}
+,
+{"type":"stdout","created":1772657827727,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"○  (Static)   prerendered as static content","id":"1772657827727141230304600001","date":1772657827727,"serial":"1772657827727141230304600001"}}
+,
+{"type":"stdout","created":1772657827727,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657827727141230304600000","date":1772657827727,"serial":"1772657827727141230304600000"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657827726141230304600010","date":1772657827726,"serial":"1772657827726141230304600010"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"  └ other shared chunks (total)          1.9 kB","id":"1772657827726141230304600009","date":1772657827726,"serial":"1772657827726141230304600009"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"  ├ chunks/e6e143be-bdadaff058d60d45.js  53.6 kB","id":"1772657827726141230304600008","date":1772657827726,"serial":"1772657827726141230304600008"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"  ├ chunks/660-d28eb4a11b316b33.js       31.5 kB","id":"1772657827726141230304600007","date":1772657827726,"serial":"1772657827726141230304600007"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"+ First Load JS shared by all            87 kB","id":"1772657827726141230304600006","date":1772657827726,"serial":"1772657827726141230304600006"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"└ ○ /sitemap.xml                         0 B                0 B","id":"1772657827726141230304600005","date":1772657827726,"serial":"1772657827726141230304600005"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ○ /robots.txt                          0 B                0 B","id":"1772657827726141230304600004","date":1772657827726,"serial":"1772657827726141230304600004"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /api/callback                        0 B                0 B","id":"1772657827726141230304600003","date":1772657827726,"serial":"1772657827726141230304600003"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /api/auth                            0 B                0 B","id":"1772657827726141230304600002","date":1772657827726,"serial":"1772657827726141230304600002"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ○ /admin                               148 B          87.1 kB","id":"1772657827726141230304600001","date":1772657827726,"serial":"1772657827726141230304600001"}}
+,
+{"type":"stdout","created":1772657827726,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /[locale]/resume                     148 B          87.1 kB","id":"1772657827726141230304600000","date":1772657827726,"serial":"1772657827726141230304600000"}}
+,
+{"type":"stdout","created":1772657827725,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ● /[locale]/projects/[slug]            2.46 kB         121 kB","id":"1772657827725141230304600004","date":1772657827725,"serial":"1772657827725141230304600004"}}
+,
+{"type":"stdout","created":1772657827725,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /[locale]/projects                   175 B            94 kB","id":"1772657827725141230304600003","date":1772657827725,"serial":"1772657827725141230304600003"}}
+,
+{"type":"stdout","created":1772657827725,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /[locale]/contact                    148 B          87.1 kB","id":"1772657827725141230304600002","date":1772657827725,"serial":"1772657827725141230304600002"}}
+,
+{"type":"stdout","created":1772657827725,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ƒ /[locale]                            11 kB           115 kB","id":"1772657827725141230304600001","date":1772657827725,"serial":"1772657827725141230304600001"}}
+,
+{"type":"stdout","created":1772657827725,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"├ ○ /_not-found                          872 B          87.9 kB","id":"1772657827725141230304600000","date":1772657827725,"serial":"1772657827725141230304600000"}}
+,
+{"type":"stdout","created":1772657827724,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"┌ ○ /                                    148 B          87.1 kB","id":"1772657827724141230304600001","date":1772657827724,"serial":"1772657827724141230304600001"}}
+,
+{"type":"stdout","created":1772657827724,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"Route (app)                              Size     First Load JS","id":"1772657827724141230304600000","date":1772657827724,"serial":"1772657827724141230304600000"}}
+,
+{"type":"stdout","created":1772657827714,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657827714141230304600000","date":1772657827714,"serial":"1772657827714141230304600000"}}
+,
+{"type":"stdout","created":1772657820595,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Collecting build traces ...","id":"1772657820595141230304600000","date":1772657820595,"serial":"1772657820595141230304600000"}}
+,
+{"type":"stdout","created":1772657820594,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Finalizing page optimization ...","id":"1772657820594141230304600000","date":1772657820594,"serial":"1772657820594141230304600000"}}
+,
+{"type":"stdout","created":1772657820421,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":" ✓ Generating static pages (10/10)","id":"1772657820421141230304600000","date":1772657820421,"serial":"1772657820421141230304600000"}}
+,
+{"type":"stdout","created":1772657820216,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Generating static pages (7/10) \r","id":"1772657820216141230304600000","date":1772657820216,"serial":"1772657820216141230304600000"}}
+,
+{"type":"stdout","created":1772657820084,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Generating static pages (4/10) \r","id":"1772657820084141230304600000","date":1772657820084,"serial":"1772657820084141230304600000"}}
+,
+{"type":"stdout","created":1772657820000,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Generating static pages (2/10) \r","id":"1772657820000141230304600000","date":1772657820000,"serial":"1772657820000141230304600000"}}
+,
+{"type":"stdout","created":1772657819936,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Generating static pages (0/10) ...","id":"1772657819936141230304600000","date":1772657819936,"serial":"1772657819936141230304600000"}}
+,
+{"type":"stdout","created":1772657818436,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"   Collecting page data ...","id":"1772657818436141230304600000","date":1772657818436,"serial":"1772657818436141230304600000"}}
+,
+{"type":"stdout","created":1772657816144,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules","id":"1772657816144141230304600000","date":1772657816144,"serial":"1772657816144141230304600000"}}
+,
+{"type":"stdout","created":1772657816143,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657816143141230304600004","date":1772657816143,"serial":"1772657816143141230304600004"}}
+,
+{"type":"stdout","created":1772657816143,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"28:29  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element","id":"1772657816143141230304600003","date":1772657816143,"serial":"1772657816143141230304600003"}}
+,
+{"type":"stdout","created":1772657816143,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"./src/components/organisms/HeroCarousel.tsx","id":"1772657816143141230304600002","date":1772657816143,"serial":"1772657816143141230304600002"}}
+,
+{"type":"stdout","created":1772657816143,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657816143141230304600001","date":1772657816143,"serial":"1772657816143141230304600001"}}
+,
+{"type":"stdout","created":1772657816143,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"41:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element","id":"1772657816143141230304600000","date":1772657816143,"serial":"1772657816143141230304600000"}}
+,
+{"type":"stdout","created":1772657816135,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"./src/components/organisms/Header.tsx","id":"1772657816135141230304600004","date":1772657816135,"serial":"1772657816135141230304600004"}}
+,
+{"type":"stdout","created":1772657816135,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657816135141230304600003","date":1772657816135,"serial":"1772657816135141230304600003"}}
+,
+{"type":"stdout","created":1772657816135,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"9:17  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element","id":"1772657816135141230304600002","date":1772657816135,"serial":"1772657816135141230304600002"}}
+,
+{"type":"stdout","created":1772657816135,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"./src/components/mdx/index.tsx","id":"1772657816135141230304600001","date":1772657816135,"serial":"1772657816135141230304600001"}}
+,
+{"type":"stdout","created":1772657816135,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"","id":"1772657816135141230304600000","date":1772657816135,"serial":"1772657816135141230304600000"}}
+,
+{"type":"stdout","created":1772657816134,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"12:87  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element","id":"1772657816134141230304600003","date":1772657816134,"serial":"1772657816134141230304600003"}}
+,
+{"type":"stdout","created":1772657816134,"payload":{"deploymentId":"dpl_B1orjmK9cXhLHSNDYEY2q4szqu62","info":{"type":"build","name":"bld_qgycmh3t4","entrypoint":"."},"text":"./src/components/atoms/index.tsx","id":"1772657816134141230304600002","date":1772657816134,"serial":"1772657816134141230304600002"}}
+]

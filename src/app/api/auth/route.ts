@@ -14,11 +14,13 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: 'Missing GITHUB_CLIENT_ID environment variable' }, { status: 500 });
     }
 
-    // Determine the base URL dynamically or fallback to the Vercel provided one
-    // We use the host to know where to return to
     const host = request.headers.get('host');
-    const protocol = host?.includes('localhost') ? 'http' : 'https';
-    const redirectUri = `${protocol}://${host}/api/callback`;
+
+    // We force the exact domain configured in GitHub OAuth Apps
+    // to prevent mismatch errors if the user accesses via www.
+    const redirectUri = host?.includes('localhost')
+        ? 'http://localhost:3000/api/callback'
+        : 'https://jeffdomingos.com/api/callback';
 
     const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=repo,user&redirect_uri=${encodeURIComponent(redirectUri)}`;
 

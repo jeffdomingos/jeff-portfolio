@@ -1190,3 +1190,7 @@ Require stack:
  GET /_next/static/chunks/fallback/main.js 404 in 1003ms
  GET /_next/static/chunks/fallback/pages/_app.js 404 in 62ms
  GET /_next/static/chunks/fallback/pages/_error.js 404 in 61ms
+ ✓ Compiled in 974ms (946 modules)
+ ✓ Compiled in 1657ms (960 modules)
+ ✓ Compiled in 713ms (504 modules)
+ ✓ Compiled in 370ms (504 modules)
