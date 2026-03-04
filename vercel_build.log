@@ -1,0 +1,86 @@
+> [debug] [2026-03-04T20:50:22.093Z] Vercel CLI 50.26.1
+> [debug] [2026-03-04T20:50:22.102Z] Agent/TTY/nonInteractive: isAgent=false agentName=none stdin.isTTY=true --non-interactive=false explicitFalse=false => nonInteractive=false
+> [debug] [2026-03-04T20:50:22.103Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-03-04T20:50:22.144Z] failed to find extension command with name "vercel---prod"
+> [debug] [2026-03-04T20:50:22.182Z] Setting target to production
+> [debug] [2026-03-04T20:50:22.221Z] Spinner invoked (Retrieving project…) with a 1000ms delay
+> [debug] [2026-03-04T20:50:22.222Z] Using token from `--token` argument, skipping token refresh.
+> [debug] [2026-03-04T20:50:22.255Z] #1 → GET https://api.vercel.com/teams/team_CEHCId0tk3oVfyirULfN9cjd
+> [debug] [2026-03-04T20:50:22.256Z] #2 → GET https://api.vercel.com/v9/projects/prj_Sc5LDAoWKWAKTx3lCX4LBFPC1nrA?teamId=team_CEHCId0tk3oVfyirULfN9cjd
+> [debug] [2026-03-04T20:50:22.861Z] #1 ← 200 OK: sfo1::d8dpj-1772657422734-a035d37c67f5 [606ms]
+> [debug] [2026-03-04T20:50:22.867Z] #2 ← 200 OK: sfo1::tnnbj-1772657422730-208a48139896 [610ms]
+> [debug] [2026-03-04T20:50:22.935Z] Spinner invoked (Deploying jefferson-domingos-projects/jeffdomingos) with a 0ms delay
+[client-debug] 2026-03-04T20:50:22.936Z Creating deployment...
+[client-debug] 2026-03-04T20:50:22.937Z Provided 'path' is a directory.
+[client-debug] 2026-03-04T20:50:22.940Z Found 26 rules in .vercelignore
+[client-debug] 2026-03-04T20:50:22.940Z Building file tree...
+[client-debug] 2026-03-04T20:50:22.954Z Found 168 files in the specified directory
+[client-debug] 2026-03-04T20:50:22.989Z Yielding a 'hashes-calculated' event with 166 hashes
+> [debug] [2026-03-04T20:50:22.991Z] #3 → GET https://api.vercel.com/v9/projects/jeffdomingos?teamId=team_CEHCId0tk3oVfyirULfN9cjd
+> [debug] [2026-03-04T20:50:23.217Z] #3 ← 200 OK: sfo1::j7bkn-1772657423087-7692c7aa3c64 [226ms]
+[client-debug] 2026-03-04T20:50:23.219Z Using provided API URL: https://api.vercel.com
+[client-debug] 2026-03-04T20:50:23.220Z Using provided user agent: vercel 50.26.1 node-v20.20.0 linux (x64)
+[client-debug] 2026-03-04T20:50:23.220Z Setting platform version to harcoded value 2
+[client-debug] 2026-03-04T20:50:23.220Z Creating the deployment and starting upload...
+[client-debug] 2026-03-04T20:50:23.220Z Determining necessary files for upload...
+[client-debug] 2026-03-04T20:50:23.221Z Creating deployment
+[client-debug] 2026-03-04T20:50:23.223Z Sending deployment creation API request
+[client-debug] 2026-03-04T20:50:23.548Z Deployment response: {"error":{"code":"missing_files","message":"Missing files","missing":["4cc6cba464dd52a44ecf1c33e5c48f173065a657"]}}
+[client-debug] 2026-03-04T20:50:23.548Z Error: Deployment request status is 400
+[client-debug] 2026-03-04T20:50:23.548Z 1 files are required to upload
+[client-debug] 2026-03-04T20:50:23.549Z Yielding a 'file-count' event
+> [debug] [2026-03-04T20:50:23.549Z] Total files 166, 1 changed
+> [debug] [2026-03-04T20:50:23.549Z] Spinner invoked (Uploading [--------------------] (0.0B/1.6KB)) with a 0ms delay
+[client-debug] 2026-03-04T20:50:23.550Z Building an upload list...
+[client-debug] 2026-03-04T20:50:23.551Z Starting upload
+[client-debug] 2026-03-04T20:50:23.552Z POST https://api.vercel.com/v2/files?teamId=team_CEHCId0tk3oVfyirULfN9cjd
+> [debug] [2026-03-04T20:50:23.554Z] Spinner invoked (Uploading [====================] (1.6KB/1.6KB)) with a 0ms delay
+[client-debug] 2026-03-04T20:50:23.856Z DONE in 304ms: POST https://api.vercel.com/v2/files?teamId=team_CEHCId0tk3oVfyirULfN9cjd
+[client-debug] 2026-03-04T20:50:23.857Z File 4cc6cba464dd52a44ecf1c33e5c48f173065a657 (/home/deck/sites.google.com/view/jeffdomingos/vercel_build.log) uploaded
+[client-debug] 2026-03-04T20:50:23.857Z Yielding a 'file-uploaded' event
+> [debug] [2026-03-04T20:50:23.857Z] Uploaded: /home/deck/sites.google.com/view/jeffdomingos/vercel_build.log (1.58KB)
+[client-debug] 2026-03-04T20:50:23.857Z All files uploaded
+[client-debug] 2026-03-04T20:50:23.857Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-03-04T20:50:23.857Z Starting deployment creation
+[client-debug] 2026-03-04T20:50:23.857Z Creating deployment
+[client-debug] 2026-03-04T20:50:23.859Z Sending deployment creation API request
+[client-debug] 2026-03-04T20:50:26.094Z Deployment response: {"alias":["jeffdomingos-jefferson-domingos-projects.vercel.app","jeffdomingos-jeffdomingos-jefferson-domingos-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":["jeffdomingos-jefferson-domingos-projects.vercel.app","jeffdomingos-jeffdomingos-jefferson-domingos-projects.vercel.app"],"bootedAt":1772657424265,"buildingAt":1772657424265,"buildSkipped":false,"createdAt":1772657424265,"creator":{"uid":"96YmvsnzZ8egbriK0k6xbc0b","username":"jeffdomingos"},"id":"dpl_9Fya19krKzKumbYB6522bmyPRidV","name":"jeffdomingos","meta":{"githubCommitAuthorName":"Jeff Domingos","githubCommitAuthorEmail":"jeffdomingos@example.com","githubCommitMessage":"🚀 Initial Next.js & Decap CMS Architecture","githubCommitOrg":"jeffdomingos","githubCommitRef":"main","githubCommitRepo":"jeff-portfolio","githubCommitSha":"ad01e5709ed513ad3cee00a901b07eeeefa87008","githubDeployment":"1","githubOrg":"jeffdomingos","githubRepo":"jeff-portfolio","gitDirty":"1"},"originCacheRegion":"iad1","project":{"id":"prj_Sc5LDAoWKWAKTx3lCX4LBFPC1nrA","name":"jeffdomingos","framework":"nextjs"},"public":false,"readyState":"INITIALIZING","regions":["iad1"],"source":"cli","status":"INITIALIZING","target":"production","team":{"id":"team_CEHCId0tk3oVfyirULfN9cjd","name":"Jefferson Domingos' projects","slug":"jefferson-domingos-projects"},"type":"LAMBDAS","url":"jeffdomingos-ikzqra4ga-jefferson-domingos-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTokenClaims":{"sub":"owner:jefferson-domingos-projects:project:jeffdomingos:environment:production","iss":"https://oidc.vercel.com/jefferson-domingos-projects","scope":"owner:jefferson-domingos-projects:project:jeffdomingos:environment:production","aud":"https://vercel.com/jefferson-domingos-projects","owner":"jefferson-domingos-projects","owner_id":"team_CEHCId0tk3oVfyirULfN9cjd","project":"jeffdomingos","project_id":"prj_Sc5LDAoWKWAKTx3lCX4LBFPC1nrA","environment":"production","plan":"hobby"},"lambdas":[{"id":"bld_gtga4yn9g","createdAt":1772657425663,"entrypoint":".","readyState":"READY","readyStateAt":1772657425663,"output":[]}],"aliasAssignedAt":null,"build":{"env":[]},"builds":[],"createdIn":"sfo1","env":[],"functions":null,"inspectorUrl":"https://vercel.com/jefferson-domingos-projects/jeffdomingos/9Fya19krKzKumbYB6522bmyPRidV","isInConcurrentBuildsQueue":false,"isInSystemBuildsQueue":true,"ownerId":"team_CEHCId0tk3oVfyirULfN9cjd","plan":"hobby","projectId":"prj_Sc5LDAoWKWAKTx3lCX4LBFPC1nrA","projectSettings":{"buildCommand":null,"devCommand":null,"framework":"nextjs","commandForIgnoringBuildStep":null,"installCommand":null,"outputDirectory":null,"speedInsights":{"id":"WyW6JXFMebZOGKW4ly2Ku8IVRHw","hasData":false},"webAnalytics":{"id":"M6jelURdzhOvoLwvMzY0bo78J"},"nodeVersion":"24.x"},"routes":null,"config":{"version":1,"secureComputePrimaryRegion":null,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fluid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}}}
+[client-debug] 2026-03-04T20:50:26.095Z Deployment created
+[client-debug] 2026-03-04T20:50:26.095Z Yielding a 'created' event
+Inspect: https://vercel.com/jefferson-domingos-projects/jeffdomingos/9Fya19krKzKumbYB6522bmyPRidV [3s]
+Production: https://jeffdomingos-ikzqra4ga-jefferson-domingos-projects.vercel.app [3s]
+https://jeffdomingos-ikzqra4ga-jefferson-domingos-projects.vercel.app> [debug] [2026-03-04T20:50:26.096Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-03-04T20:50:26.097Z] #4 → GET https://api.vercel.com/v2/user
+[client-debug] 2026-03-04T20:50:26.097Z Waiting for deployment to be ready...
+[client-debug] 2026-03-04T20:50:26.098Z Waiting for builds and the deployment to complete...
+> [debug] [2026-03-04T20:50:26.299Z] #4 ← 200 OK: sfo1::4jwmn-1772657426192-78f0bd97e055 [202ms]
+> [debug] [2026-03-04T20:50:26.301Z] #5 → GET https://api.vercel.com/v3/now/deployments/dpl_9Fya19krKzKumbYB6522bmyPRidV/events?direction=forward&follow=1&format=lines&teamId=team_CEHCId0tk3oVfyirULfN9cjd
+[client-debug] 2026-03-04T20:50:27.880Z Deployment state changed to BUILDING
+[client-debug] 2026-03-04T20:50:27.881Z Yielding a 'building' event
+> [debug] [2026-03-04T20:50:27.881Z] Spinner invoked (Building...) with a 0ms delay
+> [debug] [2026-03-04T20:50:29.648Z] #5 ← 200 OK: sfo1::d8dpj-1772657426397-7e6d3cc257bf [3.35s]
+> [debug] [2026-03-04T20:50:29.651Z] Spinner invoked (Building: Running build in Washington, D.C., USA (East) – iad1) with a 0ms delay
+> [debug] [2026-03-04T20:50:29.652Z] Spinner invoked (Building: Build machine configuration: 2 cores, 8 GB) with a 0ms delay
+> [debug] [2026-03-04T20:50:29.652Z] Spinner invoked (Building: Retrieving list of deployment files...) with a 0ms delay
+> [debug] [2026-03-04T20:50:29.652Z] Spinner invoked (Building: Previous build caches not available.) with a 0ms delay
+> [debug] [2026-03-04T20:50:29.652Z] Spinner invoked (Building: Downloading 168 deployment files...) with a 0ms delay
+> [debug] [2026-03-04T20:50:32.808Z] Spinner invoked (Building: Running "vercel build") with a 0ms delay
+> [debug] [2026-03-04T20:50:33.814Z] Spinner invoked (Building: Detected `pnpm-lock.yaml` 9 which may be generated by pnpm@9.x or pnpm@10.x) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.814Z] Spinner invoked (Building: Using pnpm@10.x based on project creation date) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.814Z] Spinner invoked (Building: To use pnpm@9.x, manually opt in using corepack (https://vercel.com/docs/deployments/configure-a-build#corepack)) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.814Z] Spinner invoked (Building: Installing dependencies...) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.814Z] Spinner invoked (Building: Lockfile is up to date, resolution step is skipped) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.815Z] Spinner invoked (Building: Progress: resolved 1, reused 0, downloaded 0, added 0) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.815Z] Spinner invoked (Building: Packages: +918) with a 0ms delay
+> [debug] [2026-03-04T20:50:33.815Z] Spinner invoked (Building: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++) with a 0ms delay
+> [debug] [2026-03-04T20:50:35.847Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 62, added 43) with a 0ms delay
+> [debug] [2026-03-04T20:50:36.880Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 147, added 80) with a 0ms delay
+> [debug] [2026-03-04T20:50:36.880Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 253, added 125) with a 0ms delay
+> [debug] [2026-03-04T20:50:37.914Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 352, added 163) with a 0ms delay
+> [debug] [2026-03-04T20:50:37.914Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 425, added 190) with a 0ms delay
+> [debug] [2026-03-04T20:50:41.129Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 487, added 233) with a 0ms delay
+> [debug] [2026-03-04T20:50:41.130Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 493, added 237) with a 0ms delay
+> [debug] [2026-03-04T20:50:41.130Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 502, added 237) with a 0ms delay
+> [debug] [2026-03-04T20:50:43.164Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 643, added 338) with a 0ms delay
+> [debug] [2026-03-04T20:50:44.177Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 715, added 364) with a 0ms delay
+> [debug] [2026-03-04T20:50:44.177Z] Spinner invoked (Building: Progress: resolved 918, reused 0, downloaded 834, added 447) with a 0ms delay

@@ -1,0 +1,22 @@
+Loading scopes…
+Searching for existing projects…
+> Auto-detected Project Settings for Next.js
+
+Linked to jefferson-domingos-projects/jeffdomingos (created .vercel)
+> Connecting GitHub repository: https://github.com/jeffdomingos/jeff-portfolio
+Error: Failed to connect jeffdomingos/jeff-portfolio to project. Make sure there aren't any typos and that you have access to the repository if it's private.
+Deploying jefferson-domingos-projects/jeffdomingos
+Uploading [--------------------] (0.0B/17MB)
+Uploading [=====---------------] (4.3MB/17MB)
+Uploading [==========----------] (8.5MB/17MB)
+Uploading [===============-----] (12.8MB/17MB)
+Uploading [====================] (17.0MB/17MB)
+Inspect: https://vercel.com/jefferson-domingos-projects/jeffdomingos/An3AkugmFfLSjupHKtEcKwLvvFJu [8s]
+Production: https://jeffdomingos-nrhwgm1x4-jefferson-domingos-projects.vercel.app [8s]
+https://jeffdomingos-nrhwgm1x4-jefferson-domingos-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 165 deployment files...
