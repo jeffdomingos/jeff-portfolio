@@ -47,7 +47,7 @@ export async function GET(request: Request) {
                 <script>
                     if (window.opener) {
                         window.opener.postMessage(
-                            "authorization:github:success:{\\"token\\":\\"\${accessToken}\\",\\"provider\\":\\"github\\"}",
+                            'authorization:github:success:{"token":"${accessToken}","provider":"github"}',
                             "*"
                         );
                     }
