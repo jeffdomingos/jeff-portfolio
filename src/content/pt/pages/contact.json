@@ -1,0 +1,31 @@
+{
+  "pageTitleHeader": {
+    "title": "Contato",
+    "subtitle": "Entre em contato para oportunidades e parcerias."
+  },
+  "contactOptions": {
+    "items": [
+      {
+        "platformName": "E-mail",
+        "description": "Envie-me um e-mail para consultas profissionais ou apenas para dizer um olá.",
+        "ctaLabel": "Escreva para mim",
+        "href": "mailto:jeffsalb@gmail.com",
+        "icon": "mail"
+      },
+      {
+        "platformName": "LinkedIn",
+        "description": "Conecte-se comigo profissionalmente. Vamos trocar experiências e fazer networking.",
+        "ctaLabel": "Ver meu perfil",
+        "href": "https://www.linkedin.com/in/jeffdomingos/",
+        "icon": "linkedin"
+      },
+      {
+        "platformName": "WhatsApp",
+        "description": "Precisa de uma resposta mais rápida? Sinta-se à vontade para me contatar pelo WhatsApp.",
+        "ctaLabel": "Enviar mensagem",
+        "href": "https://api.whatsapp.com/send/?phone=5521999374516",
+        "icon": "message"
+      }
+    ]
+  }
+}

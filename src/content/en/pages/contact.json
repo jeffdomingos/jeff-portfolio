@@ -1,0 +1,31 @@
+{
+  "pageTitleHeader": {
+    "title": "Contact",
+    "subtitle": "Get in touch for opportunities or collaborations."
+  },
+  "contactOptions": {
+    "items": [
+      {
+        "platformName": "Email",
+        "description": "Send me an email for professional inquiries or a quick hello.",
+        "ctaLabel": "Write to me",
+        "href": "mailto:jeffsalb@gmail.com",
+        "icon": "mail"
+      },
+      {
+        "platformName": "LinkedIn",
+        "description": "Connect with me professionally. We can share experiences and network.",
+        "ctaLabel": "View my profile",
+        "href": "https://www.linkedin.com/in/jeffdomingos/",
+        "icon": "linkedin"
+      },
+      {
+        "platformName": "WhatsApp",
+        "description": "Need a faster response? Feel free to reach out via WhatsApp.",
+        "ctaLabel": "Message me",
+        "href": "https://api.whatsapp.com/send/?phone=5521999374516",
+        "icon": "message"
+      }
+    ]
+  }
+}

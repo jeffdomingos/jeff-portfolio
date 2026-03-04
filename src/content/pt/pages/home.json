@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "headline": "+ de 7 anos construindo experiências fáceis para produtos complexos",
+    "backgroundMedia": "/images/home/hero-bg.png",
+    "carousel": [
+      {
+        "src": "/images/home/carousel/01-intelie.png",
+        "caption": "Intelie - 2021"
+      },
+      {
+        "src": "/images/home/carousel/02-voltz.png",
+        "caption": "Voltz Motors - 2021"
+      },
+      {
+        "src": "/images/home/carousel/03-totvs.png",
+        "caption": "TOTVS - 2020"
+      },
+      {
+        "src": "/images/home/carousel/04-totvs.png",
+        "caption": "TOTVS - 2019"
+      },
+      {
+        "src": "/images/home/carousel/05-petit.png",
+        "caption": "Petit - 2018"
+      },
+      {
+        "src": "/images/home/carousel/06-totvs.png",
+        "caption": "TOTVS - 2018"
+      },
+      {
+        "src": "/images/home/carousel/07-voltz.png",
+        "caption": "Voltz Motors - 2017"
+      },
+      {
+        "src": "/images/home/carousel/08-totvs.png",
+        "caption": "TOTVS - 2017"
+      }
+    ]
+  },
+  "sectionDividerCases": {
+    "title": "Cases"
+  },
+  "caseList": {
+    "items": [
+      {
+        "title": "Ciclic's Design Sprints",
+        "summary": "Ajudando uma fintech a comunicar melhor o valor de seu produto, enquanto aliviamos dores comuns de proprietários e inquilinos.",
+        "href": "/pt/projects/ciclic",
+        "thumbnailImage": "/images/home/ciclic-thumb.png"
+      },
+      {
+        "title": "ViaSat's Intelie Live",
+        "summary": "Dois projetos nos quais ajudei a projetar melhorias na experiência dos usuários de uma promissora startup de tecnologia.",
+        "href": "/pt/projects/intelie-performance-report",
+        "thumbnailImage": "/images/home/intelie-thumb.png"
+      },
+      {
+        "title": "VOLTZ Product Page",
+        "summary": "Melhorias de usabilidade para e-commerce, com o objetivo de aumentar as taxas conversão em plataformas mobile e desktop.",
+        "href": "/pt/projects/voltz-motors",
+        "thumbnailImage": "/images/home/voltz-thumb.png"
+      },
+      {
+        "title": "Aprendin",
+        "summary": "Um projeto pessoal de pesquisa e ideação, que explora o uso da tecnologia para ensinar conceitos básicos de finanças pessoais.",
+        "href": "/pt/projects/aprendin",
+        "thumbnailImage": "/images/home/aprendin-thumb.png"
+      }
+    ]
+  },
+  "visualBreak1": {
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "visualDesignWork": {
+    "title": "Um passado em Comunicação Visual",
+    "description": "Eu também já trabalhei como designer gráfico, motion designer, produtor de vídeo e até mesmo com outras atividades não relacionadas ao design nas fases inicias da minha carreira. Se você quiser conferir alguns dos meus trabalhos mais antigos, fique à vontade.",
+    "ctaLabel": "Acesse",
+    "ctaHref": "http://cargocollective.com/Jeffdomingos",
+    "backgroundMedia": "/images/home/visual-design.png"
+  },
+  "aboutSummary": {
+    "heading1": "Quem sou eu?",
+    "paragraph1": "Olá, meu nome é Jefferson, mas pode me chamar de Jeff. Sou um Senior Product Designer brasileiro com uma mentalidade global. Minha base é profundamente enraizada na observação do comportamento humano, seja durante o tempo em que morei na Inglaterra e no Canadá ou através das interfaces de produtos digitais complexos. Eu me conecto com pessoas de diferentes culturas porque isso afia uma das minhas maiores forças: o reconhecimento de padrões. Eu não apenas olho para os usuários, eu sintetizo como eles se comportam e o que eles precisam. Sinto total conforto navegando na ambiguidade, construindo narrativas claras e deixando meu trabalho ser guiado por crescimento e valores fortes, independentemente da geografia ou do idioma.",
+    "heading2": "O que eu já fiz?",
+    "paragraph2": "Nos últimos anos, construí minha carreira resolvendo problemas complexos nos mercados de SaaS e B2B, com foco pesado em Experiência do Usuário e interfaces de alta qualidade. Sou formado em Desenho Industrial pela ESDI e concluí meu MBA em Inteligência Artificial, Machine Learning e Big Data para Negócios. Domino com confiança todo o processo de design, desde a pesquisa e entrevistas com stakeholders até a prototipagem de alta fidelidade e o handoff para os desenvolvedores. Eu me recuso a ser limitado por rótulos temporários da indústria, pois as ferramentas e plataformas sempre evoluem. Hoje, estou pegando minha base sólida em design bidimensional e expandindo para o XR Design. O mundo sempre precisará de pessoas que consigam transformar o caos em clareza, e é exatamente isso que eu faço.",
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "visualBreak2": {
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "quickContacts": {
+    "title": "Jefferson Domingos | Design",
+    "emailLabel": "Email:",
+    "emailValue": "jeffsalb@gmail.com",
+    "linkedinLabel": "LinkedIn:",
+    "linkedinValue": "in/jeffdomingos",
+    "whatsappLabel": "Cel / Whatsapp:",
+    "whatsappValue": "+55 21 99937-4516"
+  }
+}

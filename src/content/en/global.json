@@ -1,0 +1,23 @@
+{
+  "header": {
+    "logoHref": "/en",
+    "brandName": "Jeff Domingos",
+    "navItemHome": "Home",
+    "navItemResume": "Resume",
+    "navItemContact": "Contact",
+    "navMoreLabel": "More",
+    "socialLinkedinHref": "https://www.linkedin.com/in/jeffdomingos/",
+    "socialEmailHref": "mailto:jeffsalb@gmail.com",
+    "socialWhatsappHref": "https://api.whatsapp.com/send/?phone=5521999374516"
+  },
+  "footer": {
+    "brandName": "Jefferson Domingos | Design",
+    "emailLabel": "Email:",
+    "emailValue": "jeffsalb@gmail.com",
+    "linkedinLabel": "LinkedIn:",
+    "linkedinValue": "in/jeffdomingos",
+    "whatsappLabel": "Cel / Whatsapp:",
+    "whatsappValue": "+55 21 99937-4516",
+    "copyrightText": "© Jeff Domingos"
+  }
+}

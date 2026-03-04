@@ -1,0 +1,18 @@
+{
+  "pageTitleHeader": {
+    "title": "Resume",
+    "subtitle": ""
+  },
+  "experience": {
+    "title": "Experience",
+    "items": []
+  },
+  "education": {
+    "title": "Education",
+    "items": []
+  },
+  "skills": {
+    "title": "Skills",
+    "items": []
+  }
+}

@@ -1,0 +1,219 @@
+backend:
+  name: git-gateway
+  branch: main
+publish_mode: editorial_workflow
+locale: 'pt'
+local_backend:
+  url: http://localhost:8082/api/v1
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "projects"
+    label: "📁 Case Studies"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - {label: "Slug (URL)", name: "slug", widget: "string"}
+      - {label: "Imagem de Capa (Principal)", name: "thumbnail", widget: "image"}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Destaque (exibir na Home)", name: "featured", widget: "boolean", default: true}
+
+      - label: "🏠 Card da Home"
+        name: "home_card"
+        widget: "object"
+        collapsed: true
+        fields:
+          - {label: "Imagem de Capa (Home)", name: "thumbnail", widget: "image", required: false, hint: "Se vazio, usa a imagem principal."}
+          - {label: "🇧🇷 Título (PT)", name: "title_pt", widget: "string", hint: "Título curto de marketing."}
+          - {label: "Resumo (PT)", name: "summary_pt", widget: "text", hint: "Texto teaser para a Home."}
+          - {label: "🇺🇸 Título (EN)", name: "title_en", widget: "string"}
+          - {label: "Resumo (EN)", name: "summary_en", widget: "text"}
+
+      - label: "🇧🇷 Conteúdo em Português"
+        name: "pt"
+        widget: "object"
+        collapsed: false
+        fields:
+          - {label: "Título Interno", name: "title", widget: "string"}
+          - {label: "Papel/Cargo", name: "role", widget: "string", required: false}
+          - {label: "Duração/Timeline", name: "timeline", widget: "string", required: false}
+          - {label: "Resumo Completo", name: "summary", widget: "text"}
+          - label: "Blocos de Conteúdo Principal"
+            name: "blocks"
+            widget: "list"
+            types:
+              - label: "📝 Texto Livre (Markdown)"
+                name: "text"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo", name: "content", widget: "markdown"}
+              - label: "🖼️ Imagem"
+                name: "image"
+                widget: "object"
+                fields:
+                  - {label: "Imagem", name: "src", widget: "image"}
+                  - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
+                  - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+              - label: "💡 Destaque (Callout)"
+                name: "callout"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo (Suporta HTML)", name: "content", widget: "text"}
+                  - {label: "Tipo", name: "type", widget: "select", options: ["info", "warning"], default: "info"}
+              - label: "💬 Citação (Quote)"
+                name: "quote"
+                widget: "object"
+                fields:
+                  - {label: "Citação", name: "content", widget: "text"}
+                  - {label: "Autor", name: "author", widget: "string", required: false}
+              - label: "📊 Métrica de Impacto"
+                name: "metric"
+                widget: "object"
+                fields:
+                  - {label: "Valor (ex: 17%, R$12M)", name: "value", widget: "string"}
+                  - {label: "Rótulo/Descrição", name: "label", widget: "string"}
+              - label: "🎥 Vídeo Integrado"
+                name: "video"
+                widget: "object"
+                fields:
+                  - {label: "Arquivo de Vídeo ou URL (mp4/webm)", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🖌️ Protótipo Figma"
+                name: "figma"
+                widget: "object"
+                fields:
+                  - {label: "Link do Figma", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+
+      - label: "🇺🇸 Conteúdo em Inglês"
+        name: "en"
+        widget: "object"
+        collapsed: true
+        fields:
+          - {label: "Título Interno", name: "title", widget: "string"}
+          - {label: "Papel/Cargo", name: "role", widget: "string", required: false}
+          - {label: "Duração/Timeline", name: "timeline", widget: "string", required: false}
+          - {label: "Resumo Completo", name: "summary", widget: "text"}
+          - label: "Blocos de Conteúdo Principal"
+            name: "blocks"
+            widget: "list"
+            types:
+              - label: "📝 Texto Livre (Markdown)"
+                name: "text"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo", name: "content", widget: "markdown"}
+              - label: "🖼️ Imagem"
+                name: "image"
+                widget: "object"
+                fields:
+                  - {label: "Imagem", name: "src", widget: "image"}
+                  - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
+                  - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+              - label: "💡 Destaque (Callout)"
+                name: "callout"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo (Suporta HTML)", name: "content", widget: "text"}
+                  - {label: "Tipo", name: "type", widget: "select", options: ["info", "warning"], default: "info"}
+              - label: "💬 Citação (Quote)"
+                name: "quote"
+                widget: "object"
+                fields:
+                  - {label: "Citação", name: "content", widget: "text"}
+                  - {label: "Autor", name: "author", widget: "string", required: false}
+              - label: "📊 Métrica de Impacto"
+                name: "metric"
+                widget: "object"
+                fields:
+                  - {label: "Valor (ex: 17%, R$12M)", name: "value", widget: "string"}
+                  - {label: "Rótulo/Descrição", name: "label", widget: "string"}
+              - label: "🎥 Vídeo Integrado"
+                name: "video"
+                widget: "object"
+                fields:
+                  - {label: "Arquivo de Vídeo ou URL (mp4/webm)", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🖌️ Protótipo Figma"
+                name: "figma"
+                widget: "object"
+                fields:
+                  - {label: "Link do Figma", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+
+  - name: "home_page"
+    label: "🏠 Página Inicial"
+    files:
+      - name: "home"
+        label: "Conteúdo da Página Inicial"
+        file: "src/content/pages/home.json"
+        fields:
+          - label: "🦸‍♂️ Seção Hero (Topo)"
+            name: "hero"
+            widget: "object"
+            collapsed: false
+            fields:
+              - {label: "🇧🇷 Título (PT)", name: "headline_pt", widget: "string"}
+              - {label: "🇺🇸 Título (EN)", name: "headline_en", widget: "string"}
+              - {label: "Imagem de Fundo", name: "backgroundMedia", widget: "image"}
+              - label: "🎠 Carrossel"
+                name: "carousel"
+                widget: "list"
+                fields:
+                  - {label: "Imagem", name: "src", widget: "image"}
+                  - {label: "Legenda", name: "caption", widget: "string"}
+
+          - label: "📂 Seção Cases (Lista)"
+            name: "cases"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "🇧🇷 Título da Seção (PT)", name: "title_pt", widget: "string"}
+              - {label: "🇺🇸 Título da Seção (EN)", name: "title_en", widget: "string"}
+              - {label: "Ordem de Exibição", name: "case_order", widget: "relation", collection: "projects", value_field: "slug", search_fields: ["pt.title", "slug"], display_fields: ["pt.title"], multiple: true, required: false, hint: "Arraste para reordenar os cases. Cases não listados aqui aparecerão automaticamente no final da lista."}
+
+          - label: "🎨 Seção Visual Design"
+            name: "visual_design"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "🇧🇷 Título (PT)", name: "title_pt", widget: "string"}
+              - {label: "🇺🇸 Título (EN)", name: "title_en", widget: "string"}
+              - {label: "🇧🇷 Descrição (PT)", name: "description_pt", widget: "text"}
+              - {label: "🇺🇸 Descrição (EN)", name: "description_en", widget: "text"}
+              - {label: "🇧🇷 Texto do Botão (PT)", name: "ctaLabel_pt", widget: "string"}
+              - {label: "🇺🇸 Texto do Botão (EN)", name: "ctaLabel_en", widget: "string"}
+              - {label: "Link do Botão", name: "ctaHref", widget: "string"}
+              - {label: "Imagem de Fundo", name: "backgroundMedia", widget: "image"}
+
+          - label: "👤 Seção Sobre Mim"
+            name: "about"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "🇧🇷 Título 1 (PT)", name: "heading1_pt", widget: "string"}
+              - {label: "🇺🇸 Título 1 (EN)", name: "heading1_en", widget: "string"}
+              - {label: "🇧🇷 Parágrafo 1 (PT)", name: "paragraph1_pt", widget: "text"}
+              - {label: "🇺🇸 Parágrafo 1 (EN)", name: "paragraph1_en", widget: "text"}
+              - {label: "🇧🇷 Título 2 (PT)", name: "heading2_pt", widget: "string"}
+              - {label: "🇺🇸 Título 2 (EN)", name: "heading2_en", widget: "string"}
+              - {label: "🇧🇷 Parágrafo 2 (PT)", name: "paragraph2_pt", widget: "text"}
+              - {label: "🇺🇸 Parágrafo 2 (EN)", name: "paragraph2_en", widget: "text"}
+              - {label: "Imagem de Fundo", name: "backgroundMedia", widget: "image"}
+
+          - label: "📬 Contatos Rápidos (Rodapé)"
+            name: "contacts"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Título Principal", name: "title", widget: "string"}
+              - {label: "Email", name: "emailValue", widget: "string"}
+              - {label: "LinkedIn", name: "linkedinValue", widget: "string"}
+              - {label: "WhatsApp", name: "whatsappValue", widget: "string"}

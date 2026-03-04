@@ -1,0 +1,100 @@
+{
+  "hero": {
+    "headline": "7+ years crafting easy experiences for complex products",
+    "backgroundMedia": "/images/home/hero-bg.png",
+    "carousel": [
+      {
+        "src": "/images/home/carousel/01-intelie.png",
+        "caption": "Intelie - 2021"
+      },
+      {
+        "src": "/images/home/carousel/02-voltz.png",
+        "caption": "Voltz Motors - 2021"
+      },
+      {
+        "src": "/images/home/carousel/03-totvs.png",
+        "caption": "TOTVS - 2020"
+      },
+      {
+        "src": "/images/home/carousel/04-totvs.png",
+        "caption": "TOTVS - 2019"
+      },
+      {
+        "src": "/images/home/carousel/05-petit.png",
+        "caption": "Petit - 2018"
+      },
+      {
+        "src": "/images/home/carousel/06-totvs.png",
+        "caption": "TOTVS - 2018"
+      },
+      {
+        "src": "/images/home/carousel/07-voltz.png",
+        "caption": "Voltz Motors - 2017"
+      },
+      {
+        "src": "/images/home/carousel/08-totvs.png",
+        "caption": "TOTVS - 2017"
+      }
+    ]
+  },
+  "sectionDividerCases": {
+    "title": "Cases"
+  },
+  "caseList": {
+    "items": [
+      {
+        "title": "Ciclic's Design Sprints",
+        "summary": "Helping a fintech to better communicate its product value while helping to ease common pain points of house owners and tenants.",
+        "href": "/en/projects/ciclic",
+        "thumbnailImage": "/images/home/ciclic-thumb.png"
+      },
+      {
+        "title": "ViaSat's Intelie Live",
+        "summary": "Two projects where I've helped to design better user experiences for one of the most promising Brazilian tech startups.",
+        "href": "/en/projects/intelie-performance-report",
+        "thumbnailImage": "/images/home/intelie-thumb.png"
+      },
+      {
+        "title": "VOLTZ Product Page",
+        "summary": "UX improvement for the online shop, aiming to improve usability and conversion rates across mobile and desktop platforms.",
+        "href": "/en/projects/voltz-motors",
+        "thumbnailImage": "/images/home/voltz-thumb.png"
+      },
+      {
+        "title": "Aprendin",
+        "summary": "A personal project, research and exploration about using accessible technology to teach basic concepts of personal finance.",
+        "href": "/en/projects/aprendin",
+        "thumbnailImage": "/images/home/aprendin-thumb.png"
+      }
+    ]
+  },
+  "visualBreak1": {
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "visualDesignWork": {
+    "title": "Visual Design work",
+    "description": "Back in the days, I've also worked as a graphic designer, motion designer and video maker. If you want to check some of it, be my guest.",
+    "ctaLabel": "Go to",
+    "ctaHref": "http://cargocollective.com/Jeffdomingos",
+    "backgroundMedia": "/images/home/visual-design.png"
+  },
+  "aboutSummary": {
+    "heading1": "Who am I?",
+    "paragraph1": "Hi, I am Jefferson, but you can call me Jeff. I am a Senior Product Designer from Brazil with a global mindset. My background is deeply rooted in observing human behavior, whether that was during my time living in England and Canada or through the interfaces of complex digital products. I thrive on connecting with people from all cultures because it sharpens one of my core strengths: pattern recognition. I do not just look at users; I synthesize how they behave and what they need. I am comfortable navigating ambiguity, building clear narratives, and letting my work be guided by growth and strong values, regardless of geography or language.",
+    "heading2": "What I've done?",
+    "paragraph2": "For the past several years, I have built my career solving complex problems in the SaaS and B2B spaces, focusing heavily on User Experience and high quality UI. I hold a Bachelor degree in Industrial Design and have officially completed my MBA in AI, Machine Learning and Big Data for Business. I confidently own the entire design process, from raw research and stakeholder interviews to high fidelity prototyping and development handoff. I refuse to be limited by temporary industry labels because tools and platforms always evolve. Today, I am taking my solid foundation in 2D spatial design and expanding it into XR Design. The world will always need people who can turn chaos into clarity, and that is exactly what I do.",
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "visualBreak2": {
+    "backgroundMedia": "/images/placeholder.png"
+  },
+  "quickContacts": {
+    "title": "Jefferson Domingos | Design",
+    "emailLabel": "Email:",
+    "emailValue": "jeffsalb@gmail.com",
+    "linkedinLabel": "LinkedIn:",
+    "linkedinValue": "in/jeffdomingos",
+    "whatsappLabel": "Cel / Whatsapp:",
+    "whatsappValue": "+55 21 99937-4516"
+  }
+}
