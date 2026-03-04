@@ -45,12 +45,16 @@ export async function GET(request: Request) {
             <head>
                 <title>Authentication Success</title>
                 <script>
-                    if (window.opener) {
+                    const receiveMessage = (message) => {
                         window.opener.postMessage(
                             'authorization:github:success:{"token":"${accessToken}","provider":"github"}',
-                            "*"
+                            message.origin
                         );
+                        window.removeEventListener('message', receiveMessage, false);
                     }
+                    
+                    window.addEventListener('message', receiveMessage, false);
+                    window.opener.postMessage('authorizing:github', '*');
                 </script>
             </head>
             <body>
