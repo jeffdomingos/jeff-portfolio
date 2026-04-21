@@ -12,6 +12,8 @@ export const metadata = {
     description: "Senior Product Designer",
 };
 
+import { PostHogProvider } from "@/components/PostHogProvider";
+
 export default function RootLayout({
     children,
 }: {
@@ -20,13 +22,15 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning className={montserrat.variable}>
             <body>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="light"
-                    disableTransitionOnChange
-                >
-                    {children}
-                </ThemeProvider>
+                <PostHogProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="light"
+                        disableTransitionOnChange
+                    >
+                        {children}
+                    </ThemeProvider>
+                </PostHogProvider>
             </body>
         </html>
     );
