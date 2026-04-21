@@ -12,7 +12,10 @@ export function PostHogProvider({ children }: { children: ReactNode }) {
                 ui_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
                 person_profiles: 'identified_only',
                 capture_pageleave: true,
-                capture_pageview: false // Disabling to let PostHogPageView handle route changes manually
+                capture_pageview: false, // Disabling to let PostHogPageView handle route changes manually
+                loaded: (posthog_instance) => {
+                    if (process.env.NODE_ENV === 'development') posthog_instance.debug()
+                }
             })
         }
     }, [])
