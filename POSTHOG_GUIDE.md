@@ -48,7 +48,7 @@ Na hora de inserir em botões no meio internacional, basta enviar para:
 
 A mesma arquitetura se repete se o cliente falar no idioma local. Adicione /pt/ antes para fixar no idioma PT-BR mas ainda rastrear precisamente:
 * **Currículo PT-BR:** `jeffdomingos.com/pt/cv`
-* **Vaga Específica:** `jeffdomingos.com/pt/ola/[nome_da_empresa]` *(Ex: /pt/ola/nubank)*
+* **Vaga Específica:** `jeffdomingos.com/ola/[nome_da_empresa]` *(Ex: /ola/nubank)*
 * **Link em posts Nacionais:** `jeffdomingos.com/pt/linkedin`
 
 **Quando eles clicarem, veja seu dashboard do PostHog.** O painel de Pageviews terá o link explícito exato preenchido para cruzar com seu funil de análise UX.

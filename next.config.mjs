@@ -28,7 +28,7 @@ const nextConfig = {
                 destination: '/pt',
             },
             {
-                source: '/pt/ola/:empresa',
+                source: '/ola/:empresa',
                 destination: '/pt',
             },
 
