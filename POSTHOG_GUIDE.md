@@ -41,14 +41,14 @@ Isso significa que o design da URL entregue continuará o que você definiu e li
 
 Na hora de inserir em botões no meio internacional, basta enviar para:
 * **Currículo (PDF, Link Interno, Link Tree):** `jeffdomingos.com/cv`
-* **Vaga Específica (Entrevista):** `jeffdomingos.com/hi/[nome_da_empresa]` *(Ex: jeffdomingos.com/hi/google)*
+* **Vaga Específica (Entrevista):** `jeffdomingos.com/to/[nome_da_empresa]` *(Ex: jeffdomingos.com/to/google)*
 * **E-mail Frio para Tech Lead:** `jeffdomingos.com/linkedin`
 
 ### Em Português
 
 A mesma arquitetura se repete se o cliente falar no idioma local. Adicione /pt/ antes para fixar no idioma PT-BR mas ainda rastrear precisamente:
 * **Currículo PT-BR:** `jeffdomingos.com/pt/cv`
-* **Vaga Específica:** `jeffdomingos.com/ola/[nome_da_empresa]` *(Ex: /ola/nubank)*
+* **Vaga Específica:** `jeffdomingos.com/para/[nome_da_empresa]` *(Ex: /para/nubank)*
 * **Link em posts Nacionais:** `jeffdomingos.com/pt/linkedin`
 
 **Quando eles clicarem, veja seu dashboard do PostHog.** O painel de Pageviews terá o link explícito exato preenchido para cruzar com seu funil de análise UX.

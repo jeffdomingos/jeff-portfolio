@@ -14,7 +14,7 @@ const nextConfig = {
                 destination: '/en',
             },
             {
-                source: '/hi/:empresa',
+                source: '/to/:empresa',
                 destination: '/en',
             },
             
@@ -28,7 +28,7 @@ const nextConfig = {
                 destination: '/pt',
             },
             {
-                source: '/ola/:empresa',
+                source: '/para/:empresa',
                 destination: '/pt',
             },
 
