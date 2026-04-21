@@ -11,7 +11,6 @@ export default function PostHogPageView() {
 
   useEffect(() => {
     // Triggers a $pageview event on every route change.
-    // PostHog will automatically generate a $pageleave and calculate scroll depth for the previous page.
     if (pathname && posthog) {
       let url = window.origin + pathname
       if (searchParams.toString()) {
@@ -20,6 +19,12 @@ export default function PostHogPageView() {
       posthog.capture('$pageview', {
         $current_url: url,
       })
+
+      // The cleanup function runs just before the component unmounts 
+      // or when the dependencies (pathname) change, sending an explicit pageleave.
+      return () => {
+        posthog.capture('$pageleave')
+      }
     }
   }, [pathname, searchParams, posthog])
   
