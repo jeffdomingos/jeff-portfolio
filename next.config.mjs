@@ -4,6 +4,35 @@ const nextConfig = {
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     async rewrites() {
         return [
+            // Tracking URLs (English - Default)
+            {
+                source: '/cv',
+                destination: '/en',
+            },
+            {
+                source: '/linkedin',
+                destination: '/en',
+            },
+            {
+                source: '/hi/:empresa',
+                destination: '/en',
+            },
+            
+            // Tracking URLs (Portuguese)
+            {
+                source: '/pt/cv',
+                destination: '/pt',
+            },
+            {
+                source: '/pt/linkedin',
+                destination: '/pt',
+            },
+            {
+                source: '/pt/ola/:empresa',
+                destination: '/pt',
+            },
+
+            // PostHog Proxy
             {
                 source: '/ingest/static/:path*',
                 destination: 'https://us-assets.i.posthog.com/static/:path*',
