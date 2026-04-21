@@ -11,7 +11,8 @@ export function PostHogProvider({ children }: { children: ReactNode }) {
                 api_host: '/ingest',
                 ui_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
                 person_profiles: 'identified_only',
-                capture_pageleave: true
+                capture_pageleave: true,
+                capture_pageview: false // Disabling to let PostHogPageView handle route changes manually
             })
         }
     }, [])

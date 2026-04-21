@@ -13,6 +13,8 @@ export const metadata = {
 };
 
 import { PostHogProvider } from "@/components/PostHogProvider";
+import PostHogPageView from "@/components/PostHogPageView";
+import { Suspense } from "react";
 
 export default function RootLayout({
     children,
@@ -23,6 +25,9 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning className={montserrat.variable}>
             <body>
                 <PostHogProvider>
+                    <Suspense fallback={null}>
+                        <PostHogPageView />
+                    </Suspense>
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="light"
