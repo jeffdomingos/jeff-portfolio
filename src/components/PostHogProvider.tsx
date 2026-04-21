@@ -8,7 +8,8 @@ export function PostHogProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN || 'phc_placeholder', {
-                api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+                api_host: '/ingest',
+                ui_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
                 person_profiles: 'identified_only'
             })
         }
