@@ -16,12 +16,12 @@ export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
             current.current.x = lerp(current.current.x, target.current.x, 0.04);
             current.current.y = lerp(current.current.y, target.current.y, 0.04);
 
-            const maxTilt = 8;
+            const maxTilt = 20;
             const rotateX = -current.current.y * maxTilt; 
             const rotateY = current.current.x * maxTilt;
 
             setStyle({
-                transform: `perspective(1000px) rotateX(${rotateX.toFixed(3)}deg) rotateY(${rotateY.toFixed(3)}deg) scale(1.05)`
+                transform: `perspective(1000px) rotateX(${rotateX.toFixed(3)}deg) rotateY(${rotateY}deg) scale(1.1)`
             });
 
             requestRef.current = requestAnimationFrame(animate);

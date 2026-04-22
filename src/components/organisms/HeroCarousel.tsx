@@ -26,7 +26,7 @@ export function HeroCarousel({ items }: { items: { src: string, caption: string 
                     <CarouselItem key={index}>
                         <div className="p-2 flex flex-col items-center">
                             <img src={item.src} alt={item.caption} className="w-full max-w-4xl object-contain drop-shadow-2xl" />
-                            <div className="mt-8 text-center text-lg font-medium text-foreground">{item.caption}</div>
+                            <div className="mt-8 text-center text-lg font-light italic text-foreground/80">{item.caption}</div>
                         </div>
                     </CarouselItem>
                 ))}

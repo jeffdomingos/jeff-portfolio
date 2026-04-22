@@ -12,7 +12,7 @@ export function HeroAnimatedContent({ headline, carouselItems }: { headline: str
         setDisplayedText('')
         setIsTyping(true)
         setShowCarousel(false)
-        
+
         let i = 0
         const intervalId = setInterval(() => {
             setDisplayedText(headline.slice(0, i))
@@ -31,7 +31,7 @@ export function HeroAnimatedContent({ headline, carouselItems }: { headline: str
     const formatHeadline = (text: string) => {
         const targets = ["7\\+ anos", "7\\+ years", "complexidade", "complexity", "simples", "simple", "eficientes", "eficiente", "efficient"];
         const regex = new RegExp(`(${targets.join('|')})`, 'gi');
-        
+
         const parts = text.split(regex);
         return parts.map((part, index) => {
             if (targets.some(t => new RegExp(`^${t}$`, 'i').test(part))) {
@@ -44,12 +44,12 @@ export function HeroAnimatedContent({ headline, carouselItems }: { headline: str
     return (
         <div className="w-full flex flex-col items-center">
             {/* The h1 starts lower (translate-y-24) to simulate true vertical center, then glides up when carousel shows */}
-            <h1 className={`text-4xl md:text-5xl font-normal max-w-4xl leading-[1.8] drop-shadow-md z-10 relative text-center transition-all duration-1000 transform ${showCarousel ? 'translate-y-0 mb-8 mt-12' : 'translate-y-32 mb-0 mt-32'}`}>
+            <h1 className={`text-4xl md:text-5xl font-normal max-w-4xl leading-[1.2] drop-shadow-md z-10 relative text-center transition-all duration-1000 transform ${showCarousel ? 'translate-y-0 mb-8 mt-12' : 'translate-y-32 mb-0 mt-32'}`}>
                 {/* Ghost text to statically reserve the exact width and height so lines do not shift */}
-                <span className="opacity-0 pointer-events-none block leading-[1.8]">{formatHeadline(headline)}</span>
-                
+                <span className="opacity-0 pointer-events-none block leading-[1.2]">{formatHeadline(headline)}</span>
+
                 {/* Typing text overlaid perfectly on top */}
-                <span className="absolute top-0 left-0 w-full h-full text-foreground text-center leading-[1.8]">
+                <span className="absolute top-0 left-0 w-full h-full text-foreground text-center leading-[1.2]">
                     {formatHeadline(displayedText)}
                     {isTyping && (
                         <span className="inline-block ml-1 w-[2px] h-[0.9em] bg-current animate-pulse align-middle" />
