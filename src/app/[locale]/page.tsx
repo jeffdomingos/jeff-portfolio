@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { HeroCarousel } from "@/components/organisms/HeroCarousel";
 
+import { TypewriterEffect } from "@/components/atoms/TypewriterEffect";
+
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     return { title: `Jeff Domingos - ${locale.toUpperCase()}` };
 }
@@ -17,7 +19,9 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-20 overflow-hidden dark:bg-zinc-900">
                 <div className="absolute inset-0 -z-10 bg-fixed bg-center bg-no-repeat bg-cover opacity-100 dark:mix-blend-multiply dark:opacity-80 transition-all duration-300" style={{ backgroundImage: `url(${content.hero.backgroundMedia})` }}></div>
                 <div className="absolute inset-0 -z-10 bg-background/50 dark:bg-gradient-to-b dark:from-transparent dark:to-background/90 transition-colors duration-300"></div>
-                <h1 className="text-4xl md:text-5xl font-bold max-w-4xl mt-12 mb-8 leading-tight drop-shadow-md z-10">{content.hero.headline}</h1>
+                <h1 className="text-4xl md:text-5xl font-bold max-w-4xl mt-12 mb-8 leading-tight drop-shadow-md z-10 min-h-[140px] md:min-h-[120px] flex items-center justify-center">
+                    <TypewriterEffect text={content.hero.headline} />
+                </h1>
                 <HeroCarousel items={content.hero.carousel} />
 
                 {/* Scroll Down Indicator */}
