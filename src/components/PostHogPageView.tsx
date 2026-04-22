@@ -16,6 +16,16 @@ export default function PostHogPageView() {
       if (searchParams.toString()) {
         url = url + `?${searchParams.toString()}`
       }
+
+      // Check for Super Properties (Tracking Origin Company)
+      // Matches /to/{empresa}, /para/{empresa}, or /pt/para/{empresa}
+      const originMatch = pathname.match(/(?:\/pt)?\/(?:to|para)\/([^/?]+)/i)
+      if (originMatch && originMatch[1]) {
+        posthog.register({
+          empresa_origem: decodeURIComponent(originMatch[1])
+        })
+      }
+
       posthog.capture('$pageview', {
         $current_url: url,
       })
