@@ -53,6 +53,15 @@ A mesma arquitetura se repete se o cliente falar no idioma local. Adicione /pt/ 
 
 **Quando eles clicarem, veja seu dashboard do PostHog.** O painel de Pageviews terá o link explícito exato preenchido para cruzar com seu funil de análise UX.
 
+### Super Properties (Persistência da Origem)
+
+O maior problema de Single-Page Applications (SPA) é que as URLs mudam instantaneamente sem recarregar a página. Se você enviasse um recrutador para `/to/google`, no momento em que ele clicasse no botão "About Me", a URL mudaria para `/about` e a atribuição originária do Google seria "perdida" para as métricas daquele evento específico.
+
+Para resolver isso de forma contínua, toda vez que o portal detecta um padrão `/to/` ou `/para/` na barra de endereço inicial, ele desmembra a URL e executa um comando chamado de **Super Property**. A propriedade `empresa_origem` recebe o valor dinâmico exato (ex: *google* ou *nubank*) e é vinculada permanentemente ao cliente.
+Isso garante que:
+- O 1º Pageview rastreie a veracidade da URL primária.
+- Todos os próximos *cliques, sessões de gravação, web vitals e pageleaves subsequentes* ao longo do acesso inteiro daquele usuário ficarão perfeitamente selados com a marcação `empresa_origem: nome_da_empresa` nas propriedades do evento.
+
 ---
 
 ## 4. Analisando em Ambiente Local (Debug)
