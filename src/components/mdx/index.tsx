@@ -59,8 +59,15 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
 export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
     return (
         <figure className="my-8">
-            <div className="relative w-full overflow-hidden rounded-xl shadow-sm border border-border" style={{ height: '450px' }}>
-                <iframe src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}`} title={title || "Figma Prototype"} className="absolute top-0 left-0 w-full h-full" allowFullScreen />
+            <div className="flex w-full overflow-hidden rounded-xl shadow-sm border border-border" style={{ height: '600px' }}>
+                <iframe 
+                    src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}&scaling=scale-down-width`} 
+                    title={title || "Figma Prototype"} 
+                    width="100%" 
+                    height="100%" 
+                    className="w-full h-full border-none" 
+                    allowFullScreen 
+                />
             </div>
             {title && <figcaption className="text-center text-sm text-subtle mt-2">{title}</figcaption>}
         </figure>
