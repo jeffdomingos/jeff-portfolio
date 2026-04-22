@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { HeroAnimatedContent } from "@/components/organisms/HeroAnimatedContent";
+import { MouseTiltBackground } from "@/components/atoms/MouseTiltBackground";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     return { title: `Jeff Domingos - ${locale.toUpperCase()}` };
@@ -15,7 +16,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
         <div>
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 pt-32 pb-20 overflow-hidden dark:bg-zinc-900">
-                <div className="absolute inset-0 -z-10 bg-fixed bg-center bg-no-repeat bg-cover opacity-100 dark:mix-blend-multiply dark:opacity-80 transition-all duration-300" style={{ backgroundImage: `url(${content.hero.backgroundMedia})` }}></div>
+                <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
                 <div className="absolute inset-0 -z-10 bg-background/50 dark:bg-gradient-to-b dark:from-transparent dark:to-background/90 transition-colors duration-300"></div>
                 <HeroAnimatedContent headline={content.hero.headline} carouselItems={content.hero.carousel} />
 
