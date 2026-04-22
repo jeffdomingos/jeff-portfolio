@@ -17,12 +17,23 @@ export default function PostHogPageView() {
         url = url + `?${searchParams.toString()}`
       }
 
-      // Check for Super Properties (Tracking Origin Company)
-      // Matches /to/{empresa}, /para/{empresa}, or /pt/para/{empresa}
-      const originMatch = pathname.match(/(?:\/pt)?\/(?:to|para)\/([^/?]+)/i)
-      if (originMatch && originMatch[1]) {
+      // Check for Super Properties (Tracking unified Campaign Origin)
+      let origemCampanha = null
+
+      if (/(?:\/pt)?\/cv\/?$/i.test(pathname)) {
+        origemCampanha = 'Currículo'
+      } else if (/(?:\/pt)?\/linkedin\/?$/i.test(pathname)) {
+        origemCampanha = 'Perfil LinkedIn'
+      } else {
+        const originMatch = pathname.match(/(?:\/pt)?\/(?:to|para)\/([^/?]+)/i)
+        if (originMatch && originMatch[1]) {
+          origemCampanha = decodeURIComponent(originMatch[1])
+        }
+      }
+
+      if (origemCampanha) {
         posthog.register({
-          empresa_origem: decodeURIComponent(originMatch[1])
+          origem_campanha: origemCampanha
         })
       }
 
