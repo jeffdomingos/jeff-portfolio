@@ -8,7 +8,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function ResumePage({ params: { locale } }: { params: { locale: string } }) {
     const content = getResumePageContent(locale);
 
-    const docId = "1kGc8Sig-uJDc2nt53Tk08jl_-UTzDgqM3v7YSAFq2EI";
+    const docId = locale === 'pt'
+        ? "1nmosn33YEeWo7b730QMff4QCOZm4qnv1iJ4TOB5eDO4" // Portuguese
+        : "1kGc8Sig-uJDc2nt53Tk08jl_-UTzDgqM3v7YSAFq2EI"; // English
 
     return (
         <div className="container mx-auto px-4 py-20 max-w-5xl flex flex-col items-center">
