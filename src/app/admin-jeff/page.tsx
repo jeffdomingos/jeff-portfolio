@@ -9,9 +9,15 @@ export default function AdminJeffPage() {
     const posthog = usePostHog()
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && posthog) {
-            posthog.opt_out_capturing()
-            alert('Opt-out nativo do PostHog ativado com sucesso para este dispositivo.')
+        if (typeof window !== 'undefined') {
+            // Save local hardcoded block
+            window.localStorage.setItem('jeff_opt_out', 'true')
+            
+            if (posthog) {
+                posthog.opt_out_capturing()
+            }
+            
+            alert('Opt-out nativo do PostHog E Bloqueio Completo (Storage) ativado com sucesso para este dispositivo.')
             router.push('/')
         }
     }, [router, posthog])
