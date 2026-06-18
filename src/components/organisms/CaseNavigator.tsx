@@ -6,7 +6,7 @@ export function CaseNavigator({ locale, currentSlug }: { locale: string; current
     const projects = getAllProjects(locale);
 
     return (
-        <section className="border-t border-border mt-20 pt-16 pb-8 bg-muted/10">
+        <section className="border-t border-foreground mt-20 pt-16 pb-8 bg-halftone">
             <div className="container mx-auto px-4">
                 <h3 className="text-xl font-bold mb-8 text-center text-foreground">
                     {locale === "pt" ? "Navegue por outros cases" : "Explore other cases"}
@@ -25,7 +25,7 @@ export function CaseNavigator({ locale, currentSlug }: { locale: string; current
                                     "px-6 py-3 rounded-full text-sm font-medium transition-all duration-300",
                                     isCurrent
                                         ? "bg-primary text-primary-foreground shadow-md scale-105"
-                                        : "bg-muted text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                                        : "bg-transparent border border-foreground border-dashed text-foreground font-light hover:bg-background hover:font-bold"
                                 )}
                             >
                                 {project.meta.title}

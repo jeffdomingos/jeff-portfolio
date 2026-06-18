@@ -28,10 +28,10 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
             <LanguageFallbackToast requestedLocale={requestedLocale} effectiveLang={effectiveLang} />
 
             {/* Project Hero */}
-            <header className="bg-muted/30 border-b py-24 mb-16 px-4 transition-colors">
+            <header className="bg-halftone border-b py-24 mb-16 px-4 transition-colors">
                 <div className="container mx-auto max-w-4xl">
-                    <h1 className="text-5xl font-extrabold mb-6 tracking-tight text-foreground">{meta.title}</h1>
-                    <div className="flex flex-wrap gap-4 text-muted-foreground mb-8 text-lg">
+                    <h1 className="text-5xl font-semibold mb-6 tracking-tight text-foreground">{meta.title}</h1>
+                    <div className="flex flex-wrap gap-4 text-foreground font-light mb-8 text-lg">
                         {meta.role && <span><strong className="text-foreground">Role:</strong> {meta.role}</span>}
                         {meta.timeline && <span><strong className="text-foreground">Timeline:</strong> {meta.timeline}</span>}
                     </div>
@@ -46,7 +46,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
             </header>
 
             {/* Polymorphic Blocks Content */}
-            <div className="container mx-auto max-w-3xl px-4 prose prose-lg dark:prose-invert">
+            <div className="container mx-auto max-w-3xl px-4 prose prose-lg">
                 {blocks && blocks.length > 0 ? (
                     blocks.map((block: any, index: number) => {
                         switch (block.type) {
@@ -76,7 +76,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                         }
                     })
                 ) : (
-                    <div className="text-center py-20 text-muted-foreground italic bg-muted/50 rounded-xl border">
+                    <div className="text-center py-20 text-foreground font-light italic bg-muted/50 rounded-xl border">
                         <p>Project details are under construction.</p>
                     </div>
                 )}

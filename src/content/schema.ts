@@ -31,6 +31,7 @@ export interface CaseItem {
   summary: string;
   href: string;
   thumbnailImage: string;
+  tags?: string[];
 }
 
 export interface AboutSummary {
@@ -51,10 +52,43 @@ export interface QuickContacts {
   whatsappValue: string;
 }
 
+export interface ApproachSection {
+  title: string;
+  subtitle: string;
+  columns: {
+    title: string;
+    description: string;
+  }[];
+}
+
+export interface TestimonialsSection {
+  title: string;
+  subtitle: string;
+  items: {
+    author: string;
+    role: string;
+    quote: string;
+    details: string;
+    avatarUrl: string;
+  }[];
+}
+
+export interface AvailabilitySection {
+  title: string;
+  blocks: {
+    title: string;
+    subtitle: string;
+    description: string;
+  }[];
+}
+
 export interface HomePageContent {
   hero: {
     headline: string;
+    subheadline?: string;
     backgroundMedia: string;
+    ctaLabel?: string;
+    ctaHref?: string;
     carousel: { src: string; caption: string }[];
   };
   sectionDividerCases: {
@@ -63,6 +97,9 @@ export interface HomePageContent {
   caseList: {
     items: CaseItem[];
   };
+  approach: ApproachSection;
+  testimonials: TestimonialsSection;
+  availability: AvailabilitySection;
   visualBreak1: {
     backgroundMedia: string;
   };
@@ -73,7 +110,7 @@ export interface HomePageContent {
     ctaHref: string;
     backgroundMedia: string;
   };
-  aboutSummary: AboutSummary;
+  aboutSummary: AboutSummary; // Keeping this for the commented code
   visualBreak2: {
     backgroundMedia: string;
   };

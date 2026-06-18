@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+
 
 export function LanguageSwitch({
     currentLocale,
@@ -19,16 +19,23 @@ export function LanguageSwitch({
         router.push(newPath, { scroll: false });
     };
 
-    const isEnglish = currentLocale === "en";
-
     return (
-        <ToggleGroup type="single" value={currentLocale} onValueChange={(value) => { if (value) toggleLanguage(value) }} className="bg-muted p-1 rounded-full border">
-            <ToggleGroupItem value="pt" aria-label="Português" className="rounded-full px-3 h-8 text-xs font-semibold data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm transition-all">
-                🇧🇷 PT
-            </ToggleGroupItem>
-            <ToggleGroupItem value="en" aria-label="English" className="rounded-full px-3 h-8 text-xs font-semibold data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm transition-all">
-                🇬🇧 EN
-            </ToggleGroupItem>
-        </ToggleGroup>
+        <div className="flex items-center gap-2 text-step--2">
+            <button 
+                onClick={() => toggleLanguage('pt')} 
+                className={`transition-all ${currentLocale === 'pt' ? 'text-foreground font-bold' : 'text-foreground font-light hover:font-semibold'}`}
+                aria-label="Português"
+            >
+                PT
+            </button>
+            <span className="text-foreground font-light">/</span>
+            <button 
+                onClick={() => toggleLanguage('en')} 
+                className={`transition-all ${currentLocale === 'en' ? 'text-foreground font-bold' : 'text-foreground font-light hover:font-semibold'}`}
+                aria-label="English"
+            >
+                EN
+            </button>
+        </div>
     );
 }

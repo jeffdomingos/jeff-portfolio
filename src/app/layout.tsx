@@ -1,10 +1,17 @@
-import { Montserrat } from "next/font/google";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const barlow = Barlow({
+    weight: ["400", "500", "600", "700"],
+    style: ["normal", "italic"],
     subsets: ["latin"],
-    variable: "--font-montserrat",
+    variable: "--font-barlow",
+});
+
+const barlowCondensed = Barlow_Condensed({
+    weight: ["600", "700", "800", "900"],
+    subsets: ["latin"],
+    variable: "--font-barlow-condensed",
 });
 
 export const metadata = {
@@ -22,19 +29,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={montserrat.variable}>
+        <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable}`}>
             <body>
                 <PostHogProvider>
                     <Suspense fallback={null}>
                         <PostHogPageView />
                     </Suspense>
-                    <ThemeProvider
-                        attribute="class"
-                        defaultTheme="light"
-                        disableTransitionOnChange
-                    >
-                        {children}
-                    </ThemeProvider>
+                    {children}
                 </PostHogProvider>
             </body>
         </html>

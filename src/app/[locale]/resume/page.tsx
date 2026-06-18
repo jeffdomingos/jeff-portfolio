@@ -14,9 +14,9 @@ export default function ResumePage({ params: { locale } }: { params: { locale: s
 
     return (
         <div className="container mx-auto px-4 py-20 max-w-5xl flex flex-col items-center">
-            <h1 className="text-4xl font-bold mb-2 text-center w-full">{content.pageTitleHeader.title}</h1>
+            <h1 className="text-4xl font-semibold mb-2 text-center w-full">{content.pageTitleHeader.title}</h1>
             {content.pageTitleHeader.subtitle && (
-                <h2 className="text-xl text-muted-foreground mb-8 text-center w-full">{content.pageTitleHeader.subtitle}</h2>
+                <h2 className="text-xl text-foreground font-light mb-8 text-center w-full">{content.pageTitleHeader.subtitle}</h2>
             )}
 
             <div className="flex flex-wrap justify-center gap-3 mb-8 w-full">

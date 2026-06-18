@@ -1,7 +1,12 @@
 {
   "hero": {
-    "headline_pt": "7+ anos traduzindo a complexidade de produtos robustos em fluxos simples e eficientes",
-    "headline_en": "7+ years translating the complexity of robust products into simple and efficient workflows",
+    "headline_pt": "Product Design Estratégico & Web Design de Alto Padrão.",
+    "subheadline_pt": "Atuo de ponta a ponta: seja elevando a maturidade de produtos complexos, ou entregando sites premium funcionais e de alto impacto visual.",
+    "headline_en": "Strategic Product Design & High-End Web Design.",
+    "subheadline_en": "I work end-to-end: whether elevating the maturity of complex products, or delivering functional, high-impact premium websites.",
+    "ctaLabel_pt": "Vamos conversar",
+    "ctaLabel_en": "Let's talk",
+    "ctaHref": "https://calendly.com/jeffdomingos/papo45min",
     "backgroundMedia": "/images/home/hero-bg.png",
     "carousel": [
       {
@@ -44,9 +49,136 @@
     "case_order": [
       "ciclic",
       "intelie-performance-report",
-      "intelie-annotations-list",
       "aprendin",
       "voltz-motors"
+    ]
+  },
+  "approach": {
+    "title_pt": "Abordagem",
+    "title_en": "Approach",
+    "subtitle_pt": "A intersecção exata entre a lógica de negócios, a fluência técnica e o refinamento visual.",
+    "subtitle_en": "The exact intersection between business logic, technical fluency, and visual refinement.",
+    "columns_pt": [
+      {
+        "title": "Estratégia e Negócio",
+        "description": "Mergulho no contexto e nas regras de negócio de soluções SaaS para transformar cenários complexos em interfaces eficientes que geram retorno real."
+      },
+      {
+        "title": "Design to Code",
+        "description": "Elimino o atrito entre o Figma e o produto final através de uma forte cultura técnica. Domino a estrutura do front-end, atuo em branches de teste e utilizo IA para acelerar a entrega e gerar handoff direto em código para a engenharia."
+      },
+      {
+        "title": "Estética e Emoção",
+        "description": "Executo interfaces digitais e portfólios de alto padrão com atenção obsessiva ao pixel, aplicando direção de arte refinada e micro-interações para posicionar marcas no topo do mercado."
+      }
+    ],
+    "columns_en": [
+      {
+        "title": "Strategy and Business",
+        "description": "I dive into the context and business rules of SaaS solutions to transform complex scenarios into efficient interfaces that generate real returns."
+      },
+      {
+        "title": "Design to Code",
+        "description": "I eliminate friction between Figma and the final product through a strong technical culture. I master front-end structure, work on testing branches, and use AI to accelerate delivery and generate handoff straight to code for engineering."
+      },
+      {
+        "title": "Aesthetics and Emotion",
+        "description": "I execute high-end digital interfaces and portfolios with obsessive attention to the pixel, applying refined art direction and micro-interactions to position brands at the top of the market."
+      }
+    ]
+  },
+  "testimonials": {
+    "title_pt": "Impacto e Colaboração",
+    "title_en": "Impact and Collaboration",
+    "subtitle_pt": "O que dizem os líderes e parceiros de engenharia que constroem produtos e experiências comigo.",
+    "subtitle_en": "What engineering leaders and partners who build products and experiences with me have to say.",
+    "items_pt": [
+      {
+        "author": "Guilherme Vasconcelos",
+        "role": "Design Lead na Afya",
+        "quote": "Tive a oportunidade de liderar o Jefferson e posso atestar suas excelentes habilidades técnicas e analíticas em diferentes etapas.",
+        "details": "Ele possui forte conhecimento em arquitetura de informação, análise de dados e interfaces complexas como dashboards e data grids. Eu o recomendo fortemente tanto para posições de Product Designer Sênior quanto de Web Designer.",
+        "avatarUrl": "/images/profile_gui.jpg"
+      },
+      {
+        "author": "Gabriel Henriques",
+        "role": "Design System Specialist na Afya",
+        "quote": "O Jeff é um profissional extremamente atento e maduro conectando visão de negócio, tecnologia e necessidades do usuário.",
+        "details": "Sua postura colaborativa destrava decisões importantes em momentos complexos e sua curiosidade com IA influenciou diretamente o rumo positivo do produto.",
+        "avatarUrl": "/images/profile_gabri.jpg"
+      },
+      {
+        "author": "Leticia Silverio",
+        "role": "QA Engineer na Afya",
+        "quote": "Trabalhar em parceria com o Jefferson foi excelente e se eu precisasse defini-lo em uma palavra seria inovação.",
+        "details": "Ele sempre atuou muito além do papel de Product Designer com um olhar atento aos detalhes da plataforma. O Jefferson trazia referências e aplicações reais de IA que apoiavam tanto a tomada de decisão de negócio quanto o alinhamento de todo o time de desenvolvimento.",
+        "avatarUrl": "/images/profile_let.jpg"
+      },
+      {
+        "author": "Aline Silva",
+        "role": "UX Researcher na Afya",
+        "quote": "Ele possui um excelente senso crítico e se destaca pela clareza na comunicação e pela forma estruturada com que conduz seu trabalho.",
+        "details": "Trabalhar com o Jefferson na Afya foi uma experiência muito enriquecedora. Durante o tempo em que trabalhamos juntos aprendi com ele novas formas de utilizar ferramentas de IA para tornar os processos mais inteligentes. É um profissional que eleva o nível do time.",
+        "avatarUrl": "/images/profile_ali.jpg"
+      }
+    ],
+    "items_en": [
+      {
+        "author": "Guilherme Vasconcelos",
+        "role": "Design Lead at Afya",
+        "quote": "I had the opportunity to lead Jefferson and can attest to his excellent technical and analytical skills across different stages.",
+        "details": "He has strong knowledge in information architecture, data analysis, and complex interfaces like dashboards and data grids. I highly recommend him for both Senior Product Designer and Web Designer positions.",
+        "avatarUrl": "/images/profile_gui.jpg"
+      },
+      {
+        "author": "Gabriel Henriques",
+        "role": "Design System Specialist at Afya",
+        "quote": "Jeff is an extremely attentive and communicative professional who maturely connects business vision, technology, and user needs.",
+        "details": "His collaborative posture unlocks important decisions in complex moments and his curiosity about AI directly influenced the product direction in a positive way.",
+        "avatarUrl": "/images/profile_gabri.jpg"
+      },
+      {
+        "author": "Leticia Silverio",
+        "role": "QA Engineer at Afya",
+        "quote": "Working in partnership with Jefferson was excellent and if I had to define him in one word it would be innovation.",
+        "details": "He always went well beyond the role of a Product Designer with a sharp eye for platform details. Jefferson brought great references and real AI applications that supported both business decisions and the alignment of the entire dev team.",
+        "avatarUrl": "/images/profile_let.jpg"
+      },
+      {
+        "author": "Aline Silva",
+        "role": "UX Researcher at Afya",
+        "quote": "He has an excellent critical sense and stands out for his clear communication and structured workflow.",
+        "details": "Working with Jefferson was a very enriching experience. During our time working together I learned new ways to use AI tools from him to make processes smarter. He is a professional who truly raises the team's bar.",
+        "avatarUrl": "/images/profile_ali.jpg"
+      }
+    ]
+  },
+  "availability": {
+    "title_pt": "Disponibilidade",
+    "title_en": "Availability",
+    "blocks_pt": [
+      {
+        "title": "Bloco Squads",
+        "subtitle": "Alocação em Times",
+        "description": "Disponível para integrar squads de tecnologia como Product Designer Sênior em formato full-time, part-time ou temporário."
+      },
+      {
+        "title": "Bloco Projetos",
+        "subtitle": "Escopo Fechado",
+        "description": "Disponível para design, direção de arte e desenvolvimento de websites e portfólios premium independentes."
+      }
+    ],
+    "blocks_en": [
+      {
+        "title": "Squads Block",
+        "subtitle": "Team Allocation",
+        "description": "Available to integrate technology squads as a Senior Product Designer in full-time, part-time, or temporary format."
+      },
+      {
+        "title": "Projects Block",
+        "subtitle": "Fixed Scope",
+        "description": "Available for design, art direction, and development of independent premium websites and portfolios."
+      }
     ]
   },
   "visual_design": {
@@ -59,16 +191,40 @@
     "ctaHref": "http://cargocollective.com/Jeffdomingos",
     "backgroundMedia": "/images/home/visual-design.png"
   },
+  "specialties": {
+    "title_pt": "Especialidades",
+    "title_en": "Specialties",
+    "items_pt": [
+      {
+        "title": "Product Design (In-house/Contract)",
+        "description": "Foco em SaaS, B2B e sistemas complexos. Elevo a percepção de maturidade do seu produto, unindo visão estratégica de negócios a um UX robusto e experiência do usuário fluida."
+      },
+      {
+        "title": "Premium Web Design (Freelance/Temporário)",
+        "description": "Desenvolvimento de sites de alta performance para Startups e Marcas. Trago o rigor técnico do desenvolvimento com o apelo de um design de alto padrão para posicionar sua marca como autoridade."
+      }
+    ],
+    "items_en": [
+      {
+        "title": "Product Design (In-house/Contract)",
+        "description": "Focus on SaaS, B2B, and complex systems. I elevate your product's maturity perception, uniting a strategic business vision with robust UX and seamless user experience."
+      },
+      {
+        "title": "Premium Web Design (Freelance/Temporário)",
+        "description": "High-performance website development for Startups and Brands. I bring the technical rigor of development paired with the appeal of high-end design to position your brand as an authority."
+      }
+    ]
+  },
   "about": {
-    "paragraph1_pt": "Olá, meu nome é Jefferson, mas pode me chamar de Jeff. Sou um Senior Product Designer brasileiro com uma mentalidade global. Minha base é profundamente enraizada na observação do comportamento humano, seja durante o tempo em que morei na Inglaterra e no Canadá ou através das interfaces de produtos digitais complexos. Eu me conecto com pessoas de diferentes culturas porque isso afia uma das minhas maiores forças: o reconhecimento de padrões. Eu não apenas olho para os usuários, eu sintetizo como eles se comportam e o que eles precisam. Sinto total conforto navegando na ambiguidade, construindo narrativas claras e deixando meu trabalho ser guiado por crescimento e valores fortes, independentemente da geografia ou do idioma.",
-    "paragraph2_en": "For the past several years, I have built my career solving complex problems in the SaaS and B2B spaces, focusing heavily on User Experience and high quality UI. I hold a Bachelor degree in Industrial Design and have officially completed my MBA in AI, Machine Learning and Big Data for Business. I confidently own the entire design process, from raw research and stakeholder interviews to high fidelity prototyping and development handoff. I refuse to be limited by temporary industry labels because tools and platforms always evolve. Today, I am taking my solid foundation in 2D spatial design and expanding it into XR Design. The world will always need people who can turn chaos into clarity, and that is exactly what I do.",
-    "paragraph1_en": "Hi, I am Jefferson, but you can call me Jeff. I am a Senior Product Designer from Brazil with a global mindset. My background is deeply rooted in observing human behavior, whether that was during my time living in England and Canada or through the interfaces of complex digital products. I thrive on connecting with people from all cultures because it sharpens one of my core strengths: pattern recognition. I do not just look at users; I synthesize how they behave and what they need. I am comfortable navigating ambiguity, building clear narratives, and letting my work be guided by growth and strong values, regardless of geography or language.",
+    "paragraph1_pt": "Olá, meu nome é Jefferson, mas pode me chamar de Jeff. Sou um Senior Product Designer brasileiro com uma mentalidade global e atuo de ponta a ponta no digital. Aprendi que um produto excelente não é apenas decoração visual: é experiência fluida, clareza técnica e engenharia de confiança. Me conecto com pessoas de diferentes culturas porque isso afia uma das minhas maiores forças: o reconhecimento de padrões.",
+    "paragraph2_en": "For the past several years, I have built my career solving complex problems in the SaaS and B2B spaces, focusing heavily on User Experience and high quality UI. Today, I offer a hybrid approach: whether integrating with an existing team to provide strategic Product Design, or working as a premium Web Designer delivering functional and impactful digital experiences optimized with AI. The world will always need people who can turn chaos into clarity, and that is exactly what I do.",
+    "paragraph1_en": "Hi, I am Jefferson, but you can call me Jeff. I am a Senior Product Designer from Brazil with a global mindset, working end-to-end in the digital space. I've learned that an excellent product isn't just visual decoration: it's fluid experience, technical clarity, and trust engineering. I connect with people from all cultures because it sharpens one of my core strengths: pattern recognition.",
     "heading2_pt": "O que eu já fiz?",
     "heading1_pt": "Quem sou eu?",
     "backgroundMedia": "/images/placeholder.png",
     "heading2_en": "What I've done?",
     "heading1_en": "Who am I?",
-    "paragraph2_pt": "Nos últimos anos, construí minha carreira resolvendo problemas complexos nos mercados de SaaS e B2B, com foco pesado em Experiência do Usuário e interfaces de alta qualidade. Sou formado em Desenho Industrial pela ESDI e concluí meu MBA em Inteligência Artificial, Machine Learning e Big Data para Negócios. Domino com confiança todo o processo de design, desde a pesquisa e entrevistas com stakeholders até a prototipagem de alta fidelidade e o handoff para os desenvolvedores. Eu me recuso a ser limitado por rótulos temporários da indústria, pois as ferramentas e plataformas sempre evoluem. Hoje, estou pegando minha base sólida em design bidimensional e expandindo para o XR Design. O mundo sempre precisará de pessoas que consigam transformar o caos em clareza, e é exatamente isso que eu faço."
+    "paragraph2_pt": "Nos últimos anos, construí minha carreira resolvendo problemas complexos nos mercados de SaaS e B2B, com foco pesado em Experiência do Usuário e interfaces de alta qualidade. Hoje, ofereço uma atuação híbrida: seja me integrando a um time já existente para entregar Product Design estratégico, ou atuando como um Web Designer premium que entrega experiências digitais funcionais e de alto impacto otimizadas com IA. O mundo sempre precisará de pessoas que consigam transformar o caos em clareza, e é exatamente isso que eu faço."
   },
   "contacts": {
     "title": "Jefferson Domingos | Design",

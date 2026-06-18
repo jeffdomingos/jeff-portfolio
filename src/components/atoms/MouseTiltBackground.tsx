@@ -64,7 +64,7 @@ export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
     return (
         <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
             <div 
-                className="absolute inset-[-5%] bg-center bg-no-repeat bg-cover opacity-100 dark:mix-blend-multiply dark:opacity-80 will-change-transform"
+                className="absolute inset-[-5%] bg-center bg-no-repeat bg-cover opacity-100 will-change-transform"
                 style={{ 
                     backgroundImage: `url(${imageUrl})`,
                     ...style 

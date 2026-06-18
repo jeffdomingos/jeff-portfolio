@@ -5,8 +5,8 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: strin
     return (
         <figure className="my-8">
             {/* We use standard img for placeholders if needed or Next Image if well configured. For flexibility, img is used to support external urls without next.config setup right now */}
-            <div className={`overflow-hidden rounded-xl shadow-sm border border-border ${lightBgInDark ? 'dark:bg-muted' : ''}`}>
-                <img src={src} alt={alt || "Illustration"} className={`w-full h-auto ${invertInDark ? 'dark:invert' : ''}`} />
+            <div className={`overflow-hidden rounded-xl shadow-sm border border-border`}>
+                <img src={src} alt={alt || "Illustration"} className={`w-full h-auto`} />
             </div>
             {alt && <figcaption className="text-center text-sm text-subtle mt-2">{alt}</figcaption>}
         </figure>

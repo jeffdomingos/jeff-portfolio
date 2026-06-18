@@ -24,6 +24,9 @@ export function getHomePageContent(locale: string): HomePageContent {
 
     const hero = data.hero || {};
     const cases = data.cases || {};
+    const approach = data.approach || {};
+    const testimonials = data.testimonials || {};
+    const availability = data.availability || {};
     const visual = data.visual_design || {};
     const about = data.about || {};
     const contacts = data.contacts || {};
@@ -45,10 +48,11 @@ export function getHomePageContent(locale: string): HomePageContent {
             const homeTitle = homeCard[`title_${lang}`] || langData.title || slug;
             const homeSummary = homeCard[`summary_${lang}`] || langData.summary || '';
             const homeThumbnail = homeCard.thumbnail || pd.thumbnail || '';
+            const homeTags = homeCard[`tags_${lang}`] || homeCard.tags || pd[`tags_${lang}`] || pd.tags || [];
 
-            return { slug, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail };
+            return { slug, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags };
         })
-        .filter(Boolean) as { slug: string; title: string; summary: string; href: string; thumbnailImage: string }[];
+        .filter(Boolean) as { slug: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[] }[];
 
     // Sort by cases.case_order
     caseItems.sort((a, b) => {
@@ -66,13 +70,30 @@ export function getHomePageContent(locale: string): HomePageContent {
     return {
         hero: {
             headline: hero[`headline_${lang}`] ?? '',
+            subheadline: hero[`subheadline_${lang}`] ?? '',
             backgroundMedia: hero.backgroundMedia ?? '',
+            ctaLabel: hero[`ctaLabel_${lang}`] ?? '',
+            ctaHref: hero.ctaHref ?? '',
             carousel: hero.carousel ?? [],
         },
         sectionDividerCases: {
             title: cases[`title_${lang}`] ?? 'Cases',
         },
         caseList: { items: finalCaseItems },
+        approach: {
+            title: approach[`title_${lang}`] ?? '',
+            subtitle: approach[`subtitle_${lang}`] ?? '',
+            columns: approach[`columns_${lang}`] ?? [],
+        },
+        testimonials: {
+            title: testimonials[`title_${lang}`] ?? '',
+            subtitle: testimonials[`subtitle_${lang}`] ?? '',
+            items: testimonials[`items_${lang}`] ?? [],
+        },
+        availability: {
+            title: availability[`title_${lang}`] ?? '',
+            blocks: availability[`blocks_${lang}`] ?? [],
+        },
         visualBreak1: {
             backgroundMedia: data.visualBreak1_backgroundMedia ?? '/images/placeholder.png', // Fallback
         },
