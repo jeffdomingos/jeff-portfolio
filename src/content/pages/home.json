@@ -61,29 +61,29 @@
     "columns_pt": [
       {
         "title": "Estratégia e Negócio",
-        "description": "Mergulho no contexto e nas regras de negócio de soluções SaaS para transformar cenários complexos em interfaces eficientes que geram retorno real."
+        "description": "Mergulho nas regras do negócio para transformar cenários complexos em experiências eficientes que geram valor real para o seu produto."
       },
       {
         "title": "Design to Code",
-        "description": "Elimino o atrito entre o Figma e o produto final através de uma forte cultura técnica. Domino a estrutura do front-end, atuo em branches de teste e utilizo IA para acelerar a entrega e gerar handoff direto em código para a engenharia."
+        "description": "Elimino atritos técnicos entre design e código. Compreendo a estrutura frontend e utilizo IA para entregas e handoffs impecáveis."
       },
       {
         "title": "Estética e Emoção",
-        "description": "Executo interfaces digitais e portfólios de alto padrão com atenção obsessiva ao pixel, aplicando direção de arte refinada e micro-interações para posicionar marcas no topo do mercado."
+        "description": "Crio interfaces de alto padrão com atenção aos detalhes, aplicando direção de arte e microinterações para destacar a sua marca."
       }
     ],
     "columns_en": [
       {
         "title": "Strategy and Business",
-        "description": "I dive into the context and business rules of SaaS solutions to transform complex scenarios into efficient interfaces that generate real returns."
+        "description": "I dive into business rules to turn complex scenarios into efficient experiences, generating real value for the product."
       },
       {
         "title": "Design to Code",
-        "description": "I eliminate friction between Figma and the final product through a strong technical culture. I master front-end structure, work on testing branches, and use AI to accelerate delivery and generate handoff straight to code for engineering."
+        "description": "I remove technical friction between design and code. I grasp frontend structure and use AI for flawless deliveries and handoffs."
       },
       {
         "title": "Aesthetics and Emotion",
-        "description": "I execute high-end digital interfaces and portfolios with obsessive attention to the pixel, applying refined art direction and micro-interactions to position brands at the top of the market."
+        "description": "I design high standard interfaces with deep attention to detail, applying art direction and microinteractions to elevate the brand."
       }
     ]
   },
@@ -154,30 +154,30 @@
     ]
   },
   "availability": {
-    "title_pt": "Disponibilidade",
-    "title_en": "Availability",
+    "title_pt": "Atuação",
+    "title_en": "Services",
     "blocks_pt": [
       {
-        "title": "Bloco Squads",
-        "subtitle": "Alocação em Times",
-        "description": "Disponível para integrar squads de tecnologia como Product Designer Sênior em formato full-time, part-time ou temporário."
+        "title": "Squads",
+        "subtitle": "Product Design para Times",
+        "description": "Pronto para integrar squads de tecnologia como Product Designer Sênior nos formatos full time, part time ou temporário."
       },
       {
-        "title": "Bloco Projetos",
-        "subtitle": "Escopo Fechado",
-        "description": "Disponível para design, direção de arte e desenvolvimento de websites e portfólios premium independentes."
+        "title": "Projetos",
+        "subtitle": "Websites e Direção de Arte",
+        "description": "Disponível para criar e desenvolver projetos independentes de escopo fechado focados em sites e portfólios premium."
       }
     ],
     "blocks_en": [
       {
-        "title": "Squads Block",
-        "subtitle": "Team Allocation",
-        "description": "Available to integrate technology squads as a Senior Product Designer in full-time, part-time, or temporary format."
+        "title": "Squads",
+        "subtitle": "Product Design for Teams",
+        "description": "Ready to join tech squads as a Senior Product Designer in full time, part time, or contract roles."
       },
       {
-        "title": "Projects Block",
-        "subtitle": "Fixed Scope",
-        "description": "Available for design, art direction, and development of independent premium websites and portfolios."
+        "title": "Projects",
+        "subtitle": "Websites and Art Direction",
+        "description": "Available to design and build independent fixed scope projects focused on premium sites and portfolios."
       }
     ]
   },

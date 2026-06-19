@@ -4,122 +4,46 @@ import { useState, useEffect } from 'react'
 import { HeroCarousel } from "@/components/organisms/HeroCarousel"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Calendar, Mail, Phone, ChevronDown } from "lucide-react"
+import { AnimatedTypingText } from "@/components/atoms/AnimatedTypingText"
 
 export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaLabel, ctaHref }: { headline: string, subheadline?: string, carouselItems: any[], ctaLabel?: string, ctaHref?: string }) {
-    const [visibleCount, setVisibleCount] = useState(0)
-    const [typingState, setTypingState] = useState<'idle' | 'typing' | 'finished'>('idle')
     const [moveUp, setMoveUp] = useState(false)
     const [showSubAndImage, setShowSubAndImage] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
 
-    useEffect(() => {
-        setVisibleCount(0)
-        setTypingState('idle')
-        setMoveUp(false)
-        setShowSubAndImage(false)
-        setShowButtons(false)
+    // Removido o useEffect original de intervalo aqui, pois ele agora reside e é processado pelo AnimatedTypingText
 
-        let i = 0
-        let intervalId: NodeJS.Timeout;
+    const handleTypingFinished = () => {
+        setTimeout(() => {
+            setMoveUp(true);
+            setShowSubAndImage(true);
+        }, 200);
+        setTimeout(() => setShowButtons(true), 600);
+    };
 
-        const startTyping = () => {
-            setTypingState('typing')
-            intervalId = setInterval(() => {
-                i++
-                setVisibleCount(i)
-                if (i >= headline.length) {
-                    clearInterval(intervalId)
-                    setTypingState('finished')
-                    
-                    // Orchestrate the sequence
-                    setTimeout(() => {
-                        setMoveUp(true) // 1. Move text up
-                        setShowSubAndImage(true) // 2. Subtitle & Image appear at the exact same time as it starts moving up
-                    }, 200) 
-                    setTimeout(() => setShowButtons(true), 600) // 3. Buttons appear right after
-                }
-            }, 40)
-        }
-
-        // Aguarda 800ms piscando no lugar antes de começar a digitar
-        const timeoutId = setTimeout(startTyping, 800)
-
-        return () => {
-            clearTimeout(timeoutId)
-            clearInterval(intervalId)
-        }
-    }, [headline])
-
-    const formatHeadline = (text: string, count: number) => {
-        const targets = ["Product Design", "Web Design", "Alto Padrão", "High-End", "premium"];
-        const regex = new RegExp(`(${targets.join('|')})`, 'gi');
-        
-        const parts = text.split(regex);
-        let globalIndex = 0;
-
-        return parts.map((part, index) => {
-            const pLower = part.toLowerCase();
-            let baseColorClass = "";
-            if (pLower === 'product design' || pLower === 'web design') {
-                baseColorClass = "text-foreground";
-            } else if (targets.some(t => new RegExp(`^${t}$`, 'i').test(part))) {
-                baseColorClass = "text-foreground/90";
-            }
-            
-            // Render the string character by character but keep them in the DOM to prevent layout shift
-            const chars = part.split('');
-            const renderedChars = chars.map((char, charIdx) => {
-                const isVisible = globalIndex < count;
-                const isLastVisible = globalIndex === count - 1;
-                const isFirstChar = globalIndex === 0;
-                
-                // Se ainda não começou a digitar, o cursor fica no começo piscando
-                const showCursorBefore = count === 0 && isFirstChar;
-                // O cursor depois da letra ativa (se estiver digitando) ou na última letra (quando terminar)
-                const showCursorAfter = isLastVisible || (count === headline.length && charIdx === chars.length - 1 && index === parts.length - 1);
-                
-                const isBlinking = typingState !== 'typing';
-
-                globalIndex++;
-                return (
-                    <span key={charIdx} className={`relative ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-                        {showCursorBefore && (
-                            <span className="absolute left-0 top-[0.05em] opacity-100">
-                                <span className={`block w-[4px] h-[1em] bg-current ${isBlinking ? 'animate-hard-blink' : ''}`} />
-                            </span>
-                        )}
-                        {char}
-                        <span className={`absolute left-full ml-[1px] top-[0.05em] ${showCursorAfter ? 'opacity-100' : 'opacity-0'}`}>
-                            <span className={`block w-[4px] h-[1em] bg-current ${isBlinking ? 'animate-hard-blink' : ''}`} />
-                        </span>
-                    </span>
-                );
-            });
-
-            return (
-                <span key={index} className={baseColorClass}>
-                    {renderedChars}
-                </span>
-            );
-        });
-    }
+    const typingTargets = [
+        { text: /Product Design/i, className: "text-foreground" },
+        { text: /Web Design/i, className: "text-foreground" },
+        { text: /Alto Padrão/i, className: "text-foreground/90" },
+        { text: /High-End/i, className: "text-foreground/90" },
+        { text: /premium/i, className: "text-foreground/90" }
+    ];
 
     return (
-        <div className="w-full flex-1 flex flex-col lg:flex-row items-center justify-between">
-            <style dangerouslySetInnerHTML={{__html: `
-                @keyframes hard-blink {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0; }
-                }
-                .animate-hard-blink {
-                    animation: hard-blink 1s step-end infinite;
-                }
-            `}} />
+        <div className="w-full flex-1 grid-layout items-center relative">
             {/* Left Column: Text and CTA */}
-            <div className="w-full lg:w-1/2 flex flex-col items-start text-left px-fluid-m z-20 pt-14 lg:pt-0">
-                <h1 className={`text-step-5 md:text-step-6 font-heading font-semibold uppercase tracking-normal text-foreground w-full max-w-4xl leading-[1.1] text-balance drop-shadow-sm z-10 relative text-left transition-all duration-1000 transform ${moveUp ? 'translate-y-0 mb-fluid-m' : 'translate-y-[10vh] mb-0'}`}>
-                    {formatHeadline(headline, visibleCount)}
-                </h1>
+            <div className="col-span-12 lg:col-span-6 flex flex-col items-start text-left z-20 pt-14 lg:pt-0">
+                <AnimatedTypingText 
+                    as="h1"
+                    text={headline}
+                    mode="auto"
+                    animationType="typing"
+                    targets={typingTargets}
+                    onFinished={handleTypingFinished}
+                    delay={800}
+                    speed={40}
+                    className={`text-step-5 md:text-step-6 font-heading font-semibold uppercase tracking-normal text-foreground w-full max-w-4xl leading-[1.1] text-balance drop-shadow-sm z-10 relative text-left transition-all duration-1000 transform ${moveUp ? 'translate-y-0 mb-fluid-m' : 'translate-y-[10vh] mb-0'}`}
+                />
 
                 {subheadline && (
                     <p className={`text-step-0 font-light text-foreground max-w-2xl text-left leading-relaxed transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100 mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>

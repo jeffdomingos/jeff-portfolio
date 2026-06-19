@@ -1,32 +1,18 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
+import React from "react";
+import { AnimatedTypingText } from "@/components/atoms/AnimatedTypingText";
 
 export function TypewriterEffect({ text }: { text: string }) {
-    const [displayedText, setDisplayedText] = useState('')
-    const [isTyping, setIsTyping] = useState(true)
-
-    useEffect(() => {
-        setDisplayedText('')
-        setIsTyping(true)
-        
-        let i = 0
-        const intervalId = setInterval(() => {
-            setDisplayedText(text.slice(0, i))
-            i++
-            if (i > text.length) {
-                clearInterval(intervalId)
-                setIsTyping(false)
-            }
-        }, 80) // Adjust typing speed here (ms per character)
-
-        return () => clearInterval(intervalId)
-    }, [text])
-
     return (
-        <span className="inline-block relative">
-            {displayedText}
-            <span className="inline-block ml-1 w-[2px] h-[0.9em] bg-current animate-pulse align-middle" />
-        </span>
-    )
+        <AnimatedTypingText
+            as="span"
+            text={text}
+            mode="auto"
+            animationType="typing"
+            speed={80}
+            delay={0}
+            className="inline-block relative"
+        />
+    );
 }

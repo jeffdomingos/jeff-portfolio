@@ -1,6 +1,9 @@
 import { getGlobalContent } from "@/utils/content";
 import { Header, Footer } from "@/components/organisms";
 import { Toaster } from "@/components/ui/sonner";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+
+import { InspectorCursor } from "@/components/organisms/InspectorCursor";
 
 export default function LocaleLayout({
     children,
@@ -13,15 +16,18 @@ export default function LocaleLayout({
     const otherLocale = locale === "pt" ? "en" : "pt";
 
     return (
-        <div className="min-h-screen flex flex-col">
-            <Header data={global.header} locale={locale} otherLocale={otherLocale} />
+        <SmoothScrollProvider>
+            <div className="min-h-screen flex flex-col">
+                <Header data={global.header} locale={locale} otherLocale={otherLocale} />
 
-            <main id="main-content" className="flex-1 pt-16 outline-none" tabIndex={-1}>
-                {children}
-            </main>
+                <main id="main-content" className="flex-1 pt-16 outline-none" tabIndex={-1}>
+                    {children}
+                </main>
 
-            <Footer data={global.footer} />
-            <Toaster richColors />
-        </div>
+                <Footer data={global.footer} />
+                <Toaster richColors />
+                <InspectorCursor />
+            </div>
+        </SmoothScrollProvider>
     );
 }

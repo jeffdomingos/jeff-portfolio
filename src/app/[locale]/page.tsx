@@ -5,6 +5,7 @@ import Image from "next/image";
 import { HeroAnimatedContent } from "@/components/organisms/HeroAnimatedContent";
 import { MouseTiltBackground } from "@/components/atoms/MouseTiltBackground";
 import { CasesSection } from "@/components/organisms/CasesSection";
+import { IntermissionSVGs } from "@/components/organisms/IntermissionSVGs";
 import { ApproachSection } from "@/components/organisms/ApproachSection";
 import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
 import { AvailabilitySection } from "@/components/organisms/AvailabilitySection";
@@ -21,23 +22,26 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
 
     return (
         <div>
-            {/* Hero Section */}
-            <section className="relative w-full h-[calc(100svh-4rem)] flex flex-col items-center justify-center text-center overflow-hidden bg-background pt-14">
-                <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
-                <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
-                <HeroAnimatedContent 
-                    headline={content.hero.headline} 
-                    subheadline={content.hero.subheadline}
-                    carouselItems={content.hero.carousel} 
-                    ctaLabel={content.hero.ctaLabel}
-                    ctaHref={content.hero.ctaHref}
-                />
-
-            </section>
+            {/* Hero Section Wrapper para permitir o sticky mask */}
+            <div className="relative w-full hero-wrapper bg-background">
+                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
+                <section className="relative w-full h-[calc(100svh-4rem)] flex flex-col items-center justify-center text-center overflow-hidden pt-14">
+                    <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
+                    <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
+                    <HeroAnimatedContent 
+                        headline={content.hero.headline} 
+                        subheadline={content.hero.subheadline}
+                        carouselItems={content.hero.carousel} 
+                        ctaLabel={content.hero.ctaLabel}
+                        ctaHref={content.hero.ctaHref}
+                    />
+                </section>
+            </div>
 
             {/* Cases Section */}
-            <div id="cases" className="w-full bg-background pt-fluid-2xl">
-                <div className="px-fluid-m mb-fluid-3xl">
+            <div id="cases" className="relative w-full bg-background pt-fluid-2xl">
+                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
+                <div className="relative z-10 px-fluid-m mb-fluid-2xl w-full">
                     <TerminalTitle 
                         as="h2"
                         text={content.sectionDividerCases.title}
@@ -47,9 +51,22 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
                 <CasesSection items={content.caseList.items} locale={locale} />
             </div>
 
-            <ApproachSection data={content.approach} />
-            <TestimonialsSection data={content.testimonials} />
-            <AvailabilitySection data={content.availability} />
+            <IntermissionSVGs />
+
+            <div className="relative w-full bg-background">
+                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
+                <ApproachSection data={content.approach} />
+            </div>
+            
+            <div className="relative w-full bg-foreground">
+                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
+                <TestimonialsSection data={content.testimonials} />
+            </div>
+            
+            <div className="relative w-full bg-background">
+                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
+                <AvailabilitySection data={content.availability} />
+            </div>
 
             {/* About Summary */}
             {/* 
