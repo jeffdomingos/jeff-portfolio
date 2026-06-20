@@ -34,8 +34,6 @@ function ApproachColumn({ col, index }: { col: any, index: number }) {
 }
 
 export function ApproachSection({ data }: ApproachSectionProps) {
-    if (!data) return null;
-
     const sectionRef = useRef<HTMLElement>(null);
     const { scrollYProgress: sectionScroll } = useScroll({
         target: sectionRef,
@@ -49,6 +47,8 @@ export function ApproachSection({ data }: ApproachSectionProps) {
     });
     const headerOpacity = useTransform(headerScroll, [0, 1], [0, 1]);
     const headerY = useTransform(headerScroll, [0, 1], [30, 0]);
+
+    if (!data) return null;
 
     return (
         <section 

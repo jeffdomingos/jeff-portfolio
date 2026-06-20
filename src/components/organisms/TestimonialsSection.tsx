@@ -44,7 +44,7 @@ function TestimonialRow({ item, index }: { item: any, index: number }) {
                 {/* Text Content */}
                 <div className="w-full flex flex-col gap-fluid-s">
                     <p className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light transition-all duration-500">
-                        "{item.quote}"
+                        &quot;{item.quote}&quot;
                     </p>
                     <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]">
                         <div className="overflow-hidden">
@@ -60,8 +60,6 @@ function TestimonialRow({ item, index }: { item: any, index: number }) {
 }
 
 export function TestimonialsSection({ data }: TestimonialsSectionProps) {
-    if (!data || !data.items || data.items.length === 0) return null;
-
     const headerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress: headerScroll } = useScroll({
         target: headerRef,
@@ -69,6 +67,8 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
     });
     const headerOpacity = useTransform(headerScroll, [0, 1], [0, 1]);
     const headerY = useTransform(headerScroll, [0, 1], [30, 0]);
+
+    if (!data || !data.items || data.items.length === 0) return null;
 
     return (
         <section className="px-fluid-m py-fluid-4xl border-t border-foreground bg-foreground text-background w-full">
