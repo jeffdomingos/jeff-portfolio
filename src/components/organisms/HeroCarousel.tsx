@@ -23,11 +23,11 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
     }, [isActive, currentIndex, items.length]);
 
     return (
-        <div className="relative w-[150%] max-w-none mt-12 lg:mt-0">
+        <div className="relative w-full lg:w-[150%] max-w-none mt-12 lg:mt-0">
             {/* DUMMY container invisível para ditar a altura real do DOM e não amassar a página */}
             <div className="invisible flex flex-col items-end w-full pointer-events-none">
                 <div className="relative w-full">
-                    <img src={items[0].src} className="w-full h-[60vh] lg:h-[80vh] object-cover object-center" alt="" />
+                    <img src={items[0].src} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center" alt="" />
                 </div>
                 <div className="mt-4 text-step-0 italic pr-fluid-m">{items[0].caption}</div>
             </div>
@@ -35,10 +35,9 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
             {/* Imagem Base (Sempre a imagem anterior, estática no fundo) */}
             <div className="absolute inset-0 flex flex-col items-end w-full pointer-events-none">
                 <div className="relative w-full bg-background">
-                    <img src={items[prevIndex].src} className="w-full h-[60vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" alt="" />
+                    <img src={items[prevIndex].src} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" alt="" />
                     <div className="absolute inset-0 bg-halftone-mask pointer-events-none"></div>
                 </div>
-                <div className="mt-4 text-right text-step-0 font-light italic text-foreground/80 pr-fluid-m">{items[prevIndex].caption}</div>
             </div>
 
             {/* Nova Imagem surgindo progressivamente revelada pelo clip-path */}
@@ -52,10 +51,9 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                         className="absolute inset-0 flex flex-col items-end w-full z-10 pointer-events-none"
                     >
                         <div className="relative w-full bg-background">
-                            <img src={items[currentIndex].src} alt={items[currentIndex].caption} className="w-full h-[60vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" />
+                            <img src={items[currentIndex].src} alt={items[currentIndex].caption} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" />
                             <div className="absolute inset-0 bg-halftone-mask pointer-events-none"></div>
                         </div>
-                        <div className="mt-4 text-right text-step-0 font-light italic text-foreground/80 pr-fluid-m">{items[currentIndex].caption}</div>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -76,6 +74,23 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
 
             {/* O gradiente estático da borda esquerda do carrossel (sempre visível no topo para mesclar suavemente com o texto do Hero) */}
             <div className="absolute top-0 bottom-0 left-0 w-[30%] bg-gradient-to-r from-background to-transparent pointer-events-none z-30"></div>
+
+            {/* Dynamic Fading Caption */}
+            <div className="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none z-40">
+                <div className="pr-fluid-m text-right text-step-0 font-light italic text-foreground/80">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ opacity: 0, filter: "blur(4px)" }}
+                            animate={{ opacity: 1, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, filter: "blur(4px)" }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            {items[currentIndex].caption}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
         </div>
     );
 }

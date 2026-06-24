@@ -25,7 +25,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             {/* Hero Section Wrapper para permitir o sticky mask */}
             <div className="relative w-full hero-wrapper bg-background">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <section className="relative w-full h-[calc(100svh-4rem)] flex flex-col items-center justify-center text-center overflow-hidden pt-14">
+                <section className="relative w-full min-h-[100dvh] h-auto flex flex-col items-center justify-start lg:justify-center text-center overflow-hidden pt-16 pb-12 lg:pt-14 lg:pb-0">
                     <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
                     <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
                     <HeroAnimatedContent 
@@ -65,7 +65,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             
             <div className="relative w-full bg-background">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <AvailabilitySection data={content.availability} />
+                <AvailabilitySection data={content.availability} locale={locale} />
             </div>
 
             {/* About Summary */}

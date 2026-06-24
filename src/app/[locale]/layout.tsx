@@ -20,7 +20,7 @@ export default function LocaleLayout({
             <div className="min-h-screen flex flex-col">
                 <Header data={global.header} locale={locale} otherLocale={otherLocale} />
 
-                <main id="main-content" className="flex-1 pt-16 outline-none" tabIndex={-1}>
+                <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
                     {children}
                 </main>
 

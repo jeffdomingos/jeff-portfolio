@@ -8,39 +8,91 @@ interface ApproachSectionProps {
     data: ApproachSectionData;
 }
 
-import { useRef } from "react";
-import { useScroll, useTransform, MotionValue } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { useScroll, useTransform, useMotionTemplate, MotionValue } from "framer-motion";
 
-function ApproachColumn({ col, index }: { col: any, index: number }) {
+function ApproachColumn({ col, index, sectionProgress }: { col: any, index: number, sectionProgress: MotionValue }) {
     const ref = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
+    const startPoint = 95 - index * 15;
+    const endPoint = 40 - index * 15;
+
+    const { scrollYProgress: localProgress } = useScroll({
         target: ref,
-        offset: ["start 95%", "start 40%"]
+        offset: [`start ${startPoint}%`, `start ${endPoint}%`]
     });
 
-    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const y = useTransform(scrollYProgress, [0, 1], [50, 0]);
+    const [isDesktop, setIsDesktop] = useState(true);
+    useEffect(() => {
+        setIsDesktop(window.innerWidth >= 1024);
+        const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Desktop Timings (Global Scroll)
+    // Section is 200vh. Enters at 0, pins at ~0.33, unpins at ~0.66, leaves at 1.0.
+    const baseStart = 0.16 + index * 0.08;
+    const baseEnd = 0.40 + index * 0.08;
+    const fadeOutEnd = baseEnd + 0.05;
+
+    const desktopDraw = useTransform(sectionProgress, [baseStart, baseEnd], [0, 100]);
+    const desktopClipR = useTransform(sectionProgress, [baseStart, baseEnd], [100, 0]);
+    const desktopClipB = useTransform(sectionProgress, [baseStart, baseEnd], [100, 0]);
+    const desktopOpacity = useTransform(sectionProgress, [baseEnd, fadeOutEnd], [1, 0]);
+
+    // Mobile Timings (Local Scroll)
+    const mobileDraw = useTransform(localProgress, [0, 0.7], [0, 100]);
+    const mobileClipR = useTransform(localProgress, [0, 0.7], [100, 0]);
+    const mobileClipB = useTransform(localProgress, [0, 0.7], [100, 0]);
+    const mobileOpacity = useTransform(localProgress, [0.7, 1], [1, 0]);
+
+    // Animação Bounding Box
+    const drawProgress = useTransform(() => isDesktop ? desktopDraw.get() : mobileDraw.get());
+    const clipInsetRight = useTransform(() => isDesktop ? desktopClipR.get() : mobileClipR.get());
+    const clipInsetBottom = useTransform(() => isDesktop ? desktopClipB.get() : mobileClipB.get());
+    const clipPath = useMotionTemplate`inset(0% ${clipInsetRight}% ${clipInsetBottom}% 0%)`;
+
+    const boxWidth = useMotionTemplate`${drawProgress}%`;
+    const boxHeight = useMotionTemplate`${drawProgress}%`;
+    const boxOpacity = useTransform(() => isDesktop ? desktopOpacity.get() : mobileOpacity.get());
 
     return (
-        <motion.div 
+        <div 
             ref={ref}
-            style={{ opacity, y }}
-            className="flex flex-col col-span-12 lg:col-span-4 relative z-10"
+            className="flex flex-col items-start col-span-12 lg:col-span-4 relative z-10 mb-24 lg:mb-0"
         >
-            <h3 className="inspectable inline-block text-step-2 font-bold mb-fluid-s tracking-tight">{col.title}</h3>
-            <p className="inspectable text-step-0 text-foreground font-light leading-relaxed">{col.description}</p>
-        </motion.div>
+            <div className="relative inline-block w-fit">
+                {/* The Animated Bounding Box */}
+                <motion.div 
+                    style={{ width: boxWidth, height: boxHeight, opacity: boxOpacity }}
+                    className="absolute top-0 left-0 border border-foreground pointer-events-none z-20"
+                >
+                    {/* 4 Corner Nodes */}
+                    <div className="absolute top-0 left-0 w-2 h-2 bg-background border border-foreground -translate-x-1/2 -translate-y-1/2" />
+                    <div className="absolute top-0 right-0 w-2 h-2 bg-background border border-foreground translate-x-1/2 -translate-y-1/2" />
+                    <div className="absolute bottom-0 left-0 w-2 h-2 bg-background border border-foreground -translate-x-1/2 translate-y-1/2" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 bg-background border border-foreground translate-x-1/2 translate-y-1/2" />
+                </motion.div>
+
+                {/* The Masked Content */}
+                <motion.div style={{ clipPath }} className="flex flex-col items-start">
+                    <h3 className="inspectable inline-block text-step-2 font-bold mb-fluid-s tracking-tight">{col.title}</h3>
+                    <p className="inspectable text-step-0 text-foreground font-light leading-relaxed">{col.description}</p>
+                </motion.div>
+            </div>
+        </div>
     );
 }
 
 export function ApproachSection({ data }: ApproachSectionProps) {
     const sectionRef = useRef<HTMLElement>(null);
-    const { scrollYProgress: sectionScroll } = useScroll({
+    const headerRef = useRef<HTMLDivElement>(null);
+
+    const { scrollYProgress: sectionProgress } = useScroll({
         target: sectionRef,
         offset: ["start end", "end start"]
     });
 
-    const headerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress: headerScroll } = useScroll({
         target: headerRef,
         offset: ["start 95%", "start 40%"]
@@ -54,28 +106,31 @@ export function ApproachSection({ data }: ApproachSectionProps) {
         <section 
             id="approach-section" 
             ref={sectionRef}
-            className="py-fluid-4xl border-t border-foreground overflow-clip w-full grid-layout relative min-h-[100vh]"
+            className="border-t border-foreground overflow-clip w-full relative lg:h-[200vh]"
         >
+            <div id="approach-sticky-container" className="lg:sticky lg:top-0 w-full lg:h-[100vh] flex flex-col justify-start lg:justify-center pt-fluid-4xl pb-fluid-4xl lg:py-0">
+                <div className="grid-layout w-full">
+                    <div ref={headerRef} className="col-span-12 mb-fluid-2xl relative z-10 flex flex-col items-start">
+                        <div className="inline-block inspectable">
+                            <TerminalTitle 
+                                as="h2"
+                                text={data.title}
+                                className="text-step-6 font-heading font-semibold tracking-normal mb-fluid-s uppercase"
+                            />
+                        </div>
+                        <motion.p 
+                            style={{ opacity: headerOpacity, y: headerY }}
+                            className="inspectable text-step-1 text-foreground font-light leading-relaxed max-w-4xl"
+                        >
+                            {data.subtitle}
+                        </motion.p>
+                    </div>
 
-            <div ref={headerRef} className="col-span-12 mb-fluid-2xl relative z-10">
-                <div className="inline-block inspectable">
-                    <TerminalTitle 
-                        as="h2"
-                        text={data.title}
-                        className="text-step-6 font-heading font-semibold tracking-normal mb-fluid-s uppercase"
-                    />
+                    {data.columns?.map((col, i) => (
+                        <ApproachColumn key={i} col={col} index={i} sectionProgress={sectionProgress} />
+                    ))}
                 </div>
-                <motion.p 
-                    style={{ opacity: headerOpacity, y: headerY }}
-                    className="inspectable text-step-1 text-foreground font-light leading-relaxed max-w-4xl"
-                >
-                    {data.subtitle}
-                </motion.p>
             </div>
-
-            {data.columns?.map((col, i) => (
-                <ApproachColumn key={i} col={col} index={i} />
-            ))}
         </section>
     );
 }

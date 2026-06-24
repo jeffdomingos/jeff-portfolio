@@ -23,27 +23,34 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
     const requestedLocale = locale === "pt" ? "pt" : "en";
 
     return (
-        <article className="pb-20">
+        <article className="pb-20 relative w-full">
+            {/* Global mask for the entire Case study */}
+            <div className="absolute inset-0 pointer-events-none z-40"><div className="fade-mask" /></div>
+            
             {/* Language fallback toast (client-side, invisible) */}
             <LanguageFallbackToast requestedLocale={requestedLocale} effectiveLang={effectiveLang} />
 
-            {/* Project Hero */}
-            <header className="bg-halftone border-b py-24 mb-16 px-4 transition-colors">
-                <div className="container mx-auto max-w-4xl">
-                    <h1 className="text-5xl font-semibold mb-6 tracking-tight text-foreground">{meta.title}</h1>
-                    <div className="flex flex-wrap gap-4 text-foreground font-light mb-8 text-lg">
-                        {meta.role && <span><strong className="text-foreground">Role:</strong> {meta.role}</span>}
-                        {meta.timeline && <span><strong className="text-foreground">Timeline:</strong> {meta.timeline}</span>}
-                    </div>
-                    {meta.tags && meta.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                            {meta.tags.map((tag: string, i: number) => (
-                                <span key={i} className="px-3 py-1 bg-background border rounded-full text-sm font-medium text-foreground shadow-sm">{tag}</span>
-                            ))}
+            {/* Project Hero Wrapper */}
+            <div className="relative w-full bg-halftone border-b mb-16 transition-colors">
+                <header className="relative pt-32 pb-24 px-4">
+                    <div className="container mx-auto max-w-4xl relative z-10">
+                    <div className="bg-background/85 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-foreground/10 shadow-sm">
+                        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-foreground">{meta.title}</h1>
+                        <div className="flex flex-wrap gap-4 text-foreground font-medium mb-8 text-lg">
+                            {meta.role && <span><strong className="text-foreground">Role:</strong> {meta.role}</span>}
+                            {meta.timeline && <span><strong className="text-foreground">Timeline:</strong> {meta.timeline}</span>}
                         </div>
-                    )}
+                        {meta.tags && meta.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                                {meta.tags.map((tag: string, i: number) => (
+                                    <span key={i} className="px-4 py-1.5 bg-background border border-foreground/20 rounded-full text-sm font-semibold text-foreground shadow-sm">{tag}</span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
+            </div>
 
             {/* Polymorphic Blocks Content */}
             <div className="container mx-auto max-w-3xl px-4 prose prose-lg">

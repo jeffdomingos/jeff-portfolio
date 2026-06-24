@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply bg-background text-foreground tracking-tight;
+    @apply bg-background text-foreground tracking-tight overflow-x-hidden;
   }
 
   h1,
@@ -40,19 +40,39 @@
     background-attachment: fixed;
   }
   .bg-halftone-mask {
-    background-image: radial-gradient(transparent 1.2px, #fff 1.2px);
-    background-size: 4px 4px;
+    --dot-base: 1px;
+    background-image: radial-gradient(circle, transparent calc(var(--dot-base) * var(--dot-scale, 1)), #fff calc((var(--dot-base) + 0.3px) * var(--dot-scale, 1)));
+    background-size: 3px 3px;
     background-attachment: fixed;
   }
+  @media (min-width: 768px) {
+    .bg-halftone-mask {
+      --dot-base: 1.2px;
+      background-size: 4px 4px;
+    }
+  }
+  .bg-halftone-mask-invert {
+    --dot-base: 1px;
+    background-image: radial-gradient(circle, transparent calc(var(--dot-base) * var(--dot-scale, 1)), #000 calc((var(--dot-base) + 0.3px) * var(--dot-scale, 1)));
+    background-size: 3px 3px;
+    background-attachment: fixed;
+  }
+  @media (min-width: 768px) {
+    .bg-halftone-mask-invert {
+      --dot-base: 1.2px;
+      background-size: 4px 4px;
+    }
+  }
   .bg-halftone-mask-dense {
-    background-image: radial-gradient(transparent 1.8px, #fff 1.8px);
+    --dot-base: 1.8px;
+    background-image: radial-gradient(circle, transparent calc(var(--dot-base) * var(--dot-scale, 1)), #fff calc((var(--dot-base) + 0.3px) * var(--dot-scale, 1)));
     background-size: 4px 4px;
     background-attachment: fixed;
   }
 
   /* Hybrid Grid System Wrapper */
   .grid-layout {
-    @apply w-full mx-auto grid grid-cols-12 px-fluid-m gap-x-fluid-m;
+    @apply w-full mx-auto grid grid-cols-12 px-fluid-xs md:px-fluid-m gap-x-fluid-m;
   }
 }
 

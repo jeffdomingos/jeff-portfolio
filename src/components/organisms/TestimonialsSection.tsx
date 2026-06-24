@@ -12,20 +12,48 @@ interface TestimonialsSectionProps {
 import { useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
 
-function TestimonialRow({ item, index }: { item: any, index: number }) {
+function TestimonialRow({ item, index, isLast }: { item: any, index: number, isLast: boolean }) {
     const ref = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
+    // 1. Acende quando o TOPO cruza a linha de 55% a 45% da tela
+    const { scrollYProgress: brightenProgress } = useScroll({
         target: ref,
-        offset: ["start 95%", "start 40%"]
+        offset: ["start 55%", "start 45%"]
     });
 
-    const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    // 2. Apaga quando a BASE cruza a mesma linha de 55% a 45% da tela.
+    // Como a BASE do atual é o TOPO do próximo, o atual apaga EXATAMENTE 
+    // na mesma proporção geométrica que o próximo acende! Um crossfade matematicamente perfeito.
+    const { scrollYProgress: darkenProgress } = useScroll({
+        target: ref,
+        offset: ["end 55%", "end 45%"]
+    });
+
+    // 3. Expande quando o TOPO cruza a linha de 45% a 35%. 
+    // Usamos o TOPO (start) para ancorar, porque o elemento cresce para baixo, 
+    // e o centro físico de um depoimento encolhido bate em 50vh exatamente nessa janela.
+    const { scrollYProgress: expandProgress } = useScroll({
+        target: ref,
+        offset: ["start 45%", "start 35%"]
+    });
+
+    // Combinamos a luz e a sombra
+    const rowOpacity = useTransform(
+        [brightenProgress, darkenProgress],
+        ([b, d]) => {
+            if (isLast) return 0.3 + (0.7 * b);
+            return 0.3 + (0.7 * b) - (0.7 * d);
+        }
+    );
+    
+    // Expansão atrelada estritamente ao progresso de expansão ancorado no topo
+    const gridRows = useTransform(expandProgress, [0, 1], ["0fr", "1fr"]);
+    const detailsOpacity = useTransform(expandProgress, [0, 1], [0, 1]);
 
     return (
         <motion.div 
             ref={ref}
-            style={{ opacity }}
-            className="group transition-all duration-500 py-fluid-xl flex flex-col cursor-crosshair border-b border-background last:border-b-0 relative overflow-hidden"
+            style={{ opacity: rowOpacity }}
+            className="py-fluid-xl flex flex-col border-b border-background last:border-b-0 relative overflow-hidden transition-colors"
         >
             <div className="flex flex-col lg:flex-row gap-fluid-xl lg:items-start justify-between w-full relative z-10 px-fluid-m">
                 {/* Avatar and Info */}
@@ -46,13 +74,19 @@ function TestimonialRow({ item, index }: { item: any, index: number }) {
                     <p className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light transition-all duration-500">
                         &quot;{item.quote}&quot;
                     </p>
-                    <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]">
+                    <motion.div 
+                        style={{ gridTemplateRows: gridRows }}
+                        className="grid"
+                    >
                         <div className="overflow-hidden">
-                            <p className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                            <motion.p 
+                                style={{ opacity: detailsOpacity }}
+                                className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl"
+                            >
                                 {item.details}
-                            </p>
+                            </motion.p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </motion.div>
@@ -88,7 +122,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
 
             <div className="flex flex-col border-y border-background w-full">
                 {data.items.map((item, i) => (
-                    <TestimonialRow key={i} item={item} index={i} />
+                    <TestimonialRow key={i} item={item} index={i} isLast={i === data.items.length - 1} />
                 ))}
             </div>
         </section>

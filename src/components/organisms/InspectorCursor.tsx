@@ -59,6 +59,7 @@ export function InspectorCursor() {
         resizeCanvas();
 
         let currentAlpha = 0;
+        let crosshairAlpha = 0;
         let animHitTop = 0;
         let animHitBottom = 0;
         let animHitLeft = 0;
@@ -72,10 +73,39 @@ export function InspectorCursor() {
             let baseTop = 56; // Proteção da área do header
             let baseBottom = canvas.height;
             
+            const isMobile = window.innerWidth < 1024;
+            let forceActiveMobile = false;
+
             if (approachSection) {
                 const approachRect = approachSection.getBoundingClientRect();
                 baseTop = Math.max(56, approachRect.top);
                 baseBottom = Math.min(canvas.height, approachRect.bottom);
+
+                // Mobile Choreography Override
+                if (isMobile) {
+                    // Start choreo when top enters, end when bottom leaves
+                    if (approachRect.top < canvas.height && approachRect.bottom > 0) {
+                        // Progress from 0 (top enters) to 1 (bottom leaves)
+                        let progress = (canvas.height - approachRect.top) / (approachRect.height + canvas.height);
+                        progress = Math.max(0, Math.min(1, progress));
+
+                        // X Choreography: Left -> Right -> Left (Inverted Cosine wave)
+                        const amplitude = canvas.width * 0.35;
+                        const center = canvas.width / 2;
+                        mouseX = center - Math.cos(progress * Math.PI * 2) * amplitude;
+
+                        // Y Choreography: Slowly descends the viewport
+                        mouseY = canvas.height * 0.2 + (progress * canvas.height * 0.6);
+                        
+                        // Force interaction state
+                        isMouseInWindow = true;
+                        
+                        // Only show if we are safely inside the section limits
+                        if (progress > 0.1 && progress < 0.9) {
+                            forceActiveMobile = true;
+                        }
+                    }
+                }
             }
 
             let hitTop = baseTop;
@@ -126,8 +156,8 @@ export function InspectorCursor() {
                 isActive = false;
             }
 
-            if (isInsideAnyBox) {
-                isActive = false;
+            if (isMobile) {
+                isActive = forceActiveMobile;
             }
 
             if (!initializedAnim || !isActive) {
@@ -183,75 +213,94 @@ export function InspectorCursor() {
                 (el as HTMLElement).style.backgroundColor = `rgba(255, 255, 255, ${bgAlpha})`;
             }
 
-            // Gerenciar o Grid overlay via DOM para garantir que fique por TRÁS do conteúdo das divs
             if (approachSection) {
+                const stickyContainer = document.getElementById("approach-sticky-container") || approachSection;
                 let gridOverlay = document.getElementById("inspector-grid-overlay");
-                if (!gridOverlay) {
-                    gridOverlay = document.createElement("div");
-                    gridOverlay.id = "inspector-grid-overlay";
-                    gridOverlay.style.position = "absolute";
-                    gridOverlay.style.top = "0";
-                    gridOverlay.style.bottom = "0";
-                    gridOverlay.style.left = "0";
-                    gridOverlay.style.right = "0";
-                    gridOverlay.style.pointerEvents = "none";
-                    gridOverlay.style.zIndex = "-1"; // Fica atrás do conteúdo estático
-                    approachSection.appendChild(gridOverlay);
-                }
                 
-                gridOverlay.style.display = "block";
-                
-                if (window.getComputedStyle(approachSection).position === "static") {
-                    approachSection.style.position = "relative";
-                }
-                // Força um "Stacking Context" para que o z-index -1 não vaze para trás do background-color da página (body)
-                approachSection.style.isolation = "isolate";
-
-                // Garante que as colunas existem (previne quebra por causa de Hot Reload)
-                if (gridOverlay.children.length !== 12) {
-                    gridOverlay.innerHTML = '';
-                    for (let i = 0; i < 12; i++) {
-                        const colDiv = document.createElement("div");
-                        colDiv.className = "inspector-grid-col";
-                        colDiv.style.position = "absolute";
-                        colDiv.style.bottom = "0"; // Ancorado embaixo para crescer de baixo para cima
-                        colDiv.style.backgroundColor = "rgba(0,0,0,0.03)";
-                        gridOverlay.appendChild(colDiv);
+                if (isMobile) {
+                    if (gridOverlay) gridOverlay.style.display = "none";
+                } else {
+                    if (!gridOverlay) {
+                        gridOverlay = document.createElement("div");
+                        gridOverlay.id = "inspector-grid-overlay";
+                        gridOverlay.style.position = "absolute";
+                        gridOverlay.style.top = "0";
+                        gridOverlay.style.bottom = "0";
+                        gridOverlay.style.left = "0";
+                        gridOverlay.style.right = "0";
+                        gridOverlay.style.pointerEvents = "none";
+                        gridOverlay.style.zIndex = "0"; // Alterado de -1 para 0 para não afundar no background do Safari
+                        stickyContainer.appendChild(gridOverlay);
                     }
-                }
-                
-                const computed = window.getComputedStyle(approachSection);
-                const pl = parseFloat(computed.paddingLeft) || 0;
-                const pr = parseFloat(computed.paddingRight) || 0;
-                const gap = parseFloat(computed.columnGap) || 0;
-                const w = approachSection.getBoundingClientRect().width;
-                const availableW = w - pl - pr - (gap * 11);
-                const colW = availableW / 12;
+                    
+                    gridOverlay.style.display = "block";
+                    
+                    if (window.getComputedStyle(stickyContainer).position === "static") {
+                        stickyContainer.style.position = "relative";
+                    }
+                    // Força um "Stacking Context"
+                    stickyContainer.style.isolation = "isolate";
 
-                const cols = gridOverlay.getElementsByClassName("inspector-grid-col");
-                for (let i = 0; i < 12; i++) {
-                    const colDiv = cols[i] as HTMLElement;
-                    colDiv.style.left = `${pl + i * (colW + gap)}px`;
-                    colDiv.style.width = `${colW}px`;
+                    // Garante que as colunas existem (previne quebra por causa de Hot Reload)
+                    if (gridOverlay.children.length !== 12) {
+                        gridOverlay.innerHTML = '';
+                        for (let i = 0; i < 12; i++) {
+                            const colDiv = document.createElement("div");
+                            colDiv.className = "inspector-grid-col";
+                            colDiv.style.position = "absolute";
+                            colDiv.style.bottom = "0"; // Ancorado embaixo para crescer de baixo para cima
+                            colDiv.style.backgroundColor = "rgba(128,128,128,0.05)"; // Meio termo
+                            gridOverlay.appendChild(colDiv);
+                        }
+                    }
                     
-                    // Crescimento da Esquerda para Direita (intervalos maiores)
-                    const staggerOffset = i * 0.055; 
-                    let localProgress = (currentAlpha - staggerOffset) * 2.2; 
-                    localProgress = Math.max(0, Math.min(1, localProgress));
+                    const computed = window.getComputedStyle(stickyContainer);
+                    let pl = parseFloat(computed.paddingLeft);
+                    if (isNaN(pl)) pl = 24;
+                    let pr = parseFloat(computed.paddingRight);
+                    if (isNaN(pr)) pr = 24;
                     
-                    // Ease-out Quart para um movimento de preenchimento desacelerado e orgânico no final
-                    const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
-                    const colHeightProgress = easeOutQuart(localProgress);
+                    // We need to get the grid gap from the grid-layout element inside the sticky container
+                    const gridLayoutElement = stickyContainer.querySelector('.grid-layout');
+                    let gap = 16;
+                    if (gridLayoutElement) {
+                        const gridComputed = window.getComputedStyle(gridLayoutElement);
+                        const parsedGap = parseFloat(gridComputed.columnGap);
+                        if (!isNaN(parsedGap)) gap = parsedGap;
+                    }
                     
-                    colDiv.style.height = `${colHeightProgress * 100}%`;
-                    colDiv.style.opacity = "1"; // Sem fade, preenchimento sólido
+                    const w = stickyContainer.getBoundingClientRect().width;
+                    const availableW = w - pl - pr - (gap * 11);
+                    const colW = availableW / 12;
+
+                    const cols = gridOverlay.getElementsByClassName("inspector-grid-col");
+                    for (let i = 0; i < 12; i++) {
+                        const colDiv = cols[i] as HTMLElement;
+                        colDiv.style.left = `${pl + i * (colW + gap)}px`;
+                        colDiv.style.width = `${colW}px`;
+                        
+                        // Crescimento da Esquerda para Direita (intervalos maiores)
+                        const staggerOffset = i * 0.055; 
+                        let localProgress = (currentAlpha - staggerOffset) * 2.2; 
+                        localProgress = Math.max(0, Math.min(1, localProgress));
+                        
+                        // Ease-out Quart para um movimento de preenchimento desacelerado e orgânico no final
+                        const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+                        const colHeightProgress = easeOutQuart(localProgress);
+                        
+                        colDiv.style.height = `${colHeightProgress * 100}%`;
+                        colDiv.style.opacity = "1"; // Sem fade, preenchimento sólido
+                    }
                 }
             }
 
-            // Timeline de animação baseada no currentAlpha
-            const lineOpacity = Math.min(1, currentAlpha * 5); // Fica opaco quase instantaneamente
-            const lineProgress = Math.max(0, Math.min(1, currentAlpha * 2)); // Expande de 0.0 a 0.5
-            const arrowAndLabelAlpha = Math.max(0, Math.min(1, (currentAlpha - 0.5) * 2)); // Aparece de 0.5 a 1.0
+            // Timeline de animação do Crosshair independente do Grid
+            const targetCrosshairAlpha = isActive && !isInsideAnyBox ? 1 : 0;
+            crosshairAlpha += (targetCrosshairAlpha - crosshairAlpha) * 0.15;
+
+            const lineOpacity = Math.min(1, crosshairAlpha * 5); // Fica opaco quase instantaneamente
+            const lineProgress = Math.max(0, Math.min(1, crosshairAlpha * 2)); // Expande de 0.0 a 0.5
+            const arrowAndLabelAlpha = Math.max(0, Math.min(1, (crosshairAlpha - 0.5) * 2)); // Aparece de 0.5 a 1.0
 
             ctx.globalAlpha = lineOpacity;
 
@@ -320,10 +369,10 @@ export function InspectorCursor() {
             const horizontalGap = animHitRight - animHitLeft;
             const verticalGap = animHitBottom - animHitTop;
 
-            const labelAlpha = Math.max(0, Math.min(1, (currentAlpha - 0.5) * 2));
+            const labelAlpha = Math.max(0, Math.min(1, (crosshairAlpha - 0.5) * 2));
 
             if ((horizontalGap > 0 || verticalGap > 0) && labelAlpha > 0) {
-                ctx.globalAlpha = labelAlpha * currentAlpha; // Oculta/Mostra suavemente as labels
+                ctx.globalAlpha = labelAlpha * crosshairAlpha; // Oculta/Mostra suavemente as labels
                 ctx.font = "12px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace";
 
                 let hText = "";
