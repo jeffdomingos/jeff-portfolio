@@ -22,40 +22,91 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
     const { meta, blocks, effectiveLang } = getProject(locale, slug);
     const requestedLocale = locale === "pt" ? "pt" : "en";
 
+    let teamCallout: any = null;
+    let blocksToRender = blocks;
+    let teamCalloutHtml = '';
+
+    if (blocks && blocks.length > 0 && blocks[0].type === 'callout') {
+        teamCallout = blocks[0];
+        blocksToRender = blocks.slice(1);
+        
+        // Format the callout HTML
+        teamCalloutHtml = teamCallout.content || '';
+        teamCalloutHtml = teamCalloutHtml.replace(/<br\s*\/?>/gi, '');
+        teamCalloutHtml = teamCalloutHtml.replace(
+            /<strong>(.*?)<\/strong>/i, 
+            '<strong class="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">$1</strong><div class="flex flex-wrap gap-x-8 gap-y-4">'
+        );
+        teamCalloutHtml = teamCalloutHtml.replace(
+            /-\s*(.*?)\s*\((.*?)\)/g, 
+            '<div class="flex flex-col"><span class="font-medium text-foreground text-step-0">$1</span><span class="text-step--2 text-foreground/60 tracking-widest uppercase mt-0.5">$2</span></div>'
+        );
+        teamCalloutHtml += '</div>'; // close the flex container
+    }
+
     return (
-        <article className="pb-20 relative w-full">
-            {/* Global mask for the entire Case study */}
-            <div className="absolute inset-0 pointer-events-none z-40"><div className="fade-mask" /></div>
+        <article className="pb-20 relative w-full z-40">
+            {/* Header Reading Protection Gradient */}
+            <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[75]"></div>
             
             {/* Language fallback toast (client-side, invisible) */}
             <LanguageFallbackToast requestedLocale={requestedLocale} effectiveLang={effectiveLang} />
 
             {/* Project Hero Wrapper */}
-            <div className="relative w-full bg-halftone border-b mb-16 transition-colors">
-                <header className="relative pt-32 pb-24 px-4">
-                    <div className="container mx-auto max-w-4xl relative z-10">
-                    <div className="bg-background/85 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-foreground/10 shadow-sm">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight text-foreground">{meta.title}</h1>
-                        <div className="flex flex-wrap gap-4 text-foreground font-medium mb-8 text-lg">
-                            {meta.role && <span><strong className="text-foreground">Role:</strong> {meta.role}</span>}
-                            {meta.timeline && <span><strong className="text-foreground">Timeline:</strong> {meta.timeline}</span>}
+            <div className="relative w-full bg-background border-b border-border mb-fluid-xl transition-colors z-50">
+                <header className="relative w-full px-fluid-xs md:px-fluid-m pt-32 pb-fluid-xl flex flex-col items-start">
+                    <div className="w-full relative">
+                        <div className="mb-6">
+                            {meta.title.includes(' - ') ? (
+                                <>
+                                    <span className="block text-step-0 md:text-step-1 font-medium tracking-widest uppercase opacity-60 mb-2">
+                                        {meta.title.split(' - ')[0]}
+                                    </span>
+                                    <h1 className="text-step-5 md:text-step-6 font-bold uppercase tracking-tighter text-foreground leading-[1.1]">
+                                        {meta.title.split(' - ').slice(1).join(' - ')}
+                                    </h1>
+                                </>
+                            ) : (
+                                <h1 className="text-step-5 md:text-step-6 font-bold uppercase tracking-tighter text-foreground leading-[1.1]">
+                                    {meta.title}
+                                </h1>
+                            )}
                         </div>
                         {meta.tags && meta.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-2 mb-fluid-m">
                                 {meta.tags.map((tag: string, i: number) => (
-                                    <span key={i} className="px-4 py-1.5 bg-background border border-foreground/20 rounded-full text-sm font-semibold text-foreground shadow-sm">{tag}</span>
+                                    <span key={i} className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 uppercase tracking-wider text-foreground">{tag}</span>
                                 ))}
                             </div>
                         )}
+                        <div className="flex flex-wrap gap-x-12 gap-y-8 pt-8 border-t border-border/50">
+                            {meta.role && (
+                                <div className="flex flex-col">
+                                    <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
+                                    <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.role}</span>
+                                </div>
+                            )}
+                            {meta.timeline && (
+                                <div className="flex flex-col">
+                                    <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">Timeline</strong>
+                                    <span className="font-medium text-foreground text-step-0">{meta.timeline}</span>
+                                </div>
+                            )}
+                            {teamCallout && (
+                                <div 
+                                    className="flex flex-col"
+                                    dangerouslySetInnerHTML={{ __html: teamCalloutHtml }}
+                                />
+                            )}
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
             </div>
 
             {/* Polymorphic Blocks Content */}
-            <div className="container mx-auto max-w-3xl px-4 prose prose-lg">
-                {blocks && blocks.length > 0 ? (
-                    blocks.map((block: any, index: number) => {
+            <div className="relative z-50 w-full max-w-4xl mx-auto px-fluid-xs md:px-fluid-m prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
+                {blocksToRender && blocksToRender.length > 0 ? (
+                    blocksToRender.map((block: any, index: number) => {
                         switch (block.type) {
                             case 'text':
                                 return <MDXRemote key={index} source={block.content || ''} components={mdxComponents} />;

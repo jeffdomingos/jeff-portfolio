@@ -106,7 +106,7 @@ export function ApproachSection({ data }: ApproachSectionProps) {
         <section 
             id="approach-section" 
             ref={sectionRef}
-            className="border-t border-foreground overflow-clip w-full relative lg:h-[200vh]"
+            className="border-t border-foreground overflow-clip w-full relative z-40 bg-background lg:h-[200vh]"
         >
             <div id="approach-sticky-container" className="lg:sticky lg:top-0 w-full lg:h-[100vh] flex flex-col justify-start lg:justify-center pt-fluid-4xl pb-fluid-4xl lg:py-0">
                 <div className="grid-layout w-full">

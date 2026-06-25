@@ -3,6 +3,7 @@
 import { GlobalFooter } from "@/content/schema";
 import { FooterAnimatedLogo } from "./FooterAnimatedLogo";
 import { useMotionValue } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export function Footer({ data }: { data: GlobalFooter }) {
     const scrollToTop = () => {
@@ -14,7 +15,28 @@ export function Footer({ data }: { data: GlobalFooter }) {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
+    const [frozenHeight, setFrozenHeight] = useState<string | undefined>(undefined);
+    const [isIdle, setIsIdle] = useState(true);
+    const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+    const resetIdleTimer = () => {
+        setIsIdle(false);
+        if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+        idleTimerRef.current = setTimeout(() => {
+            setIsIdle(true);
+        }, 2500); // 2.5s sem mexer = volta a animar
+    };
+
+    useEffect(() => {
+        // Congela a altura no mobile em pixels físicos absolutos (+ folga de segurança)
+        // Isso força o motor do Safari a tratar o Footer como um bloco estático imutável, IGNORANDO 100% a barra de endereços!
+        if (window.innerWidth < 1024) {
+            setFrozenHeight(`${window.innerHeight + 120}px`);
+        }
+    }, []);
+
     const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+        resetIdleTimer();
         const rect = e.currentTarget.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -25,29 +47,40 @@ export function Footer({ data }: { data: GlobalFooter }) {
     };
 
     const handleMouseLeave = () => {
+        // Quando o mouse sai do footer, ele volta ao centro imediatamente e consideramos inativo para a animação assumir
         mouseX.set(0);
         mouseY.set(0);
+        if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+        setIsIdle(true);
     };
 
     return (
         <footer 
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="w-full bg-background text-foreground mt-auto relative z-50 overflow-hidden"
+            style={frozenHeight ? { minHeight: frozenHeight } : undefined}
+            className="w-full text-foreground mt-auto relative overflow-clip min-h-[100lvh] flex flex-col"
         >
-            <div className="absolute inset-0 pointer-events-none z-40"><div className="fade-mask" /></div>
+            {/* Máscara absoluta (não-sticky) para evitar pulos no Safari iOS */}
+            <div 
+                className="absolute top-0 left-0 w-full h-[8rem] pointer-events-none z-40 bg-background"
+                style={{ 
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 10%, transparent 100%)',
+                    maskImage: 'linear-gradient(to bottom, black 10%, transparent 100%)'
+                }}
+            />
             
-            <div className="pt-fluid-xl pb-32 px-fluid-m flex flex-col">
+            <div className="pt-12 lg:pt-fluid-xl pb-6 lg:pb-fluid-m px-fluid-m flex flex-col flex-1">
                 {/* Main Content Area */}
-                <div className="flex-1 flex flex-col justify-center py-fluid-l">
+                <div className="flex-1 flex flex-col justify-center py-6 lg:py-fluid-l">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-fluid-xl items-center">
-                    {/* Brand / Logo Area */}
-                    <div className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative">
-                        <FooterAnimatedLogo mouseX={mouseX} mouseY={mouseY} />
+                    {/* Brand / Logo Area - Mantido em z-0 para ficar ATRÁS da malha z-10 */}
+                    <div className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0">
+                        <FooterAnimatedLogo mouseX={mouseX} mouseY={mouseY} isIdle={isIdle} />
                     </div>
 
                 {/* Contact Links */}
-                <div className="flex flex-col items-start gap-fluid-m lg:col-span-5 lg:col-start-8 mt-fluid-xl lg:mt-0 relative z-50">
+                <div className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50">
                     <a href={`mailto:${data.emailValue}`} className="group inline-flex flex-col">
                         <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.emailLabel}</span>
                         <span className="text-step-1 md:text-step-2 font-bold group-hover:translate-x-4 transition-transform duration-500 text-foreground flex items-center gap-4">
@@ -97,8 +130,8 @@ export function Footer({ data }: { data: GlobalFooter }) {
             </div>
 
                 {/* Bottom Row */}
-                <div className="pt-fluid-s mt-auto border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between text-step--1 font-light gap-4 relative z-50">
-                    <p>{data.copyrightText}</p>
+                <div className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full">
+                    <p className="shrink-0">{data.copyrightText}</p>
                     <button 
                         onClick={scrollToTop} 
                         className="hover:text-background transition-colors uppercase tracking-widest text-step--2 font-medium flex items-center gap-2 group focus:outline-none"

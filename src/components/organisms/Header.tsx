@@ -1,23 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { GlobalHeader } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
 
 export function Header({ data, locale, otherLocale }: { data: GlobalHeader, locale: string, otherLocale: string }) {
     const [isOpen, setIsOpen] = useState(false);
+    const [isFooterVisible, setIsFooterVisible] = useState(false);
+    const [isMenuDark, setIsMenuDark] = useState(false);
+
+    const toggleMenu = () => {
+        if (!isOpen) {
+            // Ao abrir o menu, inspeciona os elementos que estão visualmente atrás do header
+            if (typeof document !== 'undefined') {
+                const elements = document.elementsFromPoint(window.innerWidth / 2, 50);
+                const isDark = elements.some(el => {
+                    const classes = el.className;
+                    return typeof classes === 'string' && (classes.includes('bg-foreground') || classes.includes('bg-black'));
+                });
+                setIsMenuDark(isDark);
+            }
+        }
+        setIsOpen(!isOpen);
+    };
+
+    useEffect(() => {
+        // Observer para detectar quando o footer entra na tela
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsFooterVisible(entry.isIntersecting);
+            },
+            { threshold: 0.05 } // Reage assim que 5% do footer aparecer
+        );
+        
+        // Tenta observar imediatamente, e com fallback caso o footer ainda vá montar
+        const tryObserve = () => {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                observer.observe(footer);
+                return true;
+            }
+            return false;
+        };
+
+        if (!tryObserve()) {
+            const interval = setInterval(() => {
+                if (tryObserve()) clearInterval(interval);
+            }, 500);
+            return () => clearInterval(interval);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <>
-            <header className="fixed top-0 w-full z-50 pointer-events-none mix-blend-difference text-white">
-                <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md font-bold z-[60] shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pointer-events-auto">
+            <header className="fixed top-0 w-full z-[80] pointer-events-none mix-blend-difference text-white">
+                <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md font-bold z-[70] shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pointer-events-auto">
                     Skip to Content
                 </a>
                 
                 <div className="w-full px-fluid-xs md:px-fluid-m h-12 md:h-14 flex items-center justify-between relative">
-                    <Link href={`/${locale}`} className="flex items-center pointer-events-auto z-[60]" onClick={() => setIsOpen(false)}>
-                        <img src="/images/logo-header-horiz.svg" alt={data.brandName} className="h-6 md:h-8 w-auto object-contain invert" />
+                    <Link href={`/${locale}`} className="flex items-center pointer-events-auto z-[70] overflow-hidden" onClick={() => setIsOpen(false)}>
+                        <img 
+                            src="/images/logo-header-horiz.svg" 
+                            alt={data.brandName} 
+                            className={`h-6 md:h-8 w-auto object-contain invert transition-all duration-500 ease-in-out ${isFooterVisible ? '-translate-y-[150%] opacity-0' : 'translate-y-0 opacity-100'}`} 
+                        />
                         <span className="sr-only">{data.brandName}</span>
                     </Link>
 
@@ -42,8 +92,8 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
 
                     {/* Mobile Hamburger Toggle */}
                     <button 
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="md:hidden pointer-events-auto z-[60] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none"
+                        onClick={toggleMenu}
+                        className="md:hidden pointer-events-auto z-[70] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none"
                         aria-expanded={isOpen}
                         aria-label="Toggle menu"
                     >
@@ -55,7 +105,7 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
             </header>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 bg-background text-foreground z-[45] flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+            <div className={`fixed inset-0 z-[70] flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} ${isMenuDark ? 'bg-foreground text-background' : 'bg-background text-foreground'}`}>
                 <nav className="flex flex-col items-center gap-8 text-step-2 uppercase tracking-widest font-medium">
                     <Link href={`/${locale}`} onClick={() => setIsOpen(false)} className="hover:font-bold transition-all">
                         {data.navItemHome}

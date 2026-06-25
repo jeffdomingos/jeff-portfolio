@@ -20,9 +20,14 @@ export function InspectorCursor() {
         
         let inspectableElements: Element[] = [];
 
-        // Atualiza a lista de elementos inspecionáveis
+        // Atualiza a lista de elementos inspecionáveis (Throttled para não destruir a performance do scroll)
+        let lastUpdate = 0;
         const updateElements = () => {
-            inspectableElements = Array.from(document.querySelectorAll('.inspectable'));
+            const now = Date.now();
+            if (now - lastUpdate > 100) {
+                inspectableElements = Array.from(document.querySelectorAll('.inspectable'));
+                lastUpdate = now;
+            }
         };
 
         let isMouseInWindow = true;
@@ -254,14 +259,15 @@ export function InspectorCursor() {
                         }
                     }
                     
-                    const computed = window.getComputedStyle(stickyContainer);
+                    const gridLayoutElement = stickyContainer.querySelector('.grid-layout');
+                    
+                    const computed = window.getComputedStyle(gridLayoutElement || stickyContainer);
                     let pl = parseFloat(computed.paddingLeft);
                     if (isNaN(pl)) pl = 24;
                     let pr = parseFloat(computed.paddingRight);
                     if (isNaN(pr)) pr = 24;
                     
                     // We need to get the grid gap from the grid-layout element inside the sticky container
-                    const gridLayoutElement = stickyContainer.querySelector('.grid-layout');
                     let gap = 16;
                     if (gridLayoutElement) {
                         const gridComputed = window.getComputedStyle(gridLayoutElement);

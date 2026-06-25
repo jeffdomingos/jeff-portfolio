@@ -32,6 +32,8 @@ export interface CaseItem {
   href: string;
   thumbnailImage: string;
   tags?: string[];
+  customNumber?: string;
+  customCtaLabel?: string;
 }
 
 export interface AboutSummary {

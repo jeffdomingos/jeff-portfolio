@@ -1,12 +1,18 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function HeroCarousel({ items, isActive = true }: { items: { src: string, caption: string }[], isActive?: boolean }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [prevIndex, setPrevIndex] = useState(0);
     const [hasStarted, setHasStarted] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         // Só libera o autoplay do carrossel quando a orquestração do Hero (isActive) permitir
@@ -33,10 +39,9 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
             </div>
 
             {/* Imagem Base (Sempre a imagem anterior, estática no fundo) */}
-            <div className="absolute inset-0 flex flex-col items-end w-full pointer-events-none">
+            <div className="absolute inset-0 flex flex-col items-end w-full pointer-events-none z-10">
                 <div className="relative w-full bg-background">
                     <img src={items[prevIndex].src} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" alt="" />
-                    <div className="absolute inset-0 bg-halftone-mask pointer-events-none"></div>
                 </div>
             </div>
 
@@ -52,7 +57,6 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                     >
                         <div className="relative w-full bg-background">
                             <img src={items[currentIndex].src} alt={items[currentIndex].caption} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" />
-                            <div className="absolute inset-0 bg-halftone-mask pointer-events-none"></div>
                         </div>
                     </motion.div>
                 )}
@@ -73,24 +77,27 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
             </AnimatePresence>
 
             {/* O gradiente estático da borda esquerda do carrossel (sempre visível no topo para mesclar suavemente com o texto do Hero) */}
-            <div className="absolute top-0 bottom-0 left-0 w-[30%] bg-gradient-to-r from-background to-transparent pointer-events-none z-30"></div>
+            <div className="absolute top-0 bottom-0 left-0 w-[30%] bg-gradient-to-r from-background to-transparent pointer-events-none z-40"></div>
 
-            {/* Dynamic Fading Caption */}
-            <div className="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none z-40">
-                <div className="pr-fluid-m text-right text-step-0 font-light italic text-foreground/80">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentIndex}
-                            initial={{ opacity: 0, filter: "blur(4px)" }}
-                            animate={{ opacity: 1, filter: "blur(0px)" }}
-                            exit={{ opacity: 0, filter: "blur(4px)" }}
-                            transition={{ duration: 0.6 }}
-                        >
-                            {items[currentIndex].caption}
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-            </div>
+            {/* Dynamic Fading Caption via React Portal */}
+            {mounted && document.getElementById('hero-caption-portal') ? createPortal(
+                <div className="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none z-50">
+                    <div className="pr-fluid-m text-right text-step-0 font-light italic text-foreground/80">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentIndex}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.6 }}
+                            >
+                                {items[currentIndex].caption}
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+                </div>,
+                document.getElementById('hero-caption-portal')!
+            ) : null}
         </div>
     );
 }

@@ -33,7 +33,7 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
     return (
         <div className="w-full flex-1 grid-layout items-center relative">
             {/* Left Column: Text and CTA */}
-            <div className="col-span-12 lg:col-span-6 flex flex-col items-start text-left z-20 pt-0">
+            <div className="col-span-12 lg:col-span-6 flex flex-col items-start text-left z-40 pt-0 relative">
                 <AnimatedTypingText 
                     as="h1"
                     text={headline}
@@ -95,14 +95,23 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
             </div>
 
             {/* Right Column: Slider / Carousel animated reveal */}
-            <div className={`col-span-12 w-full lg:w-[65vw] lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-[50%] z-10 pointer-events-none transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-                <div className="pointer-events-auto mt-8 lg:mt-0">
-                    <HeroCarousel items={carouselItems} isActive={showSubAndImage} />
+            {/* Right Column Wrapper (No Z-Index, No Transform, establishes relative bounds) */}
+            <div className="col-span-12 w-full lg:w-[65vw] lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-[50%] relative">
+                
+                {/* Images Layer (Z-10, behind halftone) */}
+                <div className={`w-full z-10 pointer-events-none transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
+                    <div className="pointer-events-auto mt-8 lg:mt-0">
+                        <HeroCarousel items={carouselItems} isActive={showSubAndImage} />
+                    </div>
+                </div>
+
+                {/* Portal Target Layer (Z-40, above halftone) */}
+                <div id="hero-caption-portal" className={`absolute inset-0 w-full z-40 pointer-events-none transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
                 </div>
             </div>
 
             {/* Scroll Down Indicator */}
-            <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-20 transition-all duration-1000 transform ${showButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+            <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-40 transition-all duration-1000 transform ${showButtons ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
                 <a href="#cases" className="block animate-bounce motion-reduce:animate-none text-foreground font-light hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full" aria-label="Scroll down">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m6 9 6 6 6-6" />

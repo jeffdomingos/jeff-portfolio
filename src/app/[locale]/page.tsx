@@ -41,7 +41,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             {/* Cases Section */}
             <div id="cases" className="relative w-full bg-background pt-fluid-2xl">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <div className="relative z-10 px-fluid-m mb-fluid-2xl w-full">
+                <div className="relative z-40 px-fluid-m mb-fluid-2xl w-full">
                     <TerminalTitle 
                         as="h2"
                         text={content.sectionDividerCases.title}

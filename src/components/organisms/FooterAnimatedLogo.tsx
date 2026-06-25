@@ -1,35 +1,93 @@
 "use client";
 
-import { motion, useSpring, useTransform, MotionValue } from "framer-motion";
+import { motion, useSpring, useTransform, MotionValue, animate } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface FooterAnimatedLogoProps {
     mouseX: MotionValue<number>;
     mouseY: MotionValue<number>;
+    isIdle?: boolean;
 }
 
-export function FooterAnimatedLogo({ mouseX, mouseY }: FooterAnimatedLogoProps) {
+export function FooterAnimatedLogo({ mouseX, mouseY, isIdle = true }: FooterAnimatedLogoProps) {
     // Mola para suavizar o movimento do mouse
     const springConfig = { damping: 20, stiffness: 100, mass: 0.5 };
     const smoothX = useSpring(mouseX, springConfig);
     const smoothY = useSpring(mouseY, springConfig);
 
-    // Mapeamentos de Parallax:
-    // O J-frente move junto com o mouse (na mesma direção, simulando a frente do objeto)
-    const jFrenteX = useTransform(smoothX, [-1, 1], [-12, 12]);
-    const jFrenteY = useTransform(smoothY, [-1, 1], [-12, 12]);
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 1024);
+        const handleResize = () => setIsMobile(window.innerWidth < 1024);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-    // O J-sombra move na direção oposta, criando a ilusão da perspectiva tridimensional
-    const jSombraX = useTransform(smoothX, [-1, 1], [6, -6]);
-    const jSombraY = useTransform(smoothY, [-1, 1], [6, -6]);
+    useEffect(() => {
+        if (!isIdle) return;
+        
+        let isActive = true;
 
-    // O D e o Texto movem super sutilmente na direção oposta geral para ancorar o movimento
-    const bgX = useTransform(smoothX, [-1, 1], [2, -2]);
-    const bgY = useTransform(smoothY, [-1, 1], [2, -2]);
+        const runAnimation = async () => {
+            const poses = [
+                { x: 1, y: -1 },      // Mostra o outro lado (esquerda/frente)
+                { x: -0.75, y: 1 },   // Canto inferior esquerdo (Intermediário)
+                { x: 0.9, y: 0.4 },   // Canto inferior direito (Intermediário)
+                { x: 0, y: -1 },      // Inclina para cima
+            ];
+            
+            let poseIndex = 0;
 
-    // Rotação 3D Global (Tilt Effect)
-    // Invertemos a rotação Y para que o lado do mouse "afunde", ou vice-versa, criando uma perspectiva 3D realista
-    const rotateX = useTransform(smoothY, [-1, 1], [6, -6]); 
-    const rotateY = useTransform(smoothX, [-1, 1], [-6, 6]);
+            while (isActive) {
+                // 1) Repouso absoluto na posição original (marca canônica)
+                await new Promise(resolve => setTimeout(resolve, 2500));
+                if (!isActive) break;
+
+                const pose = poses[poseIndex];
+                poseIndex = (poseIndex + 1) % poses.length;
+
+                // 2) Vai para a pose aleatória bonitinha com um pouco mais de velocidade (duration menor)
+                animate(mouseX, pose.x, { duration: 0.8, ease: "easeOut" });
+                animate(mouseY, pose.y, { duration: 0.8, ease: "easeOut" });
+                
+                // 3) Segura na pose para o usuário observar
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                if (!isActive) break;
+
+                // 4) Volta suavemente para a posição original (0,0)
+                animate(mouseX, 0, { duration: 1.2, ease: "easeInOut" });
+                animate(mouseY, 0, { duration: 1.2, ease: "easeInOut" });
+            }
+        };
+
+        runAnimation();
+
+        return () => {
+            isActive = false;
+        };
+    }, [isIdle, mouseX, mouseY]);
+
+    // Mapeamentos de Parallax ASSIMÉTRICOS:
+    // Como a ilustração base já é desenhada com perspectiva (visão da direita/cima),
+    // o centro (0) mantém o logo original intacto.
+    // Movimentos que "desentortam" o logo (ex: X=1, Y=-1) precisam de MUITO MAIS AMPLITUDE
+    // para cruzar o ponto de "visão perfeitamente de frente" e mostrar o outro lado.
+    
+    // O J-frente move junto com o mouse
+    const jFrenteX = useTransform(smoothX, [-1, 0, 1], [-15, 0, 26]);
+    const jFrenteY = useTransform(smoothY, [-1, 0, 1], [-24, 0, 21]);
+
+    // O J-sombra move na direção oposta
+    const jSombraX = useTransform(smoothX, [-1, 0, 1], [7.5, 0, -13]);
+    const jSombraY = useTransform(smoothY, [-1, 0, 1], [12, 0, -11]);
+
+    // O D e o Texto ancoram a visão
+    const bgX = useTransform(smoothX, [-1, 0, 1], [2.5, 0, -4.5]);
+    const bgY = useTransform(smoothY, [-1, 0, 1], [4, 0, -3.5]);
+
+    // Rotação 3D Global (Tilt Effect) Assimétrica
+    const rotateX = useTransform(smoothY, [-1, 0, 1], [15, 0, -14]); 
+    const rotateY = useTransform(smoothX, [-1, 0, 1], [-10, 0, 16.5]);
 
     return (
         <div 

@@ -11,12 +11,10 @@ function FloatingSVG({
     // Usando uma conversão matemática rígida para pixels (retornando número puro) para garantir que a engine do Framer Motion aplique o transform.
     const distance = 80 + (scale * 40);
     const x = useTransform(scrollYProgress, v => {
-        const vw = typeof window !== 'undefined' ? window.innerWidth / 100 : 19.2;
-        return (-distance * vw) + (v * distance * 2 * vw);
+        return `${(-distance) + (v * distance * 2)}vw`;
     });
     const y = useTransform(scrollYProgress, v => {
-        const vw = typeof window !== 'undefined' ? window.innerWidth / 100 : 19.2;
-        return (-distance * vw) + (v * distance * 2 * vw);
+        return `${(-distance) + (v * distance * 2)}vw`;
     });
 
     // Profundidade
@@ -120,8 +118,7 @@ export function IntermissionSVGs() {
             ref={sectionRef}
             className="relative w-full min-h-[150vh] bg-background overflow-hidden flex items-center justify-center"
         >
-            {/* Máscara global de retícula fixa em todo o container */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none bg-halftone-mask z-20"></div>
+            {/* Máscara global de retícula fixa em todo o container removida (agora global no layout.tsx) */}
 
             <div className="absolute inset-0 w-full h-full pointer-events-none z-10">
                 {floatingItems.map((item, i) => (

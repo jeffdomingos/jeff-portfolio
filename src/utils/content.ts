@@ -49,10 +49,12 @@ export function getHomePageContent(locale: string): HomePageContent {
             const homeSummary = homeCard[`summary_${lang}`] || langData.summary || '';
             const homeThumbnail = homeCard.thumbnail || pd.thumbnail || '';
             const homeTags = homeCard[`tags_${lang}`] || homeCard.tags || pd[`tags_${lang}`] || pd.tags || [];
+            const customNumber = homeCard.custom_number;
+            const customCtaLabel = homeCard[`cta_${lang}`] || homeCard.ctaLabel;
 
-            return { slug, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags };
+            return { slug, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags, customNumber, customCtaLabel };
         })
-        .filter(Boolean) as { slug: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[] }[];
+        .filter(Boolean) as { slug: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[]; customNumber?: string; customCtaLabel?: string }[];
 
     // Sort by cases.case_order
     caseItems.sort((a, b) => {
@@ -165,7 +167,7 @@ export function getProject(locale: string, slug: string) {
     const meta: ProjectMeta = {
         slug,
         featured: data.featured ?? false,
-        thumbnail: data.thumbnail ?? '',
+        thumbnail: data.thumbnail ?? data.home_card?.thumbnail ?? '',
         tags: data.tags ?? [],
         title: langData.title ?? slug,
         role: langData.role ?? '',

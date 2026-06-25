@@ -17,10 +17,12 @@ export default function LocaleLayout({
 
     return (
         <SmoothScrollProvider>
-            <div className="min-h-screen flex flex-col">
+            <div className="w-full min-h-[100lvh] flex flex-col">
                 <Header data={global.header} locale={locale} otherLocale={otherLocale} />
 
-                <main id="main-content" className="flex-1 outline-none" tabIndex={-1}>
+                <main id="main-content" className="flex-1 w-full min-w-0 overflow-x-clip outline-none" tabIndex={-1}>
+                    {/* Global Mesh Layer */}
+                    <div id="global-halftone" className="fixed inset-0 pointer-events-none bg-halftone-mask z-[30]" />
                     {children}
                 </main>
 

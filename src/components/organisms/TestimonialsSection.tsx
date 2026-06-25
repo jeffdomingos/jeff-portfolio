@@ -29,11 +29,11 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
     });
 
     // 3. Expande quando o TOPO cruza a linha de 45% a 35%. 
-    // Usamos o TOPO (start) para ancorar, porque o elemento cresce para baixo, 
-    // e o centro físico de um depoimento encolhido bate em 50vh exatamente nessa janela.
+    // Usamos o TOPO (start) para ancorar, porque o elemento cresce para baixo.
+    // Mudamos para 75% -> 60% para que no mobile a expansão ocorra enquanto o card inteiro ainda está visível.
     const { scrollYProgress: expandProgress } = useScroll({
         target: ref,
-        offset: ["start 45%", "start 35%"]
+        offset: ["start 75%", "start 60%"]
     });
 
     // Combinamos a luz e a sombra
@@ -105,7 +105,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
     if (!data || !data.items || data.items.length === 0) return null;
 
     return (
-        <section className="px-fluid-m py-fluid-4xl border-t border-foreground bg-foreground text-background w-full">
+        <section className="px-fluid-m py-fluid-4xl border-t border-foreground bg-foreground text-background w-full relative z-40">
             <div ref={headerRef} className="w-full mb-fluid-3xl">
                 <TerminalTitle 
                     as="h2"
