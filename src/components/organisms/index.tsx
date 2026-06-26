@@ -4,6 +4,7 @@ import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
 export { CaseNavigator } from "./CaseNavigator";
 export { Header } from "./Header";
 export { CasesSection } from "./CasesSection";
+export { ApproachSection } from "./ApproachSection";
+export { ContactCards } from "./ContactCards";
 export { Footer } from "./Footer";
-
-
+export { PageHero } from "./PageHero";

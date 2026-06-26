@@ -8,7 +8,7 @@ export function CaseNavigator({ locale, currentSlug }: { locale: string; current
 
     return (
         <section className="relative z-50 border-t border-border mt-fluid-2xl pt-fluid-xl pb-fluid-2xl bg-background overflow-hidden w-full">
-            <CaseGallery projects={projects} locale={locale} currentSlug={currentSlug} title={locale === "pt" ? "Navegue por outros cases" : "Explore other cases"} />
+            <CaseGallery projects={projects} locale={locale} currentSlug={currentSlug} title={locale === "pt" ? "Navegue por outros projetos" : "Explore other projects"} />
         </section>
     );
 }

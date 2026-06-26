@@ -25,6 +25,13 @@
         "ctaLabel": "Message me",
         "href": "https://api.whatsapp.com/send/?phone=5521999374516",
         "icon": "message"
+      },
+      {
+        "platformName": "Calendly",
+        "description": "Schedule a 45-minute chat directly on my calendar to discuss your project.",
+        "ctaLabel": "Schedule Meeting",
+        "href": "https://calendly.com/jeffdomingos/papo45min",
+        "icon": "calendar"
       }
     ]
   }

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export function HeroCarousel({ items, isActive = true }: { items: { src: string, caption: string }[], isActive?: boolean }) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,16 +33,16 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
         <div className="relative w-full lg:w-[150%] max-w-none mt-12 lg:mt-0">
             {/* DUMMY container invisível para ditar a altura real do DOM e não amassar a página */}
             <div className="invisible flex flex-col items-end w-full pointer-events-none">
-                <div className="relative w-full">
-                    <img src={items[0].src} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center" alt="" />
+                <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh]">
+                    <Image src={items[0].src} fill={true} sizes="100vw" priority={true} className="object-cover object-center" alt="" />
                 </div>
                 <div className="mt-4 text-step-0 italic pr-fluid-m">{items[0].caption}</div>
             </div>
 
             {/* Imagem Base (Sempre a imagem anterior, estática no fundo) */}
             <div className="absolute inset-0 flex flex-col items-end w-full pointer-events-none z-10">
-                <div className="relative w-full bg-background">
-                    <img src={items[prevIndex].src} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" alt="" />
+                <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh] bg-background">
+                    <Image src={items[prevIndex].src} fill={true} sizes="100vw" priority={true} className="object-cover object-center grayscale contrast-125" alt="" />
                 </div>
             </div>
 
@@ -55,8 +56,8 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                         transition={{ duration: 2.4, ease: "easeInOut" }} // Mais lento e mais suave
                         className="absolute inset-0 flex flex-col items-end w-full z-10 pointer-events-none"
                     >
-                        <div className="relative w-full bg-background">
-                            <img src={items[currentIndex].src} alt={items[currentIndex].caption} className="w-full h-[30vh] md:h-[45vh] lg:h-[80vh] object-cover object-center grayscale contrast-125" />
+                        <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh] bg-background">
+                            <Image src={items[currentIndex].src} fill={true} sizes="100vw" priority={true} alt={items[currentIndex].caption} className="object-cover object-center grayscale contrast-125" />
                         </div>
                     </motion.div>
                 )}

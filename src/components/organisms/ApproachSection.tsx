@@ -30,7 +30,7 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
     }, []);
 
     // Desktop Timings (Global Scroll)
-    // Section is 200vh. Enters at 0, pins at ~0.33, unpins at ~0.66, leaves at 1.0.
+    // Section is 200svh. Enters at 0, pins at ~0.33, unpins at ~0.66, leaves at 1.0.
     const baseStart = 0.16 + index * 0.08;
     const baseEnd = 0.40 + index * 0.08;
     const fadeOutEnd = baseEnd + 0.05;
@@ -106,9 +106,9 @@ export function ApproachSection({ data }: ApproachSectionProps) {
         <section 
             id="approach-section" 
             ref={sectionRef}
-            className="border-t border-foreground overflow-clip w-full relative z-40 bg-background lg:h-[200vh]"
+            className="border-t border-foreground overflow-clip w-full relative z-40 bg-background lg:h-[200svh]"
         >
-            <div id="approach-sticky-container" className="lg:sticky lg:top-0 w-full lg:h-[100vh] flex flex-col justify-start lg:justify-center pt-fluid-4xl pb-fluid-4xl lg:py-0">
+            <div id="approach-sticky-container" className="lg:sticky lg:top-0 w-full lg:h-[100svh] flex flex-col justify-start lg:justify-center pt-fluid-4xl pb-fluid-4xl lg:py-0">
                 <div className="grid-layout w-full">
                     <div ref={headerRef} className="col-span-12 mb-fluid-2xl relative z-10 flex flex-col items-start">
                         <div className="inline-block inspectable">

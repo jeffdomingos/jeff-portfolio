@@ -13,58 +13,9 @@ interface CasesSectionProps {
 
 import { useRef, useState, useEffect } from "react";
 
-const ANIMATION_DURATION = 0.2;
-const ANIMATION_EASE = "linear"; // Linear makes the sequential 'drawing' effect look continuous
+import { TracingGrid, TracingItem } from "@/components/atoms/TracingBorders";
 
-const variantsTop = {
-    idle: { scaleX: 0, transformOrigin: "left" },
-    hover_external: { scaleX: 1, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    exit_external: { scaleX: 0, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    hover_down: { scaleX: 1, transition: { duration: 0 } },
-    exit_down: { scaleX: 0, transformOrigin: "center", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_up: { scaleX: 1, transformOrigin: "center", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION, ease: ANIMATION_EASE } },
-    exit_up: { scaleX: 0, transition: { duration: 0 } },
-    mobile_idle: { scaleX: 0, transformOrigin: "left" },
-    mobile_hover: { scaleX: 1, transformOrigin: "left", transition: { duration: 0.5 } }
-};
-
-const variantsBottomLeft = {
-    idle: { scaleX: 0, transformOrigin: "right" },
-    hover_external: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION, ease: ANIMATION_EASE } },
-    exit_external: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION, ease: ANIMATION_EASE } },
-    hover_down: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION, ease: ANIMATION_EASE } },
-    exit_down: { scaleX: 0, transition: { duration: 0 } },
-    hover_up: { scaleX: 1, transition: { duration: 0 } },
-    exit_up: { scaleX: 0, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    mobile_idle: { scaleX: 0, transformOrigin: "right" },
-    mobile_hover: { scaleX: 1, transformOrigin: "right", transition: { duration: 0.5 } }
-};
-
-const variantsBottomRight = {
-    idle: { scaleX: 0, transformOrigin: "right" },
-    hover_external: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
-    exit_external: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
-    hover_down: { scaleX: 1, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION, ease: ANIMATION_EASE } },
-    exit_down: { scaleX: 0, transition: { duration: 0 } },
-    hover_up: { scaleX: 1, transition: { duration: 0 } },
-    exit_up: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    mobile_idle: { scaleX: 0, transformOrigin: "left" },
-    mobile_hover: { scaleX: 1, transformOrigin: "left", transition: { duration: 0.5 } }
-};
-
-const variantsMiddle = {
-    idle: { scaleY: 0, transformOrigin: "top" },
-    hover_external: { scaleY: 1, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_external: { scaleY: 0, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_down: { scaleY: 1, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_down: { scaleY: 0, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_up: { scaleY: 1, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_up: { scaleY: 0, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    mobile_idle: { scaleY: 0, transformOrigin: "top" },
-    mobile_hover: { scaleY: 1, transformOrigin: "top", transition: { duration: 0.5 } }
-};
-
-function CaseRow({ item, index, locale, hoverState, onMouseEnter }: { item: CaseItem, index: number, locale: string, hoverState: string, onMouseEnter: () => void }) {
+function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }: { item: CaseItem, index: number, locale: string, hoverState: string, onMouseEnter: () => void, onMouseLeave: () => void }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const isEven = index % 2 === 0;
@@ -81,40 +32,34 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter }: { item: Case
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    let effectiveState = "idle";
-    if (isMobile) {
-        effectiveState = isMobileHovered ? "mobile_hover" : "mobile_idle";
-    } else {
-        effectiveState = hoverState;
-    }
+    // Row hover trigger
+    const isRowHovered = isMobileHovered || hoverState.startsWith("hover");
 
     return (
         <div 
-            ref={ref}
-            data-case-index={index}
             className="group flex flex-col md:flex-row items-stretch relative cursor-pointer min-h-[200px] md:min-h-[280px]"
-            onClick={() => setIsExpanded(!isExpanded)}
-            onMouseEnter={onMouseEnter}
             onMouseLeave={(e) => {
-                const related = e.relatedTarget as HTMLElement;
-                if (!related || typeof related.closest !== 'function' || !related.closest('[data-case-index]')) {
-                    // Triggers exit if mouse leaves into padding/outside
-                    onMouseEnter(null as any); // Signal leave
-                }
+                onMouseLeave(); // Signal leave for external cases logic
             }}
-            data-hover={isMobileHovered || hoverState.startsWith("hover")}
         >
-            {/* Text Content */}
-            <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className={`w-full md:w-1/2 flex flex-col justify-center py-8 md:py-12 px-fluid-xs md:px-fluid-m z-40 relative ${isEven ? 'md:order-1' : 'md:order-2'}`}
+            <div 
+                ref={ref}
+                data-case-index={index}
+                className="absolute inset-0 z-0 pointer-events-none"
+                data-hover={isRowHovered}
+            />
+            {/* Left Card */}
+            <TracingItem 
+                id={`case-${index}-left`}
+                className={`w-full md:w-1/2 flex flex-col justify-center py-8 md:py-12 px-fluid-xs md:px-fluid-m z-40 ${isEven ? 'md:order-1' : 'md:order-2'}`}
+                hiddenWalls={["left"]} // Leak to left (invisible)
+                forceActive={isRowHovered}
+                delayOffset={0}
             >
-                <span className="font-normal group-hover:font-semibold group-data-[hover=true]:font-semibold transition-all duration-500 italic text-step-3 bg-halftone bg-clip-text text-transparent mb-1">
-                    {item.customNumber || indexStr}
-                </span>
+                <div onClick={() => setIsExpanded(!isExpanded)} className="h-full w-full pointer-events-auto cursor-pointer">
+                    <span className="font-normal group-hover:font-semibold group-data-[hover=true]:font-semibold transition-all duration-500 italic text-step-3 bg-halftone bg-clip-text text-transparent mb-1">
+                        {item.customNumber || indexStr}
+                    </span>
                 <div className="mb-3">
                     {item.title.includes(' - ') ? (
                         <>
@@ -151,7 +96,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter }: { item: Case
                             
                             <Link href={item.href || "#"} onClick={(e) => e.stopPropagation()} className="inline-flex mt-fluid-m items-center gap-2 font-normal text-foreground hover:font-bold transition-all">
                                 <span className="border-b border-foreground/30 hover:border-foreground pb-0.5 uppercase tracking-widest text-step--2">
-                                    {item.customCtaLabel || (locale === 'pt' ? 'Ver Case' : 'Read Case')}
+                                    {item.customCtaLabel || (locale === 'pt' ? 'Ver case completo' : 'Read full case')}
                                 </span> 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:translate-x-2 group-data-[hover=true]:translate-x-2 transition-transform duration-300">
                                     <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
@@ -160,16 +105,24 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter }: { item: Case
                         </div>
                     </div>
                 </div>
-            </motion.div>
+                </div>
+            </TracingItem>
 
-            {/* Image Content Wrapper */}
-            <div className={`w-full md:w-1/2 relative min-h-[200px] md:min-h-full mt-6 md:mt-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}>
+            {/* Right Card */}
+            <TracingItem 
+                id={`case-${index}-right`}
+                className={`w-full md:w-1/2 relative min-h-[200px] md:min-h-full mt-6 md:mt-0 ${isEven ? 'md:order-2' : 'md:order-1'}`}
+                hiddenWalls={["right"]} // Leak to right (invisible)
+                forceActive={isRowHovered}
+                delayOffset={0.6} // Starts filling right after Left Card finishes (4 * 0.15s)
+            >
                 <motion.div 
                     initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: false, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.1 }}
                     className={`block absolute top-[1px] bottom-[1px] w-[calc(100%-1px)] ${isEven ? 'right-0' : 'left-0'} bg-background overflow-hidden z-0 rounded-none`}
+                    onClick={() => setIsExpanded(!isExpanded)}
                 >
                     <Image 
                         src={item.thumbnailImage} 
@@ -177,20 +130,10 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter }: { item: Case
                         fill
                         sizes={IMAGE_SIZES.card}
                         {...BELOW_FOLD_IMAGE}
-                        className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-1000 ease-in-out" 
+                        className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-1000 ease-in-out cursor-pointer pointer-events-auto" 
                     />
                 </motion.div>
-            </div>
-
-            {/* Animated Dividers (Rendered last to ensure they are on top of EVERYTHING) */}
-            <motion.span variants={variantsTop} initial="idle" animate={effectiveState} className="absolute top-0 left-0 w-full h-[1px] bg-foreground z-[100] pointer-events-none" />
-            <motion.span variants={variantsBottomLeft} initial="idle" animate={effectiveState} className="absolute bottom-0 left-0 w-[calc(50%-0.5px)] h-[1px] bg-foreground z-[100] pointer-events-none" />
-            <motion.span variants={variantsBottomRight} initial="idle" animate={effectiveState} className="absolute bottom-0 right-0 w-[calc(50%-0.5px)] h-[1px] bg-foreground z-[100] pointer-events-none" />
-            
-            {/* Vertical Animated Divider (Centered on Desktop) */}
-            <motion.span variants={variantsMiddle} initial="idle" animate={effectiveState} className={`hidden md:block absolute top-0 w-[1px] h-full bg-foreground left-1/2 -translate-x-1/2 z-[99] pointer-events-none`} />
-            {/* Vertical Animated Divider (Mobile edges) */}
-            <motion.span variants={variantsMiddle} initial="idle" animate={effectiveState} className={`md:hidden absolute top-0 w-[1px] h-full bg-foreground z-[99] pointer-events-none ${isEven ? 'left-0' : 'right-0'}`} />
+            </TracingItem>
         </div>
     );
 }
@@ -279,13 +222,8 @@ export function CasesSection({ items, locale }: CasesSectionProps) {
                             index={i} 
                             locale={locale} 
                             hoverState={state} 
-                            onMouseEnter={(newIndex) => {
-                                if (newIndex === null as any) {
-                                    setHoverState(prev => ({ current: null, previous: prev.current }));
-                                } else {
-                                    handleMouseEnter(i);
-                                }
-                            }} 
+                            onMouseEnter={() => handleMouseEnter(i)}
+                            onMouseLeave={() => setHoverState(prev => ({ current: null, previous: prev.current }))}
                         />
                     );
                 })}

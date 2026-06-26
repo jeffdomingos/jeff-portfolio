@@ -10,7 +10,7 @@ export function InteractiveDeskSVG({
     scrollYProgress?: any,
     activeIndex?: number
 }) {
-    const containerRef = useRef<SVGSVGElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // Se não for passado de fora, criamos um scroll tracker local
     const localScroll = useScroll({

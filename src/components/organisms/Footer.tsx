@@ -4,8 +4,12 @@ import { GlobalFooter } from "@/content/schema";
 import { FooterAnimatedLogo } from "./FooterAnimatedLogo";
 import { useMotionValue } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
 
 export function Footer({ data }: { data: GlobalFooter }) {
+    const params = useParams();
+    const locale = params?.locale === 'en' ? 'en' : 'pt';
+    
     const scrollToTop = () => {
         if (typeof window !== "undefined") {
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -59,7 +63,7 @@ export function Footer({ data }: { data: GlobalFooter }) {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={frozenHeight ? { minHeight: frozenHeight } : undefined}
-            className="w-full text-foreground mt-auto relative overflow-clip min-h-[100lvh] flex flex-col"
+            className="w-full text-foreground mt-auto relative overflow-clip min-h-[100svh] flex flex-col"
         >
             {/* Máscara absoluta (não-sticky) para evitar pulos no Safari iOS */}
             <div 
@@ -75,16 +79,19 @@ export function Footer({ data }: { data: GlobalFooter }) {
                 <div className="flex-1 flex flex-col justify-center py-6 lg:py-fluid-l">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-fluid-xl items-center">
                     {/* Brand / Logo Area - Mantido em z-0 para ficar ATRÁS da malha z-10 */}
-                    <div className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0">
+                    <div className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0 mt-12 lg:mt-0">
                         <FooterAnimatedLogo mouseX={mouseX} mouseY={mouseY} isIdle={isIdle} />
                     </div>
 
                 {/* Contact Links */}
                 <div className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50">
-                    <a href={`mailto:${data.emailValue}`} className="group inline-flex flex-col">
+                    <a href={`mailto:${data.emailValue}`} className="group inline-flex flex-col relative">
                         <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.emailLabel}</span>
-                        <span className="text-step-1 md:text-step-2 font-bold group-hover:translate-x-4 transition-transform duration-500 text-foreground flex items-center gap-4">
-                            {data.emailValue}
+                        <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
+                            <span className="relative">
+                                {data.emailValue}
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -92,10 +99,13 @@ export function Footer({ data }: { data: GlobalFooter }) {
                         </span>
                     </a>
                     
-                    <a href="https://linkedin.com/in/jeffdomingos" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col">
+                    <a href="https://linkedin.com/in/jeffdomingos" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
                         <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.linkedinLabel}</span>
-                        <span className="text-step-1 md:text-step-2 font-bold group-hover:translate-x-4 transition-transform duration-500 text-foreground flex items-center gap-4">
-                            {data.linkedinValue}
+                        <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
+                            <span className="relative">
+                                {data.linkedinValue}
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>
@@ -104,20 +114,26 @@ export function Footer({ data }: { data: GlobalFooter }) {
                         </span>
                     </a>
 
-                    <a href="https://api.whatsapp.com/send/?phone=5521999374516" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col">
+                    <a href="https://api.whatsapp.com/send/?phone=5521999374516" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
                         <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.whatsappLabel}</span>
-                        <span className="text-step-1 md:text-step-2 font-bold group-hover:translate-x-4 transition-transform duration-500 text-foreground flex items-center gap-4">
-                            {data.whatsappValue}
+                        <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
+                            <span className="relative">
+                                {data.whatsappValue}
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
                         </span>
                     </a>
 
-                    <a href="https://www.instagram.com/jeffdomingos.design/" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col">
+                    <a href="https://www.instagram.com/jeffdomingos.design/" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
                         <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">Instagram</span>
-                        <span className="text-step-1 md:text-step-2 font-bold group-hover:translate-x-4 transition-transform duration-500 text-foreground flex items-center gap-4">
-                            @jeffdomingos.design
+                        <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
+                            <span className="relative">
+                                @jeffdomingos.design
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                 <polyline points="15 3 21 3 21 9"></polyline>
@@ -134,10 +150,10 @@ export function Footer({ data }: { data: GlobalFooter }) {
                     <p className="shrink-0">{data.copyrightText}</p>
                     <button 
                         onClick={scrollToTop} 
-                        className="hover:text-background transition-colors uppercase tracking-widest text-step--2 font-medium flex items-center gap-2 group focus:outline-none"
+                        className="transition-all uppercase tracking-widest text-step--2 font-light hover:font-bold flex items-center gap-2 group focus:outline-none"
                     >
-                        Voltar ao topo
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-y-1 transition-transform">
+                        {locale === 'en' ? 'Back to top' : 'Voltar ao topo'}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform">
                             <line x1="12" y1="19" x2="12" y2="5"></line>
                             <polyline points="5 12 12 5 19 12"></polyline>
                         </svg>

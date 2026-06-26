@@ -39,7 +39,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
     // Combinamos a luz e a sombra
     const rowOpacity = useTransform(
         [brightenProgress, darkenProgress],
-        ([b, d]) => {
+        ([b, d]: any[]) => {
             if (isLast) return 0.3 + (0.7 * b);
             return 0.3 + (0.7 * b) - (0.7 * d);
         }

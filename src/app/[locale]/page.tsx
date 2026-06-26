@@ -25,7 +25,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             {/* Hero Section Wrapper para permitir o sticky mask */}
             <div className="relative w-full hero-wrapper bg-background">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <section className="relative w-full min-h-[100dvh] h-auto flex flex-col items-center justify-start lg:justify-center text-center overflow-hidden pt-16 pb-12 lg:pt-14 lg:pb-0">
+                <section className="relative w-full min-h-[100svh] h-auto flex flex-col items-center justify-start lg:justify-center text-center overflow-hidden pt-16 pb-12 lg:pt-14 lg:pb-0">
                     <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
                     <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
                     <HeroAnimatedContent 
@@ -45,7 +45,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
                     <TerminalTitle 
                         as="h2"
                         text={content.sectionDividerCases.title}
-                        className="text-step-6 font-heading font-semibold tracking-normal uppercase"
+                        className="text-step-6 font-heading font-semibold tracking-normal uppercase leading-[1.1]"
                     />
                 </div>
                 <CasesSection items={content.caseList.items} locale={locale} />

@@ -17,7 +17,7 @@ export default function LocaleLayout({
 
     return (
         <SmoothScrollProvider>
-            <div className="w-full min-h-[100lvh] flex flex-col">
+            <div className="w-full min-h-[100svh] flex flex-col">
                 <Header data={global.header} locale={locale} otherLocale={otherLocale} />
 
                 <main id="main-content" className="flex-1 w-full min-w-0 overflow-x-clip outline-none" tabIndex={-1}>

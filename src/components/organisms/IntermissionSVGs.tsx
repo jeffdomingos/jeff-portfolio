@@ -49,6 +49,7 @@ function FloatingSVG({
                 }}
                 style={{ willChange: "transform" }}
             >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={src}
                     style={isMobile ? { opacity: opacityVal } : { filter: `blur(${blurPx}px)`, opacity: opacityVal }}
@@ -116,7 +117,7 @@ export function IntermissionSVGs() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full min-h-[150vh] bg-background overflow-hidden flex items-center justify-center"
+            className="relative w-full min-h-[150svh] bg-background overflow-hidden flex items-center justify-center"
         >
             {/* Máscara global de retícula fixa em todo o container removida (agora global no layout.tsx) */}
 

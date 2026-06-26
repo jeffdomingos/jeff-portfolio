@@ -100,21 +100,24 @@ function AvailabilityBlockMobile({
     locale: string,
     stickyProgress: any
 }) {
-    // Definimos os momentos (progress) para cada elemento criar o efeito scattered (escadinha)
-    const h3In = index === 0 ? [0, 0.1, 0.4, 0.6] : [0.45, 0.55, 1];
-    const pIn = index === 0 ? [0.05, 0.15, 0.4, 0.6] : [0.5, 0.6, 1];
-    const btnIn = index === 0 ? [0.1, 0.2, 0.4, 0.6] : [0.55, 0.65, 1];
-    const bgIn = index === 0 ? [0, 0.1, 0.4, 0.6] : [0.45, 0.55, 1];
+    // Definimos os momentos (progress) para cada elemento criar o efeito escalonado no scroll (scrub)
+    // index 0: entra (0 a 0.25), espera, sai reverso e rápido (0.35 a 0.55)
+    // index 1: entra (0.5 a 0.75), e não sai (sobe com a página)
+    
+    const h3In = index === 0 ? [0, 0.15, 0.45, 0.55] : [0.5, 0.65, 1];
+    const pIn = index === 0 ? [0.05, 0.2, 0.4, 0.5] : [0.55, 0.7, 1];
+    const btnIn = index === 0 ? [0.1, 0.25, 0.35, 0.45] : [0.6, 0.75, 1];
+    const bgIn = index === 0 ? [0, 0.15, 0.45, 0.55] : [0.5, 0.65, 1];
 
-    // Valores dinâmicos para animação
+    // Valores dinâmicos (estritamente horizontais, sem subir)
     const startX = index === 0 ? "-100%" : "100%";
     const exitX = index === 0 ? "-100%" : "0%";
     
     const xVals = index === 0 ? [startX, "0%", "0%", exitX] : [startX, "0%", "0%"];
-    const yVals = index === 0 ? [0, 0, 0, -50] : [0, 0, 0];
+    const yVals = index === 0 ? [0, 0, 0, 0] : [0, 0, 0];
     const opVals = index === 0 ? [0, 1, 1, 0] : [0, 1, 1];
 
-    // Aplicando transforms scattered
+    // Aplicando transforms escalonados (scrub)
     const xH3 = useTransform(stickyProgress, h3In, xVals);
     const yH3 = useTransform(stickyProgress, h3In, yVals);
     const opH3 = useTransform(stickyProgress, h3In, opVals);
@@ -183,6 +186,13 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
         offset: ["start start", "end end"]
     });
 
+    // Sync face lighting based on scroll on mobile
+    useMotionValueEvent(stickyProgress, "change", (latest) => {
+        if (typeof window !== 'undefined' && window.innerWidth < 768) {
+            setActiveIndex(latest > 0.45 ? 1 : 0);
+        }
+    });
+
     const yHead = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [100, 45, 0, -22, -45]);
 
     if (!data || !data.blocks || data.blocks.length === 0) return null;
@@ -206,16 +216,16 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
                 className="relative z-40 text-step-6 font-heading font-semibold tracking-normal mb-fluid-2xl uppercase px-fluid-m"
             />
 
-            <div ref={trackRef} className="w-full relative h-[250lvh] md:h-auto">
-                <div className="w-full h-[100lvh] md:h-auto sticky top-0 md:relative md:top-auto flex flex-col justify-start bg-background">
+            <div ref={trackRef} className="w-full relative h-[250svh] md:h-auto">
+                <div className="w-full h-[100svh] md:h-auto sticky top-0 md:relative md:top-auto flex flex-col justify-start bg-background">
                     
                     {/* Malha local restaurada para o container sticky. 
                         Isso aplica a retícula no SVG (z-10) mas mantém ela atrás dos textos (z-50).
                         Como usa background-attachment: fixed, alinha perfeitamente com a global mesh externa. */}
                     <div className="absolute inset-0 w-full h-full pointer-events-none bg-halftone-mask bg-scroll z-20"></div>
 
-                    {/* Main content part (100lvh on mobile to fit the screen stably, auto on desktop) */}
-                    <div className="grid grid-cols-1 grid-rows-1 w-full h-[100lvh] md:h-auto overflow-hidden md:overflow-visible relative shrink-0">
+                    {/* Main content part (100svh on mobile to fit the screen stably, auto on desktop) */}
+                    <div className="grid grid-cols-1 grid-rows-1 w-full h-[100svh] md:h-auto overflow-hidden md:overflow-visible relative shrink-0">
                         {/* Fundo preto de segurança na base removido conforme solicitado */}
 
                         <div className="col-start-1 row-start-1 justify-self-center self-start w-[120%] sm:w-[90%] max-w-[600px] lg:max-w-[750px] aspect-[10/21] z-10 pointer-events-none">
@@ -238,7 +248,7 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
                         </div>
 
                         {/* Mobile Layer */}
-                        <div className="grid md:hidden col-start-1 row-start-1 grid-cols-1 relative z-50 w-full h-[100lvh] items-end pb-[calc(3rem+env(safe-area-inset-bottom))] pointer-events-none">
+                        <div className="grid md:hidden absolute left-0 bottom-[1svh] z-50 w-full pointer-events-none">
                             {data.blocks.map((block, i) => (
                                 <div key={`mobile-${i}`} className="col-start-1 row-start-1 pointer-events-auto w-full">
                                     <AvailabilityBlockMobile 
@@ -255,7 +265,7 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
                     <div 
                         className="absolute bottom-[-2px] left-0 w-full pointer-events-none z-40"
                         style={{
-                            height: 'calc(80vh + 2px)',
+                            height: 'calc(80svh + 2px)',
                             background: 'linear-gradient(to bottom, transparent 0%, oklch(var(--color-background) / 0.05) 20%, oklch(var(--color-background) / 0.3) 50%, oklch(var(--color-background) / 0.7) 80%, oklch(var(--color-background)) 100%)'
                         }}
                     />

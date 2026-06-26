@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { GlobalHeader } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
@@ -63,9 +64,12 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
                 
                 <div className="w-full px-fluid-xs md:px-fluid-m h-12 md:h-14 flex items-center justify-between relative">
                     <Link href={`/${locale}`} className="flex items-center pointer-events-auto z-[70] overflow-hidden" onClick={() => setIsOpen(false)}>
-                        <img 
+                        <Image 
                             src="/images/logo-header-horiz.svg" 
                             alt={data.brandName} 
+                            width={160}
+                            height={32}
+                            priority={true}
                             className={`h-6 md:h-8 w-auto object-contain invert transition-all duration-500 ease-in-out ${isFooterVisible ? '-translate-y-[150%] opacity-0' : 'translate-y-0 opacity-100'}`} 
                         />
                         <span className="sr-only">{data.brandName}</span>
@@ -73,15 +77,19 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
 
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 uppercase tracking-widest font-medium pointer-events-auto">
-                        <Link href={`/${locale}`} className="font-light hover:font-bold transition-all relative group">
+                        <Link href={`/${locale}`} data-text={data.navItemHome} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemHome}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
-                        <Link href={`/${locale}/resume`} className="font-light hover:font-bold transition-all relative group">
+                        <Link href={`/${locale}#cases`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {locale === 'pt' ? 'Projetos' : 'Projects'}
+                            <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                        </Link>
+                        <Link href={`/${locale}/resume`} data-text={data.navItemResume} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemResume}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
-                        <Link href={`/${locale}/contact`} className="font-light hover:font-bold transition-all relative group">
+                        <Link href={`/${locale}/contact`} data-text={data.navItemContact} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemContact}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
@@ -107,13 +115,16 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 z-[70] flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} ${isMenuDark ? 'bg-foreground text-background' : 'bg-background text-foreground'}`}>
                 <nav className="flex flex-col items-center gap-8 text-step-2 uppercase tracking-widest font-medium">
-                    <Link href={`/${locale}`} onClick={() => setIsOpen(false)} className="hover:font-bold transition-all">
+                    <Link href={`/${locale}`} onClick={() => setIsOpen(false)} data-text={data.navItemHome} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemHome}
                     </Link>
-                    <Link href={`/${locale}/resume`} onClick={() => setIsOpen(false)} className="hover:font-bold transition-all">
+                    <Link href={`/${locale}#cases`} onClick={() => setIsOpen(false)} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        {locale === 'pt' ? 'Projetos' : 'Projects'}
+                    </Link>
+                    <Link href={`/${locale}/resume`} onClick={() => setIsOpen(false)} data-text={data.navItemResume} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemResume}
                     </Link>
-                    <Link href={`/${locale}/contact`} onClick={() => setIsOpen(false)} className="hover:font-bold transition-all">
+                    <Link href={`/${locale}/contact`} onClick={() => setIsOpen(false)} data-text={data.navItemContact} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemContact}
                     </Link>
                     <div className="mt-8 pt-8 border-t border-border flex items-center justify-center">

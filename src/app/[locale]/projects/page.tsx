@@ -1,5 +1,6 @@
 import { getAllProjects } from "@/utils/content";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProjectsPage({ params: { locale } }: { params: { locale: string } }) {
     const projects = getAllProjects(locale);
@@ -16,9 +17,9 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
                 {projects.map((project, i) => {
                     const href = `/${locale}/projects/${project.meta.slug}`;
                     return (
-                        <Link href={href} key={i} className="group flex flex-col border border-border bg-background hover:bg-halftone transition-colors rounded-xl overflow-hidden shadow-sm hover:shadow-md">
+                        <Link href={href} key={i} className="group flex flex-col border border-foreground/20 bg-background hover:border-foreground transition-colors rounded-xl overflow-hidden">
                             <div className="relative h-64 md:h-80 w-full overflow-hidden border-b border-border">
-                                <img src={project.meta.thumbnail} alt={project.meta.title} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-[0.21,0.47,0.32,0.98]" />
+                                <Image src={project.meta.thumbnail} fill={true} sizes="(max-width: 768px) 100vw, 33vw" alt={project.meta.title} className="object-cover transition-transform duration-700 ease-[0.21,0.47,0.32,0.98]" />
                             </div>
                             <div className="p-6 md:p-8 flex flex-col grow">
                                 <div className="mb-3">

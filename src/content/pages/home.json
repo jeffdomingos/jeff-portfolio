@@ -44,8 +44,8 @@
     ]
   },
   "cases": {
-    "title_pt": "Cases",
-    "title_en": "Cases",
+    "title_pt": "Projetos",
+    "title_en": "Projects",
     "case_order": [
       "ciclic",
       "intelie-performance-report",

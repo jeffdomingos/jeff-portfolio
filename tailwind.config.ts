@@ -18,8 +18,8 @@ const config = {
 		},
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-barlow)', 'sans-serif'],
-				heading: ['var(--font-barlow-condensed)', 'sans-serif'],
+				sans: ['var(--font-barlow)', 'Tahoma', 'Verdana', 'sans-serif'],
+				heading: ['var(--font-barlow-condensed)', '"Arial Narrow"', '"Helvetica Neue Condensed"', 'Tahoma', 'Verdana', 'sans-serif'],
 			},
 			colors: {
 				border: 'oklch(var(--color-border) / <alpha-value>)',
@@ -111,7 +111,7 @@ const config = {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config
 
 export default config

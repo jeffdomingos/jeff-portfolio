@@ -1,7 +1,7 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { mdxComponents, MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed } from "@/components/mdx";
-import { CaseNavigator } from "@/components/organisms";
+import { CaseNavigator, PageHero } from "@/components/organisms";
 import { LanguageFallbackToast } from "@/components/atoms/LanguageFallbackToast";
 
 export async function generateStaticParams({ params }: { params: { locale?: string } }) {
@@ -46,65 +46,33 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
 
     return (
         <article className="pb-20 relative w-full z-40">
-            {/* Header Reading Protection Gradient */}
-            <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[75]"></div>
-            
-            {/* Language fallback toast (client-side, invisible) */}
-            <LanguageFallbackToast requestedLocale={requestedLocale} effectiveLang={effectiveLang} />
-
-            {/* Project Hero Wrapper */}
-            <div className="relative w-full bg-background border-b border-border mb-fluid-xl transition-colors z-50">
-                <header className="relative w-full px-fluid-xs md:px-fluid-m pt-32 pb-fluid-xl flex flex-col items-start">
-                    <div className="w-full relative">
-                        <div className="mb-6">
-                            {meta.title.includes(' - ') ? (
-                                <>
-                                    <span className="block text-step-0 md:text-step-1 font-medium tracking-widest uppercase opacity-60 mb-2">
-                                        {meta.title.split(' - ')[0]}
-                                    </span>
-                                    <h1 className="text-step-5 md:text-step-6 font-bold uppercase tracking-tighter text-foreground leading-[1.1]">
-                                        {meta.title.split(' - ').slice(1).join(' - ')}
-                                    </h1>
-                                </>
-                            ) : (
-                                <h1 className="text-step-5 md:text-step-6 font-bold uppercase tracking-tighter text-foreground leading-[1.1]">
-                                    {meta.title}
-                                </h1>
-                            )}
-                        </div>
-                        {meta.tags && meta.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-fluid-m">
-                                {meta.tags.map((tag: string, i: number) => (
-                                    <span key={i} className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 uppercase tracking-wider text-foreground">{tag}</span>
-                                ))}
-                            </div>
-                        )}
-                        <div className="flex flex-wrap gap-x-12 gap-y-8 pt-8 border-t border-border/50">
-                            {meta.role && (
-                                <div className="flex flex-col">
-                                    <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
-                                    <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.role}</span>
-                                </div>
-                            )}
-                            {meta.timeline && (
-                                <div className="flex flex-col">
-                                    <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">Timeline</strong>
-                                    <span className="font-medium text-foreground text-step-0">{meta.timeline}</span>
-                                </div>
-                            )}
-                            {teamCallout && (
-                                <div 
-                                    className="flex flex-col"
-                                    dangerouslySetInnerHTML={{ __html: teamCalloutHtml }}
-                                />
-                            )}
-                        </div>
+            <PageHero
+                overline={meta.title.includes(' - ') ? meta.title.split(' - ')[0] : undefined}
+                title={meta.title.includes(' - ') ? meta.title.split(' - ').slice(1).join(' - ') : meta.title}
+                tags={meta.tags}
+            >
+                {meta.role && (
+                    <div className="flex flex-col">
+                        <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
+                        <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.role}</span>
                     </div>
-                </header>
-            </div>
+                )}
+                {meta.timeline && (
+                    <div className="flex flex-col">
+                        <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Período' : 'Timeline'}</strong>
+                        <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.timeline}</span>
+                    </div>
+                )}
+                {teamCallout && (
+                    <div 
+                        className="flex flex-col"
+                        dangerouslySetInnerHTML={{ __html: teamCalloutHtml }}
+                    />
+                )}
+            </PageHero>
 
             {/* Polymorphic Blocks Content */}
-            <div className="relative z-50 w-full max-w-4xl mx-auto px-fluid-xs md:px-fluid-m prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
+            <div className="relative z-50 w-full max-w-4xl mx-auto pt-fluid-xl px-fluid-xs md:px-fluid-m prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
                 {blocksToRender && blocksToRender.length > 0 ? (
                     blocksToRender.map((block: any, index: number) => {
                         switch (block.type) {

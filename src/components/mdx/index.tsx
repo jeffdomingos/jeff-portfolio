@@ -3,12 +3,15 @@ import Image from "next/image";
 
 export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean }) {
     return (
-        <figure className="my-8">
-            {/* We use standard img for placeholders if needed or Next Image if well configured. For flexibility, img is used to support external urls without next.config setup right now */}
-            <div className={`overflow-hidden rounded-xl shadow-sm border border-border`}>
-                <img src={src} alt={alt || "Illustration"} className={`w-full h-auto`} />
+        <figure className="my-10">
+            <div className="relative">
+                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+                <div className="relative z-10 overflow-hidden border-2 border-foreground bg-background">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={src} alt={alt || "Illustration"} className="w-full h-auto block" />
+                </div>
             </div>
-            {alt && <figcaption className="text-center text-sm text-subtle mt-2">{alt}</figcaption>}
+            {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
         </figure>
     );
 }
@@ -43,33 +46,41 @@ export function Metric({ label, value }: { label: string; value: string }) {
 export function VideoEmbed({ src, title }: { src: string; title?: string }) {
     const isDirectVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.gif');
     return (
-        <figure className="my-8">
-            {isDirectVideo ? (
-                <video src={src} title={title} controls className="w-full h-auto rounded-xl shadow-sm border border-border" autoPlay muted loop playsInline />
-            ) : (
-                <div className="relative w-full overflow-hidden rounded-xl shadow-sm border border-border" style={{ paddingTop: '56.25%' }}>
-                    <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full" frameBorder="0" allowFullScreen />
+        <figure className="my-10">
+            <div className="relative">
+                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+                <div className="relative z-10 overflow-hidden border-2 border-foreground bg-background">
+                    {isDirectVideo ? (
+                        <video src={src} title={title} controls className="w-full h-auto block" autoPlay muted loop playsInline />
+                    ) : (
+                        <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
+                            <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full block" frameBorder="0" allowFullScreen />
+                        </div>
+                    )}
                 </div>
-            )}
-            {title && <figcaption className="text-center text-sm text-subtle mt-2">{title}</figcaption>}
+            </div>
+            {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
         </figure>
     );
 }
 
 export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
     return (
-        <figure className="my-8">
-            <div className="flex w-full overflow-hidden rounded-xl shadow-sm border border-border" style={{ height: '600px' }}>
-                <iframe 
-                    src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}&scaling=scale-down-width`} 
-                    title={title || "Figma Prototype"} 
-                    width="100%" 
-                    height="100%" 
-                    className="w-full h-full border-none" 
-                    allowFullScreen 
-                />
+        <figure className="my-10">
+            <div className="relative">
+                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+                <div className="relative z-10 flex w-full overflow-hidden border-2 border-foreground bg-background" style={{ height: '600px' }}>
+                    <iframe 
+                        src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}&scaling=scale-down-width`} 
+                        title={title || "Figma Prototype"} 
+                        width="100%" 
+                        height="100%" 
+                        className="w-full h-full border-none block" 
+                        allowFullScreen 
+                    />
+                </div>
             </div>
-            {title && <figcaption className="text-center text-sm text-subtle mt-2">{title}</figcaption>}
+            {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
         </figure>
     );
 }

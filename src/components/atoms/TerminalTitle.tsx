@@ -19,7 +19,7 @@ export function TerminalTitle({
             mode="scroll"
             animationType="typing"
             scrollOffset={["start 95%", "start 40%"]}
-            className={className}
+            className={`leading-[1.1] ${className}`}
         />
     );
 }

@@ -25,6 +25,13 @@
         "ctaLabel": "Enviar mensagem",
         "href": "https://api.whatsapp.com/send/?phone=5521999374516",
         "icon": "message"
+      },
+      {
+        "platformName": "Calendly",
+        "description": "Agende um bate-papo de 45 minutos direto na minha agenda para discutirmos seu projeto.",
+        "ctaLabel": "Agendar Reunião",
+        "href": "https://calendly.com/jeffdomingos/papo45min",
+        "icon": "calendar"
       }
     ]
   }

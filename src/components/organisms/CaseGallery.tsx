@@ -2,11 +2,12 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const ANIMATION_DURATION = 0.15;
-const ANIMATION_EASE = "linear";
+const ANIMATION_EASE = "linear" as const;
 
 const variantsTop = {
     idle: { scaleX: 0, transformOrigin: "left" },
@@ -135,11 +136,12 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
         });
         resizeObserver.observe(el);
 
-        // Scroll to current case on mount safely
+        // Scroll to current case on mount safely without triggering vertical scroll
         const currentEl = el.querySelector('[data-current="true"]') as HTMLElement;
         if (currentEl) {
             setTimeout(() => {
-                currentEl.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+                const scrollPadding = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
+                el.scrollTo({ left: currentEl.offsetLeft - scrollPadding, behavior: 'smooth' });
             }, 300);
         }
 
@@ -279,26 +281,65 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                 <h3 className="text-step-3 md:text-step-4 font-bold uppercase tracking-tighter text-foreground">
                     {title}
                 </h3>
-                
                 {/* Navigation Buttons */}
                 {isScrollable && (
-                    <div className="hidden md:flex items-center gap-2">
-                        <button 
-                            onClick={() => scrollByAmount('left')}
-                            disabled={!canScrollLeft}
-                            className="w-12 h-12 flex items-center justify-center rounded-full border border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-background transition-all disabled:opacity-30 disabled:pointer-events-none"
-                            aria-label="Previous cases"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                        </button>
-                        <button 
-                            onClick={() => scrollByAmount('right')}
-                            disabled={!canScrollRight}
-                            className="w-12 h-12 flex items-center justify-center rounded-full border border-foreground/20 hover:border-foreground hover:bg-foreground hover:text-background transition-all disabled:opacity-30 disabled:pointer-events-none"
-                            aria-label="Next cases"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                        </button>
+                    <div className="hidden md:flex items-center gap-2 py-1">
+                        {/* Wrapper fixes the layout space to 48x48 so they never jump */}
+                        <div className="w-12 h-12 flex items-center justify-center">
+                            <motion.button 
+                                layout
+                                animate={canScrollLeft ? { 
+                                    height: 48, width: 48, borderRadius: 24, opacity: 1
+                                } : { 
+                                    height: 2, width: 24, borderRadius: 2, opacity: 1
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                onClick={() => scrollByAmount('left')}
+                                disabled={!canScrollLeft}
+                                className={cn(
+                                    "group flex-shrink-0 flex items-center justify-center overflow-hidden transition-colors focus:outline-none",
+                                    canScrollLeft ? "border border-foreground bg-transparent hover:bg-foreground hover:text-background cursor-pointer" : "bg-foreground border-none cursor-default"
+                                )}
+                                aria-label="Previous cases"
+                            >
+                                <motion.svg 
+                                    animate={{ opacity: canScrollLeft ? 1 : 0, scale: canScrollLeft ? 1 : 0 }} 
+                                    transition={{ duration: 0.2 }}
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
+                                    className="transition-transform duration-300 group-hover:scale-125"
+                                >
+                                    <path d="m15 18-6-6 6-6"/>
+                                </motion.svg>
+                            </motion.button>
+                        </div>
+                        
+                        <div className="w-12 h-12 flex items-center justify-center">
+                            <motion.button 
+                                layout
+                                animate={canScrollRight ? { 
+                                    height: 48, width: 48, borderRadius: 24, opacity: 1
+                                } : { 
+                                    height: 2, width: 24, borderRadius: 2, opacity: 1 
+                                }}
+                                transition={{ duration: 0.3, ease: "easeInOut" }}
+                                onClick={() => scrollByAmount('right')}
+                                disabled={!canScrollRight}
+                                className={cn(
+                                    "group flex-shrink-0 flex items-center justify-center overflow-hidden transition-colors focus:outline-none",
+                                    canScrollRight ? "border border-foreground bg-transparent hover:bg-foreground hover:text-background cursor-pointer" : "bg-foreground border-none cursor-default"
+                                )}
+                                aria-label="Next cases"
+                            >
+                                <motion.svg 
+                                    animate={{ opacity: canScrollRight ? 1 : 0, scale: canScrollRight ? 1 : 0 }} 
+                                    transition={{ duration: 0.2 }}
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
+                                    className="transition-transform duration-300 group-hover:scale-125"
+                                >
+                                    <path d="m9 18 6-6-6-6"/>
+                                </motion.svg>
+                            </motion.button>
+                        </div>
                     </div>
                 )}
             </div>
@@ -367,7 +408,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 className={cn(
                                     "group grow flex flex-col min-w-0 rounded-none overflow-hidden transition-all duration-500 relative bg-background",
                                     isCurrent
-                                        ? "pointer-events-none opacity-60 grayscale"
+                                        ? "pointer-events-none"
                                         : "cursor-pointer"
                                 )}
                                 draggable={false}
@@ -385,14 +426,19 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 <div className="relative aspect-[2/1] w-[calc(100%-2px)] mx-[1px] mt-[1px] overflow-hidden">
                                     {/* Halftone mask always visible */}
                                     <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none" />
-                                    <img 
+                                    <Image 
                                         src={project.meta.thumbnail} 
                                         alt={project.meta.title}
+                                        fill={true}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                         draggable={false}
-                                        className="w-full h-full object-cover md:grayscale md:contrast-125 md:group-hover:grayscale-0 md:group-hover:contrast-100 transition-all duration-1000 ease-in-out" 
+                                        className={cn(
+                                            "object-cover transition-all duration-1000 ease-in-out",
+                                            isCurrent ? "grayscale contrast-125 opacity-40" : "md:grayscale md:contrast-125 md:group-hover:grayscale-0 md:group-hover:contrast-100"
+                                        )}
                                     />
                                     {isCurrent && (
-                                        <div className="absolute inset-0 bg-background/50 backdrop-blur-sm flex items-center justify-center z-20">
+                                        <div className="absolute inset-0 flex items-center justify-center z-20">
                                             <span className="px-4 py-2 bg-foreground text-background font-bold uppercase tracking-widest text-xs rounded-full">
                                                 {locale === 'pt' ? 'Você está aqui' : 'You are here'}
                                             </span>
