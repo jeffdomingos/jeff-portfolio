@@ -171,7 +171,7 @@ export function getProject(locale: string, slug: string) {
         featured: data.featured ?? false,
         thumbnail: data.thumbnail ?? data.home_card?.thumbnail ?? '',
         tags: data.home_card?.[`tags_${effectiveLang}`] ?? data[`tags_${effectiveLang}`] ?? langData.tags ?? data.tags ?? [],
-        title: data.home_card?.[`title_${effectiveLang}`] ?? langData.title ?? slug,
+        title: langData.title ?? data.home_card?.[`title_${effectiveLang}`] ?? slug,
         role: langData.role ?? '',
         timeline: langData.timeline ?? '',
         summary: langData.summary ?? '',
