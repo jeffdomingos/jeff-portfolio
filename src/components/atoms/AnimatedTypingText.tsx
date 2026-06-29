@@ -239,7 +239,7 @@ export function AnimatedTypingText({
                                                     <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
                                                         <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />
                                                         {isLoadingPhase && loadingProgress !== undefined && (
-                                                            <span className="absolute left-[12px] bottom-[-0.1em] h-[0.85em] flex items-center whitespace-nowrap text-step--2 md:text-step--1 type-body opacity-100 text-black font-light tracking-widest">
+                                                            <span className="absolute left-[12px] bottom-[-0.1em] h-[0.85em] flex items-center whitespace-nowrap text-step--2 md:text-step--1 type-body opacity-100 text-black font-normal tracking-widest">
                                                                 {loadingProgress.toString().padStart(2, '0')}%
                                                             </span>
                                                         )}

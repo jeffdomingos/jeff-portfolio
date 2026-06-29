@@ -23,8 +23,8 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
     useEffect(() => {
         let interval: NodeJS.Timeout;
         if (isInitialLoading) {
-            document.documentElement.classList.add('is-loading');
             if (lenis) lenis.stop();
+            document.documentElement.classList.add('is-loading');
             
             let prog = 0;
             interval = setInterval(() => {
@@ -35,7 +35,18 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                     clearInterval(interval);
                     setIsInitialLoading(false);
                     document.documentElement.classList.remove('is-loading');
-                    if (lenis) lenis.start();
+                    if (lenis) {
+                        lenis.start();
+                        if (window.location.hash) {
+                            const targetId = window.location.hash.substring(1);
+                            setTimeout(() => {
+                                const el = document.getElementById(targetId);
+                                if (el) {
+                                    lenis.scrollTo(el, { duration: 1.5, offset: 0 });
+                                }
+                            }, 300); // Small delay to let the overlay start fading
+                        }
+                    }
                 } else {
                     setLoadingProgress(prog);
                 }

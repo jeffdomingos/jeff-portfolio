@@ -37,15 +37,15 @@
 
 @layer components {
   .type-display {
-    @apply font-heading font-bold uppercase tracking-normal leading-[1.1];
+    @apply font-heading font-semibold uppercase tracking-normal leading-[1.1];
   }
   
   .type-heading {
-    @apply font-heading font-bold uppercase tracking-normal leading-[1.1];
+    @apply font-heading font-semibold uppercase tracking-normal leading-[1.1];
   }
   
   .type-subheading {
-    @apply font-heading font-bold uppercase tracking-normal leading-[1.1];
+    @apply font-heading font-semibold uppercase tracking-normal leading-[1.1];
   }
   
   .type-label {
