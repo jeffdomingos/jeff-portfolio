@@ -18,6 +18,7 @@ export interface AnimatedTypingTextProps {
     
     // Auto Mode Props
     speed?: number; // ms per character (default 40)
+    delay?: number; // delay before starting (default 800)
     onFinished?: () => void;
     isLoadingPhase?: boolean; // Se verdadeiro, exibe porcentagem de load e impede início
     loadingProgress?: number; // Porcentagem para exibir
