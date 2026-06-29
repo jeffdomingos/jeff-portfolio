@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Linkedin, MessageCircle, Calendar } from "lucide-react";
+import { Mail, Linkedin, MessageCircle, Calendar, ChevronRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
@@ -50,7 +50,7 @@ function ContactCard({ item, index }: { item: any, index: number }) {
                 {/* CTA Line */}
                 <div className="mt-auto flex items-center justify-between w-full type-label text-step--1 border-t border-foreground/20 pt-6">
                     <span>{item.ctaLabel}</span>
-                    <span className="font-bold transition-transform duration-300 transform group-hover:translate-x-2">&rarr;</span>
+                    <ChevronRight className="w-6 h-6 transition-transform duration-300 transform group-hover:translate-x-2 shrink-0" strokeWidth={2} />
                 </div>
             </div>
         </TracingItem>

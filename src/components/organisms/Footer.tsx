@@ -5,6 +5,7 @@ import { FooterAnimatedLogo } from "./FooterAnimatedLogo";
 import { useMotionValue, motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
+import { ChevronUp } from "lucide-react";
 
 export function Footer({ data }: { data: GlobalFooter }) {
     const params = useParams();
@@ -199,10 +200,7 @@ export function Footer({ data }: { data: GlobalFooter }) {
                         className="transition-all type-label text-step--2 hover:font-bold flex items-center gap-2 group focus:outline-none"
                     >
                         {locale === 'en' ? 'Back to top' : 'Voltar ao topo'}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform">
-                            <line x1="12" y1="19" x2="12" y2="5"></line>
-                            <polyline points="5 12 12 5 19 12"></polyline>
-                        </svg>
+                        <ChevronUp className="w-4 h-4 transition-transform ml-2" strokeWidth={2} />
                     </button>
                 </motion.div>
             </div>

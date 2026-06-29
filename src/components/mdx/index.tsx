@@ -1,9 +1,18 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean }) {
     return (
-        <figure className="my-10">
+        <motion.figure 
+            className="my-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
                 <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
@@ -12,7 +21,7 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: strin
                 </div>
             </div>
             {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
-        </figure>
+        </motion.figure>
     );
 }
 
@@ -46,7 +55,13 @@ export function Metric({ label, value }: { label: string; value: string }) {
 export function VideoEmbed({ src, title }: { src: string; title?: string }) {
     const isDirectVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.gif');
     return (
-        <figure className="my-10">
+        <motion.figure 
+            className="my-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
                 <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
@@ -60,13 +75,19 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
                 </div>
             </div>
             {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
-        </figure>
+        </motion.figure>
     );
 }
 
 export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
     return (
-        <figure className="my-10">
+        <motion.figure 
+            className="my-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10% 0px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
                 <div className="relative z-10 flex w-full overflow-hidden border-2 border-foreground bg-background" style={{ height: '600px' }}>
@@ -81,19 +102,10 @@ export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
                 </div>
             </div>
             {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
-        </figure>
+        </motion.figure>
     );
 }
 
-// Map the components to be injected in MDXRemote
-export const mdxComponents = {
-    Image: MDXImage,
-    Callout,
-    Quote,
-    Metric,
-    VideoEmbed,
-    FigmaEmbed,
-    h2: (props: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-heading" {...props} />,
-    p: (props: any) => <p className="text-lg text-foreground/90 leading-relaxed mb-6" {...props} />,
-    a: (props: any) => <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
-};
+export { ProductTrioDiagram } from "./ProductTrioDiagram";
+
+

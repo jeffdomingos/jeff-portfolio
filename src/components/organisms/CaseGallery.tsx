@@ -288,7 +288,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
     return (
         <div className="w-full">
             <div className="flex items-center justify-between px-fluid-xs md:px-fluid-m mb-fluid-m">
-                <h3 className="text-step-3 md:text-step-4 type-display text-foreground">
+                <h3 className="text-step-3 md:text-step-4 type-heading text-foreground">
                     {title}
                 </h3>
                 {/* Navigation Buttons */}

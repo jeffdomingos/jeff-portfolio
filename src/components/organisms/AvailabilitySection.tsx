@@ -13,6 +13,7 @@ import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function AvailabilityBlockDesktop({ 
     block, 
@@ -57,17 +58,22 @@ function AvailabilityBlockDesktop({
                     `} />
 
                 <div className={`z-10 w-full relative flex items-start ${index === 1 ? 'justify-end pr-fluid-m' : 'justify-start pl-fluid-m'}`}>
-                    <div className={`flex items-start gap-2 md:gap-4 ${index === 1 ? 'flex-row-reverse' : 'flex-row'} transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'translate-x-0 translate-y-0' : (index === 1 ? 'translate-x-[50%]' : '-translate-x-[50%]')}`}>
-                        <h3 className={`inline-block text-step-4 type-display transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-100' : 'opacity-40'} ${index === 1 ? 'text-right' : 'text-left'}`}>
+                    <div className={`transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'translate-x-0 translate-y-0' : (index === 1 ? 'translate-x-[50%]' : '-translate-x-[50%]')}`}>
+                        <h3 className={`text-step-4 type-heading transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-100' : 'opacity-40'} ${index === 1 ? 'text-right' : 'text-left'}`}>
+                            {index === 1 && (
+                                <ChevronRight 
+                                    className={`inline-block align-top mt-2 md:mt-4 mr-8 md:mr-16 lg:mr-24 w-8 h-8 md:w-10 md:h-10 shrink-0 text-foreground transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-0' : 'opacity-40'}`}
+                                    strokeWidth={1.5}
+                                />
+                            )}
                             {block.subtitle}
+                            {index === 0 && (
+                                <ChevronLeft 
+                                    className={`inline-block align-top mt-2 md:mt-4 ml-8 md:ml-16 lg:ml-24 w-8 h-8 md:w-10 md:h-10 shrink-0 text-foreground transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-0' : 'opacity-40'}`}
+                                    strokeWidth={1.5}
+                                />
+                            )}
                         </h3>
-                        <motion.svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" 
-                            className={`-mt-[2px] w-12 h-12 md:w-16 md:h-16 shrink-0 text-foreground transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-0' : 'opacity-100'}`}
-                        >
-                            <path d={index === 1 ? "m9 18 6-6-6-6" : "m15 18-6-6 6-6"} strokeWidth="1.5" />
-                        </motion.svg>
                     </div>
                 </div>
             

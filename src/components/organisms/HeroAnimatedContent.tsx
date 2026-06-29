@@ -82,7 +82,7 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
         <div className={`fixed inset-0 bg-background transition-opacity duration-1000 ease-in-out ${isInitialLoading ? 'opacity-100 pointer-events-auto z-[70]' : 'opacity-0 pointer-events-none z-[-1]'}`} />
         <div className="w-full flex-1 grid-layout items-center relative">
             {/* Left Column: Text and CTA */}
-            <div className={`col-span-12 lg:col-span-6 flex flex-col items-start text-left pt-0 relative transition-all ${isInitialLoading ? 'z-[80]' : 'z-40'}`}>
+            <div className={`col-span-12 lg:col-span-6 flex flex-col items-start text-left pt-0 pb-[320px] md:pb-0 relative transition-all ${isInitialLoading ? 'z-[80]' : 'z-40'}`}>
                 <AnimatedTypingText 
                     as="h1"
                     text={headline}
@@ -125,34 +125,31 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
             </div>
 
             {/* Right Column: Slider / Carousel animated reveal */}
-            {/* Right Column Wrapper (No Z-Index, No Transform, establishes relative bounds) */}
-            <div className="col-span-12 w-full lg:w-[65vw] lg:absolute lg:right-0 lg:inset-y-0 lg:flex lg:flex-col lg:justify-center relative pointer-events-none">
+            {/* Right Column Wrapper (Absolute at bottom on mobile, absolute right on desktop) */}
+            <div className="col-span-12 w-full absolute bottom-[40px] left-0 md:bottom-auto md:left-auto md:relative lg:w-[65vw] lg:absolute lg:right-0 lg:inset-y-0 lg:flex lg:flex-col lg:justify-center pointer-events-none">
                 
                 {/* Images Layer (Z-10, behind halftone) */}
                 <div className={`w-full z-10 pointer-events-none transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-                    <div className="pointer-events-auto mt-8 lg:mt-0">
+                    <div className="pointer-events-auto">
                         <HeroCarousel items={carouselItems} isActive={showSubAndImage} />
                     </div>
                 </div>
             </div>
         </div>
         
-        {/* Bottom Elements: Scroll Down & Caption (grouped for vertical alignment) */}
-        <div className="absolute top-[99svh] -translate-y-full w-full flex items-center justify-between z-40 pointer-events-none px-fluid-xs md:px-fluid-m">
-            {/* Left Spacer for true center alignment */}
-            <div className="flex-1"></div>
+        {/* Bottom Elements: Scroll Down & Caption */}
+        <div className="absolute top-[99svh] -translate-y-full w-full z-40 pointer-events-none px-fluid-xs md:px-fluid-m h-12">
+            <div className="relative w-full h-full flex items-center justify-between md:justify-end">
+                {/* Scroll Down Indicator (Absolutely centered) */}
+                <div className={`absolute left-1/2 -translate-x-1/2 flex justify-center transition-all duration-1000 ${showButtons ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                    <a href="#cases" className="pointer-events-auto flex items-center justify-center w-12 h-12 text-foreground hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full" aria-label="Scroll down">
+                        <ChevronDown className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
+                    </a>
+                </div>
 
-            {/* Scroll Down Indicator */}
-            <div className={`flex justify-center transition-all duration-1000 ${showButtons ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                <a href="#cases" className="pointer-events-auto flex items-center justify-center w-12 h-12 border border-transparent text-foreground hover:border-foreground hover:bg-foreground hover:text-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full" aria-label="Scroll down">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="m6 9 6 6 6-6" />
-                    </svg>
-                </a>
-            </div>
-
-            {/* Portal Target Layer */}
-            <div id="hero-caption-portal" className={`flex-1 flex justify-end transition-all duration-1000 ${showSubAndImage ? 'opacity-100' : 'opacity-0'}`}>
+                {/* Portal Target Layer */}
+                <div id="hero-caption-portal" className={`hidden md:flex transition-all duration-1000 ${showSubAndImage ? 'opacity-100' : 'opacity-0'}`}>
+                </div>
             </div>
         </div>
         </>

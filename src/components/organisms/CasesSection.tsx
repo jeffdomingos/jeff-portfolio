@@ -94,7 +94,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                     </div>
                 <div className="mb-3 flex items-start md:items-center justify-between gap-4">
                     <div className="flex-1">
-                        <h3 className="text-step-4 md:text-step-5 type-display line-clamp-2">
+                        <h3 className="text-step-4 md:text-step-5 type-heading line-clamp-2">
                             {item.title}
                         </h3>
                     </div>

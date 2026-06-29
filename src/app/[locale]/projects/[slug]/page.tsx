@@ -1,6 +1,18 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { mdxComponents, MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram } from "@/components/mdx";
+
+const mdxComponents = {
+    Image: MDXImage,
+    Callout,
+    Quote,
+    Metric,
+    VideoEmbed,
+    FigmaEmbed,
+    h2: (props: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-heading" {...props} />,
+    p: (props: any) => <p className="text-lg text-foreground/90 leading-relaxed mb-6" {...props} />,
+    a: (props: any) => <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
+};
 import { CaseNavigator, PageHero } from "@/components/organisms";
 import { LanguageFallbackToast } from "@/components/atoms/LanguageFallbackToast";
 
@@ -97,6 +109,8 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <VideoEmbed key={index} src={block.src} title={block.title} />;
                             case 'figma':
                                 return <FigmaEmbed key={index} src={block.src} title={block.title} />;
+                            case 'product-trio':
+                                return <ProductTrioDiagram key={index} locale={locale} />;
                             default:
                                 return null;
                         }
