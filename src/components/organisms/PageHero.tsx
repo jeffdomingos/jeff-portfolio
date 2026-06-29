@@ -21,15 +21,15 @@ export function PageHero({ title, overline, subtitle, tags, children }: PageHero
                     <div className="w-full relative">
                         <div className="mb-6">
                             {overline && (
-                                <span className="block text-step-0 md:text-step-1 font-medium tracking-widest uppercase opacity-60 mb-2">
+                                <span className="block text-step-0 md:text-step-1 type-label opacity-60 mb-2">
                                     {overline}
                                 </span>
                             )}
-                            <h1 className="text-step-5 md:text-step-6 font-bold uppercase tracking-tighter text-foreground leading-[1.1]">
+                            <h1 className="text-step-5 md:text-step-6 type-display text-foreground">
                                 <TypewriterEffect text={title} />
                             </h1>
                             {subtitle && (
-                                <h2 className="text-step-1 text-foreground font-light w-full text-left mt-4 md:mt-6">
+                                <h2 className="text-step-1 text-foreground type-body w-full text-left mt-4 md:mt-6">
                                     {subtitle}
                                 </h2>
                             )}
@@ -38,7 +38,7 @@ export function PageHero({ title, overline, subtitle, tags, children }: PageHero
                         {tags && tags.length > 0 && (
                             <div className="flex flex-wrap gap-2 mb-fluid-m">
                                 {tags.map((tag: string, i: number) => (
-                                    <span key={i} className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 uppercase tracking-wider text-foreground">
+                                    <span key={i} className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 type-label text-foreground">
                                         {tag}
                                     </span>
                                 ))}

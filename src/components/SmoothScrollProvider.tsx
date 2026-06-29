@@ -9,22 +9,34 @@ function ScrollResetter() {
   const lenis = useLenis();
 
   useEffect(() => {
-    // Disable browser's default scroll restoration to prevent conflicts
+    // Immediate forced scroll
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-
-    // Immediate forced scroll
     window.scrollTo(0, 0);
+
     if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
+      lenis.stop();
+      window.scrollTo(0, 0);
+      lenis.scrollTo(0, { immediate: true, force: true });
+      requestAnimationFrame(() => {
+        if (!document.documentElement.classList.contains('is-loading')) {
+          lenis.start();
+        }
+      });
     }
 
-    // Fallback delayed scroll (to ensure it catches after DOM updates)
     const timeoutId = setTimeout(() => {
       window.scrollTo(0, 0);
       if (lenis) {
-        lenis.scrollTo(0, { immediate: true });
+        lenis.stop();
+        window.scrollTo(0, 0);
+        lenis.scrollTo(0, { immediate: true, force: true });
+        requestAnimationFrame(() => {
+          if (!document.documentElement.classList.contains('is-loading')) {
+            lenis.start();
+          }
+        });
       }
     }, 50);
 

@@ -82,20 +82,18 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
 
             {/* Dynamic Fading Caption via React Portal */}
             {mounted && document.getElementById('hero-caption-portal') ? createPortal(
-                <div className="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none z-50">
-                    <div className="pr-fluid-m text-right text-step-0 font-light italic text-foreground/80">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentIndex}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{ duration: 0.6 }}
-                            >
-                                {items[currentIndex].caption}
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
+                <div className="text-right text-step-0 font-light italic text-foreground/80 pointer-events-none">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            transition={{ duration: 0.6 }}
+                        >
+                            {items[currentIndex].caption}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>,
                 document.getElementById('hero-caption-portal')!
             ) : null}

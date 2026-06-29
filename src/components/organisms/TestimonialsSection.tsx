@@ -28,13 +28,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
         offset: ["end 55%", "end 45%"]
     });
 
-    // 3. Expande quando o TOPO cruza a linha de 45% a 35%. 
-    // Usamos o TOPO (start) para ancorar, porque o elemento cresce para baixo.
-    // Mudamos para 75% -> 60% para que no mobile a expansão ocorra enquanto o card inteiro ainda está visível.
-    const { scrollYProgress: expandProgress } = useScroll({
-        target: ref,
-        offset: ["start 75%", "start 60%"]
-    });
+
 
     // Combinamos a luz e a sombra
     const rowOpacity = useTransform(
@@ -45,9 +39,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
         }
     );
     
-    // Expansão atrelada estritamente ao progresso de expansão ancorado no topo
-    const gridRows = useTransform(expandProgress, [0, 1], ["0fr", "1fr"]);
-    const detailsOpacity = useTransform(expandProgress, [0, 1], [0, 1]);
+
 
     return (
         <motion.div 
@@ -55,7 +47,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
             style={{ opacity: rowOpacity }}
             className="py-fluid-xl flex flex-col border-b border-background last:border-b-0 relative overflow-hidden transition-colors"
         >
-            <div className="flex flex-col lg:flex-row gap-fluid-xl lg:items-start justify-between w-full relative z-10 px-fluid-m">
+            <div className="flex flex-col lg:flex-row gap-fluid-xl lg:items-start justify-between w-full relative z-10 px-fluid-xs md:px-fluid-m">
                 {/* Avatar and Info */}
                 <div className="flex items-center gap-fluid-m w-full lg:w-1/4 shrink-0">
                     <div className="w-16 h-16 rounded-full overflow-hidden bg-background/10 relative shrink-0">
@@ -71,21 +63,24 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
                 
                 {/* Text Content */}
                 <div className="w-full flex flex-col gap-fluid-s">
-                    <p className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light transition-all duration-500">
-                        &quot;{item.quote}&quot;
-                    </p>
-                    <motion.div 
-                        style={{ gridTemplateRows: gridRows }}
-                        className="grid"
+                    <motion.p 
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light"
                     >
-                        <div className="overflow-hidden">
-                            <motion.p 
-                                style={{ opacity: detailsOpacity }}
-                                className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl"
-                            >
-                                {item.details}
-                            </motion.p>
-                        </div>
+                        &quot;{item.quote}&quot;
+                    </motion.p>
+                    <motion.div 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                        <p className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl">
+                            {item.details}
+                        </p>
                     </motion.div>
                 </div>
             </div>
@@ -105,12 +100,12 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
     if (!data || !data.items || data.items.length === 0) return null;
 
     return (
-        <section className="px-fluid-m py-fluid-4xl border-t border-foreground bg-foreground text-background w-full relative z-40">
+        <section className="px-fluid-xs md:px-fluid-m py-fluid-4xl border-t border-foreground bg-foreground text-background w-full relative z-40">
             <div ref={headerRef} className="w-full mb-fluid-3xl">
                 <TerminalTitle 
                     as="h2"
                     text={data.title}
-                    className="text-step-6 font-heading font-semibold tracking-normal mb-fluid-s uppercase"
+                    className="text-step-6 type-display mb-fluid-s"
                 />
                 <motion.p 
                     style={{ opacity: headerOpacity, y: headerY }}

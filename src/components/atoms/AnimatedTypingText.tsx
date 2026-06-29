@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useLenis } from 'lenis/react';
 
 export type TargetStyle = {
     text: string | RegExp;
@@ -17,9 +18,10 @@ export interface AnimatedTypingTextProps {
     
     // Auto Mode Props
     speed?: number; // ms per character (default 40)
-    delay?: number; // ms before starting (default 800)
     onFinished?: () => void;
-    
+    isLoadingPhase?: boolean; // Se verdadeiro, exibe porcentagem de load e impede início
+    loadingProgress?: number; // Porcentagem para exibir
+
     // Scroll Mode Props
     scrollOffset?: any; // Framer motion offset (default ["start 95%", "start 40%"])
     
@@ -40,7 +42,9 @@ export function AnimatedTypingText({
     speed = 40,
     delay = 800,
     onFinished,
-    scrollOffset = ["start 95%", "start 40%"],
+    isLoadingPhase = false,
+    loadingProgress = 0,
+    scrollOffset = ["start end", "end start"],
     as: Component = "span",
     className = "",
     selectionClassName = "bg-foreground text-background transition-all duration-75"
@@ -58,6 +62,7 @@ export function AnimatedTypingText({
     // MODO AUTO
     useEffect(() => {
         if (mode !== 'auto') return;
+        if (isLoadingPhase) return;
 
         setCount(0);
         setTypingState('idle');
@@ -78,13 +83,19 @@ export function AnimatedTypingText({
             }, speed);
         };
 
-        const timeoutId = setTimeout(startTyping, delay);
+        const effectiveDelay = isLoadingPhase ? 0 : delay; // If we wait for loading, we start immediately after. Wait! We need to check if we WERE in loading phase.
+        // Se isLoadingPhase acabou de virar false e antes era true, o effect roda e effectiveDelay seria bom ser 0.
+        // Como o effect re-roda quando isLoadingPhase muda, se for false ele executa. 
+        // Vamos apenas usar 0 delay. Ou o original delay.
+        // Vamos usar 0 delay se ele foi acionado apó o loading (ou seja, se delay é passado mas isLoadingPhase é a dependência, 
+        // na real se renderiza a tela com loading, delay = 0 depois. Mas pode ser que queira zero mesmo.
+        const timeoutId = setTimeout(startTyping, 0); // Sempre inicia instantâneo pq o delay real é o load.
 
         return () => {
             clearTimeout(timeoutId);
             clearInterval(intervalId);
         };
-    }, [text, mode, speed, delay]); // onFinished removido daqui para não reiniciar a animação
+    }, [text, mode, speed, delay, isLoadingPhase]);
 
     // MODO SCROLL
     const { scrollYProgress } = useScroll({
@@ -173,7 +184,7 @@ export function AnimatedTypingText({
     const isBlinking = typingState !== 'typing';
 
     return (
-        <Component ref={ref} className={className}>
+        <Component ref={ref} className={`${className || ''} pr-2`}>
             <style dangerouslySetInnerHTML={{__html: `
                 @keyframes hard-blink {
                     0%, 100% { opacity: 1; }
@@ -214,39 +225,35 @@ export function AnimatedTypingText({
                             }
 
                             // --- MODO TYPING ---
-                            const isFirstWord = wordStartIndex === 0;
-                            const showInitialCursor = count === 0 && isFirstWord;
-                            const hasCursorAfter = count > 0 && lastVisibleNonSpaceIndex >= wordStartIndex && lastVisibleNonSpaceIndex < wordEndIndex;
-
-                            if (showInitialCursor) {
-                                return (
-                                    <span key={wordIdx} className={wrapperClass}>
-                                        <span 
-                                            className={`inline-block align-baseline bg-current w-[4px] mr-[-4px] ${isBlinking ? 'animate-hard-blink' : ''}`}
-                                            style={{ height: '0.85em' }}
-                                        />
-                                        <span className="opacity-0">{word}</span>
-                                    </span>
-                                );
-                            }
-
-                            if (hasCursorAfter) {
-                                return (
-                                    <span key={wordIdx} className={wrapperClass}>
-                                        {typedStr && <span className="opacity-100">{typedStr}</span>}
-                                        <span 
-                                            className={`inline-block align-baseline bg-current w-[4px] mr-[-4px] ${isBlinking ? 'animate-hard-blink' : ''}`}
-                                            style={{ height: '0.85em' }}
-                                        />
-                                        {untypedStr && <span className="opacity-0">{untypedStr}</span>}
-                                    </span>
-                                );
-                            }
-
                             return (
                                 <span key={wordIdx} className={wrapperClass}>
-                                    {typedStr && <span className="opacity-100">{typedStr}</span>}
-                                    {untypedStr && <span className="opacity-0">{untypedStr}</span>}
+                                    {word.split('').map((char, charIdx) => {
+                                        const charGlobalIdx = wordStartIndex + charIdx;
+                                        const isCharTyped = charGlobalIdx < count;
+                                        const showCursorBefore = count === 0 && charGlobalIdx === 0;
+                                        const showCursorAfter = count > 0 && charGlobalIdx === lastVisibleNonSpaceIndex;
+
+                                        return (
+                                            <span key={charIdx}>
+                                                {showCursorBefore && (
+                                                    <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
+                                                        <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />
+                                                        {isLoadingPhase && loadingProgress !== undefined && (
+                                                            <span className="absolute left-[12px] bottom-[-0.1em] h-[0.85em] flex items-center whitespace-nowrap text-step--2 md:text-step--1 type-body opacity-100 text-black font-light tracking-widest">
+                                                                {loadingProgress.toString().padStart(2, '0')}%
+                                                            </span>
+                                                        )}
+                                                    </span>
+                                                )}
+                                                <span className={isCharTyped ? 'opacity-100' : 'opacity-0'}>{char}</span>
+                                                {showCursorAfter && (
+                                                    <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
+                                                        <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />
+                                                    </span>
+                                                )}
+                                            </span>
+                                        );
+                                    })}
                                 </span>
                             );
                         })}

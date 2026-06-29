@@ -35,11 +35,11 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
         teamCalloutHtml = teamCalloutHtml.replace(/<br\s*\/?>/gi, '');
         teamCalloutHtml = teamCalloutHtml.replace(
             /<strong>(.*?)<\/strong>/i, 
-            '<strong class="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">$1</strong><div class="flex flex-wrap gap-x-8 gap-y-4">'
+            '<strong class="text-foreground/70 type-label text-step--1 block mb-3">$1</strong><div class="flex flex-wrap gap-x-8 gap-y-4">'
         );
         teamCalloutHtml = teamCalloutHtml.replace(
             /-\s*(.*?)\s*\((.*?)\)/g, 
-            '<div class="flex flex-col"><span class="font-medium text-foreground text-step-0">$1</span><span class="text-step--2 text-foreground/60 tracking-widest uppercase mt-0.5">$2</span></div>'
+            '<div class="flex flex-col"><span class="font-medium text-foreground text-step-0">$1</span><span class="text-step--2 text-foreground/60 type-label mt-0.5">$2</span></div>'
         );
         teamCalloutHtml += '</div>'; // close the flex container
     }
@@ -47,20 +47,20 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
     return (
         <article className="pb-20 relative w-full z-40">
             <PageHero
-                overline={meta.title.includes(' - ') ? meta.title.split(' - ')[0] : undefined}
-                title={meta.title.includes(' - ') ? meta.title.split(' - ').slice(1).join(' - ') : meta.title}
+                overline={meta.context}
+                title={meta.title}
                 tags={meta.tags}
             >
                 {meta.role && (
                     <div className="flex flex-col">
-                        <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
-                        <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.role}</span>
+                        <strong className="text-foreground/70 type-label text-step--1 block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
+                        <span className="text-foreground text-step-1 md:text-step-2 type-subheading">{meta.role}</span>
                     </div>
                 )}
                 {meta.timeline && (
                     <div className="flex flex-col">
-                        <strong className="text-foreground/70 uppercase tracking-widest text-step--1 font-light block mb-3">{requestedLocale === 'pt' ? 'Período' : 'Timeline'}</strong>
-                        <span className="font-bold text-foreground text-step-1 md:text-step-2 tracking-tight leading-none">{meta.timeline}</span>
+                        <strong className="text-foreground/70 type-label text-step--1 block mb-3">{requestedLocale === 'pt' ? 'Período' : 'Timeline'}</strong>
+                        <span className="text-foreground text-step-1 md:text-step-2 type-subheading">{meta.timeline}</span>
                     </div>
                 )}
                 {teamCallout && (

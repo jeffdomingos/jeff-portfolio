@@ -9,7 +9,7 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
         <div className="relative z-40 w-full px-fluid-xs md:px-fluid-m pt-32 pb-fluid-2xl min-h-screen">
             {/* Header Reading Protection Gradient */}
             <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[75]"></div>
-            <h1 className="text-step-4 md:text-step-5 font-bold uppercase tracking-tighter mb-fluid-xl border-b border-foreground/10 pb-fluid-s w-full text-left">
+            <h1 className="text-step-4 md:text-step-5 type-display mb-fluid-xl border-b border-foreground/10 pb-fluid-s w-full text-left">
                 {locale === 'pt' ? 'Cases' : 'Cases'}
             </h1>
 
@@ -25,25 +25,25 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
                                 <div className="mb-3">
                                     {project.meta.title.includes(' - ') ? (
                                         <>
-                                            <span className="block text-step--1 font-medium tracking-widest uppercase opacity-60 mb-1">
+                                            <span className="block text-step--1 type-label opacity-60 mb-1">
                                                 {project.meta.title.split(' - ')[0]}
                                             </span>
-                                            <h3 className="text-step-1 md:text-step-2 font-bold uppercase tracking-tight line-clamp-2 leading-[1.1]">
+                                            <h3 className="text-step-1 md:text-step-2 type-subheading line-clamp-2">
                                                 {project.meta.title.split(' - ').slice(1).join(' - ')}
                                             </h3>
                                         </>
                                     ) : (
-                                        <h3 className="text-step-1 md:text-step-2 font-bold uppercase tracking-tight line-clamp-2 leading-[1.1]">
+                                        <h3 className="text-step-1 md:text-step-2 type-subheading line-clamp-2">
                                             {project.meta.title}
                                         </h3>
                                     )}
                                 </div>
-                                <p className="text-foreground/80 font-light line-clamp-3 mb-6">{project.meta.summary}</p>
+                                <p className="text-foreground/80 type-body line-clamp-3 mb-6">{project.meta.summary}</p>
                                 
                                 {project.meta.tags && project.meta.tags.length > 0 && (
                                     <div className="flex flex-wrap gap-2 mt-auto">
                                         {project.meta.tags.slice(0, 3).map((tag: string, tagIndex: number) => (
-                                            <span key={tagIndex} className="px-3 py-1 bg-transparent text-foreground text-step--2 font-normal rounded-full border border-foreground border-dashed uppercase tracking-wider">
+                                            <span key={tagIndex} className="px-3 py-1 bg-transparent text-foreground text-step--2 type-label rounded-full border border-foreground border-dashed">
                                                 {tag}
                                             </span>
                                         ))}

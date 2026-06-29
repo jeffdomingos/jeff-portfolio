@@ -32,25 +32,44 @@ function AvailabilityBlockDesktop({
 
     return (
         <div 
-            className={`w-full group transition-all duration-700 flex flex-col justify-center relative cursor-pointer 
+            className={`w-full group flex flex-col justify-center cursor-pointer 
                 py-fluid-2xl
                 ${index === 1 ? 'pl-[200px] lg:pl-[260px] xl:pl-[300px] 2xl:pl-[350px]' : 'pr-[200px] lg:pr-[260px] xl:pr-[300px] 2xl:pr-[350px]'} 
-                ${!isActive ? 'z-10' : 'z-20'}
             `}
             onClick={onActivate}
             onMouseEnter={onActivate}
         >
-            {/* Glassmorphism Backdrop */}
-            <div className="absolute inset-[-20%] z-0 pointer-events-none 
-                bg-background/60 backdrop-blur-md 
-                [mask-image:radial-gradient(ellipse_at_center,_black_20%,_transparent_60%)]
-            " />
+            <div className="relative w-full flex flex-col justify-center">
+                {/* TEXT & BLUR LAYER - ABOVE HALFTONE (z-30) */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+                    className="relative z-30"
+                >
+                    {/* Glassmorphism Backdrop restricted to content area */}
+                    <div className={`absolute inset-y-[-20%] inset-x-[-30%] z-0 pointer-events-none 
+                        bg-background/60 backdrop-blur-md 
+                        [mask-image:radial-gradient(ellipse_at_center,_black_40%,_transparent_80%)]
+                        transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
+                        ${isActive ? 'opacity-100' : 'opacity-0'}
+                    `} />
 
-            <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right pr-fluid-m' : 'mr-auto text-left pl-fluid-m'}`}>
-                <h3 className={`inline-block text-step-4 font-heading font-semibold tracking-normal mt-2 leading-none transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'translate-x-0 translate-y-0 opacity-100' : h3Desktop}`}>
-                    {block.subtitle}
-                </h3>
-            </div>
+                <div className={`z-10 w-full relative flex items-start ${index === 1 ? 'justify-end pr-fluid-m' : 'justify-start pl-fluid-m'}`}>
+                    <div className={`flex items-start gap-2 md:gap-4 ${index === 1 ? 'flex-row-reverse' : 'flex-row'} transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'translate-x-0 translate-y-0' : (index === 1 ? 'translate-x-[50%]' : '-translate-x-[50%]')}`}>
+                        <h3 className={`inline-block text-step-4 type-display transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-100' : 'opacity-40'} ${index === 1 ? 'text-right' : 'text-left'}`}>
+                            {block.subtitle}
+                        </h3>
+                        <motion.svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" 
+                            className={`-mt-[2px] w-12 h-12 md:w-16 md:h-16 shrink-0 text-foreground transition-opacity duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'opacity-0' : 'opacity-100'}`}
+                        >
+                            <path d={index === 1 ? "m9 18 6-6-6-6" : "m15 18-6-6 6-6"} strokeWidth="1.5" />
+                        </motion.svg>
+                    </div>
+                </div>
             
             <div className={`overflow-hidden grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full relative z-10 ${isActive ? 'grid-rows-[1fr] pointer-events-auto' : 'grid-rows-[0fr] pointer-events-none'}`}>
                 <motion.div 
@@ -67,7 +86,7 @@ function AvailabilityBlockDesktop({
                             hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
                             show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
                         }}
-                        className="text-step-0 text-foreground font-normal leading-relaxed pt-fluid-m"
+                        className="text-step-0 type-body text-foreground pt-fluid-m"
                     >
                         {block.description}
                     </motion.p>
@@ -85,7 +104,9 @@ function AvailabilityBlockDesktop({
                     </motion.div>
                 </motion.div>
             </div>
+        </motion.div>
         </div>
+    </div>
     );
 }
 
@@ -133,7 +154,7 @@ function AvailabilityBlockMobile({
     const opBg = useTransform(stickyProgress, bgIn, opVals);
 
     return (
-        <div className={`w-full group flex flex-col justify-center relative px-fluid-m pointer-events-auto`}>
+        <div className={`w-full group flex flex-col justify-center relative px-fluid-xs md:px-fluid-m pointer-events-auto`}>
             {/* Glassmorphism Backdrop individualizado em opacity */}
             <motion.div 
                 style={{ opacity: opBg }}
@@ -143,7 +164,7 @@ function AvailabilityBlockMobile({
             <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right' : 'mr-auto text-left'}`}>
                 <motion.h3 
                     style={{ x: xH3, y: yH3, opacity: opH3 }}
-                    className="inline-block text-step-4 font-heading font-semibold tracking-normal mt-2 leading-none"
+                    className="inline-block text-step-4 type-display mt-2"
                 >
                     {block.subtitle}
                 </motion.h3>
@@ -153,7 +174,7 @@ function AvailabilityBlockMobile({
                 <div className={`flex flex-col w-full max-w-sm ${index === 1 ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}>
                     <motion.p 
                         style={{ x: xP, y: yP, opacity: opP }}
-                        className="text-step-0 text-foreground font-normal leading-relaxed pt-fluid-m"
+                        className="text-step-0 type-body text-foreground pt-fluid-m"
                     >
                         {block.description}
                     </motion.p>
@@ -213,7 +234,7 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
             <TerminalTitle 
                 as="h2"
                 text={data.title}
-                className="relative z-40 text-step-6 font-heading font-semibold tracking-normal mb-fluid-2xl uppercase px-fluid-m"
+                className="relative z-40 text-step-6 type-display mb-fluid-2xl px-fluid-xs md:px-fluid-m"
             />
 
             <div ref={trackRef} className="w-full relative h-[250svh] md:h-auto">
@@ -233,7 +254,7 @@ export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) 
                         </div>
 
                         {/* Desktop Layer */}
-                        <div className="hidden md:grid col-start-1 row-start-1 grid-cols-2 relative z-50 w-full h-full items-start pt-[15%] lg:pt-[12%] pb-fluid-3xl pointer-events-none">
+                        <div className="hidden md:grid col-start-1 row-start-1 grid-cols-2 relative w-full h-full items-start pt-[15%] lg:pt-[12%] pb-fluid-3xl pointer-events-none">
                             {data.blocks.map((block, i) => (
                                 <div key={`desktop-${i}`} className="pointer-events-auto w-full">
                                     <AvailabilityBlockDesktop 

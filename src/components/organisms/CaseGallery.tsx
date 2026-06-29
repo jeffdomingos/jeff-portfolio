@@ -10,43 +10,43 @@ const ANIMATION_DURATION = 0.15;
 const ANIMATION_EASE = "linear" as const;
 
 const variantsTop = {
-    idle: { scaleX: 0, transformOrigin: "left" },
-    hover_external: { scaleX: 1, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
-    exit_external: { scaleX: 0, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    hover_right: { scaleX: 1, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_right: { scaleX: 0, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_left: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_left: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } }
+    idle: { scaleX: 0, originX: 0 },
+    hover_external: { scaleX: 1, originX: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
+    exit_external: { scaleX: 0, originX: 1, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
+    hover_right: { scaleX: 1, originX: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    exit_right: { scaleX: 0, originX: 1, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    hover_left: { scaleX: 1, originX: 1, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    exit_left: { scaleX: 0, originX: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } }
 };
 
 const variantsRight = {
-    idle: { scaleY: 0, transformOrigin: "top" },
-    hover_external: { scaleY: 1, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    exit_external: { scaleY: 0, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
-    hover_right: { scaleY: 1, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
-    exit_right: { scaleY: 0, transition: { duration: 0 } },
-    hover_left: { scaleY: 1, transition: { duration: 0 } },
-    exit_left: { scaleY: 0, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } }
+    idle: { scaleY: 0, originY: 0 },
+    hover_external: { scaleY: 1, originY: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
+    exit_external: { scaleY: 0, originY: 1, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
+    hover_right: { scaleY: 1, originY: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
+    exit_right: { scaleY: 0, originY: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    hover_left: { scaleY: 1, originY: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    exit_left: { scaleY: 0, originY: 1, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } }
 };
 
 const variantsBottom = {
-    idle: { scaleX: 0, transformOrigin: "right" },
-    hover_external: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
-    exit_external: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_right: { scaleX: 1, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    exit_right: { scaleX: 0, transformOrigin: "right", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    hover_left: { scaleX: 1, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
-    exit_left: { scaleX: 0, transformOrigin: "left", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } }
+    idle: { scaleX: 0, originX: 1 },
+    hover_external: { scaleX: 1, originX: 1, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
+    exit_external: { scaleX: 0, originX: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    hover_right: { scaleX: 1, originX: 1, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
+    exit_right: { scaleX: 0, originX: 1, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    hover_left: { scaleX: 1, originX: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 2, ease: ANIMATION_EASE } },
+    exit_left: { scaleX: 0, originX: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } }
 };
 
 const variantsLeft = {
-    idle: { scaleY: 0, transformOrigin: "bottom" },
-    hover_external: { scaleY: 1, transformOrigin: "bottom", transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
-    exit_external: { scaleY: 0, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
-    hover_right: { scaleY: 1, transition: { duration: 0 } },
-    exit_right: { scaleY: 0, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
-    hover_left: { scaleY: 1, transformOrigin: "top", transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
-    exit_left: { scaleY: 0, transition: { duration: 0 } }
+    idle: { scaleY: 0, originY: 1 },
+    hover_external: { scaleY: 1, originY: 1, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    exit_external: { scaleY: 0, originY: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 3, ease: ANIMATION_EASE } },
+    hover_right: { scaleY: 1, originY: 1, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } },
+    exit_right: { scaleY: 0, originY: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
+    hover_left: { scaleY: 1, originY: 0, transition: { duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * 1, ease: ANIMATION_EASE } },
+    exit_left: { scaleY: 0, originY: 0, transition: { duration: ANIMATION_DURATION, delay: 0, ease: ANIMATION_EASE } }
 };
 
 export function CaseGallery({ projects, locale, currentSlug, title }: { projects: any[], locale: string, currentSlug: string, title: string }) {
@@ -61,6 +61,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
     const [isScrollable, setIsScrollable] = useState(true);
     const [cardWidth, setCardWidth] = useState<number | null>(null);
     const [hoverState, setHoverState] = useState<{current: number | null, previous: number | null}>({current: null, previous: null});
+    const [hasScrolledToCurrent, setHasScrolledToCurrent] = useState(false);
     const hoverStateRef = useRef(hoverState);
 
     useEffect(() => {
@@ -136,14 +137,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
         });
         resizeObserver.observe(el);
 
-        // Scroll to current case on mount safely without triggering vertical scroll
-        const currentEl = el.querySelector('[data-current="true"]') as HTMLElement;
-        if (currentEl) {
-            setTimeout(() => {
-                const scrollPadding = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
-                el.scrollTo({ left: currentEl.offsetLeft - scrollPadding, behavior: 'smooth' });
-            }, 300);
-        }
+        // Removed mount setTimeout scroll - handled by cardWidth effect instead
 
         el.addEventListener('scroll', checkScroll);
 
@@ -197,6 +191,22 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
         const timer = setTimeout(checkScroll, 150);
         return () => clearTimeout(timer);
     }, [cardWidth]);
+
+    // Scroll to current case once card widths are actually calculated
+    useEffect(() => {
+        if (cardWidth !== null && !hasScrolledToCurrent && scrollRef.current) {
+            const el = scrollRef.current;
+            const currentEl = el.querySelector('[data-current="true"]') as HTMLElement;
+            if (currentEl) {
+                const cardEl = currentEl.closest('[data-card="true"]') as HTMLElement;
+                if (cardEl) {
+                    const scrollPadding = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
+                    el.scrollTo({ left: cardEl.offsetLeft - scrollPadding, behavior: 'auto' });
+                }
+            }
+            setHasScrolledToCurrent(true);
+        }
+    }, [cardWidth, hasScrolledToCurrent]);
 
     const handleMouseDown = (e: React.MouseEvent) => {
         setIsDragging(true);
@@ -277,8 +287,8 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
 
     return (
         <div className="w-full">
-            <div className="flex items-center justify-between px-fluid-m mb-fluid-m">
-                <h3 className="text-step-3 md:text-step-4 font-bold uppercase tracking-tighter text-foreground">
+            <div className="flex items-center justify-between px-fluid-xs md:px-fluid-m mb-fluid-m">
+                <h3 className="text-step-3 md:text-step-4 type-display text-foreground">
                     {title}
                 </h3>
                 {/* Navigation Buttons */}
@@ -355,7 +365,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                 onMouseUp={handleMouseUp}
                 onMouseMove={handleMouseMove}
                 className={cn(
-                    "flex flex-nowrap overflow-x-auto snap-x snap-mandatory pb-fluid-m [scroll-padding-left:var(--space-m)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] transition-opacity duration-300",
+                    "relative flex flex-nowrap overflow-x-auto snap-x snap-mandatory pb-fluid-m [scroll-padding-left:var(--space-m)] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] transition-opacity duration-300",
                     (isDragging || isSnapping) ? "snap-none" : "",
                     isDragging ? "cursor-grabbing select-none" : "cursor-grab",
                     cardWidth === null ? "opacity-0" : "opacity-100"
@@ -425,7 +435,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
 
                                 <div className="relative aspect-[2/1] w-[calc(100%-2px)] mx-[1px] mt-[1px] overflow-hidden">
                                     {/* Halftone mask always visible */}
-                                    <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none" />
+                                    <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none max-md:[background-attachment:scroll]" />
                                     <Image 
                                         src={project.meta.thumbnail} 
                                         alt={project.meta.title}
@@ -439,7 +449,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                     />
                                     {isCurrent && (
                                         <div className="absolute inset-0 flex items-center justify-center z-20">
-                                            <span className="px-4 py-2 bg-foreground text-background font-bold uppercase tracking-widest text-xs rounded-full">
+                                            <span className="px-4 py-2 bg-foreground text-background type-label text-xs rounded-full">
                                                 {locale === 'pt' ? 'Você está aqui' : 'You are here'}
                                             </span>
                                         </div>
@@ -449,15 +459,15 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                     <div className="mb-2">
                                         {project.meta.title.includes(' - ') ? (
                                             <>
-                                                <span className="block text-step--2 font-medium tracking-widest uppercase opacity-60 mb-1">
+                                                <span className="block text-step--2 type-label opacity-60 mb-1">
                                                     {project.meta.title.split(' - ')[0]}
                                                 </span>
-                                                <h4 className="text-step-0 md:text-step-1 font-bold uppercase tracking-tight line-clamp-2 leading-[1.1]">
+                                                <h4 className="text-step-0 md:text-step-1 type-subheading line-clamp-2">
                                                     {project.meta.title.split(' - ').slice(1).join(' - ')}
                                                 </h4>
                                             </>
                                         ) : (
-                                            <h4 className="text-step-0 md:text-step-1 font-bold uppercase tracking-tight line-clamp-2 leading-[1.1]">
+                                            <h4 className="text-step-0 md:text-step-1 type-subheading line-clamp-2">
                                                 {project.meta.title}
                                             </h4>
                                         )}

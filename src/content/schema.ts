@@ -27,6 +27,7 @@ export interface GlobalContent {
 }
 
 export interface CaseItem {
+  context?: string;
   title: string;
   summary: string;
   href: string;
@@ -182,6 +183,7 @@ export interface ProjectIndex {
 
 export interface ProjectMeta {
   slug: string;
+  context?: string;
   title: string;
   role: string;
   timeline: string;

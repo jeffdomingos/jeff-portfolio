@@ -6,9 +6,9 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: strin
         <figure className="my-10">
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 overflow-hidden border-2 border-foreground bg-background">
+                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={src} alt={alt || "Illustration"} className="w-full h-auto block" />
+                    <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0" />
                 </div>
             </div>
             {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
@@ -49,12 +49,12 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
         <figure className="my-10">
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 overflow-hidden border-2 border-foreground bg-background">
+                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
                     {isDirectVideo ? (
-                        <video src={src} title={title} controls className="w-full h-auto block" autoPlay muted loop playsInline />
+                        <video src={src} title={title} controls className="w-full h-auto block !m-0" autoPlay muted loop playsInline />
                     ) : (
-                        <div className="relative w-full overflow-hidden" style={{ paddingTop: '56.25%' }}>
-                            <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full block" frameBorder="0" allowFullScreen />
+                        <div className="relative w-full overflow-hidden !m-0" style={{ paddingTop: '56.25%' }}>
+                            <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full block !m-0" frameBorder="0" allowFullScreen />
                         </div>
                     )}
                 </div>

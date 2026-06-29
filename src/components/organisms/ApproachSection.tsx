@@ -76,8 +76,24 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
 
                 {/* The Masked Content */}
                 <motion.div style={{ clipPath }} className="flex flex-col items-start">
-                    <h3 className="inspectable inline-block text-step-2 font-bold mb-fluid-s tracking-tight">{col.title}</h3>
-                    <p className="inspectable text-step-0 text-foreground font-light leading-relaxed">{col.description}</p>
+                    <motion.h3 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="inspectable inline-block text-step-2 type-subheading mb-fluid-s"
+                    >
+                        {col.title}
+                    </motion.h3>
+                    <motion.p 
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                        className="inspectable text-step-0 type-body text-foreground"
+                    >
+                        {col.description}
+                    </motion.p>
                 </motion.div>
             </div>
         </div>
@@ -115,12 +131,12 @@ export function ApproachSection({ data }: ApproachSectionProps) {
                             <TerminalTitle 
                                 as="h2"
                                 text={data.title}
-                                className="text-step-6 font-heading font-semibold tracking-normal mb-fluid-s uppercase"
+                                className="text-step-6 type-display mb-fluid-s"
                             />
                         </div>
                         <motion.p 
                             style={{ opacity: headerOpacity, y: headerY }}
-                            className="inspectable text-step-1 text-foreground font-light leading-relaxed max-w-4xl"
+                            className="inspectable text-step-1 type-body text-foreground max-w-4xl"
                         >
                             {data.subtitle}
                         </motion.p>

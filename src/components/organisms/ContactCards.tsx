@@ -43,12 +43,12 @@ function ContactCard({ item, index }: { item: any, index: number }) {
                     {item.platformName.toLowerCase().includes('linkedin') && <Linkedin className="w-8 h-8 md:w-10 md:h-10 shrink-0 stroke-1" />}
                     {item.platformName.toLowerCase().includes('whatsapp') && <MessageCircle className="w-8 h-8 md:w-10 md:h-10 shrink-0 stroke-1" />}
                     {item.icon === 'calendar' && <Calendar className="w-8 h-8 md:w-10 md:h-10 shrink-0 stroke-1" />}
-                    <h3 className="text-step-2 md:text-step-3 font-bold uppercase tracking-tight">{item.platformName}</h3>
+                    <h3 className="text-step-2 md:text-step-3 type-subheading">{item.platformName}</h3>
                 </div>
                 <p className="font-light opacity-80 mb-12 text-step--1">{item.description}</p>
                 
                 {/* CTA Line */}
-                <div className="mt-auto flex items-center justify-between w-full font-medium uppercase tracking-widest text-step--1 border-t border-foreground/20 pt-6">
+                <div className="mt-auto flex items-center justify-between w-full type-label text-step--1 border-t border-foreground/20 pt-6">
                     <span>{item.ctaLabel}</span>
                     <span className="font-bold transition-transform duration-300 transform group-hover:translate-x-2">&rarr;</span>
                 </div>

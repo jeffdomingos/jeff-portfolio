@@ -2,7 +2,7 @@
 
 import { GlobalFooter } from "@/content/schema";
 import { FooterAnimatedLogo } from "./FooterAnimatedLogo";
-import { useMotionValue } from "framer-motion";
+import { useMotionValue, motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 
@@ -74,19 +74,41 @@ export function Footer({ data }: { data: GlobalFooter }) {
                 }}
             />
             
-            <div className="pt-12 lg:pt-fluid-xl pb-6 lg:pb-fluid-m px-fluid-m flex flex-col flex-1">
+            <div className="pt-12 lg:pt-fluid-xl pb-6 lg:pb-fluid-m px-fluid-xs md:px-fluid-m flex flex-col flex-1">
                 {/* Main Content Area */}
                 <div className="flex-1 flex flex-col justify-center py-6 lg:py-fluid-l">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-fluid-xl items-center">
                     {/* Brand / Logo Area - Mantido em z-0 para ficar ATRÁS da malha z-10 */}
-                    <div className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0 mt-12 lg:mt-0">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-10% 0px" }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0 mt-12 lg:mt-0"
+                    >
                         <FooterAnimatedLogo mouseX={mouseX} mouseY={mouseY} isIdle={isIdle} />
-                    </div>
+                    </motion.div>
 
                 {/* Contact Links */}
-                <div className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50">
-                    <a href={`mailto:${data.emailValue}`} className="group inline-flex flex-col relative">
-                        <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.emailLabel}</span>
+                <motion.div 
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                    variants={{
+                        hidden: { opacity: 0 },
+                        show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+                    }}
+                    className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50"
+                >
+                    <motion.a 
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                        href={`mailto:${data.emailValue}`} 
+                        className="group inline-flex flex-col relative"
+                    >
+                        <span className="text-step--2 type-label text-foreground/70 mb-1">{data.emailLabel}</span>
                         <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
                             <span className="relative">
                                 {data.emailValue}
@@ -97,10 +119,16 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </span>
-                    </a>
+                    </motion.a>
                     
-                    <a href="https://linkedin.com/in/jeffdomingos" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
-                        <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.linkedinLabel}</span>
+                    <motion.a 
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                        href="https://linkedin.com/in/jeffdomingos" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative"
+                    >
+                        <span className="text-step--2 type-label text-foreground/70 mb-1">{data.linkedinLabel}</span>
                         <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
                             <span className="relative">
                                 {data.linkedinValue}
@@ -112,10 +140,16 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </span>
-                    </a>
+                    </motion.a>
 
-                    <a href="https://api.whatsapp.com/send/?phone=5521999374516" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
-                        <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">{data.whatsappLabel}</span>
+                    <motion.a 
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                        href="https://api.whatsapp.com/send/?phone=5521999374516" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative"
+                    >
+                        <span className="text-step--2 type-label text-foreground/70 mb-1">{data.whatsappLabel}</span>
                         <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
                             <span className="relative">
                                 {data.whatsappValue}
@@ -125,10 +159,16 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
                         </span>
-                    </a>
+                    </motion.a>
 
-                    <a href="https://www.instagram.com/jeffdomingos.design/" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative">
-                        <span className="text-step--2 uppercase tracking-widest text-foreground/70 font-light mb-1">Instagram</span>
+                    <motion.a 
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+                        }}
+                        href="https://www.instagram.com/jeffdomingos.design/" target="_blank" rel="noopener noreferrer" className="group inline-flex flex-col relative"
+                    >
+                        <span className="text-step--2 type-label text-foreground/70 mb-1">Instagram</span>
                         <span className="text-step-1 md:text-step-2 font-bold text-foreground flex items-center gap-4 relative">
                             <span className="relative">
                                 @jeffdomingos.design
@@ -140,17 +180,23 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </span>
-                    </a>
-                </div>
+                    </motion.a>
+                </motion.div>
                 </div>
             </div>
 
                 {/* Bottom Row */}
-                <div className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full">
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "0px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
+                    className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full"
+                >
                     <p className="shrink-0">{data.copyrightText}</p>
                     <button 
                         onClick={scrollToTop} 
-                        className="transition-all uppercase tracking-widest text-step--2 font-light hover:font-bold flex items-center gap-2 group focus:outline-none"
+                        className="transition-all type-label text-step--2 hover:font-bold flex items-center gap-2 group focus:outline-none"
                     >
                         {locale === 'en' ? 'Back to top' : 'Voltar ao topo'}
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform">
@@ -158,7 +204,7 @@ export function Footer({ data }: { data: GlobalFooter }) {
                             <polyline points="5 12 12 5 19 12"></polyline>
                         </svg>
                     </button>
-                </div>
+                </motion.div>
             </div>
         </footer>
     );

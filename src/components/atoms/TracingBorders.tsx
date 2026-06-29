@@ -130,13 +130,15 @@ function getVariants(linePosition: "top" | "right" | "bottom" | "left", isShared
         hover: { 
             scaleX: isHorizontal ? 1 : undefined,
             scaleY: !isHorizontal ? 1 : undefined,
-            transformOrigin: entryOrigin,
+            originX: isHorizontal ? (entryOrigin === "left" ? 0 : 1) : undefined,
+            originY: !isHorizontal ? (entryOrigin === "top" ? 0 : 1) : undefined,
             transition: { duration: isShared ? 0 : ANIMATION_DURATION, delay: (isShared ? 0 : entryDelay) + delayOffset, ease: ANIMATION_EASE }
         },
         exit: { 
             scaleX: isHorizontal ? (isShared ? 1 : 0) : undefined,
             scaleY: !isHorizontal ? (isShared ? 1 : 0) : undefined,
-            transformOrigin: exitOrigin,
+            originX: isHorizontal ? (exitOrigin === "left" ? 0 : 1) : undefined,
+            originY: !isHorizontal ? (exitOrigin === "top" ? 0 : 1) : undefined,
             transition: { duration: isShared ? 0 : ANIMATION_DURATION, delay: (isShared ? 0 : exitDelay) + delayOffset, ease: ANIMATION_EASE } 
         }
     } as any;
@@ -148,14 +150,18 @@ export function TracingItem({
     className = "",
     forceActive = false,
     hiddenWalls = [],
-    delayOffset = 0
+    delayOffset = 0,
+    forceSharedWall,
+    forceExiting
 }: { 
     id: string, 
     children: React.ReactNode, 
     className?: string,
     forceActive?: boolean,
     hiddenWalls?: ("top" | "right" | "bottom" | "left")[],
-    delayOffset?: number
+    delayOffset?: number,
+    forceSharedWall?: "top" | "right" | "bottom" | "left" | null,
+    forceExiting?: boolean
 }) {
     const context = useContext(TracingContext);
     const ref = useRef<HTMLDivElement>(null);
@@ -170,9 +176,9 @@ export function TracingItem({
     }, [id, context]);
 
     const isHovered = forceActive || (context?.activeId === id);
-    const isExiting = !forceActive && (context?.previousId === id && context?.activeId !== id);
+    const isExiting = (forceExiting !== undefined ? forceExiting : (!forceActive && (context?.previousId === id && context?.activeId !== id)));
     
-    const sharedWall = isHovered ? context?.activeSharedWall : (isExiting ? context?.previousSharedWall : null);
+    const sharedWall = forceSharedWall !== undefined ? forceSharedWall : (isHovered ? context?.activeSharedWall : (isExiting ? context?.previousSharedWall : null));
 
     let state = "idle";
     if (isHovered) state = "hover";
@@ -187,16 +193,16 @@ export function TracingItem({
             data-tracing-state={state}
         >
             {!hiddenWalls.includes("top") && (
-                <motion.span variants={getVariants("top", sharedWall === "top", delayOffset)} initial="idle" animate={state} className="absolute top-0 left-0 -right-[1px] h-[1px] bg-foreground z-10 pointer-events-none" />
+                <motion.span variants={getVariants("top", sharedWall === "top", delayOffset)} initial="idle" animate={state} className="absolute top-0 left-0 -right-[1px] h-[1px] bg-foreground z-40 pointer-events-none" />
             )}
             {!hiddenWalls.includes("right") && (
-                <motion.span variants={getVariants("right", sharedWall === "right", delayOffset)} initial="idle" animate={state} className="absolute top-0 -bottom-[1px] -right-[1px] w-[1px] bg-foreground z-10 pointer-events-none" />
+                <motion.span variants={getVariants("right", sharedWall === "right", delayOffset)} initial="idle" animate={state} className="absolute top-0 -bottom-[1px] -right-[1px] w-[1px] bg-foreground z-40 pointer-events-none" />
             )}
             {!hiddenWalls.includes("bottom") && (
-                <motion.span variants={getVariants("bottom", sharedWall === "bottom", delayOffset)} initial="idle" animate={state} className="absolute -bottom-[1px] left-0 -right-[1px] h-[1px] bg-foreground z-10 pointer-events-none" />
+                <motion.span variants={getVariants("bottom", sharedWall === "bottom", delayOffset)} initial="idle" animate={state} className="absolute -bottom-[1px] left-0 -right-[1px] h-[1px] bg-foreground z-40 pointer-events-none" />
             )}
             {!hiddenWalls.includes("left") && (
-                <motion.span variants={getVariants("left", sharedWall === "left", delayOffset)} initial="idle" animate={state} className="absolute top-0 -bottom-[1px] left-0 w-[1px] bg-foreground z-10 pointer-events-none" />
+                <motion.span variants={getVariants("left", sharedWall === "left", delayOffset)} initial="idle" animate={state} className="absolute top-0 -bottom-[1px] left-0 w-[1px] bg-foreground z-40 pointer-events-none" />
             )}
             
             {children}

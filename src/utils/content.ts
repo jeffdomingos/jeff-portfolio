@@ -45,6 +45,7 @@ export function getHomePageContent(locale: string): HomePageContent {
             const homeCard = pd.home_card || {};
             const langData = pd[lang] || {};
 
+            const homeContext = homeCard[`context_${lang}`] || langData.context || undefined;
             const homeTitle = homeCard[`title_${lang}`] || langData.title || slug;
             const homeSummary = homeCard[`summary_${lang}`] || langData.summary || '';
             const homeThumbnail = homeCard.thumbnail || pd.thumbnail || '';
@@ -52,9 +53,9 @@ export function getHomePageContent(locale: string): HomePageContent {
             const customNumber = homeCard.custom_number;
             const customCtaLabel = homeCard[`cta_${lang}`] || homeCard.ctaLabel;
 
-            return { slug, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags, customNumber, customCtaLabel };
+            return { slug, context: homeContext, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags, customNumber, customCtaLabel };
         })
-        .filter(Boolean) as { slug: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[]; customNumber?: string; customCtaLabel?: string }[];
+        .filter(Boolean) as { slug: string; context?: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[]; customNumber?: string; customCtaLabel?: string }[];
 
     // Sort by cases.case_order
     caseItems.sort((a, b) => {
@@ -166,6 +167,7 @@ export function getProject(locale: string, slug: string) {
 
     const meta: ProjectMeta = {
         slug,
+        context: data.home_card?.[`context_${effectiveLang}`] ?? langData.context ?? undefined,
         featured: data.featured ?? false,
         thumbnail: data.thumbnail ?? data.home_card?.thumbnail ?? '',
         tags: data.home_card?.[`tags_${effectiveLang}`] ?? data[`tags_${effectiveLang}`] ?? langData.tags ?? data.tags ?? [],

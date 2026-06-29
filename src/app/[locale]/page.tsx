@@ -41,11 +41,11 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
             {/* Cases Section */}
             <div id="cases" className="relative w-full bg-background pt-fluid-2xl">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <div className="relative z-40 px-fluid-m mb-fluid-2xl w-full">
+                <div className="relative z-40 px-fluid-xs md:px-fluid-m mb-fluid-2xl w-full">
                     <TerminalTitle 
                         as="h2"
                         text={content.sectionDividerCases.title}
-                        className="text-step-6 font-heading font-semibold tracking-normal uppercase leading-[1.1]"
+                        className="text-step-6 type-display mb-fluid-2xl"
                     />
                 </div>
                 <CasesSection items={content.caseList.items} locale={locale} />

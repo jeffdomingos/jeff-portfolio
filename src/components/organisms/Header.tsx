@@ -76,7 +76,7 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
                     </Link>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 uppercase tracking-widest font-medium pointer-events-auto">
+                    <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 type-label pointer-events-auto transition-opacity duration-1000 [.is-loading_&]:opacity-0 [.is-loading_&]:pointer-events-none">
                         <Link href={`/${locale}`} data-text={data.navItemHome} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemHome}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
@@ -101,7 +101,7 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
                     {/* Mobile Hamburger Toggle */}
                     <button 
                         onClick={toggleMenu}
-                        className="md:hidden pointer-events-auto z-[70] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none"
+                        className="md:hidden pointer-events-auto z-[70] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none transition-opacity duration-1000 [.is-loading_&]:opacity-0 [.is-loading_&]:pointer-events-none"
                         aria-expanded={isOpen}
                         aria-label="Toggle menu"
                     >
@@ -114,7 +114,7 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
 
             {/* Mobile Menu Overlay */}
             <div className={`fixed inset-0 z-[70] flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} ${isMenuDark ? 'bg-foreground text-background' : 'bg-background text-foreground'}`}>
-                <nav className="flex flex-col items-center gap-8 text-step-2 uppercase tracking-widest font-medium">
+                <nav className="flex flex-col items-center gap-8 text-step-2 type-label">
                     <Link href={`/${locale}`} onClick={() => setIsOpen(false)} data-text={data.navItemHome} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemHome}
                     </Link>
