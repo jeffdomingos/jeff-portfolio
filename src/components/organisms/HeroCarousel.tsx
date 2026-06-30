@@ -39,33 +39,39 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                 <div className="mt-4 text-step-0 italic pr-fluid-m">{items[0].caption}</div>
             </div>
 
-            {/* Imagem do Carrossel com AnimatePresence */}
-            <AnimatePresence initial={false}>
-                <motion.div
-                    key={currentIndex}
-                    initial={{ clipPath: "polygon(0% 0%, -80% 0%, -80% 100%, 0% 100%)", zIndex: 20 }}
-                    animate={{ clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)", zIndex: 20 }}
-                    exit={{ zIndex: 10, transition: { duration: 2.4 } }}
-                    transition={{ duration: 2.4, ease: "easeInOut" }}
-                    className="absolute inset-0 flex flex-col items-end w-full pointer-events-none"
-                >
-                    <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh] bg-background">
-                        <Image src={items[currentIndex].src} fill={true} sizes="100vw" priority={true} alt={items[currentIndex].caption} className="object-cover object-center grayscale contrast-125" />
-                    </div>
-                </motion.div>
-            </AnimatePresence>
+            {/* Imagens do Carrossel (Renderizando a atual e a anterior simultaneamente para não piscar) */}
+            {items.map((item, index) => {
+                if (index !== currentIndex && index !== prevIndex) return null;
+
+                const isCurrent = index === currentIndex;
+
+                return (
+                    <motion.div
+                        key={`img-${index}`}
+                        initial={isCurrent && hasStarted ? { clipPath: "polygon(0% 0%, -80% 0%, -80% 100%, 0% 100%)" } : { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" }}
+                        animate={isCurrent ? { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" } : undefined}
+                        transition={{ duration: 2.4, ease: "easeInOut" }}
+                        className={`absolute inset-0 flex flex-col items-end w-full pointer-events-none ${isCurrent ? 'z-20' : 'z-10'}`}
+                    >
+                        <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh] bg-background">
+                            <Image src={item.src} fill={true} sizes="100vw" priority={true} alt={item.caption} className="object-cover object-center grayscale contrast-125" />
+                        </div>
+                    </motion.div>
+                );
+            })}
 
             {/* A Faixa Branca Brilhante com Gradiente (O "Laser" do Wipe) */}
             <AnimatePresence initial={false}>
-                <motion.div
-                    key={`wipe-${currentIndex}`}
-                    initial={{ left: "-80%" }}
-                    animate={{ left: "180%" }}
-                    exit={{ left: "180%", transition: { duration: 0 } }}
-                    transition={{ duration: 2.4, ease: "easeInOut" }}
-                    className="absolute top-0 bottom-0 w-[150%] -translate-x-1/2 pointer-events-none z-20"
-                    style={{ backgroundImage: "linear-gradient(to right, transparent 0%, oklch(var(--color-background)) 40%, oklch(var(--color-background)) 60%, transparent 100%)" }}
-                />
+                {hasStarted && currentIndex !== prevIndex && (
+                    <motion.div
+                        key={`wipe-${currentIndex}`}
+                        initial={{ left: "-80%" }}
+                        animate={{ left: "180%" }}
+                        transition={{ duration: 2.4, ease: "easeInOut" }}
+                        className="absolute top-0 bottom-0 w-[150%] -translate-x-1/2 pointer-events-none z-20"
+                        style={{ backgroundImage: "linear-gradient(to right, transparent 0%, oklch(var(--color-background)) 40%, oklch(var(--color-background)) 60%, transparent 100%)" }}
+                    />
+                )}
             </AnimatePresence>
 
             {/* O gradiente estático da borda esquerda do carrossel (sempre visível no topo para mesclar suavemente com o texto do Hero) */}
