@@ -30,7 +30,7 @@
         "platformName": "Calendly",
         "description": "Schedule a 45-minute chat directly on my calendar to discuss your project.",
         "ctaLabel": "Schedule Meeting",
-        "href": "https://calendly.com/jeffdomingos/papo45min",
+        "href": "https://calendly.com/jeffdomingos/call45min",
         "icon": "calendar"
       }
     ]
