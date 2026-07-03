@@ -21,6 +21,25 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
     const lenis = useLenis()
 
     useEffect(() => {
+        // Se a página for carregada já com uma âncora (hash) na URL, pule a tela de loading para não travar o usuário
+        if (window.location.hash) {
+            setIsInitialLoading(false);
+            setLoadingProgress(100);
+            setMoveUp(true);
+            setShowSubAndImage(true);
+            setShowButtons(true);
+            document.documentElement.classList.remove('is-loading');
+            if (lenis) {
+                lenis.start();
+                const targetId = window.location.hash.substring(1);
+                setTimeout(() => {
+                    const el = document.getElementById(targetId);
+                    if (el) lenis.scrollTo(el, { immediate: true });
+                }, 50);
+            }
+            return;
+        }
+
         let interval: NodeJS.Timeout;
         if (isInitialLoading) {
             if (lenis) lenis.stop();
@@ -37,15 +56,6 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                     document.documentElement.classList.remove('is-loading');
                     if (lenis) {
                         lenis.start();
-                        if (window.location.hash) {
-                            const targetId = window.location.hash.substring(1);
-                            setTimeout(() => {
-                                const el = document.getElementById(targetId);
-                                if (el) {
-                                    lenis.scrollTo(el, { duration: 1.5, offset: 0 });
-                                }
-                            }, 300); // Small delay to let the overlay start fading
-                        }
                     }
                 } else {
                     setLoadingProgress(prog);
