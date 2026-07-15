@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { GlobalHeader, GlobalFooter } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
 export { CaseNavigator } from "./CaseNavigator";

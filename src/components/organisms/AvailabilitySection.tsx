@@ -11,7 +11,7 @@ interface AvailabilitySectionProps {
 
 import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 

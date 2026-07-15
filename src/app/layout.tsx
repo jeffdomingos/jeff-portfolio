@@ -22,6 +22,7 @@ export const metadata = {
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogPageView from "@/components/PostHogPageView";
 import { Suspense } from "react";
+import { ViewTransitions } from "next-view-transitions";
 
 export default function RootLayout({
     children,
@@ -29,18 +30,20 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable}`}>
-            <head>
-                <script dangerouslySetInnerHTML={{ __html: `if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0); window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); }); window.addEventListener('load', function() { window.scrollTo(0, 0); }); const p = window.location.pathname; if (p === '/' || p === '/en' || p === '/pt' || p === '/en/' || p === '/pt/') { document.documentElement.classList.add('is-loading'); }` }} />
-            </head>
-            <body>
-                <PostHogProvider>
-                    <Suspense fallback={null}>
-                        <PostHogPageView />
-                    </Suspense>
-                    {children}
-                </PostHogProvider>
-            </body>
-        </html>
+        <ViewTransitions>
+            <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable}`}>
+                <head>
+                    <script dangerouslySetInnerHTML={{ __html: `if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0); window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); }); window.addEventListener('load', function() { window.scrollTo(0, 0); }); const p = window.location.pathname; if (p === '/' || p === '/en' || p === '/pt' || p === '/en/' || p === '/pt/') { document.documentElement.classList.add('is-loading'); }` }} />
+                </head>
+                <body>
+                    <PostHogProvider>
+                        <Suspense fallback={null}>
+                            <PostHogPageView />
+                        </Suspense>
+                        {children}
+                    </PostHogProvider>
+                </body>
+            </html>
+        </ViewTransitions>
     );
 }

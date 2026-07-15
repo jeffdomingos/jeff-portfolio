@@ -59,6 +59,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
     return (
         <article className="pb-20 relative w-full z-40">
             <PageHero
+                slug={slug}
                 overline={meta.context}
                 title={meta.title}
                 tags={meta.tags}

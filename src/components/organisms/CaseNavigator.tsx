@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { getAllProjects } from "@/utils/content";
 import { cn } from "@/lib/utils";
 import { CaseGallery } from "./CaseGallery";

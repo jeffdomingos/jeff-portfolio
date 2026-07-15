@@ -1,0 +1,269 @@
+"use client";
+
+import { AvailabilitySection as AvailabilitySectionData } from "@/content/schema";
+import { TerminalTitle } from "@/components/atoms/TerminalTitle";
+import { InteractiveDeskSVG } from "@/components/atoms/InteractiveDeskSVG";
+
+interface AvailabilitySectionProps {
+    data: AvailabilitySectionData;
+    locale: string;
+}
+
+import { useRef, useState, useEffect } from "react";
+import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+function AvailabilityBlockDesktop({ 
+    block, 
+    index, 
+    locale, 
+    activeIndex,
+    onActivate 
+}: { 
+    block: any, 
+    index: number, 
+    locale: string,
+    activeIndex: number,
+    onActivate: () => void
+}) {
+    const isActive = activeIndex === index;
+    const h3Desktop = index === 1 ? 'translate-x-[75%] opacity-40' : '-translate-x-[75%] opacity-40';
+
+    return (
+        <div 
+            className={`w-full group transition-all duration-700 flex flex-col justify-center relative cursor-pointer 
+                py-fluid-2xl
+                ${index === 1 ? 'pl-[200px] lg:pl-[260px] xl:pl-[300px] 2xl:pl-[350px]' : 'pr-[200px] lg:pr-[260px] xl:pr-[300px] 2xl:pr-[350px]'} 
+                ${!isActive ? 'z-10' : 'z-20'}
+            `}
+            onClick={onActivate}
+            onMouseEnter={onActivate}
+        >
+            {/* Glassmorphism Backdrop */}
+            <div className="absolute inset-[-20%] z-0 pointer-events-none 
+                bg-background/60 backdrop-blur-md 
+                [mask-image:radial-gradient(ellipse_at_center,_black_20%,_transparent_60%)]
+            " />
+
+            <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right pr-fluid-m' : 'mr-auto text-left pl-fluid-m'}`}>
+                <h3 className={`inline-block text-step-4 font-heading font-semibold tracking-normal mt-2 leading-none transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${isActive ? 'translate-x-0 translate-y-0 opacity-100' : h3Desktop}`}>
+                    {block.subtitle}
+                </h3>
+            </div>
+            
+            <div className={`overflow-hidden grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full relative z-10 ${isActive ? 'grid-rows-[1fr] pointer-events-auto' : 'grid-rows-[0fr] pointer-events-none'}`}>
+                <motion.div 
+                    className={`flex flex-col w-full max-w-sm lg:max-w-md xl:max-w-lg ${index === 1 ? 'ml-auto items-end text-right pr-fluid-m' : 'mr-auto items-start text-left pl-fluid-m'}`}
+                    variants={{
+                        hidden: { opacity: 0, transition: { staggerChildren: 0.1, staggerDirection: -1 } },
+                        show: { opacity: 1, transition: { staggerChildren: 0.35, delayChildren: 0.45 } }
+                    }}
+                    initial="hidden"
+                    animate={isActive ? "show" : "hidden"}
+                >
+                    <motion.p 
+                        variants={{
+                            hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
+                            show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                        }}
+                        className="text-step-0 text-foreground font-normal leading-relaxed pt-fluid-m"
+                    >
+                        {block.description}
+                    </motion.p>
+                    <motion.div
+                        variants={{
+                            hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
+                            show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+                        }}
+                    >
+                        <Button asChild className="mt-fluid-m pointer-events-auto">
+                            <Link href={`/${locale}/contact`}>
+                                {locale === 'en' ? "Let's talk" : 'Vamos conversar'}
+                            </Link>
+                        </Button>
+                    </motion.div>
+                </motion.div>
+            </div>
+        </div>
+    );
+}
+
+function AvailabilityBlockMobile({ 
+    block, 
+    index, 
+    locale, 
+    stickyProgress 
+}: { 
+    block: any, 
+    index: number, 
+    locale: string,
+    stickyProgress: any
+}) {
+    // Definimos os momentos (progress) para cada elemento criar o efeito scattered (escadinha)
+    const h3In = index === 0 ? [0, 0.1, 0.4, 0.6] : [0.45, 0.55, 1];
+    const pIn = index === 0 ? [0.05, 0.15, 0.4, 0.6] : [0.5, 0.6, 1];
+    const btnIn = index === 0 ? [0.1, 0.2, 0.4, 0.6] : [0.55, 0.65, 1];
+    const bgIn = index === 0 ? [0, 0.1, 0.4, 0.6] : [0.45, 0.55, 1];
+
+    // Valores dinâmicos para animação
+    const startX = index === 0 ? "-100%" : "100%";
+    const exitX = index === 0 ? "-100%" : "0%";
+    
+    const xVals = index === 0 ? [startX, "0%", "0%", exitX] : [startX, "0%", "0%"];
+    const yVals = index === 0 ? [0, 0, 0, -50] : [0, 0, 0];
+    const opVals = index === 0 ? [0, 1, 1, 0] : [0, 1, 1];
+
+    // Aplicando transforms scattered
+    const xH3 = useTransform(stickyProgress, h3In, xVals);
+    const yH3 = useTransform(stickyProgress, h3In, yVals);
+    const opH3 = useTransform(stickyProgress, h3In, opVals);
+
+    const xP = useTransform(stickyProgress, pIn, xVals);
+    const yP = useTransform(stickyProgress, pIn, yVals);
+    const opP = useTransform(stickyProgress, pIn, opVals);
+
+    const xBtn = useTransform(stickyProgress, btnIn, xVals);
+    const yBtn = useTransform(stickyProgress, btnIn, yVals);
+    const opBtn = useTransform(stickyProgress, btnIn, opVals);
+
+    const opBg = useTransform(stickyProgress, bgIn, opVals);
+
+    return (
+        <div className={`w-full group flex flex-col justify-center relative px-fluid-m pointer-events-auto`}>
+            {/* Glassmorphism Backdrop individualizado em opacity */}
+            <motion.div 
+                style={{ opacity: opBg }}
+                className="absolute inset-[-50%] z-0 pointer-events-none bg-background/60 backdrop-blur-md [mask-image:radial-gradient(ellipse_at_center,_black_20%,_transparent_60%)]" 
+            />
+
+            <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right' : 'mr-auto text-left'}`}>
+                <motion.h3 
+                    style={{ x: xH3, y: yH3, opacity: opH3 }}
+                    className="inline-block text-step-4 font-heading font-semibold tracking-normal mt-2 leading-none"
+                >
+                    {block.subtitle}
+                </motion.h3>
+            </div>
+            
+            <div className="w-full relative z-10">
+                <div className={`flex flex-col w-full max-w-sm ${index === 1 ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}>
+                    <motion.p 
+                        style={{ x: xP, y: yP, opacity: opP }}
+                        className="text-step-0 text-foreground font-normal leading-relaxed pt-fluid-m"
+                    >
+                        {block.description}
+                    </motion.p>
+                    <motion.div 
+                        style={{ x: xBtn, y: yBtn, opacity: opBtn }}
+                        className="mt-fluid-m pointer-events-auto"
+                    >
+                        <Button asChild>
+                            <Link href={`/${locale}/contact`}>
+                                {locale === 'en' ? "Let's talk" : 'Vamos conversar'}
+                            </Link>
+                        </Button>
+                    </motion.div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export function AvailabilitySection({ data, locale }: AvailabilitySectionProps) {
+    const [activeIndex, setActiveIndex] = useState<number>(0);
+    const trackRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: trackRef,
+        offset: ["start end", "end start"]
+    });
+
+    const { scrollYProgress: stickyProgress } = useScroll({
+        target: trackRef,
+        offset: ["start start", "end end"]
+    });
+
+    const yHead = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [100, 45, 0, -22, -45]);
+
+    if (!data || !data.blocks || data.blocks.length === 0) return null;
+
+    return (
+        <>
+        <section 
+            className="pt-fluid-4xl border-t border-foreground w-full relative z-20"
+            onMouseMove={(e) => {
+                if (typeof window !== 'undefined' && window.innerWidth >= 768) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    let progress = (e.clientX - rect.left) / rect.width;
+                    progress = Math.max(0, Math.min(1, progress));
+                    
+                    setActiveIndex(progress < 0.5 ? 0 : 1);
+                }
+            }}
+        >
+            <TerminalTitle 
+                as="h2"
+                text={data.title}
+                className="relative z-30 text-step-6 font-heading font-semibold tracking-normal mb-fluid-2xl uppercase px-fluid-m"
+            />
+
+            <div ref={trackRef} className="w-full relative h-[250vh] md:h-auto z-30">
+                <div className="w-full h-[130vh] md:h-auto sticky top-0 md:relative md:top-auto overflow-hidden md:overflow-visible flex flex-col justify-start bg-background">
+                    
+                    {/* Malha Unificada (cobre a ilustração e a transição) */}
+                    <div className="absolute inset-0 bg-halftone-mask pointer-events-none z-40" />
+
+                    {/* Main content part (100vh on mobile, auto on desktop) */}
+                    <div className="grid grid-cols-1 grid-rows-1 w-full h-[100vh] md:h-auto relative shrink-0">
+                        {/* Fundo preto de segurança na base */}
+                        <div className="col-start-1 row-start-1 self-end w-full h-[40vh] bg-foreground z-0 pointer-events-none" />
+
+                        <div className="col-start-1 row-start-1 justify-self-center self-start w-[120%] sm:w-[90%] max-w-[600px] lg:max-w-[750px] aspect-[10/21] z-10 pointer-events-none">
+                            <InteractiveDeskSVG scrollYProgress={scrollYProgress} activeIndex={activeIndex} />
+                        </div>
+
+                        {/* Desktop Layer */}
+                        <div className="hidden md:grid col-start-1 row-start-1 grid-cols-2 relative z-50 w-full h-full items-start pt-[15%] lg:pt-[12%] pb-fluid-3xl pointer-events-none">
+                            {data.blocks.map((block, i) => (
+                                <div key={`desktop-${i}`} className="pointer-events-auto w-full">
+                                    <AvailabilityBlockDesktop 
+                                        block={block} 
+                                        index={i} 
+                                        locale={locale} 
+                                        activeIndex={activeIndex}
+                                        onActivate={() => setActiveIndex(i)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Mobile Layer */}
+                        <div className="grid md:hidden col-start-1 row-start-1 grid-cols-1 relative z-50 w-full h-full items-end pb-12 pointer-events-none">
+                            {data.blocks.map((block, i) => (
+                                <div key={`mobile-${i}`} className="col-start-1 row-start-1 pointer-events-auto w-full">
+                                    <AvailabilityBlockMobile 
+                                        block={block} 
+                                        index={i} 
+                                        locale={locale} 
+                                        stickyProgress={stickyProgress}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="w-full h-[30vh] relative shrink-0 z-50 bg-foreground">
+                        <div 
+                            className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                            style={{
+                                height: '80vh',
+                                background: 'linear-gradient(to bottom, transparent 0%, oklch(var(--color-background) / 0.05) 20%, oklch(var(--color-background) / 0.3) 50%, oklch(var(--color-background) / 0.7) 80%, oklch(var(--color-background)) 100%)'
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+        </>
+    );
+}

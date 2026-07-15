@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useLenis } from 'lenis/react'
 import { BoldReserver } from "@/components/atoms/BoldReserver"
 import { HeroCarousel } from "@/components/organisms/HeroCarousel"
-import Link from 'next/link'
+import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button"
 import { useParams } from "next/navigation"
 import { Calendar, Mail, Phone, ChevronDown, CalendarDays, MessageCircle } from "lucide-react"

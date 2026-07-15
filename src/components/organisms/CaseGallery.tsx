@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -462,12 +462,12 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                                 <span className="block text-step--2 type-label opacity-60 mb-1">
                                                     {project.meta.title.split(' - ')[0]}
                                                 </span>
-                                                <h4 className="text-step-0 md:text-step-1 type-subheading line-clamp-2">
+                                                <h4 className="text-step-0 md:text-step-1 type-display line-clamp-2">
                                                     {project.meta.title.split(' - ').slice(1).join(' - ')}
                                                 </h4>
                                             </>
                                         ) : (
-                                            <h4 className="text-step-0 md:text-step-1 type-subheading line-clamp-2">
+                                            <h4 className="text-step-0 md:text-step-1 type-display line-clamp-2">
                                                 {project.meta.title}
                                             </h4>
                                         )}

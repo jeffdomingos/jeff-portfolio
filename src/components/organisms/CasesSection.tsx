@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { motion, useInView } from "framer-motion";
 import { CaseItem } from "@/content/schema";
 import { BELOW_FOLD_IMAGE, IMAGE_SIZES } from "@/lib/performance/image-hints";
@@ -81,25 +81,37 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                 forceSharedWall={sharedWall}
                 delayOffset={0}
             >
-                <div className="h-full w-full pointer-events-auto cursor-pointer">
-                    <div className="flex items-baseline gap-4 mb-2">
-                        <span className="font-normal group-hover:font-semibold group-data-[hover=true]:font-semibold transition-all duration-500 italic text-step-3 bg-halftone bg-clip-text text-transparent">
-                            {item.customNumber || indexStr}
-                        </span>
-                        {item.context && (
-                            <span className="text-step--1 md:text-step-0 font-heading opacity-90 type-label font-semibold text-foreground tracking-widest uppercase">
-                                {item.context}
-                            </span>
+                <div className="h-full w-full pointer-events-auto cursor-pointer flex items-start md:items-center justify-between gap-4">
+                    <div 
+                        style={{ viewTransitionName: `project-header-${item.href.split('/').pop()}`, width: 'fit-content' }}
+                        className="flex flex-col items-start"
+                    >
+                        <div className="mb-6">
+                            {item.context && (
+                                <span className="block text-step--1 md:text-step-0 font-heading opacity-90 type-label font-semibold text-foreground tracking-widest uppercase mb-2">
+                                    {item.context}
+                                </span>
+                            )}
+                            <h3 className="text-step-4 md:text-step-5 type-display text-foreground leading-none m-0 p-0 line-clamp-2">
+                                {item.title}
+                            </h3>
+                        </div>
+                        
+                        {item.tags && item.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                                {item.tags.slice(0, 3).map((tag, tagIndex) => (
+                                    <span 
+                                        key={tagIndex} 
+                                        className="px-4 py-1.5 bg-transparent text-foreground text-step--2 type-label rounded-full border border-foreground border-dashed"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
                         )}
                     </div>
-                <div className="mb-3 flex items-start md:items-center justify-between gap-4">
-                    <div className="flex-1">
-                        <h3 className="text-step-4 md:text-step-5 type-heading line-clamp-2">
-                            {item.title}
-                        </h3>
-                    </div>
                     
-                    <div className="flex-shrink-0 self-center">
+                    <div className="flex-shrink-0 self-center mt-[-30px]">
                         <motion.svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             width="24" height="24" 
@@ -127,18 +139,8 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                         </motion.svg>
                     </div>
                 </div>
-                
-                {item.tags && item.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-2">
-                        {item.tags.slice(0, 3).map((tag, tagIndex) => (
-                            <span key={tagIndex} className="px-3 py-1 bg-transparent text-foreground text-step--2 type-label rounded-full border border-foreground border-dashed">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )}
 
-                <div className={`grid transition-all duration-500 ease-in-out ${isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                <div className={`grid transition-all duration-500 ease-in-out mt-4 ${isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
                     <div className="overflow-hidden flex flex-col justify-start">
                         <div className="pt-fluid-m">
                             <p className="text-step-0 type-body text-foreground max-w-xl">
@@ -155,7 +157,6 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                             </Link>
                         </div>
                     </div>
-                </div>
                 </div>
             </TracingItem>
 
