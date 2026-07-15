@@ -18,6 +18,8 @@ import { TracingGrid, TracingItem } from "@/components/atoms/TracingBorders";
 
 function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }: { item: CaseItem, index: number, locale: string, hoverState: string, onMouseEnter: () => void, onMouseLeave: () => void }) {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
+    const [isCtaHovered, setIsCtaHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const isEven = index % 2 === 0;
     const indexStr = (index + 1).toString().padStart(2, "0");
@@ -55,6 +57,8 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
         }
     };
 
+    const showChevron = !isExpanded ? isRowHovered : (isRowHovered && hoveredSide === "left");
+
     return (
         <div 
             ref={containerRef}
@@ -81,8 +85,13 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                 forceSharedWall={sharedWall}
                 delayOffset={0}
             >
-                <div className="h-full w-full pointer-events-auto cursor-pointer flex items-start md:items-center justify-between gap-4">
-                    <div 
+                <div 
+                    className="w-full h-full flex flex-col justify-center"
+                    onMouseEnter={() => setHoveredSide("left")}
+                    onMouseLeave={() => setHoveredSide(null)}
+                >
+                    <div className="w-full pointer-events-auto cursor-pointer flex items-start md:items-center justify-between gap-4">
+                        <div 
                         style={{ viewTransitionName: `project-header-${item.href.split('/').pop()}`, width: 'fit-content' }}
                         className="flex flex-col items-start"
                     >
@@ -127,8 +136,8 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                                 strokeWidth="1.5"
                                 initial={{ pathLength: 0, opacity: 0 }}
                                 animate={{ 
-                                    pathLength: isRowHovered ? 1 : 0,
-                                    opacity: isRowHovered ? 1 : 0
+                                    pathLength: showChevron ? 1 : 0,
+                                    opacity: showChevron ? 1 : 0
                                 }}
                                 transition={{ 
                                     duration: 0.6, 
@@ -147,16 +156,23 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                                 {item.summary}
                             </p>
                             
-                            <Link href={item.href || "#"} onClick={(e) => e.stopPropagation()} className="inline-flex mt-fluid-m items-center gap-2 font-normal text-foreground hover:font-bold transition-all">
-                                <span className="border-b border-foreground/30 hover:border-foreground pb-0.5 type-label text-step--2">
+                            <Link 
+                                href={item.href || "#"} 
+                                onClick={(e) => e.stopPropagation()} 
+                                className={`inline-flex mt-fluid-m items-center gap-2 text-foreground transition-all duration-300 ${isCtaHovered ? 'font-bold' : 'font-normal'}`}
+                                onMouseEnter={() => setIsCtaHovered(true)}
+                                onMouseLeave={() => setIsCtaHovered(false)}
+                            >
+                                <span className={`border-b pb-0.5 type-label text-step--2 transition-colors duration-300 ${isCtaHovered ? 'border-foreground' : 'border-foreground/30'}`}>
                                     {item.customCtaLabel || (locale === 'pt' ? 'Ver case completo' : 'Read full case')}
                                 </span> 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:translate-x-2 group-data-[hover=true]:translate-x-2 transition-transform duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform transition-transform duration-300 ${isCtaHovered ? 'translate-x-4' : 'group-hover:translate-x-2 group-data-[hover=true]:translate-x-2'}`}>
                                     <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
                                 </svg>
                             </Link>
                         </div>
                     </div>
+                </div>
                 </div>
             </TracingItem>
 
@@ -176,14 +192,26 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                     viewport={{ once: false, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.1 }}
                     className={`block absolute top-[1px] bottom-[1px] w-[calc(100%-1px)] ${isEven ? 'right-0' : 'left-0'} bg-background overflow-hidden z-0 rounded-none cursor-pointer pointer-events-auto`}
+                    onMouseEnter={() => setHoveredSide("right")}
+                    onMouseLeave={() => setHoveredSide(null)}
                 >
+                    {isExpanded && item.href && (
+                        <Link 
+                            href={item.href} 
+                            onClick={(e) => e.stopPropagation()} 
+                            className="absolute inset-0 z-10" 
+                            aria-label={`Ver case ${item.title}`} 
+                            onMouseEnter={() => setIsCtaHovered(true)}
+                            onMouseLeave={() => setIsCtaHovered(false)}
+                        />
+                    )}
                     <Image 
                         src={item.thumbnailImage} 
                         alt={item.title} 
                         fill
                         sizes={IMAGE_SIZES.card}
                         {...BELOW_FOLD_IMAGE}
-                        className="object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-1000 ease-in-out cursor-pointer pointer-events-auto" 
+                        className={`object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-700 ease-[cubic-bezier(0.21,0.47,0.32,0.98)] cursor-pointer pointer-events-auto ${isExpanded && isCtaHovered ? 'scale-105' : 'scale-100'}`} 
                     />
                 </motion.div>
             </TracingItem>

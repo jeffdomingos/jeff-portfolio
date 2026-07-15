@@ -389,7 +389,7 @@ export function InspectorCursor() {
 
                 if (horizontalGap > 0) {
                     const hPercentage = (horizontalGap / canvas.width) * 100;
-                    hText = `${hPercentage.toFixed(1).replace('.0', '')}vw`;
+                    hText = `${hPercentage.toFixed(1).replace('.0', '')}w`;
                     htw = ctx.measureText(hText).width;
                     hx = animHitLeft + horizontalGap / 2;
                     
@@ -415,7 +415,7 @@ export function InspectorCursor() {
 
                 if (verticalGap > 0) {
                     const vPercentage = (verticalGap / canvas.height) * 100;
-                    vText = `${vPercentage.toFixed(1).replace('.0', '')}vh`;
+                    vText = `${vPercentage.toFixed(1).replace('.0', '')}h`;
                     vtw = ctx.measureText(vText).width;
                     
                     // Posição Padrão: Direita da linha com um gap de 8px
