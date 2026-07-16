@@ -68,10 +68,19 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
 }
 
 export function Callout({ children, type = "info" }: { children: ReactNode; type?: "info" | "warning" }) {
-    const bg = type === "warning" ? "bg-amber-50 border-amber-200" : "bg-muted border-border";
+    const isWarning = type === "warning";
     return (
-        <div className={`p-4 rounded-lg border-l-4 ${bg} my-6`}>
-            {children}
+        <div className="not-prose flex gap-3 items-start py-3 px-4 rounded-xl bg-muted/30 border border-border/50 text-sm md:text-base text-foreground/70 my-8">
+            <div className="mt-0.5 shrink-0 opacity-40">
+                {isWarning ? (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                ) : (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                )}
+            </div>
+            <div className="leading-relaxed [&>strong]:text-foreground [&>strong]:font-medium">
+                {children}
+            </div>
         </div>
     );
 }
