@@ -1,5 +1,5 @@
 import { getAllProjects } from "@/utils/content";
-import { CasesSection } from "@/components/organisms/CasesSection";
+import { ProjectsListSection } from "@/components/organisms/ProjectsListSection";
 import type { CaseItem } from "@/content/schema";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
@@ -35,7 +35,7 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
                 </p>
             </div>
 
-            <CasesSection items={items} locale={locale} />
+            <ProjectsListSection items={items} locale={locale} />
         </div>
     );
 }
