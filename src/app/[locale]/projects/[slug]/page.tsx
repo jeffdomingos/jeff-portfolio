@@ -116,7 +116,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                 )}
 
                 {/* Content Blocks */}
-                <div className="w-full max-w-3xl mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-normal prose-a:text-primary">
+                <div className="w-full max-w-3xl mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-normal prose-a:text-primary prose-p:my-fluid-s prose-h2:mt-fluid-xl prose-h2:mb-fluid-m prose-h3:mt-fluid-l prose-h3:mb-fluid-s prose-ul:my-fluid-m prose-li:my-fluid-xs prose-figure:my-fluid-xl">
                 {blocksToRender && blocksToRender.length > 0 ? (
                     blocksToRender.map((block: any, index: number) => {
                         switch (block.type) {
