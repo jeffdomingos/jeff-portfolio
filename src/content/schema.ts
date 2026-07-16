@@ -2,6 +2,7 @@ export interface GlobalHeader {
   logoHref: string;
   brandName: string;
   navItemHome: string;
+  navItemJournal: string;
   navItemResume: string;
   navItemContact: string;
   navMoreLabel: string;
@@ -198,4 +199,15 @@ export interface ProjectContentBlock {
   title: string;
   content: string;
   mediaSrc: string;
+}
+
+export interface JournalMeta {
+  slug: string;
+  date: string;
+  title: string;
+  summary: string;
+  thumbnail: string;
+  tags: string[];
+  linkedinUrl?: string;
+  instagramUrl?: string;
 }

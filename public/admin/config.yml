@@ -149,6 +149,131 @@ collections:
                   - {label: "Link do Figma", name: "src", widget: "string"}
                   - {label: "Legenda / Título", name: "title", widget: "string", required: false}
 
+  - name: "journal"
+    label: "📓 Journal"
+    folder: "src/content/journal"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - {label: "Slug (URL)", name: "slug", widget: "string"}
+      - {label: "Data de Publicação", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Imagem de Capa (Opcional)", name: "thumbnail", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "URL do Post no LinkedIn (para discussão)", name: "linkedinUrl", widget: "string", required: false}
+      - {label: "URL do Post no Instagram (para discussão)", name: "instagramUrl", widget: "string", required: false}
+      
+      - label: "🇧🇷 Conteúdo em Português"
+        name: "pt"
+        widget: "object"
+        collapsed: false
+        fields:
+          - {label: "Título", name: "title", widget: "string"}
+          - {label: "Resumo", name: "summary", widget: "text"}
+          - label: "Blocos de Conteúdo"
+            name: "blocks"
+            widget: "list"
+            types:
+              - label: "📝 Texto Livre (Markdown)"
+                name: "text"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo", name: "content", widget: "markdown"}
+              - label: "🖼️ Imagem"
+                name: "image"
+                widget: "object"
+                fields:
+                  - {label: "Imagem", name: "src", widget: "image"}
+                  - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
+                  - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+              - label: "💡 Destaque (Callout)"
+                name: "callout"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo (Suporta HTML)", name: "content", widget: "text"}
+                  - {label: "Tipo", name: "type", widget: "select", options: ["info", "warning"], default: "info"}
+              - label: "💬 Citação (Quote)"
+                name: "quote"
+                widget: "object"
+                fields:
+                  - {label: "Citação", name: "content", widget: "text"}
+                  - {label: "Autor", name: "author", widget: "string", required: false}
+              - label: "📊 Métrica de Impacto"
+                name: "metric"
+                widget: "object"
+                fields:
+                  - {label: "Valor (ex: 17%, R$12M)", name: "value", widget: "string"}
+                  - {label: "Rótulo/Descrição", name: "label", widget: "string"}
+              - label: "🎥 Vídeo Integrado"
+                name: "video"
+                widget: "object"
+                fields:
+                  - {label: "Arquivo de Vídeo ou URL (mp4/webm)", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🖌️ Protótipo Figma"
+                name: "figma"
+                widget: "object"
+                fields:
+                  - {label: "Link do Figma", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+
+      - label: "🇺🇸 Conteúdo em Inglês"
+        name: "en"
+        widget: "object"
+        collapsed: true
+        fields:
+          - {label: "Título", name: "title", widget: "string"}
+          - {label: "Resumo", name: "summary", widget: "text"}
+          - label: "Blocos de Conteúdo"
+            name: "blocks"
+            widget: "list"
+            types:
+              - label: "📝 Texto Livre (Markdown)"
+                name: "text"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo", name: "content", widget: "markdown"}
+              - label: "🖼️ Imagem"
+                name: "image"
+                widget: "object"
+                fields:
+                  - {label: "Imagem", name: "src", widget: "image"}
+                  - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
+                  - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+              - label: "💡 Destaque (Callout)"
+                name: "callout"
+                widget: "object"
+                fields:
+                  - {label: "Conteúdo (Suporta HTML)", name: "content", widget: "text"}
+                  - {label: "Tipo", name: "type", widget: "select", options: ["info", "warning"], default: "info"}
+              - label: "💬 Citação (Quote)"
+                name: "quote"
+                widget: "object"
+                fields:
+                  - {label: "Citação", name: "content", widget: "text"}
+                  - {label: "Autor", name: "author", widget: "string", required: false}
+              - label: "📊 Métrica de Impacto"
+                name: "metric"
+                widget: "object"
+                fields:
+                  - {label: "Valor (ex: 17%, R$12M)", name: "value", widget: "string"}
+                  - {label: "Rótulo/Descrição", name: "label", widget: "string"}
+              - label: "🎥 Vídeo Integrado"
+                name: "video"
+                widget: "object"
+                fields:
+                  - {label: "Arquivo de Vídeo ou URL (mp4/webm)", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🖌️ Protótipo Figma"
+                name: "figma"
+                widget: "object"
+                fields:
+                  - {label: "Link do Figma", name: "src", widget: "string"}
+                  - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+
   - name: "home_page"
     label: "🏠 Página Inicial"
     files:

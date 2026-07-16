@@ -7,7 +7,8 @@ import type {
     ResumePageContent,
     ContactPageContent,
     ProjectIndex,
-    ProjectMeta
+    ProjectMeta,
+    JournalMeta
 } from '@/content/schema';
 
 const contentDirectory = path.join(process.cwd(), 'src', 'content');
@@ -211,3 +212,52 @@ export function getAllProjects(locale: string) {
     return projects;
 }
 
+export function getJournalPost(locale: string, slug: string) {
+    const filePath = path.join(contentDirectory, 'journal', `${slug}.mdx`);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { data } = matter(fileContents);
+
+    const availableLocales: string[] = [];
+    if (data.pt && data.pt.blocks && data.pt.blocks.length > 0) availableLocales.push('pt');
+    if (data.en && data.en.blocks && data.en.blocks.length > 0) availableLocales.push('en');
+
+    const requestedLang = locale === 'pt' ? 'pt' : 'en';
+    const effectiveLang = availableLocales.includes(requestedLang)
+        ? requestedLang
+        : (availableLocales[0] ?? requestedLang);
+
+    const langData = data[effectiveLang] || {};
+
+    const meta: JournalMeta = {
+        slug,
+        date: data.date ?? '',
+        thumbnail: data.thumbnail ?? '',
+        tags: data[`tags_${effectiveLang}`] ?? langData.tags ?? data.tags ?? [],
+        title: langData.title ?? slug,
+        summary: langData.summary ?? '',
+        linkedinUrl: data.linkedinUrl ?? undefined,
+        instagramUrl: data.instagramUrl ?? undefined,
+    };
+
+    const blocks: any[] = langData.blocks ?? [];
+
+    return { meta, blocks, availableLocales, effectiveLang };
+}
+
+export function getAllJournalPosts(locale: string) {
+    const journalDir = path.join(contentDirectory, 'journal');
+    if (!fs.existsSync(journalDir)) return [];
+    
+    const files = fs.readdirSync(journalDir).filter(f => f.endsWith('.mdx'));
+
+    const posts = files.map(file => {
+        const slug = file.replace(/\.mdx$/, '');
+        return getJournalPost(locale, slug);
+    });
+
+    posts.sort((a, b) => {
+        return new Date(b.meta.date).getTime() - new Date(a.meta.date).getTime();
+    });
+
+    return posts;
+}
