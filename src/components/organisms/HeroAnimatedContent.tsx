@@ -152,7 +152,15 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
             <div className="relative w-full h-full flex items-center justify-between md:justify-end">
                 {/* Scroll Down Indicator (Absolutely centered) */}
                 <div className={`absolute left-1/2 -translate-x-1/2 flex justify-center transition-all duration-1000 ${showButtons ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                    <a href="#cases" className="pointer-events-auto flex items-center justify-center w-12 h-12 text-foreground hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full" aria-label="Scroll down">
+                    <a 
+                        href="#cases" 
+                        onClick={(e) => {
+                            e.preventDefault();
+                            lenis?.scrollTo('#cases', { offset: -50 });
+                        }}
+                        className="pointer-events-auto flex items-center justify-center w-12 h-12 text-foreground hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-full" 
+                        aria-label="Scroll down"
+                    >
                         <ChevronDown className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
                     </a>
                 </div>
