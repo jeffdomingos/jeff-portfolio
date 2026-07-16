@@ -60,10 +60,11 @@ function ProjectRow({
                 forceActive={isRowHovered}
                 forceExiting={isRowExiting}
                 forceSharedWall={sharedWall}
-                className="group flex flex-col md:flex-row md:items-center justify-between border-b border-foreground/20 cursor-pointer transition-colors duration-500"
+                className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer transition-colors duration-500"
             >
                 <div className="flex flex-row items-center w-full md:w-2/3">
-                    <div className="relative w-32 md:w-[260px] aspect-video shrink-0 overflow-hidden border-r border-foreground/10 bg-muted hidden md:block my-[2px]">
+                    <div className="relative w-32 md:w-[260px] aspect-video shrink-0 overflow-hidden bg-muted hidden md:block my-[2px]">
+                        <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none opacity-100" />
                         <Image 
                             src={item.thumbnailImage} 
                             alt={item.title} 
@@ -172,7 +173,7 @@ export function ProjectsListSection({ items, locale }: ProjectsListSectionProps)
 
     return (
         <div className="relative w-full pb-fluid-2xl px-fluid-xs md:px-fluid-m mt-fluid-xl" onMouseLeave={handleMouseLeaveSection}>
-            <div className="flex flex-col w-full border-t border-foreground/20">
+            <div className="flex flex-col w-full">
                 {items.map((item, i) => {
                     let state = "idle";
                     
