@@ -237,7 +237,7 @@ export function CasesSection({ items, locale }: CasesSectionProps) {
     };
 
     return (
-        <section data-cases-section="true" className="w-full pb-fluid-4xl overflow-hidden" onMouseLeave={handleMouseLeaveSection}>
+        <section id="cases" data-cases-section="true" className="w-full pb-fluid-4xl overflow-hidden" onMouseLeave={handleMouseLeaveSection}>
             <div className="flex flex-col w-full">
                 {items.map((item, i) => {
                     let state = "idle";
