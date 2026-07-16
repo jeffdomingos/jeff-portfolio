@@ -27,8 +27,8 @@ export function AuthorBio({ locale }: AuthorBioProps) {
         </h4>
         <p className="text-foreground/70 text-step--1 type-body mb-3">
           {isPt 
-            ? "Product Designer focado em estratégias complexas e interfaces de alto padrão. Construindo experiências digitais escaláveis."
-            : "Product Designer focused on complex strategies and high-end interfaces. Building scalable digital experiences."}
+            ? "Explorando o equilíbrio entre a consistência de sistemas SaaS/B2B e a expressividade de interfaces e websites de alto padrão."
+            : "Exploring the balance between the consistency of SaaS/B2B systems and the expressiveness of high-end interfaces and websites."}
         </p>
         <div className="flex items-center gap-4">
           <Link 
