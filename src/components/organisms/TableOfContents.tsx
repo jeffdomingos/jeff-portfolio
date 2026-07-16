@@ -67,12 +67,12 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
               >
                 {/* 3 Physical Integer Pixel Lines */}
                 <div className="absolute left-[-2px] top-0 bottom-0 flex">
-                  {/* -1 (Hover/Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
+                  {/* -1 (Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
                   {/* 0 (Base line from UL border) */}
                   <div className="w-[1px]" />
-                  {/* +1 (Hover/Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
+                  {/* +1 (Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
                 </div>
 
                 <span className="block" style={{ paddingLeft: `${16 + indent}px` }}>
