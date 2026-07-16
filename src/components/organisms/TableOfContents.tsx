@@ -43,7 +43,7 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
       <h4 className="text-step--2 type-label font-normal text-foreground mb-4 uppercase tracking-wider">
         {locale === 'pt' ? 'Nesta página' : 'On this page'}
       </h4>
-      <ul className="flex flex-col gap-2 m-0 p-0 list-none border-l border-foreground/10">
+      <ul className="flex flex-col gap-2 m-0 p-0 list-none border-l border-foreground">
         {toc.map((item) => (
           <li 
             key={item.id} 
@@ -52,10 +52,10 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
           >
             <a
               href={`#${item.id}`}
-              className={`block py-1 pl-4 -ml-[1px] border-l-2 transition-colors type-body text-step--2 no-underline
+              className={`block py-1 -ml-[1px] transition-all type-body text-step--2 no-underline
                 ${activeId === item.id 
-                  ? 'border-primary text-foreground font-medium' 
-                  : 'border-transparent text-foreground font-light hover:font-medium hover:border-foreground/30'
+                  ? 'border-l-4 border-foreground text-foreground font-medium pl-[13px]' 
+                  : 'border-l border-transparent text-foreground font-light pl-4 hover:font-medium hover:border-l-2 hover:border-foreground hover:pl-[15px]'
                 }
               `}
               onClick={(e) => {
