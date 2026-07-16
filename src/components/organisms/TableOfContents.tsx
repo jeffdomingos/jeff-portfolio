@@ -54,8 +54,8 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
               href={`#${item.id}`}
               className={`relative block py-1 pl-4 type-body text-step--2 no-underline transition-colors before:content-[''] before:absolute before:top-0 before:bottom-0 before:bg-foreground before:transition-all before:duration-200
                 ${activeId === item.id 
-                  ? 'text-foreground font-medium before:opacity-100 before:w-[5px] before:-left-[3px]' 
-                  : 'text-foreground font-light hover:font-medium before:w-[1px] before:-left-[1px] before:opacity-0 hover:before:opacity-100 hover:before:w-[3px] hover:before:-left-[2px]'
+                  ? 'text-foreground font-medium before:opacity-100 before:w-[5px] before:left-[-3px]' 
+                  : 'text-foreground font-light hover:font-medium before:w-[1px] before:left-[-1px] before:opacity-0 hover:before:opacity-100 hover:before:w-[3px] hover:before:left-[-2px]'
                 }
               `}
               onClick={(e) => {
