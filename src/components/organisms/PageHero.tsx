@@ -7,10 +7,11 @@ interface PageHeroProps {
     overline?: string;
     subtitle?: string;
     tags?: string[];
+    readingTimeLabel?: string;
     children?: React.ReactNode;
 }
 
-export function PageHero({ title, slug, overline, subtitle, tags, children }: PageHeroProps) {
+export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLabel, children }: PageHeroProps) {
     return (
         <>
             {/* Header Reading Protection Gradient */}
@@ -45,6 +46,12 @@ export function PageHero({ title, slug, overline, subtitle, tags, children }: Pa
                                                 {tag}
                                             </span>
                                         ))}
+                                    </div>
+                                )}
+                                {readingTimeLabel && (
+                                    <div className="mt-6 flex items-center gap-2 text-foreground/60 type-body text-step--1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <span>{readingTimeLabel}</span>
                                     </div>
                                 )}
                             </div>

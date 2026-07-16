@@ -1,6 +1,15 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem } from "@/components/mdx";
+import { LinksBlock } from "@/components/mdx/LinksBlock";
+import { TableOfContents } from "@/components/organisms/TableOfContents";
+import { generateTOC } from "@/utils/toc";
+import React from 'react';
+
+const slugify = (text: string) => {
+    if (typeof text !== 'string') return '';
+    return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-");
+};
 
 const mdxComponents = {
     Image: MDXImage,
@@ -9,7 +18,17 @@ const mdxComponents = {
     Metric,
     VideoEmbed,
     FigmaEmbed,
-    h2: (props: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-heading" {...props} />,
+    Ref,
+    Footnotes,
+    FootnoteItem,
+    h2: (props: any) => {
+        const textContent = React.Children.toArray(props.children).join('');
+        return <h2 id={slugify(textContent)} className="text-3xl font-bold mt-12 mb-6 text-heading scroll-mt-32" {...props} />;
+    },
+    h3: (props: any) => {
+        const textContent = React.Children.toArray(props.children).join('');
+        return <h3 id={slugify(textContent)} className="text-2xl font-bold mt-8 mb-4 text-heading scroll-mt-32" {...props} />;
+    },
     p: (props: any) => <p className="text-lg text-foreground/90 leading-relaxed mb-6" {...props} />,
     a: (props: any) => <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
 };
@@ -33,6 +52,7 @@ export async function generateMetadata({ params: { locale, slug } }: { params: {
 export default function ProjectDetail({ params: { locale, slug } }: { params: { locale: string, slug: string } }) {
     const { meta, blocks, effectiveLang } = getProject(locale, slug);
     const requestedLocale = locale === "pt" ? "pt" : "en";
+    const toc = generateTOC(blocks);
 
     let teamCallout: any = null;
     let blocksToRender = blocks;
@@ -63,6 +83,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                 overline={meta.context}
                 title={meta.title}
                 tags={meta.tags}
+                readingTimeLabel={meta.readingTime ? (requestedLocale === 'pt' ? `${meta.readingTime} min de leitura` : `${meta.readingTime} min read`) : undefined}
             >
                 {meta.role && (
                     <div className="flex flex-col">
@@ -84,8 +105,18 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                 )}
             </PageHero>
 
-            {/* Polymorphic Blocks Content */}
-            <div className="relative z-50 w-full max-w-4xl mx-auto pt-fluid-xl px-fluid-xs md:px-fluid-m prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
+            {/* Main Content Layout with TOC */}
+            <div className="relative z-50 w-full pt-fluid-xl px-fluid-xs md:px-fluid-m">
+                
+                {/* Sidebar TOC */}
+                {toc.length > 0 && (
+                    <div className="hidden xl:block absolute left-4 2xl:left-12 top-fluid-xl bottom-0 w-64">
+                        <TableOfContents toc={toc} locale={locale} />
+                    </div>
+                )}
+
+                {/* Content Blocks */}
+                <div className="w-full max-w-3xl mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary">
                 {blocksToRender && blocksToRender.length > 0 ? (
                     blocksToRender.map((block: any, index: number) => {
                         switch (block.type) {
@@ -112,6 +143,8 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <FigmaEmbed key={index} src={block.src} title={block.title} />;
                             case 'product-trio':
                                 return <ProductTrioDiagram key={index} locale={locale} />;
+                            case 'links':
+                                return <LinksBlock key={index} title={block.title} items={block.items} />;
                             default:
                                 return null;
                         }
@@ -121,6 +154,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                         <p>Project details are under construction.</p>
                     </div>
                 )}
+                </div>
             </div>
 
             {/* Case Navigator */}

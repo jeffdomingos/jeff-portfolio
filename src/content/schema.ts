@@ -192,13 +192,21 @@ export interface ProjectMeta {
   tags: string[];
   featured?: boolean;
   summary?: string;
+  readingTime?: number;
 }
 
 export interface ProjectContentBlock {
-  blockType: 'text' | 'image' | 'video' | 'caption';
-  title: string;
-  content: string;
-  mediaSrc: string;
+  type: 'text' | 'image' | 'callout' | 'quote' | 'metric' | 'video' | 'figma' | 'product-trio' | 'links';
+  content?: string;
+  src?: string;
+  alt?: string;
+  author?: string;
+  label?: string;
+  value?: string;
+  title?: string;
+  invertInDark?: boolean;
+  lightBgInDark?: boolean;
+  items?: { label: string; url: string }[];
 }
 
 export interface JournalMeta {
@@ -210,4 +218,5 @@ export interface JournalMeta {
   tags: string[];
   linkedinUrl?: string;
   instagramUrl?: string;
+  readingTime?: number;
 }

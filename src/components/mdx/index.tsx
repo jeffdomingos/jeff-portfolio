@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
+
 export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean }) {
     return (
         <motion.figure 

@@ -1,4 +1,4 @@
-import fs from 'fs'; // Cache buster
+import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import type {
@@ -12,6 +12,37 @@ import type {
 } from '@/content/schema';
 
 const contentDirectory = path.join(process.cwd(), 'src', 'content');
+
+export function calculateReadingTime(blocks: any[]): number {
+    let text = '';
+    let visualBlocksCount = 0;
+    
+    // Extract text from all relevant blocks
+    for (const block of blocks) {
+        if (block.type === 'text' && block.content) {
+            text += block.content + ' ';
+        } else if (block.type === 'callout' && block.content) {
+            text += block.content + ' ';
+        } else if (block.type === 'quote' && block.content) {
+            text += block.content + ' ';
+        } else if (['image', 'figma', 'video', 'gallery', 'carousel'].includes(block.type)) {
+            // Count visual elements to add absorption time
+            visualBlocksCount++;
+        }
+    }
+    
+    // Remove markdown formatting to get rough word count
+    const cleanText = text.replace(/[#*`_\[\]()]/g, '');
+    const wordCount = cleanText.trim().split(/\s+/).filter(Boolean).length;
+    
+    // Average reading speed: 200 words per minute
+    // Plus 15 seconds (0.25 minutes) per visual block
+    const baseTime = wordCount / 200;
+    const visualTime = visualBlocksCount * 0.25;
+    
+    const time = Math.ceil(baseTime + visualTime);
+    return Math.max(1, time); // Minimum 1 minute
+}
 
 export function getGlobalContent(locale: string): GlobalContent {
     const filePath = path.join(contentDirectory, locale, 'global.json');
@@ -165,6 +196,8 @@ export function getProject(locale: string, slug: string) {
         : (availableLocales[0] ?? requestedLang);
 
     const langData = data[effectiveLang] || {};
+    const blocks: any[] = langData.blocks ?? [];
+    const readingTime = calculateReadingTime(blocks);
 
     const meta: ProjectMeta = {
         slug,
@@ -176,9 +209,8 @@ export function getProject(locale: string, slug: string) {
         role: langData.role ?? '',
         timeline: langData.timeline ?? '',
         summary: langData.summary ?? '',
+        readingTime,
     };
-
-    const blocks: any[] = langData.blocks ?? [];
 
     return { meta, blocks, availableLocales, effectiveLang };
 }
@@ -227,6 +259,8 @@ export function getJournalPost(locale: string, slug: string) {
         : (availableLocales[0] ?? requestedLang);
 
     const langData = data[effectiveLang] || {};
+    const blocks: any[] = langData.blocks ?? [];
+    const readingTime = calculateReadingTime(blocks);
 
     const meta: JournalMeta = {
         slug,
@@ -237,9 +271,8 @@ export function getJournalPost(locale: string, slug: string) {
         summary: langData.summary ?? '',
         linkedinUrl: data.linkedinUrl ?? undefined,
         instagramUrl: data.instagramUrl ?? undefined,
+        readingTime,
     };
-
-    const blocks: any[] = langData.blocks ?? [];
 
     return { meta, blocks, availableLocales, effectiveLang };
 }

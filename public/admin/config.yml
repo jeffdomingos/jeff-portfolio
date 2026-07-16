@@ -91,6 +91,17 @@ collections:
                 fields:
                   - {label: "Link do Figma", name: "src", widget: "string"}
                   - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🔗 Links / Referências"
+                name: "links"
+                widget: "object"
+                fields:
+                  - {label: "Título do Bloco (ex: Referências)", name: "title", widget: "string", default: "Referências"}
+                  - label: "Lista de Links"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - {label: "Texto do Link", name: "label", widget: "string"}
+                      - {label: "URL", name: "url", widget: "string"}
 
       - label: "🇺🇸 Conteúdo em Inglês"
         name: "en"
@@ -148,6 +159,17 @@ collections:
                 fields:
                   - {label: "Link do Figma", name: "src", widget: "string"}
                   - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🔗 Links / Referências"
+                name: "links"
+                widget: "object"
+                fields:
+                  - {label: "Título do Bloco (ex: Referências)", name: "title", widget: "string", default: "Referências"}
+                  - label: "Lista de Links"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - {label: "Texto do Link", name: "label", widget: "string"}
+                      - {label: "URL", name: "url", widget: "string"}
 
   - name: "journal"
     label: "📓 Journal"
@@ -218,6 +240,17 @@ collections:
                 fields:
                   - {label: "Link do Figma", name: "src", widget: "string"}
                   - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🔗 Links / Referências"
+                name: "links"
+                widget: "object"
+                fields:
+                  - {label: "Título do Bloco (ex: Referências)", name: "title", widget: "string", default: "Referências"}
+                  - label: "Lista de Links"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - {label: "Texto do Link", name: "label", widget: "string"}
+                      - {label: "URL", name: "url", widget: "string"}
 
       - label: "🇺🇸 Conteúdo em Inglês"
         name: "en"
@@ -273,6 +306,17 @@ collections:
                 fields:
                   - {label: "Link do Figma", name: "src", widget: "string"}
                   - {label: "Legenda / Título", name: "title", widget: "string", required: false}
+              - label: "🔗 Links / Referências"
+                name: "links"
+                widget: "object"
+                fields:
+                  - {label: "Título do Bloco (ex: Referências)", name: "title", widget: "string", default: "Referências"}
+                  - label: "Lista de Links"
+                    name: "items"
+                    widget: "list"
+                    fields:
+                      - {label: "Texto do Link", name: "label", widget: "string"}
+                      - {label: "URL", name: "url", widget: "string"}
 
   - name: "home_page"
     label: "🏠 Página Inicial"
