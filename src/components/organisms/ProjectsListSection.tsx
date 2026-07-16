@@ -87,7 +87,7 @@ function ProjectRow({
                 </div>
                 
                 <div className="hidden lg:flex flex-col justify-center lg:w-[35%] py-4 md:py-6 px-4 md:px-6">
-                    <p className="text-step--1 type-body text-foreground/70 line-clamp-2 m-0 p-0">
+                    <p className="text-step--1 type-body text-foreground line-clamp-2 m-0 p-0">
                         {item.summary}
                     </p>
                 </div>
