@@ -27,7 +27,7 @@ const mdxComponents = {
     },
     h3: (props: any) => {
         const textContent = React.Children.toArray(props.children).join('');
-        return <h3 id={slugify(textContent)} className="text-2xl font-bold mt-8 mb-4 text-heading scroll-mt-32" {...props} />;
+        return <h3 id={slugify(textContent)} className="text-xl md:text-2xl font-medium mt-8 mb-4 text-foreground/80 scroll-mt-32" {...props} />;
     },
     p: (props: any) => <p className="text-lg text-foreground/90 leading-relaxed mb-6" {...props} />,
     a: (props: any) => <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />

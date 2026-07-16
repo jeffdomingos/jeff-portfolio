@@ -10,8 +10,8 @@ export function generateTOC(blocks: any[]): TOCItem[] {
     // Extract headings from text blocks
     for (const block of blocks) {
         if (block.type === 'text' && block.content) {
-            // Match markdown headings ## and ###
-            const headingRegex = /^(#{2,3})\s+(.+)$/gm;
+            // Match markdown headings ##
+            const headingRegex = /^(#{2})\s+(.+)$/gm;
             let match;
 
             while ((match = headingRegex.exec(block.content)) !== null) {

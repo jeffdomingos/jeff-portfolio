@@ -33,6 +33,10 @@
     @apply font-heading tracking-tight;
     text-wrap: balance;
   }
+
+  h2 + h3 {
+    margin-top: -0.5rem !important;
+  }
 }
 
 @layer components {
