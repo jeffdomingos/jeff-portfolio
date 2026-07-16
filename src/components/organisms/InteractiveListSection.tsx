@@ -259,6 +259,9 @@ export function InteractiveListSection({ items, locale }: InteractiveListSection
                 )}
             </div>
 
+            {/* Full Width Divider */}
+            <div className="w-[100vw] relative left-1/2 -translate-x-1/2 h-[1px] bg-foreground/10 mb-8" />
+
             {/* List */}
             <div className="flex flex-col w-full" onMouseLeave={handleMouseLeaveSection}>
                 {visibleItems.length === 0 ? (
