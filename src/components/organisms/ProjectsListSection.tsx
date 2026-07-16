@@ -53,7 +53,7 @@ function ProjectRow({
             onClick={() => {
                 if (item.href) router.push(item.href);
             }}
-            className="w-full relative"
+            className={`w-full relative -mt-[1px] first:mt-0 ${hoverState !== "idle" ? "z-50" : "z-10"}`}
         >
             <TracingItem 
                 id={`project-${index}`}
