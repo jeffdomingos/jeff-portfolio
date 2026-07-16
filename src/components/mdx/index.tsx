@@ -6,7 +6,22 @@ import { motion } from "framer-motion";
 
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 
-export function MDXImage({ src, alt, invertInDark, lightBgInDark }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean }) {
+export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean }) {
+    if (cleanLayout) {
+        return (
+            <motion.figure 
+                className="my-10"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0 rounded-lg" />
+            </motion.figure>
+        );
+    }
+
     return (
         <motion.figure 
             className="my-10"

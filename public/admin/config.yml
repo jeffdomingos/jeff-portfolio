@@ -65,6 +65,7 @@ collections:
                   - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
                   - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
                   - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Layout Limpo (Sem borda e sem legenda)", name: "cleanLayout", widget: "boolean", default: false, required: false}
               - label: "💡 Destaque (Callout)"
                 name: "callout"
                 widget: "object"
@@ -133,6 +134,7 @@ collections:
                   - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
                   - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
                   - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Layout Limpo (Sem borda e sem legenda)", name: "cleanLayout", widget: "boolean", default: false, required: false}
               - label: "💡 Destaque (Callout)"
                 name: "callout"
                 widget: "object"
@@ -214,6 +216,7 @@ collections:
                   - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
                   - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
                   - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Layout Limpo (Sem borda e sem legenda)", name: "cleanLayout", widget: "boolean", default: false, required: false}
               - label: "💡 Destaque (Callout)"
                 name: "callout"
                 widget: "object"
@@ -280,6 +283,7 @@ collections:
                   - {label: "Texto Alternativo (Alt)", name: "alt", widget: "string", required: false}
                   - {label: "Inverter cor no Dark Mode (ícones pretos)", name: "invertInDark", widget: "boolean", default: false, required: false}
                   - {label: "Adicionar fundo claro no Dark Mode (logos)", name: "lightBgInDark", widget: "boolean", default: false, required: false}
+                  - {label: "Layout Limpo (Sem borda e sem legenda)", name: "cleanLayout", widget: "boolean", default: false, required: false}
               - label: "💡 Destaque (Callout)"
                 name: "callout"
                 widget: "object"
