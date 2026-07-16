@@ -34,8 +34,15 @@
     text-wrap: balance;
   }
 
-  h2 + h3 {
-    margin-top: -0.5rem !important;
+  /* Agrupamento coeso de Título e Subtítulo */
+  h2:has(+ h3),
+  .prose h2:has(+ h3) {
+    margin-bottom: 0 !important;
+  }
+
+  h2 + h3,
+  .prose h2 + h3 {
+    margin-top: 0.25rem !important;
   }
 }
 
