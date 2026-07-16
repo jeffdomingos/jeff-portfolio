@@ -63,7 +63,7 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
     let displayDate = meta.date;
     if (meta.date) {
         try {
-            const d = (meta.date as any) instanceof Date ? meta.date : new Date(meta.date + 'T00:00:00');
+            const d = (meta.date as any) instanceof Date ? (meta.date as any as Date) : new Date(meta.date + 'T00:00:00');
             displayDate = new Intl.DateTimeFormat(locale === 'pt' ? 'pt-BR' : 'en-US', {
                 day: 'numeric', month: 'long', year: 'numeric'
             }).format(d);
