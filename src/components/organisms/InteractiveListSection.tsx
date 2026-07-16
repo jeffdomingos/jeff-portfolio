@@ -221,9 +221,9 @@ export function InteractiveListSection({ items, locale }: InteractiveListSection
     };
 
     return (
-        <div className="relative w-full pb-fluid-2xl px-fluid-xs md:px-fluid-m mt-fluid-xl">
+        <div className="relative w-full mt-fluid-xl">
             {/* Toolbar: Search and Filters */}
-            <div className="flex flex-col md:flex-row gap-4 mb-8 w-full items-start md:items-center justify-between">
+            <div className="flex flex-col md:flex-row gap-4 mb-8 w-full items-start md:items-center justify-between px-fluid-xs md:px-fluid-m">
                 <div className="relative w-full md:w-1/3 shrink-0">
                     <input 
                         type="text" 
@@ -260,55 +260,58 @@ export function InteractiveListSection({ items, locale }: InteractiveListSection
             </div>
 
             {/* Full Width Divider */}
-            <div className="w-[100vw] relative left-1/2 -translate-x-1/2 h-[1px] bg-foreground/10 mb-8" />
+            <div className="w-full h-px bg-border mb-8" />
 
-            {/* List */}
-            <div className="flex flex-col w-full" onMouseLeave={handleMouseLeaveSection}>
-                {visibleItems.length === 0 ? (
-                    <div className="w-full text-center py-20 text-foreground/50 italic bg-muted/30 rounded-xl border border-dashed mt-4">
-                        {locale === 'pt' ? 'Nenhum resultado encontrado.' : 'No results found.'}
+            {/* List and Pagination Wrapper */}
+            <div className="flex flex-col w-full pb-fluid-2xl px-fluid-xs md:px-fluid-m">
+                {/* List */}
+                <div className="flex flex-col w-full" onMouseLeave={handleMouseLeaveSection}>
+                    {visibleItems.length === 0 ? (
+                        <div className="w-full text-center py-20 text-foreground/50 italic bg-muted/30 rounded-xl border border-dashed mt-4">
+                            {locale === 'pt' ? 'Nenhum resultado encontrado.' : 'No results found.'}
+                        </div>
+                    ) : (
+                        visibleItems.map((item, i) => {
+                            let state = "idle";
+                            
+                            if (i === hoverState.current) {
+                                if (hoverState.previous === null) state = "hover_external";
+                                else if (hoverState.previous === i - 1) state = "hover_down";
+                                else if (hoverState.previous === i + 1) state = "hover_up";
+                                else state = "hover_external";
+                            } else if (i === hoverState.previous && hoverState.current !== i) {
+                                if (hoverState.current === null) state = "exit_external";
+                                else if (hoverState.current === i - 1) state = "exit_up";
+                                else if (hoverState.current === i + 1) state = "exit_down";
+                                else state = "exit_external";
+                            }
+
+                            return (
+                                <InteractiveRow 
+                                    key={item.id} 
+                                    item={item} 
+                                    index={i} 
+                                    hoverState={state} 
+                                    onMouseEnter={() => handleMouseEnter(i)}
+                                    onMouseLeave={() => {}}
+                                />
+                            );
+                        })
+                    )}
+                </div>
+
+                {/* Pagination / Load More */}
+                {filteredItems.length > displayCount && (
+                    <div className="w-full flex justify-center mt-12">
+                        <button
+                            onClick={() => setDisplayCount(prev => prev + 10)}
+                            className="px-8 py-3 rounded-full border border-foreground/20 hover:border-foreground bg-transparent text-foreground transition-colors type-label text-step--1 uppercase tracking-wider"
+                        >
+                            {locale === 'pt' ? 'Carregar Mais' : 'Load More'}
+                        </button>
                     </div>
-                ) : (
-                    visibleItems.map((item, i) => {
-                        let state = "idle";
-                        
-                        if (i === hoverState.current) {
-                            if (hoverState.previous === null) state = "hover_external";
-                            else if (hoverState.previous === i - 1) state = "hover_down";
-                            else if (hoverState.previous === i + 1) state = "hover_up";
-                            else state = "hover_external";
-                        } else if (i === hoverState.previous && hoverState.current !== i) {
-                            if (hoverState.current === null) state = "exit_external";
-                            else if (hoverState.current === i - 1) state = "exit_up";
-                            else if (hoverState.current === i + 1) state = "exit_down";
-                            else state = "exit_external";
-                        }
-
-                        return (
-                            <InteractiveRow 
-                                key={item.id} 
-                                item={item} 
-                                index={i} 
-                                hoverState={state} 
-                                onMouseEnter={() => handleMouseEnter(i)}
-                                onMouseLeave={() => {}}
-                            />
-                        );
-                    })
                 )}
             </div>
-
-            {/* Pagination / Load More */}
-            {filteredItems.length > displayCount && (
-                <div className="w-full flex justify-center mt-12">
-                    <button
-                        onClick={() => setDisplayCount(prev => prev + 10)}
-                        className="px-8 py-3 rounded-full border border-foreground/20 hover:border-foreground bg-transparent text-foreground transition-colors type-label text-step--1 uppercase tracking-wider"
-                    >
-                        {locale === 'pt' ? 'Carregar Mais' : 'Load More'}
-                    </button>
-                </div>
-            )}
         </div>
     );
 }
