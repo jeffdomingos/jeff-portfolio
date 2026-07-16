@@ -137,24 +137,24 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
             {/* Discussion & DM Form Area */}
             <div className={`relative z-50 w-full ${CONTENT_MAX_WIDTH} mx-auto px-fluid-xs md:px-fluid-m pb-fluid-xl mt-12`}>
                 {(meta.linkedinUrl || meta.instagramUrl) && (
-                    <div className="mb-12 p-8 bg-foreground/5 rounded-2xl border border-foreground/10">
-                        <h3 className="text-step-1 type-subheading mb-4">
+                    <div className="mb-10 pt-4">
+                        <h3 className="text-step-0 font-bold mb-2">
                             {locale === 'pt' ? 'Participe da discussão pública' : 'Join the public discussion'}
                         </h3>
-                        <p className="text-foreground/70 type-body mb-6">
+                        <p className="text-foreground/70 text-step--1 type-body mb-4">
                             {locale === 'pt' 
                                 ? 'Este assunto também está sendo discutido nas minhas redes. Clique nos links abaixo para comentar e interagir por lá!' 
                                 : 'This topic is also being discussed on my networks. Click the links below to comment and interact over there!'}
                         </p>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-3">
                             {meta.linkedinUrl && (
                                 <a 
                                     href={meta.linkedinUrl} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-6 py-3 bg-[#0A66C2] text-white rounded-full font-medium hover:bg-[#004182] transition-colors"
+                                    className="flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full text-step--1 font-medium hover:bg-foreground/90 transition-colors"
                                 >
-                                    <Linkedin className="w-5 h-5" />
+                                    <Linkedin className="w-4 h-4" />
                                     LinkedIn
                                 </a>
                             )}
@@ -163,9 +163,9 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
                                     href={meta.instagramUrl} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white rounded-full font-medium hover:opacity-90 transition-opacity"
+                                    className="flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full text-step--1 font-medium hover:bg-foreground/90 transition-colors"
                                 >
-                                    <Instagram className="w-5 h-5" />
+                                    <Instagram className="w-4 h-4" />
                                     Instagram
                                 </a>
                             )}
