@@ -62,37 +62,43 @@ function ProjectRow({
                 forceSharedWall={sharedWall}
                 className="group flex flex-col md:flex-row md:items-center justify-between cursor-pointer transition-colors duration-500"
             >
-                <div className="flex flex-row items-center w-full md:w-2/3">
-                    <div className="relative w-32 md:w-[260px] aspect-video shrink-0 overflow-hidden bg-muted hidden md:block my-[2px]">
+                <div className="flex flex-row items-center w-full md:w-2/3 lg:w-[40%]">
+                    <div className="relative w-24 md:w-[200px] aspect-video shrink-0 overflow-hidden bg-muted hidden md:block my-[2px]">
                         <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none opacity-100" />
                         <Image 
                             src={item.thumbnailImage} 
                             alt={item.title} 
                             fill 
                             className={`object-cover transition-transform duration-700 ease-[0.21,0.47,0.32,0.98] grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 ${isHovered ? 'scale-110' : 'scale-100'}`}
-                            sizes="(max-width: 768px) 128px, 260px"
+                            sizes="(max-width: 768px) 128px, 200px"
                         />
                     </div>
                     
-                    <div className="flex flex-col justify-center gap-1 py-6 md:py-8 px-4 md:px-8">
+                    <div className="flex flex-col justify-center gap-1 py-4 md:py-6 px-4 md:px-6">
                         {item.context && (
-                            <span className="block type-label font-heading text-step--2 md:text-step--1 opacity-60 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span className="block type-label font-heading text-step--2 md:text-[0.75rem] opacity-60 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
                                 {item.context}
                             </span>
                         )}
-                        <h3 className={`text-step-1 md:text-step-4 type-display m-0 p-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? 'md:translate-x-2' : ''}`}>
+                        <h3 className={`text-step-0 md:text-step-2 type-display m-0 p-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? 'md:translate-x-2' : ''}`}>
                             {item.title}
                         </h3>
                     </div>
                 </div>
                 
-                <div className="flex flex-col md:flex-row md:items-center gap-6 md:w-1/3 justify-start md:justify-end shrink-0 py-6 md:py-8 px-4 md:px-8">
+                <div className="hidden lg:flex flex-col justify-center lg:w-[35%] py-4 md:py-6 px-4 md:px-6">
+                    <p className="text-step--1 type-body text-foreground/70 line-clamp-2 m-0 p-0">
+                        {item.summary}
+                    </p>
+                </div>
+
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:w-1/3 lg:w-[25%] justify-start md:justify-end shrink-0 py-4 md:py-6 px-4 md:px-6">
                     {item.tags && item.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2 justify-start md:justify-end">
                             {item.tags.slice(0, 3).map((tag, tagIndex) => (
                                 <span 
                                     key={tagIndex} 
-                                    className="px-4 py-1.5 bg-transparent text-foreground text-step--2 type-label rounded-full border border-foreground/30 transition-colors duration-300 group-hover:border-foreground border-dashed"
+                                    className="px-3 py-1 bg-transparent text-foreground text-step--2 md:text-[0.7rem] type-label rounded-full border border-foreground/30 transition-colors duration-300 group-hover:border-foreground border-dashed"
                                 >
                                     {tag}
                                 </span>
@@ -100,8 +106,8 @@ function ProjectRow({
                         </div>
                     )}
                     
-                    <div className="flex-shrink-0 md:ml-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-6 h-6 md:w-8 md:h-8 text-foreground transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? '-rotate-45' : 'rotate-0'}`}>
+                    <div className="flex-shrink-0 ml-0 md:ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`w-5 h-5 md:w-6 md:h-6 text-foreground transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? '-rotate-45' : 'rotate-0'}`}>
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
