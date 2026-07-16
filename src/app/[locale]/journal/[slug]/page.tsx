@@ -91,7 +91,7 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
                 )}
 
                 {/* Content Blocks */}
-                <div className={`w-full ${CONTENT_MAX_WIDTH} mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-normal prose-a:text-primary prose-p:font-light prose-p:tracking-tight prose-p:text-foreground prose-p:my-fluid-s prose-p:leading-relaxed prose-h2:mt-fluid-xl prose-h2:mb-fluid-m prose-h3:mt-fluid-l prose-h3:mb-fluid-s prose-ul:my-fluid-m prose-li:font-light prose-li:tracking-tight prose-li:text-foreground prose-li:my-2 prose-li:marker:text-foreground prose-li:leading-relaxed prose-strong:font-semibold prose-strong:text-foreground [&_li_p]:my-0 prose-figure:my-fluid-xl`}>
+                <div className={`w-full ${CONTENT_MAX_WIDTH} mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-normal prose-a:text-primary prose-p:text-[1em] prose-p:font-light prose-p:tracking-tight prose-p:text-foreground prose-p:my-fluid-s prose-p:leading-relaxed prose-h2:mt-fluid-xl prose-h2:mb-fluid-m prose-h3:mt-fluid-l prose-h3:mb-fluid-s prose-ul:my-fluid-m prose-li:text-[1em] prose-li:font-light prose-li:tracking-tight prose-li:text-foreground prose-li:my-2 prose-li:marker:text-foreground prose-li:leading-relaxed prose-strong:font-semibold prose-strong:text-foreground [&_li_p]:text-[1em] [&_li_p]:my-0 prose-figure:my-fluid-xl`}>
                 {blocks && blocks.length > 0 ? (
                     blocks.map((block: any, index: number) => {
                         switch (block.type) {
