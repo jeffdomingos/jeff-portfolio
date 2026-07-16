@@ -6,7 +6,26 @@ import { motion } from "framer-motion";
 
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 
-export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean }) {
+export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, scrollingMockup }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean; scrollingMockup?: boolean }) {
+    if (scrollingMockup) {
+        return (
+            <motion.figure 
+                className="my-10 w-full"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10% 0px" }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+                <div 
+                    className="w-full h-[400px] md:h-[600px] rounded-xl border border-border/50 overflow-hidden animate-scroll-vertical bg-no-repeat shadow-xl"
+                    style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
+                    aria-label={alt || "Scrolling Mockup"}
+                    role="img"
+                />
+            </motion.figure>
+        );
+    }
+
     if (cleanLayout) {
         return (
             <motion.figure 

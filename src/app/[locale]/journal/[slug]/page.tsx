@@ -98,7 +98,7 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
                             case 'text':
                                 return <MDXRemote key={index} source={block.content || ''} components={mdxComponents} />;
                             case 'image':
-                                return <MDXImage key={index} src={block.src} alt={block.alt} invertInDark={block.invertInDark} lightBgInDark={block.lightBgInDark} cleanLayout={block.cleanLayout} />;
+                                return <MDXImage key={index} src={block.src} alt={block.alt} invertInDark={block.invertInDark} lightBgInDark={block.lightBgInDark} cleanLayout={block.cleanLayout} scrollingMockup={block.scrollingMockup} />;
                             case 'callout':
                                 return (
                                     <Callout key={index} type={block.type}>

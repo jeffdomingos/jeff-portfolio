@@ -58,6 +58,7 @@
 }
 
 @layer utilities {
+  /* Retícula de Fundo (Halftone) */
   .bg-halftone {
     --dot-base: 1.2px;
     --grid-size: 4px;
@@ -116,4 +117,20 @@
 
 .bg-foreground .fade-mask {
   background-color: oklch(var(--color-foreground));
+}
+
+@keyframes scroll-vertical {
+  0% {
+    background-position: top center;
+  }
+  85% {
+    background-position: bottom center;
+  }
+  100% {
+    background-position: top center;
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical 15s ease-in-out infinite;
 }
