@@ -5,11 +5,15 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { GlobalHeader } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
+import { usePathname } from "next/navigation";
 
 export function Header({ data, locale, otherLocale }: { data: GlobalHeader, locale: string, otherLocale: string }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isFooterVisible, setIsFooterVisible] = useState(false);
     const [isMenuDark, setIsMenuDark] = useState(false);
+
+    const pathname = usePathname();
+    const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
     const toggleMenu = () => {
         if (!isOpen) {
@@ -81,10 +85,17 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
                             {data.navItemHome}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
-                        <Link href={`/${locale}#cases`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
-                            {locale === 'pt' ? 'Projetos' : 'Projects'}
-                            <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
-                        </Link>
+                        {isHome ? (
+                            <Link href={`/${locale}#cases`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                                {locale === 'pt' ? 'Projetos' : 'Projects'}
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </Link>
+                        ) : (
+                            <a href={`/${locale}#cases`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                                {locale === 'pt' ? 'Projetos' : 'Projects'}
+                                <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                            </a>
+                        )}
                         <Link href={`/${locale}/journal`} data-text={data.navItemJournal} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemJournal}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
@@ -122,9 +133,15 @@ export function Header({ data, locale, otherLocale }: { data: GlobalHeader, loca
                     <Link href={`/${locale}`} onClick={() => setIsOpen(false)} data-text={data.navItemHome} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemHome}
                     </Link>
-                    <Link href={`/${locale}#cases`} onClick={() => setIsOpen(false)} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
-                        {locale === 'pt' ? 'Projetos' : 'Projects'}
-                    </Link>
+                    {isHome ? (
+                        <Link href={`/${locale}#cases`} onClick={() => setIsOpen(false)} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {locale === 'pt' ? 'Projetos' : 'Projects'}
+                        </Link>
+                    ) : (
+                        <a href={`/${locale}#cases`} onClick={() => setIsOpen(false)} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {locale === 'pt' ? 'Projetos' : 'Projects'}
+                        </a>
+                    )}
                     <Link href={`/${locale}/journal`} onClick={() => setIsOpen(false)} data-text={data.navItemJournal} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                         {data.navItemJournal}
                     </Link>
