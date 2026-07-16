@@ -27,7 +27,7 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                         />
                     </div>
                 </div>
-                {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
+                {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
             </motion.figure>
         );
     }
@@ -62,7 +62,7 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                     <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0" />
                 </div>
             </div>
-            {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
+            {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
         </motion.figure>
     );
 }
@@ -125,7 +125,7 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
                     )}
                 </div>
             </div>
-            {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
+            {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
         </motion.figure>
     );
 }
@@ -152,7 +152,7 @@ export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
                     />
                 </div>
             </div>
-            {title && <figcaption className="text-center text-sm text-foreground font-light mt-6">{title}</figcaption>}
+            {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
         </motion.figure>
     );
 }
