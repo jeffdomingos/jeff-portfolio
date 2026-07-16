@@ -28,7 +28,7 @@ export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLab
                             >
                                 <div className="mb-6">
                                     {overline && (
-                                        <span className="block text-step--1 md:text-step-0 font-heading opacity-90 type-label font-semibold text-foreground tracking-widest uppercase mb-2">
+                                        <span className="block text-step--1 md:text-step-0 font-heading type-label font-normal text-foreground tracking-widest uppercase mb-2">
                                             {overline}
                                         </span>
                                     )}
@@ -41,7 +41,7 @@ export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLab
                                         {tags.map((tag: string, i: number) => (
                                             <span 
                                                 key={i} 
-                                                className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 type-label text-foreground"
+                                                className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 type-label text-foreground font-light"
                                             >
                                                 {tag}
                                             </span>
@@ -49,8 +49,8 @@ export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLab
                                     </div>
                                 )}
                                 {readingTimeLabel && (
-                                    <div className="mt-6 flex items-center gap-2 text-foreground/60 type-body text-step--1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    <div className="mt-6 flex items-center gap-2 text-foreground type-body text-step--1 font-light">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                         <span>{readingTimeLabel}</span>
                                     </div>
                                 )}

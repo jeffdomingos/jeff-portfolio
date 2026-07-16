@@ -40,7 +40,7 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
 
   return (
     <nav className="sticky top-32 max-h-[calc(100vh-8rem)] overflow-y-auto hidden lg:block w-64 pr-4">
-      <h4 className="text-step--2 type-label font-bold text-foreground/50 mb-4 uppercase tracking-wider">
+      <h4 className="text-step--2 type-label font-normal text-foreground mb-4 uppercase tracking-wider">
         {locale === 'pt' ? 'Nesta página' : 'On this page'}
       </h4>
       <ul className="flex flex-col gap-2 m-0 p-0 list-none border-l border-foreground/10">
@@ -55,7 +55,7 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
               className={`block py-1 pl-4 -ml-[1px] border-l-2 transition-colors type-body text-step--2 no-underline
                 ${activeId === item.id 
                   ? 'border-primary text-foreground font-medium' 
-                  : 'border-transparent text-foreground/50 hover:text-foreground hover:border-foreground/30'
+                  : 'border-transparent text-foreground font-light hover:font-medium hover:border-foreground/30'
                 }
               `}
               onClick={(e) => {

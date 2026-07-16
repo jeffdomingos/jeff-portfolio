@@ -67,11 +67,11 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
         teamCalloutHtml = teamCalloutHtml.replace(/<br\s*\/?>/gi, '');
         teamCalloutHtml = teamCalloutHtml.replace(
             /<strong>(.*?)<\/strong>/i, 
-            '<strong class="text-foreground/70 type-label text-step--1 block mb-3">$1</strong><div class="flex flex-wrap gap-x-8 gap-y-4">'
+            '<strong class="text-foreground type-label text-step--1 font-normal block mb-3">$1</strong><div class="flex flex-wrap gap-x-8 gap-y-4">'
         );
         teamCalloutHtml = teamCalloutHtml.replace(
             /-\s*(.*?)\s*\((.*?)\)/g, 
-            '<div class="flex flex-col"><span class="font-medium text-foreground text-step-0">$1</span><span class="text-step--2 text-foreground/60 type-label mt-0.5">$2</span></div>'
+            '<div class="flex flex-col"><span class="font-medium text-foreground text-step-0">$1</span><span class="text-step--2 text-foreground type-label font-light mt-0.5">$2</span></div>'
         );
         teamCalloutHtml += '</div>'; // close the flex container
     }
@@ -87,13 +87,13 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
             >
                 {meta.role && (
                     <div className="flex flex-col">
-                        <strong className="text-foreground/70 type-label text-step--1 block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
+                        <strong className="text-foreground type-label text-step--1 font-normal block mb-3">{requestedLocale === 'pt' ? 'Atuação' : 'Role'}</strong>
                         <span className="text-foreground text-step-1 md:text-step-2 type-subheading">{meta.role}</span>
                     </div>
                 )}
                 {meta.timeline && (
                     <div className="flex flex-col">
-                        <strong className="text-foreground/70 type-label text-step--1 block mb-3">{requestedLocale === 'pt' ? 'Período' : 'Timeline'}</strong>
+                        <strong className="text-foreground type-label text-step--1 font-normal block mb-3">{requestedLocale === 'pt' ? 'Período' : 'Timeline'}</strong>
                         <span className="text-foreground text-step-1 md:text-step-2 type-subheading">{meta.timeline}</span>
                     </div>
                 )}
