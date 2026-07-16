@@ -46,13 +46,13 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
       <ul className="flex flex-col gap-2 m-0 p-0 list-none border-l border-foreground ml-[4px]">
         {toc.map((item) => {
           const indent = (item.level - 2) * 12;
+          const isActive = activeId === item.id;
           return (
             <li key={item.id} className="m-0 p-0">
               <a
                 href={`#${item.id}`}
-                style={{ paddingLeft: `${16 + indent}px` }}
                 className={`relative block py-1 type-body text-step--2 no-underline transition-colors group
-                  ${activeId === item.id ? 'text-foreground font-medium' : 'text-foreground font-light hover:font-medium'}
+                  ${isActive ? 'text-foreground font-medium' : 'text-foreground font-light hover:font-medium'}
                 `}
                 onClick={(e) => {
                   e.preventDefault();
@@ -65,22 +65,21 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
                   }
                 }}
               >
-                {/* 5 Physical Integer Pixel Lines to beat Subpixel Rounding */}
-                <div className="absolute left-[-3px] top-0 bottom-0 flex">
-                  {/* -2 (Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
+                {/* 3 Physical Integer Pixel Lines */}
+                <div className="absolute left-[-2px] top-0 bottom-0 flex">
                   {/* -1 (Hover/Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
+                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
                   {/* 0 (Base line from UL border) */}
                   <div className="w-[1px]" />
                   {/* +1 (Hover/Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
-                  {/* +2 (Active) */}
-                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
+                  <div className={`w-[1px] transition-opacity duration-200 ${isActive ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
                 </div>
-              {item.title}
-            </a>
-          </li>
+
+                <span className="block" style={{ paddingLeft: `${16 + indent}px` }}>
+                  {item.title}
+                </span>
+              </a>
+            </li>
           );
         })}
       </ul>
