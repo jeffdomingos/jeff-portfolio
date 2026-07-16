@@ -25,7 +25,7 @@ export function ProjectsListSection({ items, locale }: ProjectsListSectionProps)
                     return (
                         <div 
                             key={index}
-                            className="group flex flex-col md:flex-row md:items-center justify-between py-10 md:py-16 border-b border-foreground/20 cursor-pointer transition-colors duration-500 hover:bg-foreground/5 px-4 md:px-8 -mx-4 md:-mx-8"
+                            className="group flex flex-col md:flex-row md:items-center justify-between py-6 md:py-8 border-b border-foreground/20 cursor-pointer transition-colors duration-500 hover:bg-foreground/5 px-4 md:px-8 -mx-4 md:-mx-8"
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                             onClick={() => {
