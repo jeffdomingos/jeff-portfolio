@@ -51,24 +51,33 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
               <a
                 href={`#${item.id}`}
                 style={{ paddingLeft: `${16 + indent}px` }}
-                className={`relative block py-1 type-body text-step--2 no-underline transition-colors
-                  before:content-[''] before:absolute before:top-0 before:bottom-0 before:w-[1px] before:-left-px before:bg-foreground before:transition-all before:duration-200 before:origin-center
-                  ${activeId === item.id 
-                    ? 'text-foreground font-medium before:opacity-100 before:scale-x-[5]' 
-                    : 'text-foreground font-light hover:font-medium before:opacity-0 hover:before:opacity-100 hover:before:scale-x-[3]'
-                  }
+                className={`relative block py-1 type-body text-step--2 no-underline transition-colors group
+                  ${activeId === item.id ? 'text-foreground font-medium' : 'text-foreground font-light hover:font-medium'}
                 `}
-              onClick={(e) => {
-                e.preventDefault();
-                const el = document.getElementById(item.id);
-                if (el) {
-                  window.scrollTo({
-                    top: el.offsetTop - 100,
-                    behavior: 'smooth',
-                  });
-                }
-              }}
-            >
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById(item.id);
+                  if (el) {
+                    window.scrollTo({
+                      top: el.offsetTop - 100,
+                      behavior: 'smooth',
+                    });
+                  }
+                }}
+              >
+                {/* 5 Physical Integer Pixel Lines to beat Subpixel Rounding */}
+                <div className="absolute left-[-3px] top-0 bottom-0 flex">
+                  {/* -2 (Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
+                  {/* -1 (Hover/Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
+                  {/* 0 (Base line from UL border) */}
+                  <div className="w-[1px]" />
+                  {/* +1 (Hover/Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'bg-foreground opacity-0 group-hover:opacity-100'}`} />
+                  {/* +2 (Active) */}
+                  <div className={`w-[1px] transition-opacity duration-200 ${activeId === item.id ? 'bg-foreground opacity-100' : 'opacity-0'}`} />
+                </div>
               {item.title}
             </a>
           </li>
