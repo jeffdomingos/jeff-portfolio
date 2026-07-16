@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 
 export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, scrollingMockup }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean; scrollingMockup?: boolean }) {
-    if (scrollingMockup) {
+    if (cleanLayout) {
         return (
             <motion.figure 
                 className="my-10 w-full"
@@ -16,47 +16,63 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                 viewport={{ once: true, margin: "-10% 0px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-                <div 
-                    className="w-full h-[400px] md:h-[600px] rounded-xl border border-border/50 overflow-hidden animate-scroll-vertical bg-no-repeat shadow-xl"
-                    style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
-                    aria-label={alt || "Scrolling Mockup"}
-                    role="img"
-                />
+                {scrollingMockup ? (
+                    <div 
+                        className="w-full h-[300px] md:h-[400px] rounded-lg overflow-hidden animate-scroll-vertical bg-no-repeat"
+                        style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
+                        aria-label={alt || "Scrolling Mockup"}
+                        role="img"
+                    />
+                ) : (
+                    <Image
+                        src={src}
+                        alt={alt || "Article image"}
+                        width={1200}
+                        height={800}
+                        className="w-full h-auto rounded-lg"
+                    />
+                )}
             </motion.figure>
         );
     }
 
-    if (cleanLayout) {
-        return (
-            <motion.figure 
-                className="my-10"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0 rounded-lg" />
-            </motion.figure>
-        );
-    }
+    const invertClass = invertInDark ? 'dark:invert dark:hue-rotate-180' : '';
+    const bgClass = lightBgInDark ? 'dark:bg-white' : '';
 
     return (
         <motion.figure 
-            className="my-10"
+            className="my-14"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="relative">
-                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0" />
+            <div className="relative group">
+                <div className="absolute inset-0 bg-halftone translate-x-4 translate-y-4 rounded-xl -z-10 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500 ease-out" />
+                <div className={`relative overflow-hidden rounded-xl border-2 border-foreground ${bgClass}`}>
+                    {scrollingMockup ? (
+                        <div 
+                            className={`w-full h-[300px] md:h-[400px] bg-no-repeat animate-scroll-vertical ${invertClass}`}
+                            style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
+                            aria-label={alt || "Scrolling Mockup"}
+                            role="img"
+                        />
+                    ) : (
+                        <Image
+                            src={src}
+                            alt={alt || "Article image"}
+                            width={1200}
+                            height={800}
+                            className={`w-full h-auto object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] ${invertClass}`}
+                        />
+                    )}
                 </div>
             </div>
-            {alt && <figcaption className="text-center text-sm text-foreground font-light mt-6">{alt}</figcaption>}
+            {alt && (
+                <figcaption className="mt-4 text-center text-step--1 text-foreground/60 type-label">
+                    {alt}
+                </figcaption>
+            )}
         </motion.figure>
     );
 }
