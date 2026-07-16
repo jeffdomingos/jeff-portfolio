@@ -44,20 +44,20 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
         {locale === 'pt' ? 'Nesta página' : 'On this page'}
       </h4>
       <ul className="flex flex-col gap-2 m-0 p-0 list-none border-l border-foreground">
-        {toc.map((item) => (
-          <li 
-            key={item.id} 
-            className="m-0 p-0"
-            style={{ paddingLeft: `${(item.level - 2) * 12}px` }}
-          >
-            <a
-              href={`#${item.id}`}
-              className={`relative block py-1 pl-4 type-body text-step--2 no-underline transition-colors before:content-[''] before:absolute before:top-0 before:bottom-0 before:bg-foreground before:transition-all before:duration-200
-                ${activeId === item.id 
-                  ? 'text-foreground font-medium before:opacity-100 before:w-[5px] before:left-[-3px]' 
-                  : 'text-foreground font-light hover:font-medium before:w-[1px] before:left-[-1px] before:opacity-0 hover:before:opacity-100 hover:before:w-[3px] hover:before:left-[-2px]'
-                }
-              `}
+        {toc.map((item) => {
+          const indent = (item.level - 2) * 12;
+          return (
+            <li key={item.id} className="m-0 p-0">
+              <a
+                href={`#${item.id}`}
+                style={{ paddingLeft: `${16 + indent}px` }}
+                className={`relative block py-1 type-body text-step--2 no-underline transition-colors
+                  before:content-[''] before:absolute before:top-0 before:bottom-0 before:w-[1px] before:-left-[1px] before:bg-foreground before:transition-all before:duration-200 before:origin-center
+                  ${activeId === item.id 
+                    ? 'text-foreground font-medium before:opacity-100 before:scale-x-[5]' 
+                    : 'text-foreground font-light hover:font-medium before:opacity-0 hover:before:opacity-100 hover:before:scale-x-[3]'
+                  }
+                `}
               onClick={(e) => {
                 e.preventDefault();
                 const el = document.getElementById(item.id);
