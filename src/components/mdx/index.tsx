@@ -52,7 +52,7 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                 <div className={`relative overflow-hidden rounded-xl border-2 border-foreground ${bgClass}`}>
                     {scrollingMockup ? (
                         <div 
-                            className={`w-full h-[300px] md:h-[400px] bg-no-repeat animate-scroll-vertical ${invertClass}`}
+                            className={`w-full h-[300px] md:h-[400px] bg-no-repeat animate-scroll-vertical transition-transform duration-700 ease-out group-hover:scale-[1.02] ${invertClass}`}
                             style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
                             aria-label={alt || "Scrolling Mockup"}
                             role="img"
