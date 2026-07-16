@@ -94,13 +94,10 @@ function ProjectRow({
 
                 <div className="flex flex-col md:flex-row md:items-center gap-4 md:w-1/3 lg:w-[25%] justify-start md:justify-end shrink-0 py-4 md:py-6 px-4 md:px-6">
                     {item.tags && item.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 justify-start md:justify-end">
-                            {item.tags.slice(0, 3).map((tag, tagIndex) => (
-                                <span 
-                                    key={tagIndex} 
-                                    className="px-3 py-1 bg-transparent text-foreground text-step--2 md:text-[0.7rem] type-label rounded-full border border-foreground/30 transition-colors duration-300 group-hover:border-foreground border-dashed"
-                                >
-                                    {tag}
+                        <div className="flex flex-wrap justify-start md:justify-end text-step--2 md:text-[0.75rem] type-label opacity-70">
+                            {item.tags.slice(0, 3).map((tag, tagIndex, arr) => (
+                                <span key={tagIndex} className="whitespace-nowrap">
+                                    #{tag}{tagIndex < arr.length - 1 ? ', ' : ''}&nbsp;
                                 </span>
                             ))}
                         </div>
