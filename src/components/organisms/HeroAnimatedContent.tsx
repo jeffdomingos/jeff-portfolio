@@ -125,9 +125,9 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                             </Button>
 
                             <Button asChild variant="secondary" size="default" className="md:h-12 md:px-8 md:text-sm h-10 px-6 text-xs">
-                                <a href="#cases">
+                                <Link href={`/${locale}/projects`}>
                                     {locale === 'en' ? 'View Projects' : 'Ver Projetos'}
-                                </a>
+                                </Link>
                             </Button>
                         </div>
                     )}
