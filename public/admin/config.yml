@@ -1,3 +1,4 @@
+local_backend: true
 backend:
   name: github
   repo: jeffdomingos/jeff-portfolio
@@ -9,6 +10,9 @@ locale: 'pt'
 
 media_folder: "public/images"
 public_folder: "/images"
+
+editor:
+  preview: false
 
 collections:
   - name: "projects"

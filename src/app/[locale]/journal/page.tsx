@@ -32,7 +32,7 @@ export default function JournalPage({ params: { locale } }: { params: { locale: 
                         let displayDate = post.meta.date;
                         if (post.meta.date) {
                             try {
-                                const d = new Date(post.meta.date + 'T00:00:00'); // Ensure it reads as local
+                                const d = post.meta.date instanceof Date ? post.meta.date : new Date(post.meta.date + 'T00:00:00'); // Ensure it reads as local
                                 displayDate = new Intl.DateTimeFormat(locale === 'pt' ? 'pt-BR' : 'en-US', {
                                     day: 'numeric', month: 'short', year: 'numeric'
                                 }).format(d);

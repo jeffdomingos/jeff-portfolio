@@ -30,7 +30,7 @@ export function Footnotes({ children }: { children: React.ReactNode }) {
 
 export function FootnoteItem({ id, href, children }: { id: string; href?: string; children: React.ReactNode }) {
     return (
-        <div id={`footnote-${id}`} className="text-step--2 text-foreground/60 type-body flex gap-3 items-start scroll-mt-32 leading-relaxed">
+        <div id={`footnote-${id}`} className="text-sm text-foreground/90 type-body flex gap-3 items-start scroll-mt-32 leading-relaxed">
             <a 
                 href={`#ref-${id}`} 
                 className="text-primary hover:text-primary/80 no-underline font-bold shrink-0 mt-[2px]"
@@ -38,7 +38,7 @@ export function FootnoteItem({ id, href, children }: { id: string; href?: string
             >
                 {id}.
             </a>
-            <div className="flex-1 [&>p]:inline">
+            <div className="flex-1 [&>p]:inline [&>p]:!text-sm [&>p]:!m-0 [&>p]:!text-foreground/90">
                 {children}
                 {href && (
                     <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center ml-1.5 align-baseline text-primary/70 hover:text-primary transition-colors">
