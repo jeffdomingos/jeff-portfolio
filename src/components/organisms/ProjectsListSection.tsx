@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring } from "framer-motion";
 import { CaseItem } from "@/content/schema";
 import { useTransitionRouter } from "next-view-transitions";
 
@@ -14,52 +13,9 @@ interface ProjectsListSectionProps {
 export function ProjectsListSection({ items, locale }: ProjectsListSectionProps) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const router = useTransitionRouter();
-    
-    // Mouse tracking for floating thumbnail
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
-    const springX = useSpring(mouseX, springConfig);
-    const springY = useSpring(mouseY, springConfig);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [mouseX, mouseY]);
 
     return (
         <div className="relative w-full pb-fluid-2xl px-fluid-xs md:px-fluid-m mt-fluid-xl">
-            {/* Floating Thumbnail (Hidden on mobile) */}
-            <motion.div 
-                className="hidden md:block fixed top-0 left-0 w-[400px] h-[500px] pointer-events-none z-50 overflow-hidden bg-background border border-border"
-                style={{
-                    x: springX,
-                    y: springY,
-                    translateX: "-50%",
-                    translateY: "-50%",
-                    opacity: hoveredIndex !== null ? 1 : 0,
-                    scale: hoveredIndex !== null ? 1 : 0.8,
-                }}
-                transition={{ 
-                    opacity: { duration: 0.3, ease: "easeInOut" }, 
-                    scale: { duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] } 
-                }}
-            >
-                {hoveredIndex !== null && items[hoveredIndex] && (
-                    <Image 
-                        src={items[hoveredIndex].thumbnailImage} 
-                        alt={items[hoveredIndex].title} 
-                        fill 
-                        className="object-cover"
-                        sizes="400px"
-                    />
-                )}
-            </motion.div>
 
             {/* Table List */}
             <div className="flex flex-col w-full border-t border-foreground/20">
@@ -76,15 +32,27 @@ export function ProjectsListSection({ items, locale }: ProjectsListSectionProps)
                                 if (item.href) router.push(item.href);
                             }}
                         >
-                            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 w-full md:w-2/3">
-                                {item.context && (
-                                    <span className="block md:w-1/4 type-label font-heading text-step--1 md:text-step-0 opacity-60 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
-                                        {item.context}
-                                    </span>
-                                )}
-                                <h3 className={`text-step-2 md:text-step-5 type-display m-0 p-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? 'md:translate-x-4' : ''}`}>
-                                    {item.title}
-                                </h3>
+                            <div className="flex flex-row items-center gap-4 md:gap-8 w-full md:w-2/3">
+                                <div className="relative w-20 h-20 md:w-32 md:h-20 shrink-0 rounded-lg overflow-hidden border border-foreground/10 bg-muted hidden md:block">
+                                    <Image 
+                                        src={item.thumbnailImage} 
+                                        alt={item.title} 
+                                        fill 
+                                        className={`object-cover transition-transform duration-700 ease-[0.21,0.47,0.32,0.98] ${isHovered ? 'scale-110' : 'scale-100'}`}
+                                        sizes="(max-width: 768px) 80px, 128px"
+                                    />
+                                </div>
+                                
+                                <div className="flex flex-col gap-1">
+                                    {item.context && (
+                                        <span className="block type-label font-heading text-step--2 md:text-step--1 opacity-60 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
+                                            {item.context}
+                                        </span>
+                                    )}
+                                    <h3 className={`text-step-1 md:text-step-4 type-display m-0 p-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] ${isHovered ? 'md:translate-x-2' : ''}`}>
+                                        {item.title}
+                                    </h3>
+                                </div>
                             </div>
                             
                             <div className="mt-8 md:mt-0 flex flex-col md:flex-row md:items-center gap-6 md:w-1/3 justify-start md:justify-end shrink-0">
