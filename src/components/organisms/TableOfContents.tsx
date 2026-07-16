@@ -20,7 +20,7 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: '-10% 0px -80% 0px' }
+      { rootMargin: '-80px 0px -40% 0px' }
     );
 
     toc.forEach((item) => {
