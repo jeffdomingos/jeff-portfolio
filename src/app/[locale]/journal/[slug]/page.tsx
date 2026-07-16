@@ -91,7 +91,7 @@ export default function JournalPostDetail({ params: { locale, slug } }: { params
                 )}
 
                 {/* Content Blocks */}
-                <div className={`w-full ${CONTENT_MAX_WIDTH} mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-wider prose-a:text-primary`}>
+                <div className={`w-full ${CONTENT_MAX_WIDTH} mx-auto prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:tracking-normal prose-a:text-primary`}>
                 {blocks && blocks.length > 0 ? (
                     blocks.map((block: any, index: number) => {
                         switch (block.type) {
