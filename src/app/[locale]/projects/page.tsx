@@ -13,7 +13,7 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
     const items: CaseItem[] = allProjects.map((proj) => ({
         context: proj.meta.context,
         title: proj.meta.title,
-        summary: proj.meta.summary,
+        summary: proj.meta.summary || "",
         href: `/${locale}/projects/${proj.meta.slug}`,
         thumbnailImage: proj.meta.thumbnail,
         tags: proj.meta.tags,
