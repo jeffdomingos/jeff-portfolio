@@ -1,6 +1,5 @@
 import { getAllProjects } from "@/utils/content";
-import { ProjectsListSection } from "@/components/organisms/ProjectsListSection";
-import type { CaseItem } from "@/content/schema";
+import { InteractiveListSection, ListItem } from "@/components/organisms/InteractiveListSection";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     const title = locale === 'pt' ? 'Projetos - Jeff Domingos' : 'Projects - Jeff Domingos';
@@ -10,7 +9,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default function ProjectsPage({ params: { locale } }: { params: { locale: string } }) {
     const allProjects = getAllProjects(locale);
 
-    const items: CaseItem[] = allProjects.map((proj) => ({
+    const items: ListItem[] = allProjects.map((proj) => ({
+        id: proj.meta.slug,
         context: proj.meta.context,
         title: proj.meta.title,
         summary: proj.meta.summary || "",
@@ -35,7 +35,7 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
                 </p>
             </div>
 
-            <ProjectsListSection items={items} locale={locale} />
+            <InteractiveListSection items={items} locale={locale} />
         </div>
     );
 }
