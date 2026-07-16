@@ -52,10 +52,10 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
           >
             <a
               href={`#${item.id}`}
-              className={`block py-1 transition-all type-body text-step--2 no-underline
+              className={`relative block py-1 pl-4 type-body text-step--2 no-underline transition-colors before:content-[''] before:absolute before:top-0 before:bottom-0 before:bg-foreground before:transition-all before:duration-200
                 ${activeId === item.id 
-                  ? 'border-l-[5px] border-foreground text-foreground font-medium pl-[14px] -ml-[3px]' 
-                  : 'border-l-[1px] border-transparent text-foreground font-light pl-[16px] -ml-[1px] hover:font-medium hover:border-l-[3px] hover:border-foreground hover:-ml-[2px] hover:pl-[15px]'
+                  ? 'text-foreground font-medium before:opacity-100 before:w-[5px] before:-left-[3px]' 
+                  : 'text-foreground font-light hover:font-medium before:w-[1px] before:-left-[1px] before:opacity-0 hover:before:opacity-100 hover:before:w-[3px] hover:before:-left-[2px]'
                 }
               `}
               onClick={(e) => {
