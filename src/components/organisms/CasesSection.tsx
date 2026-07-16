@@ -13,17 +13,18 @@ interface CasesSectionProps {
 
 import { useRef, useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
+import { useTransitionRouter } from "next-view-transitions";
 
 import { TracingGrid, TracingItem } from "@/components/atoms/TracingBorders";
 
 function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }: { item: CaseItem, index: number, locale: string, hoverState: string, onMouseEnter: () => void, onMouseLeave: () => void }) {
-    const [isExpanded, setIsExpanded] = useState(false);
     const [hoveredSide, setHoveredSide] = useState<"left" | "right" | null>(null);
     const [isCtaHovered, setIsCtaHovered] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const isEven = index % 2 === 0;
     const indexStr = (index + 1).toString().padStart(2, "0");
     
+    const router = useTransitionRouter();
     const ref = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const lenis = useLenis();
@@ -47,27 +48,21 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
     else if (hoverState === "exit_down") sharedWall = "bottom";
     else if (hoverState === "exit_up") sharedWall = "top";
 
-    const handleToggleExpand = (e: React.MouseEvent) => {
-        const nextState = !isExpanded;
-        setIsExpanded(nextState);
-        
-        if (nextState && containerRef.current && lenis) {
-            // Scroll to perfectly frame the card, accounting for 56px header
-            lenis.scrollTo(containerRef.current, { offset: -56, duration: 1.2, lock: false });
+    const handleNavigate = () => {
+        if (item.href) {
+            router.push(item.href);
         }
     };
-
-    const showChevron = !isExpanded ? isRowHovered : (isRowHovered && hoveredSide === "left");
 
     return (
         <div 
             ref={containerRef}
             data-case-index={index}
             data-hover={isRowHovered}
-            className={`group flex flex-col md:flex-row items-stretch relative cursor-pointer ${isExpanded ? 'min-h-[100svh]' : 'min-h-[200px] md:min-h-[280px]'} transition-[min-height] duration-700 ease-in-out`}
-            onClick={handleToggleExpand}
+            className={`group flex flex-col md:flex-row items-stretch relative cursor-pointer min-h-auto md:min-h-[400px] transition-all duration-700 ease-in-out`}
+            onClick={handleNavigate}
             onMouseEnter={onMouseEnter}
-            onMouseLeave={(e) => {
+            onMouseLeave={() => {
                 onMouseLeave(); // Signal leave for external cases logic
             }}
         >
@@ -119,46 +114,16 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                             </div>
                         )}
                     </div>
-                    
-                    <div className="flex-shrink-0 self-center mt-[-30px]">
-                        <motion.svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            width="24" height="24" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            className={`w-8 h-8 md:w-10 md:h-10 text-foreground transition-transform duration-500 ease-[cubic-bezier(0.21,0.47,0.32,0.98)] ${isExpanded ? 'rotate-180' : 'rotate-0'}`}
-                        >
-                            <motion.path 
-                                d="m6 9 6 6 6-6"
-                                strokeWidth="1.5"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                animate={{ 
-                                    pathLength: showChevron ? 1 : 0,
-                                    opacity: showChevron ? 1 : 0
-                                }}
-                                transition={{ 
-                                    duration: 0.6, 
-                                    ease: [0.21, 0.47, 0.32, 0.98],
-                                    opacity: { duration: 0.1 }
-                                }}
-                            />
-                        </motion.svg>
-                    </div>
                 </div>
 
-                <div className={`grid transition-all duration-500 ease-in-out mt-4 ${isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                    <div className="overflow-hidden flex flex-col justify-start">
+                <div className={`mt-4 w-full`}>
+                    <div className="flex flex-col justify-start">
                         <div className="pt-fluid-m">
                             <p className="text-step-0 type-body text-foreground max-w-xl">
                                 {item.summary}
                             </p>
                             
-                            <Link 
-                                href={item.href || "#"} 
-                                onClick={(e) => e.stopPropagation()} 
+                            <div 
                                 className={`inline-flex mt-fluid-m items-center gap-2 text-foreground transition-all duration-300 ${isCtaHovered ? 'font-bold' : 'font-normal'}`}
                                 onMouseEnter={() => setIsCtaHovered(true)}
                                 onMouseLeave={() => setIsCtaHovered(false)}
@@ -169,7 +134,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transform transition-transform duration-300 ${isCtaHovered ? 'translate-x-4' : 'group-hover:translate-x-2 group-data-[hover=true]:translate-x-2'}`}>
                                     <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
                                 </svg>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,23 +160,13 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                     onMouseEnter={() => setHoveredSide("right")}
                     onMouseLeave={() => setHoveredSide(null)}
                 >
-                    {isExpanded && item.href && (
-                        <Link 
-                            href={item.href} 
-                            onClick={(e) => e.stopPropagation()} 
-                            className="absolute inset-0 z-10" 
-                            aria-label={`Ver case ${item.title}`} 
-                            onMouseEnter={() => setIsCtaHovered(true)}
-                            onMouseLeave={() => setIsCtaHovered(false)}
-                        />
-                    )}
                     <Image 
                         src={item.thumbnailImage} 
                         alt={item.title} 
                         fill
                         sizes={IMAGE_SIZES.card}
                         {...BELOW_FOLD_IMAGE}
-                        className={`object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-700 ease-[cubic-bezier(0.21,0.47,0.32,0.98)] cursor-pointer pointer-events-auto ${isExpanded && isCtaHovered ? 'scale-105' : 'scale-100'}`} 
+                        className={`object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-700 ease-[cubic-bezier(0.21,0.47,0.32,0.98)] cursor-pointer pointer-events-auto ${isCtaHovered ? 'scale-105' : 'scale-100'}`} 
                     />
                 </motion.div>
             </TracingItem>
