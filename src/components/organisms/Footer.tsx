@@ -2,7 +2,7 @@
 
 import { GlobalFooter } from "@/content/schema";
 import { FooterAnimatedLogo } from "./FooterAnimatedLogo";
-import { useMotionValue, motion } from "framer-motion";
+import { useMotionValue, m } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import { ChevronUp } from "lucide-react";
@@ -80,28 +80,28 @@ export function Footer({ data }: { data: GlobalFooter }) {
                 <div className="flex-1 flex flex-col justify-center py-6 lg:py-fluid-l">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-fluid-xl items-center">
                     {/* Brand / Logo Area - Mantido em z-0 para ficar ATRÁS da malha z-10 */}
-                    <motion.div 
+                    <m.div 
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0 mt-12 lg:mt-0"
                     >
                         <FooterAnimatedLogo mouseX={mouseX} mouseY={mouseY} isIdle={isIdle} />
-                    </motion.div>
+                    </m.div>
 
                 {/* Contact Links */}
-                <motion.div 
+                <m.div 
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: "-10% 0px" }}
+                    viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                     variants={{
                         hidden: { opacity: 0 },
                         show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
                     }}
                     className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50"
                 >
-                    <motion.a 
+                    <m.a 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -120,9 +120,9 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </span>
-                    </motion.a>
+                    </m.a>
                     
-                    <motion.a 
+                    <m.a 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -141,9 +141,9 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </span>
-                    </motion.a>
+                    </m.a>
 
-                    <motion.a 
+                    <m.a 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -160,9 +160,9 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
                         </span>
-                    </motion.a>
+                    </m.a>
 
-                    <motion.a 
+                    <m.a 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -181,16 +181,16 @@ export function Footer({ data }: { data: GlobalFooter }) {
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>
                         </span>
-                    </motion.a>
-                </motion.div>
+                    </m.a>
+                </m.div>
                 </div>
             </div>
 
                 {/* Bottom Row */}
-                <motion.div 
+                <m.div 
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "0px" }}
+                    viewport={{ once: true, amount: "some", margin: "0px" }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                     className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full"
                 >
@@ -202,7 +202,7 @@ export function Footer({ data }: { data: GlobalFooter }) {
                         {locale === 'en' ? 'Back to top' : 'Voltar ao topo'}
                         <ChevronUp className="w-4 h-4 transition-transform ml-2" strokeWidth={2} />
                     </button>
-                </motion.div>
+                </m.div>
             </div>
         </footer>
     );

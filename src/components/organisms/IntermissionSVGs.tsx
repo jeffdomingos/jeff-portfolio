@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
+import { m, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
 
 function FloatingSVG({
     src, top, left, scale, width, index, scrollYProgress, isMobile
@@ -35,11 +35,11 @@ function FloatingSVG({
     const bobDelay = (index % 4) * 0.5;
 
     return (
-        <motion.div
+        <m.div
             style={{ x, y, scale, rotate, top, left, width, zIndex, willChange: "transform" }}
             className="absolute pointer-events-none"
         >
-            <motion.div
+            <m.div
                 animate={isMobile ? { y: 0 } : { y: [0, -20, 0] }}
                 transition={isMobile ? undefined : {
                     duration: bobDuration,
@@ -56,8 +56,8 @@ function FloatingSVG({
                     className="w-full h-auto object-contain"
                     alt="Transition decoration"
                 />
-            </motion.div>
-        </motion.div>
+            </m.div>
+        </m.div>
     );
 }
 

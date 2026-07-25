@@ -2,6 +2,9 @@
 const nextConfig = {
     reactStrictMode: true,
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+    experimental: {
+        optimizePackageImports: ['lucide-react', 'framer-motion'],
+    },
     async rewrites() {
         return [
             // Tracking URLs (English - Default)

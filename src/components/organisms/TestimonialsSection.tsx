@@ -1,7 +1,7 @@
 "use client";
 
 import { TestimonialsSection as TestimonialsSectionData } from "@/content/schema";
-import * as motion from "framer-motion/client";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { TerminalTitle } from "@/components/atoms/TerminalTitle";
 
@@ -42,7 +42,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
 
 
     return (
-        <motion.div 
+        <m.div 
             ref={ref}
             style={{ opacity: rowOpacity }}
             className="py-fluid-xl flex flex-col border-b border-background last:border-b-0 relative overflow-hidden transition-colors"
@@ -63,28 +63,28 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
                 
                 {/* Text Content */}
                 <div className="w-full flex flex-col gap-fluid-s">
-                    <motion.p 
+                    <m.p 
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light"
                     >
                         &quot;{item.quote}&quot;
-                    </motion.p>
-                    <motion.div 
+                    </m.p>
+                    <m.div 
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <p className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl">
                             {item.details}
                         </p>
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
-        </motion.div>
+        </m.div>
     );
 }
 
@@ -107,12 +107,12 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
                     text={data.title}
                     className="text-step-6 type-display mb-fluid-s"
                 />
-                <motion.p 
+                <m.p 
                     style={{ opacity: headerOpacity, y: headerY }}
                     className="text-step-1 font-light max-w-4xl"
                 >
                     {data.subtitle}
-                </motion.p>
+                </m.p>
             </div>
 
             <div className="flex flex-col border-y border-background w-full">

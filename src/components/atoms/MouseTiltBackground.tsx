@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { m, useMotionValue, useSpring, useTransform } from "framer-motion"
+import Image from "next/image"
 
 export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
     const containerRef = useRef<HTMLDivElement>(null)
@@ -54,15 +55,23 @@ export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
 
     return (
         <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" style={{ perspective: 1000 }}>
-            <motion.div 
-                className="absolute inset-[-5%] bg-center bg-no-repeat bg-cover opacity-100 will-change-transform"
+            <m.div 
+                className="absolute inset-[-5%] opacity-100 will-change-transform"
                 style={{ 
-                    backgroundImage: `url(${imageUrl})`,
                     rotateX,
                     rotateY,
                     scale: 1.05
                 }}
-            />
+            >
+                <Image 
+                    src={imageUrl} 
+                    alt="Background" 
+                    fill={true} 
+                    priority={true} 
+                    sizes="100vw"
+                    className="object-cover object-center"
+                />
+            </m.div>
         </div>
     )
 }

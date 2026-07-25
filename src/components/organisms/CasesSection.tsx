@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { CaseItem } from "@/content/schema";
 import { BELOW_FOLD_IMAGE, IMAGE_SIZES } from "@/lib/performance/image-hints";
 
@@ -151,10 +151,10 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                 forceSharedWall={sharedWall}
                 delayOffset={0.6} // Starts filling right after Left Card finishes (4 * 0.15s)
             >
-                <motion.div 
+                <m.div 
                     initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, margin: "-100px" }}
+                    viewport={{ once: false, amount: "some", margin: "-100px" }}
                     transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.1 }}
                     className={`block absolute top-[1px] bottom-[1px] w-[calc(100%-1px)] ${isEven ? 'right-0' : 'left-0'} bg-background overflow-hidden z-0 rounded-none cursor-pointer pointer-events-auto`}
                     onMouseEnter={() => setHoveredSide("right")}
@@ -168,7 +168,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                         {...BELOW_FOLD_IMAGE}
                         className={`object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 group-data-[hover=true]:grayscale-0 group-data-[hover=true]:contrast-100 transition-all duration-700 ease-[cubic-bezier(0.21,0.47,0.32,0.98)] cursor-pointer pointer-events-auto ${isCtaHovered ? 'scale-105' : 'scale-100'}`} 
                     />
-                </motion.div>
+                </m.div>
             </TracingItem>
         </div>
     );

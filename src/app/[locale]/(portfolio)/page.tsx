@@ -6,11 +6,13 @@ import { HeroAnimatedContent } from "@/components/organisms/HeroAnimatedContent"
 import { MouseTiltBackground } from "@/components/atoms/MouseTiltBackground";
 import { CasesSection } from "@/components/organisms/CasesSection";
 import { IntermissionSVGs } from "@/components/organisms/IntermissionSVGs";
-import { ApproachSection } from "@/components/organisms/ApproachSection";
-import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
-import { AvailabilitySection } from "@/components/organisms/AvailabilitySection";
+import dynamic from 'next/dynamic';
+
+const ApproachSection = dynamic(() => import('@/components/organisms/ApproachSection').then(mod => mod.ApproachSection));
+const TestimonialsSection = dynamic(() => import('@/components/organisms/TestimonialsSection').then(mod => mod.TestimonialsSection));
+const AvailabilitySection = dynamic(() => import('@/components/organisms/AvailabilitySection').then(mod => mod.AvailabilitySection));
 import { TerminalTitle } from "@/components/atoms/TerminalTitle";
-import * as motion from "framer-motion/client";
+import { m } from "framer-motion";
 import { BELOW_FOLD_IMAGE, IMAGE_SIZES } from "@/lib/performance/image-hints";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {

@@ -16,58 +16,22 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
     const [moveUp, setMoveUp] = useState(false)
     const [showSubAndImage, setShowSubAndImage] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
-    const [isInitialLoading, setIsInitialLoading] = useState(true)
-    const [loadingProgress, setLoadingProgress] = useState(0)
     const lenis = useLenis()
 
     useEffect(() => {
-        // Se a página for carregada já com uma âncora (hash) na URL, pule a tela de loading para não travar o usuário
-        if (window.location.hash) {
-            setIsInitialLoading(false);
-            setLoadingProgress(100);
-            setMoveUp(true);
-            setShowSubAndImage(true);
-            setShowButtons(true);
-            document.documentElement.classList.remove('is-loading');
-            if (lenis) {
-                lenis.start();
+        // Ensure scroll is unlocked and we are not in loading state
+        document.documentElement.classList.remove('is-loading');
+        if (lenis) {
+            lenis.start();
+            if (window.location.hash) {
                 const targetId = window.location.hash.substring(1);
                 setTimeout(() => {
                     const el = document.getElementById(targetId);
                     if (el) lenis.scrollTo(el, { immediate: true });
                 }, 50);
             }
-            return;
         }
-
-        let interval: NodeJS.Timeout;
-        if (isInitialLoading) {
-            if (lenis) lenis.stop();
-            document.documentElement.classList.add('is-loading');
-            
-            let prog = 0;
-            interval = setInterval(() => {
-                prog += Math.floor(Math.random() * 8) + 2;
-                if (prog >= 100) {
-                    prog = 100;
-                    setLoadingProgress(100);
-                    clearInterval(interval);
-                    setIsInitialLoading(false);
-                    document.documentElement.classList.remove('is-loading');
-                    if (lenis) {
-                        lenis.start();
-                    }
-                } else {
-                    setLoadingProgress(prog);
-                }
-            }, 60);
-        }
-        
-        return () => {
-            if (interval) clearInterval(interval);
-            document.documentElement.classList.remove('is-loading');
-        };
-    }, [isInitialLoading, lenis]);
+    }, [lenis]);
 
     // Removido o useEffect original de intervalo aqui, pois ele agora reside e é processado pelo AnimatedTypingText
 
@@ -89,10 +53,9 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
 
     return (
         <>
-        <div className={`fixed inset-0 bg-background transition-opacity duration-1000 ease-in-out ${isInitialLoading ? 'opacity-100 pointer-events-auto z-[70]' : 'opacity-0 pointer-events-none z-[-1]'}`} />
         <div className="w-full flex-1 grid-layout items-center relative">
             {/* Left Column: Text and CTA */}
-            <div className={`col-span-12 lg:col-span-6 flex flex-col items-start text-left pt-0 pb-[320px] md:pb-0 relative transition-all ${isInitialLoading ? 'z-[80]' : 'z-40'}`}>
+            <div className="col-span-12 lg:col-span-6 flex flex-col items-start text-left pt-0 pb-[320px] md:pb-0 relative transition-all z-40">
                 <AnimatedTypingText 
                     as="h1"
                     text={headline}
@@ -100,10 +63,8 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                     animationType="typing"
                     targets={typingTargets}
                     onFinished={handleTypingFinished}
-                    delay={800}
+                    delay={0}
                     speed={40}
-                    isLoadingPhase={isInitialLoading}
-                    loadingProgress={loadingProgress}
                     className={`text-step-6 type-display text-foreground w-full max-w-4xl text-balance drop-shadow-sm z-10 relative text-left transition-all duration-1000 transform ${moveUp ? 'translate-y-0 mb-3 md:mb-fluid-m' : 'translate-y-[10svh] mb-0'}`}
                 />
 

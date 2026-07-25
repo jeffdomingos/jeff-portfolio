@@ -1,7 +1,7 @@
 "use client";
 
 import { Mail, Linkedin, MessageCircle, Calendar, ChevronRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 import { TracingGrid, TracingItem } from "@/components/atoms/TracingBorders";

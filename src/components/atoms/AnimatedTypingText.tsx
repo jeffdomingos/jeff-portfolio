@@ -246,7 +246,12 @@ export function AnimatedTypingText({
                                                         )}
                                                     </span>
                                                 )}
-                                                <span className={isCharTyped ? 'opacity-100' : 'opacity-0'}>{char}</span>
+                                                <span 
+                                                    className={isCharTyped ? 'opacity-100' : 'opacity-0'}
+                                                    style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}
+                                                >
+                                                    {char}
+                                                </span>
                                                 {showCursorAfter && (
                                                     <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
                                                         <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />

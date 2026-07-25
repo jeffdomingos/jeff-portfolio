@@ -2,18 +2,18 @@
 
 import { ReactNode } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 
 export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, scrollingMockup }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean; scrollingMockup?: boolean }) {
     if (scrollingMockup) {
         return (
-            <motion.figure 
+            <m.figure 
                 className="my-10"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
+                viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
                 <div className="relative">
@@ -28,31 +28,31 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                     </div>
                 </div>
                 {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
-            </motion.figure>
+            </m.figure>
         );
     }
 
     if (cleanLayout) {
         return (
-            <motion.figure 
+            <m.figure 
                 className="my-10"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
+                viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0 rounded-lg" />
-            </motion.figure>
+            </m.figure>
         );
     }
 
     return (
-        <motion.figure 
+        <m.figure 
             className="my-10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className="relative">
@@ -63,7 +63,7 @@ export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, s
                 </div>
             </div>
             {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
-        </motion.figure>
+        </m.figure>
     );
 }
 
@@ -106,11 +106,11 @@ export function Metric({ label, value }: { label: string; value: string }) {
 export function VideoEmbed({ src, title }: { src: string; title?: string }) {
     const isDirectVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.gif');
     return (
-        <motion.figure 
+        <m.figure 
             className="my-10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className="relative">
@@ -126,17 +126,17 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
                 </div>
             </div>
             {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
-        </motion.figure>
+        </m.figure>
     );
 }
 
 export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
     return (
-        <motion.figure 
+        <m.figure 
             className="my-10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className="relative">
@@ -153,7 +153,7 @@ export function FigmaEmbed({ src, title }: { src: string; title?: string }) {
                 </div>
             </div>
             {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
-        </motion.figure>
+        </m.figure>
     );
 }
 

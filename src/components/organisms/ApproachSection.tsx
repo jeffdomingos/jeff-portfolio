@@ -1,7 +1,7 @@
 "use client";
 
 import { ApproachSection as ApproachSectionData } from "@/content/schema";
-import * as motion from "framer-motion/client";
+import { m } from "framer-motion";
 import { TerminalTitle } from "@/components/atoms/TerminalTitle";
 
 interface ApproachSectionProps {
@@ -63,7 +63,7 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
         >
             <div className="relative inline-block w-fit">
                 {/* The Animated Bounding Box */}
-                <motion.div 
+                <m.div 
                     style={{ width: boxWidth, height: boxHeight, opacity: boxOpacity }}
                     className="absolute top-0 left-0 border border-foreground pointer-events-none z-20"
                 >
@@ -72,29 +72,29 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
                     <div className="absolute top-0 right-0 w-2 h-2 bg-background border border-foreground translate-x-1/2 -translate-y-1/2" />
                     <div className="absolute bottom-0 left-0 w-2 h-2 bg-background border border-foreground -translate-x-1/2 translate-y-1/2" />
                     <div className="absolute bottom-0 right-0 w-2 h-2 bg-background border border-foreground translate-x-1/2 translate-y-1/2" />
-                </motion.div>
+                </m.div>
 
                 {/* The Masked Content */}
-                <motion.div style={{ clipPath }} className="flex flex-col items-start">
-                    <motion.h3 
+                <m.div style={{ clipPath }} className="flex flex-col items-start">
+                    <m.h3 
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="inspectable inline-block text-step-2 type-subheading mb-fluid-s"
                     >
                         {col.title}
-                    </motion.h3>
-                    <motion.p 
+                    </m.h3>
+                    <m.p 
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-10% 0px" }}
+                        viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                         className="inspectable text-step-0 type-body text-foreground"
                     >
                         {col.description}
-                    </motion.p>
-                </motion.div>
+                    </m.p>
+                </m.div>
             </div>
         </div>
     );
@@ -134,12 +134,12 @@ export function ApproachSection({ data }: ApproachSectionProps) {
                                 className="text-step-6 type-display mb-fluid-s"
                             />
                         </div>
-                        <motion.p 
+                        <m.p 
                             style={{ opacity: headerOpacity, y: headerY }}
                             className="inspectable text-step-1 type-body text-foreground max-w-4xl"
                         >
                             {data.subtitle}
-                        </motion.p>
+                        </m.p>
                     </div>
 
                     {data.columns?.map((col, i) => (

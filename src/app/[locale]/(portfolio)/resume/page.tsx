@@ -1,9 +1,18 @@
 import { getResumePageContent } from "@/utils/content";
 import { FileText, Download, Share2, Printer } from "lucide-react";
 import { PageHero } from "@/components/organisms";
-import { NativeDocsResume } from "@/components/atoms/NativeDocsResume";
 import { Button } from "@/components/ui/button";
 import { BoldReserver } from "@/components/atoms/BoldReserver";
+import dynamic from 'next/dynamic';
+
+const NativeDocsResume = dynamic(() => import('@/components/atoms/NativeDocsResume').then(mod => mod.NativeDocsResume), {
+    ssr: false, 
+    loading: () => (
+        <div className="w-full flex items-center justify-center p-20 opacity-50">
+            Carregando currículo...
+        </div>
+    )
+});
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     return { title: `Resume - ${locale.toUpperCase()}` };

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "next-view-transitions";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -296,7 +296,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                     <div className="hidden md:flex items-center gap-2 py-1">
                         {/* Wrapper fixes the layout space to 48x48 so they never jump */}
                         <div className="w-12 h-12 flex items-center justify-center">
-                            <motion.button 
+                            <m.button 
                                 layout
                                 animate={canScrollLeft ? { 
                                     height: 48, width: 48, borderRadius: 24, opacity: 1
@@ -312,19 +312,19 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 )}
                                 aria-label="Previous cases"
                             >
-                                <motion.svg 
+                                <m.svg 
                                     animate={{ opacity: canScrollLeft ? 1 : 0, scale: canScrollLeft ? 1 : 0 }} 
                                     transition={{ duration: 0.2 }}
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
                                     className="transition-transform duration-300 group-hover:scale-125"
                                 >
                                     <path d="m15 18-6-6 6-6"/>
-                                </motion.svg>
-                            </motion.button>
+                                </m.svg>
+                            </m.button>
                         </div>
                         
                         <div className="w-12 h-12 flex items-center justify-center">
-                            <motion.button 
+                            <m.button 
                                 layout
                                 animate={canScrollRight ? { 
                                     height: 48, width: 48, borderRadius: 24, opacity: 1
@@ -340,15 +340,15 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 )}
                                 aria-label="Next cases"
                             >
-                                <motion.svg 
+                                <m.svg 
                                     animate={{ opacity: canScrollRight ? 1 : 0, scale: canScrollRight ? 1 : 0 }} 
                                     transition={{ duration: 0.2 }}
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
                                     className="transition-transform duration-300 group-hover:scale-125"
                                 >
                                     <path d="m9 18 6-6-6-6"/>
-                                </motion.svg>
-                            </motion.button>
+                                </m.svg>
+                            </m.button>
                         </div>
                     </div>
                 )}
@@ -426,10 +426,10 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 {/* Animated Borders */}
                                 {!isCurrent && (
                                     <>
-                                        <motion.span variants={variantsTop} initial="idle" animate={state} className="absolute top-0 left-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
-                                        <motion.span variants={variantsRight} initial="idle" animate={state} className="absolute top-0 right-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
-                                        <motion.span variants={variantsBottom} initial="idle" animate={state} className="absolute bottom-0 right-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
-                                        <motion.span variants={variantsLeft} initial="idle" animate={state} className="absolute bottom-0 left-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
+                                        <m.span variants={variantsTop} initial="idle" animate={state} className="absolute top-0 left-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
+                                        <m.span variants={variantsRight} initial="idle" animate={state} className="absolute top-0 right-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
+                                        <m.span variants={variantsBottom} initial="idle" animate={state} className="absolute bottom-0 right-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
+                                        <m.span variants={variantsLeft} initial="idle" animate={state} className="absolute bottom-0 left-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
                                     </>
                                 )}
 

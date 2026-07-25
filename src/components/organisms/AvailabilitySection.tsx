@@ -10,7 +10,7 @@ interface AvailabilitySectionProps {
 }
 
 import { useRef, useState, useEffect } from "react";
-import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
+import { useScroll, useTransform, m, useMotionValueEvent } from "framer-motion";
 import { Link } from "next-view-transitions";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -42,10 +42,10 @@ function AvailabilityBlockDesktop({
         >
             <div className="relative w-full flex flex-col justify-center">
                 {/* TEXT & BLUR LAYER - ABOVE HALFTONE (z-30) */}
-                <motion.div 
+                <m.div 
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-10% 0px" }}
+                    viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
                     className="relative z-30"
                 >
@@ -78,7 +78,7 @@ function AvailabilityBlockDesktop({
                 </div>
             
             <div className={`overflow-hidden grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full relative z-10 ${isActive ? 'grid-rows-[1fr] pointer-events-auto' : 'grid-rows-[0fr] pointer-events-none'}`}>
-                <motion.div 
+                <m.div 
                     className={`flex flex-col w-full max-w-sm lg:max-w-md xl:max-w-lg ${index === 1 ? 'ml-auto items-end text-right pr-fluid-m' : 'mr-auto items-start text-left pl-fluid-m'}`}
                     variants={{
                         hidden: { opacity: 0, transition: { staggerChildren: 0.1, staggerDirection: -1 } },
@@ -87,7 +87,7 @@ function AvailabilityBlockDesktop({
                     initial="hidden"
                     animate={isActive ? "show" : "hidden"}
                 >
-                    <motion.p 
+                    <m.p 
                         variants={{
                             hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
                             show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -95,8 +95,8 @@ function AvailabilityBlockDesktop({
                         className="text-step-0 type-body text-foreground pt-fluid-m"
                     >
                         {block.description}
-                    </motion.p>
-                    <motion.div
+                    </m.p>
+                    <m.div
                         variants={{
                             hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
                             show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -107,10 +107,10 @@ function AvailabilityBlockDesktop({
                                 {locale === 'en' ? "Let's talk" : 'Vamos conversar'}
                             </Link>
                         </Button>
-                    </motion.div>
-                </motion.div>
+                    </m.div>
+                </m.div>
             </div>
-        </motion.div>
+        </m.div>
         </div>
     </div>
     );
@@ -162,29 +162,29 @@ function AvailabilityBlockMobile({
     return (
         <div className={`w-full group flex flex-col justify-center relative px-fluid-xs md:px-fluid-m pointer-events-auto`}>
             {/* Glassmorphism Backdrop individualizado em opacity */}
-            <motion.div 
+            <m.div 
                 style={{ opacity: opBg }}
                 className="absolute inset-[-50%] z-0 pointer-events-none bg-background/60 backdrop-blur-md [mask-image:radial-gradient(ellipse_at_center,_black_20%,_transparent_60%)]" 
             />
 
             <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right' : 'mr-auto text-left'}`}>
-                <motion.h3 
+                <m.h3 
                     style={{ x: xH3, y: yH3, opacity: opH3 }}
                     className="inline-block text-step-4 type-display mt-2"
                 >
                     {block.subtitle}
-                </motion.h3>
+                </m.h3>
             </div>
             
             <div className="w-full relative z-10">
                 <div className={`flex flex-col w-full max-w-sm ${index === 1 ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}>
-                    <motion.p 
+                    <m.p 
                         style={{ x: xP, y: yP, opacity: opP }}
                         className="text-step-0 type-body text-foreground pt-fluid-m"
                     >
                         {block.description}
-                    </motion.p>
-                    <motion.div 
+                    </m.p>
+                    <m.div 
                         style={{ x: xBtn, y: yBtn, opacity: opBtn }}
                         className="mt-fluid-m pointer-events-auto"
                     >
@@ -193,7 +193,7 @@ function AvailabilityBlockMobile({
                                 {locale === 'en' ? "Let's talk" : 'Vamos conversar'}
                             </Link>
                         </Button>
-                    </motion.div>
+                    </m.div>
                 </div>
             </div>
         </div>

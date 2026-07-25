@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export function ProductTrioDiagram({ locale = "pt" }: { locale?: string }) {
     const isEn = locale === "en";
@@ -17,11 +17,11 @@ export function ProductTrioDiagram({ locale = "pt" }: { locale?: string }) {
     };
 
     return (
-        <motion.figure 
+        <m.figure 
             className="my-10"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
             <div className="relative">
@@ -91,6 +91,6 @@ export function ProductTrioDiagram({ locale = "pt" }: { locale?: string }) {
             </div>
                 </div>
             </div>
-        </motion.figure>
+        </m.figure>
     );
 }

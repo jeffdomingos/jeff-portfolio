@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export function HeroCarousel({ items, isActive = true }: { items: { src: string, caption: string }[], isActive?: boolean }) {
@@ -46,7 +46,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                 const isCurrent = index === currentIndex;
 
                 return (
-                    <motion.div
+                    <m.div
                         key={`img-${index}`}
                         initial={isCurrent && hasStarted ? { clipPath: "polygon(0% 0%, -80% 0%, -80% 100%, 0% 100%)" } : { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" }}
                         animate={isCurrent ? { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" } : undefined}
@@ -56,14 +56,14 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                         <div className="relative w-full h-[30svh] md:h-[45svh] lg:h-[80svh] bg-background">
                             <Image src={item.src} fill={true} sizes="100vw" priority={true} alt={item.caption} className="object-cover object-center grayscale contrast-125" />
                         </div>
-                    </motion.div>
+                    </m.div>
                 );
             })}
 
             {/* A Faixa Branca Brilhante com Gradiente (O "Laser" do Wipe) */}
             <AnimatePresence initial={false}>
                 {hasStarted && currentIndex !== prevIndex && (
-                    <motion.div
+                    <m.div
                         key={`wipe-${currentIndex}`}
                         initial={{ left: "-80%" }}
                         animate={{ left: "180%" }}
@@ -81,7 +81,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
             {mounted && document.getElementById('hero-caption-portal') ? createPortal(
                 <div className="text-right text-step-0 font-light italic text-foreground/80 pointer-events-none">
                     <AnimatePresence mode="wait">
-                        <motion.div
+                        <m.div
                             key={currentIndex}
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -89,7 +89,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                             transition={{ duration: 0.6 }}
                         >
                             {items[currentIndex].caption}
-                        </motion.div>
+                        </m.div>
                     </AnimatePresence>
                 </div>,
                 document.getElementById('hero-caption-portal')!
