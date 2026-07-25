@@ -1,0 +1,52 @@
+{
+  "title_pt": "O que dizem os clientes",
+  "title_en": "What clients say",
+  "subtitle_pt": "Depoimentos de clientes que confiaram no studio para elevar suas marcas.",
+  "subtitle_en": "Testimonials from clients who trusted the studio to elevate their brands.",
+  "items_pt": [
+    {
+      "author": "Cliente Studio A",
+      "role": "CEO, Startup Tech",
+      "quote": "O resultado superou nossas expectativas. O site trouxe um aumento significativo na percepção de marca.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "avatarUrl": ""
+    },
+    {
+      "author": "Cliente Studio B",
+      "role": "Fundador, E-commerce",
+      "quote": "A landing page converteu 3x mais do que nossa versão anterior. O design premium fez toda a diferença.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+      "avatarUrl": ""
+    },
+    {
+      "author": "Cliente Studio C",
+      "role": "Marketing Director, SaaS",
+      "quote": "Profissionalismo impecável e um olhar único para detalhes. Nosso site agora reflete a qualidade do nosso produto.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+      "avatarUrl": ""
+    }
+  ],
+  "items_en": [
+    {
+      "author": "Studio Client A",
+      "role": "CEO, Tech Startup",
+      "quote": "The result exceeded our expectations. The website brought a significant boost in brand perception.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "avatarUrl": ""
+    },
+    {
+      "author": "Studio Client B",
+      "role": "Founder, E-commerce",
+      "quote": "The landing page converted 3x more than our previous version. The premium design made all the difference.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+      "avatarUrl": ""
+    },
+    {
+      "author": "Studio Client C",
+      "role": "Marketing Director, SaaS",
+      "quote": "Impeccable professionalism and a unique eye for detail. Our website now reflects the quality of our product.",
+      "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+      "avatarUrl": ""
+    }
+  ]
+}

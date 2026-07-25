@@ -1,0 +1,22 @@
+{
+  "title_pt": "Projetos do Studio",
+  "title_en": "Studio Projects",
+  "items": [
+    {
+      "src": "/images/studio/placeholder-01.png",
+      "caption": "Project Alpha — 2024"
+    },
+    {
+      "src": "/images/studio/placeholder-02.png",
+      "caption": "Project Beta — 2024"
+    },
+    {
+      "src": "/images/studio/placeholder-03.png",
+      "caption": "Project Gamma — 2025"
+    },
+    {
+      "src": "/images/studio/placeholder-04.png",
+      "caption": "Project Delta — 2025"
+    }
+  ]
+}
