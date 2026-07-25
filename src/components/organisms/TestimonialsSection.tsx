@@ -65,7 +65,8 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
                 <div className="w-full flex flex-col gap-fluid-s">
                     <m.p 
                         initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                         style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light"
@@ -74,7 +75,8 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
                     </m.p>
                     <m.div 
                         initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                         style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     >

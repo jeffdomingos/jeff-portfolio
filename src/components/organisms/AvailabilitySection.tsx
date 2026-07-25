@@ -44,7 +44,8 @@ function AvailabilityBlockDesktop({
                 {/* TEXT & BLUR LAYER - ABOVE HALFTONE (z-30) */}
                 <m.div 
                     initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                     style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
                     className="relative z-30"

@@ -78,7 +78,8 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
                 <m.div style={{ clipPath }} className="flex flex-col items-start">
                     <m.h3 
                         initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                         style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="inspectable inline-block text-step-2 type-subheading mb-fluid-s"
@@ -87,7 +88,8 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
                     </m.h3>
                     <m.p 
                         initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                         style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                         className="inspectable text-step-0 type-body text-foreground"

@@ -82,7 +82,8 @@ export function Footer({ data }: { data: GlobalFooter }) {
                     {/* Brand / Logo Area - Mantido em z-0 para ficar ATRÁS da malha z-10 */}
                     <m.div 
                         initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                         style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="flex flex-col justify-between lg:col-span-7 w-full lg:w-full mx-auto relative z-0 mt-12 lg:mt-0"
@@ -93,7 +94,8 @@ export function Footer({ data }: { data: GlobalFooter }) {
                 {/* Contact Links */}
                 <m.div 
                     initial="hidden"
-                    whileInView="show"
+                     style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView="show"
                     viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                     variants={{
                         hidden: { opacity: 0 },
@@ -189,7 +191,8 @@ export function Footer({ data }: { data: GlobalFooter }) {
                 {/* Bottom Row */}
                 <m.div 
                     initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                     style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: "some", margin: "0px" }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                     className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full"

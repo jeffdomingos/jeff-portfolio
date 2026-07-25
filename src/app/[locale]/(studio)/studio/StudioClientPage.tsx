@@ -70,7 +70,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                             <m.div
                                 key={i}
                                 initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                 style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
                                 className="group relative p-fluid-m border border-foreground/10 hover:border-foreground/30 transition-colors duration-500"
@@ -105,7 +106,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                             <m.div
                                 key={i}
                                 initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                 style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
                                 className="group relative overflow-hidden"
@@ -140,7 +142,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                             <m.div
                                 key={i}
                                 initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
+                                 style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: i * 0.15 }}
                                 className="flex flex-col p-fluid-m border border-background/10"
@@ -165,7 +168,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                     <div className="max-w-3xl mx-auto text-center">
                         <m.h2
                             initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                             style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                             className="text-step-4 type-display mb-fluid-s"
@@ -174,7 +178,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                         </m.h2>
                         <m.p
                             initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                             style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                             className="text-step-0 type-body text-foreground/70 mb-fluid-m"
@@ -184,7 +189,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                         
                         <m.div
                             initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                             style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-fluid-xl"
@@ -203,7 +209,8 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
 
                         <m.div
                             initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
+                             style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
+whileInView={{ opacity: 1 }}
                             viewport={{ once: true, amount: "some" }}
                             transition={{ duration: 0.8, delay: 0.4 }}
                             className="flex flex-col sm:flex-row gap-fluid-m justify-center text-step--2 type-label text-foreground/50"
