@@ -1,32 +1,26 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
     const containerRef = useRef<HTMLDivElement>(null)
-    const requestRef = useRef<number>()
-    const target = useRef({ x: 0, y: 0 })
-    const current = useRef({ x: 0, y: 0 })
-    const [style, setStyle] = useState({ transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.05)' })
+    
+    // Valores de movimento puros, não causam re-render no React
+    const mouseX = useMotionValue(0)
+    const mouseY = useMotionValue(0)
+
+    // Suavização automática do framer-motion (substitui o lerp manual)
+    const springConfig = { damping: 25, stiffness: 150 }
+    const springX = useSpring(mouseX, springConfig)
+    const springY = useSpring(mouseY, springConfig)
+
+    // Mapeamento dos valores de mouse (-0.5 a 0.5) para rotação em graus (-10 a 10)
+    const maxTilt = 20;
+    const rotateX = useTransform(springY, [-0.5, 0.5], [maxTilt / 2, -maxTilt / 2])
+    const rotateY = useTransform(springX, [-0.5, 0.5], [-maxTilt / 2, maxTilt / 2])
 
     useEffect(() => {
-        const lerp = (start: number, end: number, factor: number) => start + (end - start) * factor;
-
-        const animate = () => {
-            current.current.x = lerp(current.current.x, target.current.x, 0.04);
-            current.current.y = lerp(current.current.y, target.current.y, 0.04);
-
-            const maxTilt = 20;
-            const rotateX = -current.current.y * maxTilt; 
-            const rotateY = current.current.x * maxTilt;
-
-            setStyle({
-                transform: `perspective(1000px) rotateX(${rotateX.toFixed(3)}deg) rotateY(${rotateY}deg) scale(1.1)`
-            });
-
-            requestRef.current = requestAnimationFrame(animate);
-        };
-
         const handleMouseMove = (e: globalThis.MouseEvent) => {
             if (!containerRef.current) return;
             const parent = containerRef.current.parentElement;
@@ -34,40 +28,39 @@ export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
 
             const rect = parent.getBoundingClientRect();
             
-            // If the mouse goes below the hero section or outside horizontally, return to center
-            if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
-                target.current.x = 0;
-                target.current.y = 0;
+            // Se o mouse estiver dentro da seção do hero, calcula o tilt. Senão, zera.
+            if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+                mouseX.set((e.clientX / window.innerWidth) - 0.5);
+                mouseY.set((e.clientY / rect.height) - 0.5);
             } else {
-                target.current.x = (e.clientX / window.innerWidth) - 0.5;
-                target.current.y = (e.clientY / rect.height) - 0.5; // Calc relative to Hero height
+                mouseX.set(0);
+                mouseY.set(0);
             }
         }
 
         const handleMouseLeave = () => {
-            target.current.x = 0;
-            target.current.y = 0;
+            mouseX.set(0);
+            mouseY.set(0);
         }
 
-        window.addEventListener('mousemove', handleMouseMove)
-        document.body.addEventListener('mouseleave', handleMouseLeave)
-        
-        requestRef.current = requestAnimationFrame(animate);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true })
+        document.body.addEventListener('mouseleave', handleMouseLeave, { passive: true })
 
         return () => {
-            if (requestRef.current) cancelAnimationFrame(requestRef.current);
             window.removeEventListener('mousemove', handleMouseMove)
             document.body.removeEventListener('mouseleave', handleMouseLeave)
         }
-    }, [])
+    }, [mouseX, mouseY])
 
     return (
-        <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-            <div 
+        <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" style={{ perspective: 1000 }}>
+            <motion.div 
                 className="absolute inset-[-5%] bg-center bg-no-repeat bg-cover opacity-100 will-change-transform"
                 style={{ 
                     backgroundImage: `url(${imageUrl})`,
-                    ...style 
+                    rotateX,
+                    rotateY,
+                    scale: 1.05
                 }}
             />
         </div>

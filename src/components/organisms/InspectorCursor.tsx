@@ -30,12 +30,20 @@ export function InspectorCursor() {
             }
         };
 
-        let isMouseInWindow = true;
+        let isSleeping = false;
+        const wakeUp = () => {
+            if (isSleeping) {
+                isSleeping = false;
+                lastUpdate = 0; // Force refresh
+                animationFrameId = requestAnimationFrame(render);
+            }
+        };
 
         const onMouseMove = (e: MouseEvent) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             isMouseInWindow = true;
+            wakeUp();
         };
 
         const onMouseLeave = () => {
@@ -44,21 +52,31 @@ export function InspectorCursor() {
 
         const onMouseEnter = () => {
             isMouseInWindow = true;
+            wakeUp();
         };
 
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             updateElements();
+            wakeUp();
         };
 
-        window.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseleave", onMouseLeave);
-        document.addEventListener("mouseenter", onMouseEnter);
-        window.addEventListener("resize", resizeCanvas);
-        window.addEventListener("scroll", updateElements, { passive: true });
+        const onScroll = () => {
+            updateElements();
+            wakeUp();
+        };
+
+        window.addEventListener("mousemove", onMouseMove, { passive: true });
+        document.addEventListener("mouseleave", onMouseLeave, { passive: true });
+        document.addEventListener("mouseenter", onMouseEnter, { passive: true });
+        window.addEventListener("resize", resizeCanvas, { passive: true });
+        window.addEventListener("scroll", onScroll, { passive: true });
         
-        const observer = new MutationObserver(updateElements);
+        const observer = new MutationObserver(() => {
+            updateElements();
+            wakeUp();
+        });
         observer.observe(document.body, { childList: true, subtree: true });
 
         resizeCanvas();
@@ -203,7 +221,8 @@ export function InspectorCursor() {
                 const gridOverlay = document.getElementById("inspector-grid-overlay");
                 if (gridOverlay) gridOverlay.style.display = "none";
                 
-                animationFrameId = requestAnimationFrame(render);
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Garante que não ficou sujeira
+                isSleeping = true; // MATA o loop aqui para não fritar o processador
                 return;
             }
 
@@ -458,7 +477,7 @@ export function InspectorCursor() {
         return () => {
             window.removeEventListener("mousemove", onMouseMove);
             window.removeEventListener("resize", resizeCanvas);
-            window.removeEventListener("scroll", updateElements);
+            window.removeEventListener("scroll", onScroll);
             observer.disconnect();
             cancelAnimationFrame(animationFrameId);
         };
