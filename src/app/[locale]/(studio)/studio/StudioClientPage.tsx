@@ -12,7 +12,7 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                 <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
                 
                 <div className="w-full max-w-5xl relative z-40">
-                    <m.h1 
+                    <m.h1 style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
@@ -21,7 +21,7 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                         {content.hero.headline}
                     </m.h1>
                     
-                    <m.p 
+                    <m.p style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
@@ -30,7 +30,7 @@ export function StudioClientPage({ content, locale }: { content: any, locale: st
                         {content.hero.subheadline}
                     </m.p>
 
-                    <m.div
+                    <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}

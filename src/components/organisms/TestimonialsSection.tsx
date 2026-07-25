@@ -44,7 +44,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
     return (
         <m.div 
             ref={ref}
-            style={{ opacity: rowOpacity }}
+            style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  opacity: rowOpacity }}
             className="py-fluid-xl flex flex-col border-b border-background last:border-b-0 relative overflow-hidden transition-colors"
         >
             <div className="flex flex-col lg:flex-row gap-fluid-xl lg:items-start justify-between w-full relative z-10 px-fluid-xs md:px-fluid-m">
@@ -110,7 +110,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
                     className="text-step-6 type-display mb-fluid-s"
                 />
                 <m.p 
-                    style={{ opacity: headerOpacity, y: headerY }}
+                    style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  opacity: headerOpacity, y: headerY }}
                     className="text-step-1 font-light max-w-4xl"
                 >
                     {data.subtitle}

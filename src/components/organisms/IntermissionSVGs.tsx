@@ -36,7 +36,7 @@ function FloatingSVG({
 
     return (
         <m.div
-            style={{ x, y, scale, rotate, top, left, width, zIndex, willChange: "transform" }}
+            style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  x, y, scale, rotate, top, left, width, zIndex }}
             className="absolute pointer-events-none"
         >
             <m.div
@@ -47,7 +47,7 @@ function FloatingSVG({
                     ease: "easeInOut",
                     delay: bobDelay
                 }}
-                style={{ willChange: "transform" }}
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
             >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img

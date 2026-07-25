@@ -296,7 +296,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                     <div className="hidden md:flex items-center gap-2 py-1">
                         {/* Wrapper fixes the layout space to 48x48 so they never jump */}
                         <div className="w-12 h-12 flex items-center justify-center">
-                            <m.button 
+                            <m.button style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                                 layout
                                 animate={canScrollLeft ? { 
                                     height: 48, width: 48, borderRadius: 24, opacity: 1
@@ -312,7 +312,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 )}
                                 aria-label="Previous cases"
                             >
-                                <m.svg 
+                                <m.svg style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                                     animate={{ opacity: canScrollLeft ? 1 : 0, scale: canScrollLeft ? 1 : 0 }} 
                                     transition={{ duration: 0.2 }}
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
@@ -324,7 +324,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                         </div>
                         
                         <div className="w-12 h-12 flex items-center justify-center">
-                            <m.button 
+                            <m.button style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                                 layout
                                 animate={canScrollRight ? { 
                                     height: 48, width: 48, borderRadius: 24, opacity: 1
@@ -340,7 +340,7 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 )}
                                 aria-label="Next cases"
                             >
-                                <m.svg 
+                                <m.svg style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                                     animate={{ opacity: canScrollRight ? 1 : 0, scale: canScrollRight ? 1 : 0 }} 
                                     transition={{ duration: 0.2 }}
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
@@ -426,10 +426,10 @@ export function CaseGallery({ projects, locale, currentSlug, title }: { projects
                                 {/* Animated Borders */}
                                 {!isCurrent && (
                                     <>
-                                        <m.span variants={variantsTop} initial="idle" animate={state} className="absolute top-0 left-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
-                                        <m.span variants={variantsRight} initial="idle" animate={state} className="absolute top-0 right-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
-                                        <m.span variants={variantsBottom} initial="idle" animate={state} className="absolute bottom-0 right-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
-                                        <m.span variants={variantsLeft} initial="idle" animate={state} className="absolute bottom-0 left-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
+                                        <m.span style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} variants={variantsTop} initial="idle" animate={state} className="absolute top-0 left-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
+                                        <m.span style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} variants={variantsRight} initial="idle" animate={state} className="absolute top-0 right-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
+                                        <m.span style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} variants={variantsBottom} initial="idle" animate={state} className="absolute bottom-0 right-0 w-full h-[1px] bg-foreground z-50 pointer-events-none" />
+                                        <m.span style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} variants={variantsLeft} initial="idle" animate={state} className="absolute bottom-0 left-0 w-[1px] h-full bg-foreground z-50 pointer-events-none" />
                                     </>
                                 )}
 

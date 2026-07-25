@@ -46,7 +46,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                 const isCurrent = index === currentIndex;
 
                 return (
-                    <m.div
+                    <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                         key={`img-${index}`}
                         initial={isCurrent && hasStarted ? { clipPath: "polygon(0% 0%, -80% 0%, -80% 100%, 0% 100%)" } : { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" }}
                         animate={isCurrent ? { clipPath: "polygon(0% 0%, 180% 0%, 180% 100%, 0% 100%)" } : undefined}
@@ -69,7 +69,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
                         animate={{ left: "180%" }}
                         transition={{ duration: 2.4, ease: "easeInOut" }}
                         className="absolute top-0 bottom-0 w-[150%] -translate-x-1/2 pointer-events-none z-20"
-                        style={{ backgroundImage: "linear-gradient(to right, transparent 0%, oklch(var(--color-background)) 40%, oklch(var(--color-background)) 60%, transparent 100%)" }}
+                        style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  backgroundImage: "linear-gradient(to right, transparent 0%, oklch(var(--color-background)) 40%, oklch(var(--color-background)) 60%, transparent 100%)" }}
                     />
                 )}
             </AnimatePresence>
@@ -81,7 +81,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
             {mounted && document.getElementById('hero-caption-portal') ? createPortal(
                 <div className="text-right text-step-0 font-light italic text-foreground/80 pointer-events-none">
                     <AnimatePresence mode="wait">
-                        <m.div
+                        <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                             key={currentIndex}
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}

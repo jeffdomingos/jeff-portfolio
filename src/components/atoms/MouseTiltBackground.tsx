@@ -57,7 +57,7 @@ export function MouseTiltBackground({ imageUrl }: { imageUrl: string }) {
         <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" style={{ perspective: 1000 }}>
             <m.div 
                 className="absolute inset-[-5%] opacity-100 will-change-transform"
-                style={{ 
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  
                     rotateX,
                     rotateY,
                     scale: 1.05

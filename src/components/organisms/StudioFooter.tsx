@@ -95,7 +95,7 @@ whileInView="show"
                     }}
                     className="flex flex-col items-start gap-6 lg:gap-fluid-m lg:col-span-5 lg:col-start-8 mt-8 lg:mt-0 relative z-50"
                 >
-                    <m.a 
+                    <m.a style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -116,7 +116,7 @@ whileInView="show"
                         </span>
                     </m.a>
                     
-                    <m.a 
+                    <m.a style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
@@ -135,7 +135,7 @@ whileInView="show"
                         </span>
                     </m.a>
 
-                    <m.a 
+                    <m.a style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         variants={{
                             hidden: { opacity: 0, y: 30 },
                             show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }

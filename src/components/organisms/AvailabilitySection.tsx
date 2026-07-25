@@ -79,7 +79,7 @@ whileInView={{ opacity: 1, y: 0 }}
                 </div>
             
             <div className={`overflow-hidden grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] w-full relative z-10 ${isActive ? 'grid-rows-[1fr] pointer-events-auto' : 'grid-rows-[0fr] pointer-events-none'}`}>
-                <m.div 
+                <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                     className={`flex flex-col w-full max-w-sm lg:max-w-md xl:max-w-lg ${index === 1 ? 'ml-auto items-end text-right pr-fluid-m' : 'mr-auto items-start text-left pl-fluid-m'}`}
                     variants={{
                         hidden: { opacity: 0, transition: { staggerChildren: 0.1, staggerDirection: -1 } },
@@ -88,7 +88,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     initial="hidden"
                     animate={isActive ? "show" : "hidden"}
                 >
-                    <m.p 
+                    <m.p style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }} 
                         variants={{
                             hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
                             show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -97,7 +97,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     >
                         {block.description}
                     </m.p>
-                    <m.div
+                    <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                         variants={{
                             hidden: { opacity: 0, x: index === 0 ? '-100%' : '100%', y: 0 },
                             show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -164,13 +164,13 @@ function AvailabilityBlockMobile({
         <div className={`w-full group flex flex-col justify-center relative px-fluid-xs md:px-fluid-m pointer-events-auto`}>
             {/* Glassmorphism Backdrop individualizado em opacity */}
             <m.div 
-                style={{ opacity: opBg }}
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  opacity: opBg }}
                 className="absolute inset-[-50%] z-0 pointer-events-none bg-background/60 backdrop-blur-md [mask-image:radial-gradient(ellipse_at_center,_black_20%,_transparent_60%)]" 
             />
 
             <div className={`z-10 w-full relative ${index === 1 ? 'ml-auto text-right' : 'mr-auto text-left'}`}>
                 <m.h3 
-                    style={{ x: xH3, y: yH3, opacity: opH3 }}
+                    style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  x: xH3, y: yH3, opacity: opH3 }}
                     className="inline-block text-step-4 type-display mt-2"
                 >
                     {block.subtitle}
@@ -180,13 +180,13 @@ function AvailabilityBlockMobile({
             <div className="w-full relative z-10">
                 <div className={`flex flex-col w-full max-w-sm ${index === 1 ? 'ml-auto items-end text-right' : 'mr-auto items-start text-left'}`}>
                     <m.p 
-                        style={{ x: xP, y: yP, opacity: opP }}
+                        style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  x: xP, y: yP, opacity: opP }}
                         className="text-step-0 type-body text-foreground pt-fluid-m"
                     >
                         {block.description}
                     </m.p>
                     <m.div 
-                        style={{ x: xBtn, y: yBtn, opacity: opBtn }}
+                        style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  x: xBtn, y: yBtn, opacity: opBtn }}
                         className="mt-fluid-m pointer-events-auto"
                     >
                         <Button asChild>

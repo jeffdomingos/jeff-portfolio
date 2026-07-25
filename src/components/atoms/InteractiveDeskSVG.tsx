@@ -76,7 +76,7 @@ export function InteractiveDeskSVG({
             {/* Camada Traseira: Corpo */}
             <m.svg
                 {...svgProps}
-                style={{ y: yBody, rotateX: rotateXBody, transformOrigin: "center center", willChange: "transform" }}
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  y: yBody, rotateX: rotateXBody, transformOrigin: "center center" }}
             >
                 <g transform="translate(87, 8) scale(0.9)" style={{ transformOrigin: "center top" }}>
                     <path d="M1170.6,437.1c1.58-1.24,3.42-3.42,5.24-6.84,1.3-2.44,2.2-4.94,3.2-7.51,2.02-5.2,2.25-9.86,2.03-15.26-.18-4.3-.26-8.18-1.58-12.33l-4.13-13.07s0-.03-.02-.04l-12.29-31.64-8.73-21.3s-.02-.05-.03-.08l-1.64-6.03s-.02-.06-.03-.1l-4.48-11.18s-.02-.06-.03-.09c-.9-3.38-2.07-6.64-3.95-9.91-.07-.12-.1-.26-.09-.4.62-7.33-3.07-13.46-5.44-19.92-.02-.05-.03-.1-.04-.16-.57-4.36-1.31-8.77-2.48-13.12-3.95-14.77-8.98-28.67-16.99-41.91-2.52-4.45-5.65-8.23-9.44-11.73-.13-.12-.2-.28-.22-.45-.39-3.5-3.25-5.59-6.86-5.76-.07,0-.14-.02-.21-.04l-17.21-6.08c-.1-.04-.2-.1-.27-.17-2.51-2.48-5.97-3.96-9.71-2.67-.09.03-.18.05-.28.04-2.5-.11-5.2-.5-7.49-1.45l-5.82-2.4c-4.13-1.71-7.59-2.92-12.05-3.81-10.44-2.08-15.59-6.83-19.18-7.24-3.03-.34-5.27-1.31-7.84-2.88-3.78-2.3-7.89,1.11-14.1-4.58-.03-.02-.06-.05-.08-.07,0,0-.21-22.49-.38-23.51-3.64-22.74-19.14-39.15-39.35-39.15-21.58,0-37.5,15.69-39.42,40.73h0c-.3,3.32-.31,6.67.11,9.97.52,4.03-.28,8.76-.34,12.61,0,.03,0,.06,0,.08-.13,3-4.62,3.63-6.85,3.55-2.62-.1-5.14,2.59-7.12,3.22-.06.02-.11.03-.17.03-5.24.54-8.54,2.06-12.74,4.95-3.62,2.5-9.19,4.31-13.7,4.68-4.21.33-7.79,1.33-10.47,4.38-.09.1-.21.18-.35.22l-5.05,1.51c-4.7,1.4-8.48,2.55-13.58,2.37-1.32-.05-3.76,1.46-5.14,1.95l-18.67,6.75c-.08.03-.17.04-.26.04-3.87-.03-6.45,2.69-6.74,6.22-.01.18-.1.36-.23.48-3.91,3.55-7.3,7.09-10.05,11.38-7.11,10.45-12.22,21.31-16.81,32.96-1.69,4.29-5.11,8.1-7.05,11.86-2.88,5.58-5.57,9.51-5.18,16.13.2,3.27-4.17,6.95-5.41,9.88l-2.77,6.51s-.02.05-.04.08l-7.36,12.75c-.04.08-.07.16-.09.24l-.44,2.9c-.01.08-.04.16-.08.23l-9.11,23.69-18.54,38.88s-.02.05-.03.07l-3.05,8.7c-2.94,8.38-4.47,19.46-1.26,27.44l3.57,8.92c7.28,17.5,404.37,23.73,426.38,6.46ZM820.73,394l-4.98-2.72c-.39-.2-.52-.67-.28-1.03l9.43-17.54c.39-.6,5.62-.09,5.66.61l.96,20.27c.02.35-.23.66-.58.74-1.67.35-8.96.3-10.2-.32ZM1106.59,390.92l-1.65,1.81c-.21.23-.69-.05-1.08-.37-.34-.29-.86-.24-1.12.12h0c-.38.52-9.52.41-9.66-.21-.37-1.69-.57-3.54-.42-5.41l.71-9.38c.05-.72,9.03-.74,9.39-.1l4.66,10.16c.23.42.55,1.54.61,1.89.16,1,.04-.12-1.44,1.5Z" fill="#000000" />
@@ -86,7 +86,7 @@ export function InteractiveDeskSVG({
             {/* Rostos e Silhueta integrados no SVG */}
             <m.svg
                 {...svgProps}
-                style={{ y: yHead, rotateX: rotateXHead, transformOrigin: "center center", willChange: "transform" }}
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  y: yHead, rotateX: rotateXHead, transformOrigin: "center center" }}
             >
                 <image
                     href="/images/RostoEsqu.png"
@@ -101,7 +101,7 @@ export function InteractiveDeskSVG({
                     style={{ filter: "brightness(0)" }}
                 />
 
-                <m.image
+                <m.image style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                     href="/images/RostoEsqu.png"
                     x="466.02" y="0.028" width="1000" height="187.232"
                     preserveAspectRatio="xMidYMax meet"
@@ -110,7 +110,7 @@ export function InteractiveDeskSVG({
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                 />
 
-                <m.image
+                <m.image style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                     href="/images/RostoDir.png"
                     x="466.02" y="0.028" width="1000" height="187.232"
                     preserveAspectRatio="xMidYMax meet"
@@ -122,7 +122,7 @@ export function InteractiveDeskSVG({
 
             {/* Camada Frontal: Mesa */}
             <svg {...svgProps}>
-                <m.g style={{ y: yDesk, willChange: "transform" }}>
+                <m.g style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  y: yDesk }}>
                     <g transform="translate(87, 12) scale(0.9)" style={{ transformOrigin: "center top" }}>
                         <rect x="-5000" y="406.39" width="10000" height="1000" fill="#000000" />
                     </g>
@@ -132,7 +132,7 @@ export function InteractiveDeskSVG({
             {/* Camada Frontal: Notebook */}
             <m.svg
                 {...svgProps}
-                style={{ y: yNotebook, rotateX: rotateXNotebook, transformOrigin: "center center", willChange: "transform" }}
+                style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  y: yNotebook, rotateX: rotateXNotebook, transformOrigin: "center center" }}
             >
                 <g transform="translate(105, 8) scale(0.9)" style={{ transformOrigin: "center top" }}>
                     <path d="M1091.41 258.24H809.7c-3.35 0-5.86 2.71-5.64 6.05l10.58 155.24c0.23 3.35 3.12 6.05 6.47 6.05h258.91c3.35 0 6.23-2.71 6.46-6.05l10.58-155.24c0.23-3.35-2.3-6.05-5.63-6.05Z" fill="#666666" />

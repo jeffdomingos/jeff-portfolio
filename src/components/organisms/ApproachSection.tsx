@@ -64,7 +64,7 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
             <div className="relative inline-block w-fit">
                 {/* The Animated Bounding Box */}
                 <m.div 
-                    style={{ width: boxWidth, height: boxHeight, opacity: boxOpacity }}
+                    style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  width: boxWidth, height: boxHeight, opacity: boxOpacity }}
                     className="absolute top-0 left-0 border border-foreground pointer-events-none z-20"
                 >
                     {/* 4 Corner Nodes */}
@@ -75,7 +75,7 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
                 </m.div>
 
                 {/* The Masked Content */}
-                <m.div style={{ clipPath }} className="flex flex-col items-start">
+                <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  clipPath }} className="flex flex-col items-start">
                     <m.h3 
                         initial={{ opacity: 0, y: 30 }}
                          style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
@@ -137,7 +137,7 @@ export function ApproachSection({ data }: ApproachSectionProps) {
                             />
                         </div>
                         <m.p 
-                            style={{ opacity: headerOpacity, y: headerY }}
+                            style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  opacity: headerOpacity, y: headerY }}
                             className="inspectable text-step-1 type-body text-foreground max-w-4xl"
                         >
                             {data.subtitle}
