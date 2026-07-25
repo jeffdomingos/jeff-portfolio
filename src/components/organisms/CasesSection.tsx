@@ -155,7 +155,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
                     initial={{ opacity: 0, x: isEven ? 50 : -50 }}
                      style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
 whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, amount: "some", margin: "-100px" }}
+                    viewport={{ once: true, amount: "some", margin: "-100px" }}
                     transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.1 }}
                     className={`block absolute top-[1px] bottom-[1px] w-[calc(100%-1px)] ${isEven ? 'right-0' : 'left-0'} bg-background overflow-hidden z-0 rounded-none cursor-pointer pointer-events-auto`}
                     onMouseEnter={() => setHoveredSide("right")}
