@@ -37,6 +37,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
+        },
+        {
+            url: 'https://studio.jeffdomingos.com/en',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: 'https://studio.jeffdomingos.com/pt',
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
         }
     ]
 }
