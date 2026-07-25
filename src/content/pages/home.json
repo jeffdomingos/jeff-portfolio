@@ -1,9 +1,9 @@
 {
   "hero": {
-    "headline_pt": "Product Design Estratégico & Experiências Digitais de Alto Padrão.",
-    "subheadline_pt": "Atuo de ponta a ponta: seja elevando a maturidade de produtos complexos, ou desenvolvendo sites premium funcionais e de alto impacto visual.",
-    "headline_en": "Strategic Product Design & High-End Digital Experiences.",
-    "subheadline_en": "I work end-to-end: whether elevating the maturity of complex products, or delivering functional, high-impact premium websites.",
+    "headline_pt": "Product Design Estratégico para SaaS, B2B e Plataformas Complexas.",
+    "subheadline_pt": "Elevo a maturidade de produtos digitais unindo visão de negócios, engenharia de interface e fluxos orientados por Inteligência Artificial.",
+    "headline_en": "Strategic Product Design for SaaS, B2B, and Complex Platforms.",
+    "subheadline_en": "I elevate the maturity of digital products by combining business vision, interface engineering, and AI driven workflows.",
     "ctaLabel_pt": "Vamos conversar",
     "ctaLabel_en": "Let's talk",
     "ctaHref": "https://calendly.com/jeffdomingos/call45min",
@@ -57,34 +57,34 @@
   "approach": {
     "title_pt": "Abordagem",
     "title_en": "Approach",
-    "subtitle_pt": "A intersecção exata entre a lógica de negócios, a fluência técnica e o refinamento visual.",
-    "subtitle_en": "The exact intersection between business logic, technical fluency, and visual refinement.",
+    "subtitle_pt": "A intersecção exata entre a lógica de negócios, a fluência técnica e a arquitetura escalável.",
+    "subtitle_en": "The exact intersection between business logic, technical fluency, and scalable architecture.",
     "columns_pt": [
       {
         "title": "Estratégia e Negócio",
-        "description": "Mergulho nas regras do negócio para transformar cenários complexos em experiências eficientes que geram valor real para o seu produto."
+        "description": "Mergulho nas regras operacionais para transformar cenários complexos em jornadas eficientes que geram valor real para o seu produto."
       },
       {
         "title": "Design to Code",
-        "description": "Elimino atritos técnicos entre design e código. Compreendo a estrutura frontend e utilizo IA para entregas e handoffs impecáveis."
+        "description": "Elimino atritos técnicos entre design e engenharia. Compreendo a arquitetura frontend e utilizo IA para acelerar processos e garantir handoffs impecáveis."
       },
       {
-        "title": "Estética e Emoção",
-        "description": "Crio interfaces de alto padrão com atenção aos detalhes, aplicando direção de arte e microinterações para destacar a sua marca."
+        "title": "Design Systems e Escala",
+        "description": "Crio interfaces robustas com profunda atenção aos detalhes, aplicando bibliotecas de componentes e microinterações para elevar a qualidade da entrega corporativa."
       }
     ],
     "columns_en": [
       {
         "title": "Strategy and Business",
-        "description": "I dive into business rules to turn complex scenarios into efficient experiences, generating real value for the product."
+        "description": "I dive into operational rules to turn complex scenarios into efficient user journeys, generating real value for your product."
       },
       {
         "title": "Design to Code",
-        "description": "I remove technical friction between design and code. I grasp frontend structure and use AI for flawless deliveries and handoffs."
+        "description": "I remove technical friction between design and engineering. I grasp frontend architecture and use AI to accelerate processes and ensure flawless handoffs."
       },
       {
-        "title": "Aesthetics and Emotion",
-        "description": "I design high standard interfaces with deep attention to detail, applying art direction and microinteractions to elevate the brand."
+        "title": "Design Systems and Scale",
+        "description": "I design robust interfaces with deep attention to detail, applying component libraries and microinteractions to elevate the quality of enterprise delivery."
       }
     ]
   },
@@ -159,26 +159,26 @@
     "title_en": "How I can help",
     "blocks_pt": [
       {
-        "title": "Squads",
+        "title": "Estratégia e Descoberta",
         "subtitle": "Product Design",
-        "description": "Pronto para integrar squads de tecnologia como Product Designer Sênior nos formatos full time, part time ou temporário."
+        "description": "Pronto para integrar times de tecnologia como Product Designer Sênior, liderando o discovery e a validação de soluções complexas lado a lado com Produto e Engenharia."
       },
       {
-        "title": "Projetos",
-        "subtitle": "Websites e Direção de Arte",
-        "description": "Disponível para criar e desenvolver projetos independentes de escopo fechado focados em sites e portfólios premium."
+        "title": "Execução e Escala",
+        "subtitle": "Design Ops e Sistemas",
+        "description": "Focado em elevar a barra técnica da equipe através da governança de Design Systems, handoff de alta precisão e implementação de fluxos de trabalho impulsionados por IA."
       }
     ],
     "blocks_en": [
       {
-        "title": "Squads",
+        "title": "Strategy and Discovery",
         "subtitle": "Product Design",
-        "description": "Ready to join tech squads as a Senior Product Designer in full time, part time, or contract roles."
+        "description": "Ready to join tech teams as a Senior Product Designer, leading discovery and validating complex solutions closely with Product and Engineering."
       },
       {
-        "title": "Projects",
-        "subtitle": "Websites and Art Direction",
-        "description": "Available to design and build independent fixed scope projects focused on premium sites and portfolios."
+        "title": "Execution and Scale",
+        "subtitle": "Design Ops and Systems",
+        "description": "Focused on raising the technical bar of the team through Design Systems governance, high precision handoffs, and AI driven workflows."
       }
     ]
   },
