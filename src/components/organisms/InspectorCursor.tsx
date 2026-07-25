@@ -30,6 +30,7 @@ export function InspectorCursor() {
             }
         };
 
+        let isMouseInWindow = true;
         let isSleeping = false;
         const wakeUp = () => {
             if (isSleeping) {
