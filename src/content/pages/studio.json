@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "headline_pt": "Experiências Digitais Premium que Convertem.",
+    "subheadline_pt": "Desenvolvo sites e landing pages de alto impacto visual, focados em performance, SEO e conversão para elevar o posicionamento da sua marca.",
+    "headline_en": "Premium Digital Experiences that Convert.",
+    "subheadline_en": "I build high impact websites and landing pages focused on performance, SEO, and conversion to elevate your brand positioning.",
+    "ctaLabel_pt": "Iniciar Projeto",
+    "ctaLabel_en": "Start a Project",
+    "ctaHref": "https://calendly.com/jeffdomingos/call45min",
+    "backgroundMedia": "/images/home/hero-bg.png"
+  },
+  "services": {
+    "title_pt": "Serviços",
+    "title_en": "Services",
+    "subtitle_pt": "Soluções de web design de alto padrão para marcas que buscam destaque.",
+    "subtitle_en": "High-end web design solutions for brands that demand distinction.",
+    "items_pt": [
+      {
+        "title": "Web Design Premium",
+        "description": "Sites institucionais e portfólios com design de alto padrão, performance otimizada e responsividade impecável."
+      },
+      {
+        "title": "Landing Pages de Conversão",
+        "description": "Páginas estratégicas focadas em captura de leads, lançamentos e campanhas com alto impacto visual e copy persuasivo."
+      },
+      {
+        "title": "SEO & Performance",
+        "description": "Arquitetura otimizada para mecanismos de busca, Core Web Vitals e velocidade de carregamento para posicionar sua marca como autoridade."
+      },
+      {
+        "title": "Design Systems para Marcas",
+        "description": "Sistemas visuais escaláveis que garantem consistência em todas as propriedades digitais da sua marca."
+      }
+    ],
+    "items_en": [
+      {
+        "title": "Premium Web Design",
+        "description": "Institutional sites and portfolios with high-end design, optimized performance, and flawless responsiveness."
+      },
+      {
+        "title": "Conversion Landing Pages",
+        "description": "Strategic pages focused on lead capture, launches, and campaigns with high visual impact and persuasive copy."
+      },
+      {
+        "title": "SEO & Performance",
+        "description": "Architecture optimized for search engines, Core Web Vitals, and loading speed to position your brand as an authority."
+      },
+      {
+        "title": "Brand Design Systems",
+        "description": "Scalable visual systems that ensure consistency across all your brand's digital properties."
+      }
+    ]
+  },
+  "cta": {
+    "title_pt": "Pronto para elevar sua presença digital?",
+    "title_en": "Ready to elevate your digital presence?",
+    "subtitle_pt": "Agende uma conversa e descubra como posso transformar sua marca online.",
+    "subtitle_en": "Schedule a call and discover how I can transform your online brand.",
+    "ctaLabel_pt": "Agendar Conversa",
+    "ctaLabel_en": "Schedule a Call",
+    "ctaHref": "https://calendly.com/jeffdomingos/call45min",
+    "emailLabel_pt": "Ou envie um email:",
+    "emailLabel_en": "Or send an email:",
+    "emailValue": "jeffsalb@gmail.com",
+    "whatsappLabel_pt": "WhatsApp:",
+    "whatsappLabel_en": "WhatsApp:",
+    "whatsappValue": "+55 21 99937-4516",
+    "whatsappHref": "https://api.whatsapp.com/send/?phone=5521999374516"
+  }
+}
