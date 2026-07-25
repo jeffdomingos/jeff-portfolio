@@ -51,8 +51,9 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
     const clipInsetRight = useTransform(() => isDesktop ? desktopClipR.get() : mobileClipR.get());
     const clipInsetBottom = useTransform(() => isDesktop ? desktopClipB.get() : mobileClipB.get());
     const clipPath = useMotionTemplate`inset(0% ${clipInsetRight}% ${clipInsetBottom}% 0%)`;
-    const boxClipPath = useMotionTemplate`inset(-10px calc(${clipInsetRight}% - 10px) calc(${clipInsetBottom}% - 10px) -10px)`;
 
+    const boxWidth = useMotionTemplate`${drawProgress}%`;
+    const boxHeight = useMotionTemplate`${drawProgress}%`;
     const boxOpacity = useTransform(() => isDesktop ? desktopOpacity.get() : mobileOpacity.get());
 
     return (
@@ -63,8 +64,8 @@ function ApproachColumn({ col, index, sectionProgress }: { col: any, index: numb
             <div className="relative inline-block w-fit">
                 {/* The Animated Bounding Box */}
                 <m.div 
-                    style={{ willChange: "transform, opacity, clip-path", transform: "translateZ(0)", backfaceVisibility: "hidden", clipPath: boxClipPath, opacity: boxOpacity }}
-                    className="absolute inset-0 border border-foreground pointer-events-none z-20"
+                    style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  width: boxWidth, height: boxHeight, opacity: boxOpacity }}
+                    className="absolute top-0 left-0 border border-foreground pointer-events-none z-20"
                 >
                     {/* 4 Corner Nodes */}
                     <div className="absolute top-0 left-0 w-2 h-2 bg-background border border-foreground -translate-x-1/2 -translate-y-1/2" />
