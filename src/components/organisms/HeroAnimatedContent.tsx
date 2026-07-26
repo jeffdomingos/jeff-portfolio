@@ -55,7 +55,7 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
         <>
         <div className="w-full flex-1 grid-layout items-center relative">
             {/* Left Column: Text and CTA */}
-            <div className="col-span-12 lg:col-span-6 flex flex-col items-start text-left pt-0 pb-[320px] md:pb-0 relative transition-all z-40">
+            <div className="col-span-12 lg:col-span-7 flex flex-col items-start text-left pt-0 pb-[320px] md:pb-0 relative transition-all z-40">
                 <AnimatedTypingText 
                     as="h1"
                     text={headline}
@@ -69,7 +69,7 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                 />
 
                 {subheadline && (
-                    <p className={`hidden md:block text-step-0 type-body text-foreground max-w-2xl text-left transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
+                    <p className={`hidden md:block text-step-0 type-body text-foreground max-w-[700px] text-left transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
                         {subheadline}
                     </p>
                 )}
