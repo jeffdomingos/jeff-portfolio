@@ -2,6 +2,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { StudioHeader } from "@/components/organisms/StudioHeader";
 import { StudioFooter } from "@/components/organisms/StudioFooter";
+import { getGlobalContent } from "@/utils/content";
+import { InspectorCursor } from "@/components/organisms/InspectorCursor";
 
 export default function StudioLayout({
     children,
@@ -10,12 +12,13 @@ export default function StudioLayout({
     children: React.ReactNode;
     params: { locale: string };
 }) {
+    const global = getGlobalContent(locale);
     const otherLocale = locale === "pt" ? "en" : "pt";
 
     return (
         <SmoothScrollProvider>
             <div className="w-full min-h-[100svh] flex flex-col">
-                <StudioHeader locale={locale} otherLocale={otherLocale} />
+                <StudioHeader data={global.header} locale={locale} otherLocale={otherLocale} />
 
                 <main id="main-content" className="flex-1 w-full min-w-0 overflow-x-clip outline-none" tabIndex={-1}>
                     {/* Global Mesh Layer */}
@@ -25,6 +28,7 @@ export default function StudioLayout({
 
                 <StudioFooter locale={locale} />
                 <Toaster richColors />
+                <InspectorCursor />
             </div>
         </SmoothScrollProvider>
     );

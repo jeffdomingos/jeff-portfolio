@@ -7,64 +7,140 @@
     "ctaLabel_pt": "Iniciar Projeto",
     "ctaLabel_en": "Start a Project",
     "ctaHref": "https://calendly.com/jeffdomingos/call45min",
-    "backgroundMedia": "/images/home/hero-bg.png"
+    "backgroundMedia": "/images/home/hero-bg.png",
+    "carousel": [
+      {
+        "src": "/images/home/carousel/05-petit.png",
+        "caption": "Petit Journal - 2024"
+      },
+      {
+        "src": "/images/home/carousel/02-voltz.png",
+        "caption": "Voltz Motors - 2022"
+      }
+    ]
   },
-  "services": {
-    "title_pt": "Serviços",
-    "title_en": "Services",
-    "subtitle_pt": "Soluções de web design de alto padrão para marcas que buscam destaque.",
-    "subtitle_en": "High-end web design solutions for brands that demand distinction.",
+  "sectionDividerCases": {
+    "title_pt": "Projetos de Studio",
+    "title_en": "Studio Projects"
+  },
+  "cases": {
+    "case_order": [
+      "petit-journal",
+      "voltz-motors"
+    ]
+  },
+  "approach": {
+    "title_pt": "Abordagem",
+    "title_en": "Approach",
+    "subtitle_pt": "A intersecção exata entre o design de alto padrão, conversão e a performance técnica.",
+    "subtitle_en": "The exact intersection between high-end design, conversion, and technical performance.",
+    "columns_pt": [
+      {
+        "title": "Design Premium",
+        "description": "Interfaces impactantes focadas em elevar o valor percebido da sua marca com uso estratégico de micro-interações, tipografia avançada e grids impecáveis."
+      },
+      {
+        "title": "Performance & SEO",
+        "description": "Arquitetura front-end moderna otimizada para Core Web Vitals, garantindo tempos de carregamento instantâneos e máxima indexação orgânica."
+      },
+      {
+        "title": "Orientação à Conversão",
+        "description": "Arquitetura de informação e copy estruturados para guiar o usuário de forma fluida até a ação, transformando visitantes em clientes reais."
+      }
+    ],
+    "columns_en": [
+      {
+        "title": "Premium Design",
+        "description": "Impactful interfaces focused on elevating your brand's perceived value through strategic micro-interactions, advanced typography, and flawless grids."
+      },
+      {
+        "title": "Performance & SEO",
+        "description": "Modern front-end architecture optimized for Core Web Vitals, ensuring instant load times and maximum organic indexing."
+      },
+      {
+        "title": "Conversion Driven",
+        "description": "Information architecture and copy structured to smoothly guide the user to action, turning visitors into real customers."
+      }
+    ]
+  },
+  "testimonials": {
+    "title_pt": "Impacto e Colaboração",
+    "title_en": "Impact and Collaboration",
+    "subtitle_pt": "O que dizem os clientes e parceiros que já trabalharam comigo na criação de experiências digitais.",
+    "subtitle_en": "What clients and partners who have worked with me on creating digital experiences have to say.",
     "items_pt": [
       {
-        "title": "Web Design Premium",
-        "description": "Sites institucionais e portfólios com design de alto padrão, performance otimizada e responsividade impecável."
+        "author": "Nome do Cliente 1",
+        "role": "CEO na Empresa",
+        "quote": "O site ficou incrível e a performance aumentou radicalmente nossas conversões. Recomendadíssimo.",
+        "details": "Trabalho excepcional de ponta a ponta.",
+        "avatarUrl": "/images/placeholder.png"
       },
       {
-        "title": "Landing Pages de Conversão",
-        "description": "Páginas estratégicas focadas em captura de leads, lançamentos e campanhas com alto impacto visual e copy persuasivo."
+        "author": "Nome do Cliente 2",
+        "role": "Diretor de Marketing",
+        "quote": "Uma entrega impecável de design e tecnologia que elevou o posicionamento da nossa marca.",
+        "details": "Uma verdadeira revolução digital.",
+        "avatarUrl": "/images/placeholder.png"
       },
       {
-        "title": "SEO & Performance",
-        "description": "Arquitetura otimizada para mecanismos de busca, Core Web Vitals e velocidade de carregamento para posicionar sua marca como autoridade."
-      },
-      {
-        "title": "Design Systems para Marcas",
-        "description": "Sistemas visuais escaláveis que garantem consistência em todas as propriedades digitais da sua marca."
+        "author": "Nome do Cliente 3",
+        "role": "Fundador",
+        "quote": "Atenção aos detalhes e foco no negócio, não apenas em layouts bonitos.",
+        "details": "Conseguiu traduzir perfeitamente o nosso propósito.",
+        "avatarUrl": "/images/placeholder.png"
       }
     ],
     "items_en": [
       {
-        "title": "Premium Web Design",
-        "description": "Institutional sites and portfolios with high-end design, optimized performance, and flawless responsiveness."
+        "author": "Client Name 1",
+        "role": "CEO at Company",
+        "quote": "The website looks amazing and the performance radically increased our conversions. Highly recommended.",
+        "details": "Exceptional end-to-end work.",
+        "avatarUrl": "/images/placeholder.png"
       },
       {
-        "title": "Conversion Landing Pages",
-        "description": "Strategic pages focused on lead capture, launches, and campaigns with high visual impact and persuasive copy."
+        "author": "Client Name 2",
+        "role": "Marketing Director",
+        "quote": "Flawless delivery of design and technology that elevated our brand positioning.",
+        "details": "A true digital revolution.",
+        "avatarUrl": "/images/placeholder.png"
       },
       {
-        "title": "SEO & Performance",
-        "description": "Architecture optimized for search engines, Core Web Vitals, and loading speed to position your brand as an authority."
-      },
-      {
-        "title": "Brand Design Systems",
-        "description": "Scalable visual systems that ensure consistency across all your brand's digital properties."
+        "author": "Client Name 3",
+        "role": "Founder",
+        "quote": "Attention to detail and business focus, not just beautiful layouts.",
+        "details": "Perfectly translated our purpose.",
+        "avatarUrl": "/images/placeholder.png"
       }
     ]
   },
-  "cta": {
-    "title_pt": "Pronto para elevar sua presença digital?",
-    "title_en": "Ready to elevate your digital presence?",
-    "subtitle_pt": "Agende uma conversa e descubra como posso transformar sua marca online.",
-    "subtitle_en": "Schedule a call and discover how I can transform your online brand.",
-    "ctaLabel_pt": "Agendar Conversa",
-    "ctaLabel_en": "Schedule a Call",
-    "ctaHref": "https://calendly.com/jeffdomingos/call45min",
-    "emailLabel_pt": "Ou envie um email:",
-    "emailLabel_en": "Or send an email:",
-    "emailValue": "jeffsalb@gmail.com",
-    "whatsappLabel_pt": "WhatsApp:",
-    "whatsappLabel_en": "WhatsApp:",
-    "whatsappValue": "+55 21 99937-4516",
-    "whatsappHref": "https://api.whatsapp.com/send/?phone=5521999374516"
+  "availability": {
+    "title_pt": "Como podemos colaborar",
+    "title_en": "How we can collaborate",
+    "blocks_pt": [
+      {
+        "title": "Projetos Pontuais",
+        "subtitle": "Web Design & Landing Pages",
+        "description": "Criação de ponta a ponta de sites institucionais, portfólios ou landing pages de alta conversão. Ideal para lançamentos e rebrandings."
+      },
+      {
+        "title": "Design Retainer",
+        "subtitle": "Acompanhamento Contínuo",
+        "description": "Parceria de longo prazo para evolução contínua da sua presença digital, manutenção de design systems e otimização constante de conversão."
+      }
+    ],
+    "blocks_en": [
+      {
+        "title": "One-off Projects",
+        "subtitle": "Web Design & Landing Pages",
+        "description": "End-to-end creation of institutional sites, portfolios, or high conversion landing pages. Ideal for launches and rebrandings."
+      },
+      {
+        "title": "Design Retainer",
+        "subtitle": "Continuous Support",
+        "description": "Long term partnership for the continuous evolution of your digital presence, design systems maintenance, and ongoing conversion optimization."
+      }
+    ]
   }
 }

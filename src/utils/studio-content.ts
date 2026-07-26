@@ -1,122 +1,102 @@
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
+import { CaseItem } from '@/content/schema';
 
 const contentDirectory = path.join(process.cwd(), 'src', 'content');
 
-export interface StudioHero {
-    headline: string;
-    subheadline: string;
-    ctaLabel: string;
-    ctaHref: string;
-    backgroundMedia: string;
-}
-
-export interface StudioServiceItem {
-    title: string;
-    description: string;
-}
-
-export interface StudioServices {
-    title: string;
-    subtitle: string;
-    items: StudioServiceItem[];
-}
-
-export interface StudioTestimonialItem {
-    author: string;
-    role: string;
-    quote: string;
-    details: string;
-    avatarUrl: string;
-}
-
-export interface StudioTestimonials {
-    title: string;
-    subtitle: string;
-    items: StudioTestimonialItem[];
-}
-
-export interface StudioShowcaseItem {
-    src: string;
-    caption: string;
-}
-
-export interface StudioShowcase {
-    title: string;
-    items: StudioShowcaseItem[];
-}
-
-export interface StudioCTA {
-    title: string;
-    subtitle: string;
-    ctaLabel: string;
-    ctaHref: string;
-    emailLabel: string;
-    emailValue: string;
-    whatsappLabel: string;
-    whatsappValue: string;
-    whatsappHref: string;
-}
-
-export interface StudioPageContent {
-    hero: StudioHero;
-    services: StudioServices;
-    testimonials: StudioTestimonials;
-    showcase: StudioShowcase;
-    cta: StudioCTA;
-}
-
-export function getStudioPageContent(locale: string): StudioPageContent {
+export function getStudioPageContent(locale: string) {
     const lang = locale === 'pt' ? 'pt' : 'en';
 
-    // Main studio content
     const studioPath = path.join(contentDirectory, 'pages', 'studio.json');
-    const studioData = JSON.parse(fs.readFileSync(studioPath, 'utf8'));
+    const data = JSON.parse(fs.readFileSync(studioPath, 'utf8'));
 
-    // Studio testimonials
-    const testimonialsPath = path.join(contentDirectory, 'pages', 'testimonials-studio.json');
-    const testimonialsData = JSON.parse(fs.readFileSync(testimonialsPath, 'utf8'));
+    const hero = data.hero || {};
+    const cases = data.cases || {};
+    const approach = data.approach || {};
+    const testimonials = data.testimonials || {};
+    const availability = data.availability || {};
+    const sectionDividerCases = data.sectionDividerCases || {};
 
-    // Studio projects/showcase
-    const projectsPath = path.join(contentDirectory, 'pages', 'studio-projects.json');
-    const projectsData = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
+    const orderList: string[] = cases.case_order || [];
 
-    const hero = studioData.hero || {};
-    const services = studioData.services || {};
-    const cta = studioData.cta || {};
+    // Build case list dynamically from project MDX files (single source of truth)
+    const projectsDir = path.join(contentDirectory, 'projects');
+    const projectFiles = fs.readdirSync(projectsDir).filter(f => f.endsWith('.mdx'));
+    let caseItems = projectFiles
+        .map(file => {
+            const slug = file.replace(/\.mdx$/, '');
+            const { data: pd } = matter(fs.readFileSync(path.join(projectsDir, file), 'utf8'));
+            if (!pd.featured) return null;
+
+            const homeCard = pd.home_card || {};
+            const langData = pd[lang] || {};
+
+            const homeContext = homeCard[`context_${lang}`] || langData.context || undefined;
+            const homeTitle = homeCard[`title_${lang}`] || langData.title || slug;
+            const homeSummary = homeCard[`summary_${lang}`] || langData.summary || '';
+            const homeThumbnail = homeCard.thumbnail || pd.thumbnail || '';
+            const homeTags = homeCard[`tags_${lang}`] || homeCard.tags || pd[`tags_${lang}`] || pd.tags || [];
+            const customNumber = homeCard.custom_number;
+            const customCtaLabel = homeCard[`cta_${lang}`] || homeCard.ctaLabel;
+
+            return { slug, context: homeContext, title: homeTitle, summary: homeSummary, href: `/${locale}/projects/${slug}`, thumbnailImage: homeThumbnail, tags: homeTags, customNumber, customCtaLabel };
+        })
+        .filter(Boolean) as { slug: string; context?: string; title: string; summary: string; href: string; thumbnailImage: string; tags: string[]; customNumber?: string; customCtaLabel?: string }[];
+
+    // Sort by cases.case_order
+    caseItems.sort((a, b) => {
+        const indexA = orderList.indexOf(a.slug);
+        const indexB = orderList.indexOf(b.slug);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+    });
+
+    const finalCaseItems = caseItems.map(({ slug, ...rest }) => rest);
 
     return {
         hero: {
             headline: hero[`headline_${lang}`] ?? '',
             subheadline: hero[`subheadline_${lang}`] ?? '',
+            backgroundMedia: hero.backgroundMedia ?? '',
             ctaLabel: hero[`ctaLabel_${lang}`] ?? '',
             ctaHref: hero.ctaHref ?? '',
-            backgroundMedia: hero.backgroundMedia ?? '',
+            carousel: hero.carousel ?? []
         },
-        services: {
-            title: services[`title_${lang}`] ?? '',
-            subtitle: services[`subtitle_${lang}`] ?? '',
-            items: services[`items_${lang}`] ?? [],
+        sectionDividerCases: {
+            title: sectionDividerCases[`title_${lang}`] ?? ''
+        },
+        caseList: {
+            items: finalCaseItems
+        },
+        approach: {
+            title: approach[`title_${lang}`] ?? '',
+            subtitle: approach[`subtitle_${lang}`] ?? '',
+            columns: (approach[`columns_${lang}`] || []).map((col: any) => ({
+                title: col.title ?? '',
+                description: col.description ?? ''
+            }))
         },
         testimonials: {
-            title: testimonialsData[`title_${lang}`] ?? '',
-            subtitle: testimonialsData[`subtitle_${lang}`] ?? '',
-            items: testimonialsData[`items_${lang}`] ?? [],
+            title: testimonials[`title_${lang}`] ?? '',
+            subtitle: testimonials[`subtitle_${lang}`] ?? '',
+            items: (testimonials[`items_${lang}`] || []).map((t: any) => ({
+                author: t.author ?? '',
+                role: t.role ?? '',
+                quote: t.quote ?? '',
+                details: t.details ?? '',
+                avatarUrl: t.avatarUrl ?? ''
+            }))
         },
-        showcase: {
-            title: projectsData[`title_${lang}`] ?? '',
-            items: projectsData.items ?? [],
-        },
-        cta: {
-            title: cta[`title_${lang}`] ?? '',
-            subtitle: cta[`subtitle_${lang}`] ?? '',
-            ctaLabel: cta[`ctaLabel_${lang}`] ?? '',
-            ctaHref: cta.ctaHref ?? '',
-            emailLabel: cta[`emailLabel_${lang}`] ?? '',
-            emailValue: cta.emailValue ?? '',
-            whatsappLabel: cta[`whatsappLabel_${lang}`] ?? '',
-            whatsappValue: cta.whatsappValue ?? '',
-            whatsappHref: cta.whatsappHref ?? '',
-        },
+        availability: {
+            title: availability[`title_${lang}`] ?? '',
+            blocks: (availability[`blocks_${lang}`] || []).map((b: any) => ({
+                title: b.title ?? '',
+                subtitle: b.subtitle ?? '',
+                description: b.description ?? ''
+            }))
+        }
     };
 }

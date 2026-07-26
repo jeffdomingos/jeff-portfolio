@@ -3,24 +3,43 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { GlobalHeader } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
+import { usePathname } from "next/navigation";
 
-export function StudioHeader({ locale, otherLocale }: { locale: string, otherLocale: string }) {
+export function StudioHeader({ data, locale, otherLocale }: { data: GlobalHeader, locale: string, otherLocale: string }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isFooterVisible, setIsFooterVisible] = useState(false);
+    const [isMenuDark, setIsMenuDark] = useState(false);
+
+    const pathname = usePathname();
+    const isHome = pathname === `/${locale}/studio` || pathname === `/${locale}/studio/`;
 
     const toggleMenu = () => {
+        if (!isOpen) {
+            // Ao abrir o menu, inspeciona os elementos que estão visualmente atrás do header
+            if (typeof document !== 'undefined') {
+                const elements = document.elementsFromPoint(window.innerWidth / 2, 50);
+                const isDark = elements.some(el => {
+                    const classes = el.className;
+                    return typeof classes === 'string' && (classes.includes('bg-foreground') || classes.includes('bg-black'));
+                });
+                setIsMenuDark(isDark);
+            }
+        }
         setIsOpen(!isOpen);
     };
 
     useEffect(() => {
+        // Observer para detectar quando o footer entra na tela
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsFooterVisible(entry.isIntersecting);
             },
-            { threshold: 0.05 }
+            { threshold: 0.05 } // Reage assim que 5% do footer aparecer
         );
         
+        // Tenta observar imediatamente, e com fallback caso o footer ainda vá montar
         const tryObserve = () => {
             const footer = document.querySelector('footer');
             if (footer) {
@@ -40,8 +59,6 @@ export function StudioHeader({ locale, otherLocale }: { locale: string, otherLoc
         return () => observer.disconnect();
     }, []);
 
-    const ctaLabel = locale === 'pt' ? 'Iniciar Projeto' : 'Start a Project';
-
     return (
         <>
             <header className="fixed top-0 w-full z-[80] pointer-events-none mix-blend-difference text-white">
@@ -53,27 +70,34 @@ export function StudioHeader({ locale, otherLocale }: { locale: string, otherLoc
                     <Link href={`/${locale}/studio`} className="flex items-center pointer-events-auto z-[70] overflow-hidden" onClick={() => setIsOpen(false)}>
                         <Image 
                             src="/images/logo-header-horiz.svg" 
-                            alt="Jeff Domingos Studio" 
+                            alt={data.brandName} 
                             width={160}
                             height={32}
                             priority={true}
                             className={`h-6 md:h-8 w-auto object-contain invert transition-all duration-500 ease-in-out ${isFooterVisible ? '-translate-y-[150%] opacity-0' : 'translate-y-0 opacity-100'}`} 
                         />
-                        <span className="sr-only">Jeff Domingos Studio</span>
+                        <span className="sr-only">{data.brandName}</span>
                     </Link>
 
-                    {/* Desktop Nav — Minimal: only CTA + Language */}
-                    <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 type-label pointer-events-auto">
-                        <a 
-                            href="https://calendly.com/jeffdomingos/call45min" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            data-text={ctaLabel} 
-                            className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none"
-                        >
-                            {ctaLabel}
+                    {/* Desktop Nav */}
+                    <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 type-label pointer-events-auto transition-opacity duration-1000 [.is-loading_&]:opacity-0 [.is-loading_&]:pointer-events-none">
+                        <Link href={`/${locale}/studio`} data-text={data.navItemHome} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {data.navItemHome}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
-                        </a>
+                        </Link>
+                        <Link href={`/${locale}/projects`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {locale === 'pt' ? 'Projetos' : 'Projects'}
+                            <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                        </Link>
+                        <Link href={`/${locale}/journal`} data-text={data.navItemJournal} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {data.navItemJournal}
+                            <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                        </Link>
+                        {/* Resume Link Removido */}
+                        <Link href={`/${locale}/contact`} data-text={data.navItemContact} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                            {data.navItemContact}
+                            <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
+                        </Link>
                         <div className="flex items-center gap-4 border-l border-current pl-fluid-m ml-2">
                             <LanguageSwitch currentLocale={locale} otherLocale={otherLocale} />
                         </div>
@@ -82,7 +106,7 @@ export function StudioHeader({ locale, otherLocale }: { locale: string, otherLoc
                     {/* Mobile Hamburger Toggle */}
                     <button 
                         onClick={toggleMenu}
-                        className="md:hidden pointer-events-auto z-[70] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none"
+                        className="md:hidden pointer-events-auto z-[70] p-2 flex flex-col justify-center items-center gap-[6px] focus:outline-none transition-opacity duration-1000 [.is-loading_&]:opacity-0 [.is-loading_&]:pointer-events-none"
                         aria-expanded={isOpen}
                         aria-label="Toggle menu"
                     >
@@ -93,37 +117,22 @@ export function StudioHeader({ locale, otherLocale }: { locale: string, otherLoc
                 </div>
             </header>
 
-            {/* Mobile Menu Overlay — Studio-specific (no portfolio links) */}
-            <div className={`fixed inset-0 z-[70] flex flex-col justify-center items-center transition-all duration-500 ease-in-out bg-background text-foreground ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+            {/* Mobile Menu Overlay */}
+            <div className={`fixed inset-0 z-[70] flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} ${isMenuDark ? 'bg-foreground text-background' : 'bg-background text-foreground'}`}>
                 <nav className="flex flex-col items-center gap-8 text-step-2 type-label">
-                    <a 
-                        href="https://calendly.com/jeffdomingos/call45min" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={() => setIsOpen(false)} 
-                        data-text={ctaLabel} 
-                        className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none"
-                    >
-                        {ctaLabel}
-                    </a>
-                    <a 
-                        href="mailto:jeffsalb@gmail.com" 
-                        onClick={() => setIsOpen(false)} 
-                        data-text="Email" 
-                        className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none"
-                    >
-                        Email
-                    </a>
-                    <a 
-                        href="https://api.whatsapp.com/send/?phone=5521999374516" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={() => setIsOpen(false)} 
-                        data-text="WhatsApp" 
-                        className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none"
-                    >
-                        WhatsApp
-                    </a>
+                    <Link href={`/${locale}/studio`} onClick={() => setIsOpen(false)} data-text={data.navItemHome} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        {data.navItemHome}
+                    </Link>
+                    <Link href={`/${locale}/projects`} onClick={() => setIsOpen(false)} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        {locale === 'pt' ? 'Projetos' : 'Projects'}
+                    </Link>
+                    <Link href={`/${locale}/journal`} onClick={() => setIsOpen(false)} data-text={data.navItemJournal} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        {data.navItemJournal}
+                    </Link>
+                    {/* Resume Link Removido */}
+                    <Link href={`/${locale}/contact`} onClick={() => setIsOpen(false)} data-text={data.navItemContact} className="hover:font-bold transition-colors flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        {data.navItemContact}
+                    </Link>
                     <div className="mt-8 pt-8 border-t border-border flex items-center justify-center">
                         <LanguageSwitch currentLocale={locale} otherLocale={otherLocale} />
                     </div>
