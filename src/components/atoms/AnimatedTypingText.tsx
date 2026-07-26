@@ -51,78 +51,141 @@ export function AnimatedTypingText({
     selectionClassName = "bg-foreground text-background transition-all duration-75"
 }: AnimatedTypingTextProps) {
     const ref = useRef<HTMLElement>(null);
-    const [count, setCount] = useState(0);
-    const [typingState, setTypingState] = useState<'idle' | 'typing' | 'paused' | 'finished'>('idle');
+    
+    // Para modo selection, mantemos o React State, pois é mais simples e menos usado em scroll intenso
+    const [selectionCount, setSelectionCount] = useState(0);
 
-    // Manter a referência mais recente de onFinished sem engatilhar re-render/reset
+    // Refs para a mutação Vanilla JS
+    const countRef = useRef(0);
+    const charsRef = useRef<HTMLElement[]>([]);
+    const cursorsRef = useRef<HTMLElement[]>([]);
+    const blinkTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
     const onFinishedRef = useRef(onFinished);
     useEffect(() => {
         onFinishedRef.current = onFinished;
     }, [onFinished]);
+
+    // Coleta as referências dos nós DOM após a montagem
+    useEffect(() => {
+        if (!ref.current || animationType === 'selection') return;
+        charsRef.current = Array.from(ref.current.querySelectorAll('.type-char'));
+        cursorsRef.current = Array.from(ref.current.querySelectorAll('.type-cursor'));
+        
+        // Garante que o estado inicial do DOM reflete count=0
+        renderFrame(0, true);
+    }, [text, animationType]);
+
+    // Função de mutação direta no DOM (O(delta))
+    const renderFrame = (newCount: number, force = false) => {
+        const current = countRef.current;
+        if (newCount === current && !force) return;
+        
+        const chars = charsRef.current;
+        const cursors = cursorsRef.current;
+
+        // Helper para achar a posição correta do cursor (ignora espaços)
+        const getCursorIndex = (c: number) => {
+            if (c === 0) return 0;
+            let lastVisible = -1;
+            for (let i = c - 1; i >= 0; i--) {
+                if (text[i] !== ' ') { lastVisible = i; break; }
+            }
+            return lastVisible + 1;
+        };
+
+        const oldCursorIndex = getCursorIndex(current);
+        const newCursorIndex = getCursorIndex(newCount);
+
+        // Atualiza a visibilidade do cursor
+        if (oldCursorIndex !== newCursorIndex || force) {
+            if (cursors[oldCursorIndex]) cursors[oldCursorIndex].style.opacity = '0';
+            if (cursors[newCursorIndex]) cursors[newCursorIndex].style.opacity = '1';
+        }
+
+        // Lógica de piscar (pausa enquanto digita)
+        if (cursors[newCursorIndex]) {
+            const cursorLine = cursors[newCursorIndex].querySelector('.cursor-line');
+            if (cursorLine) cursorLine.classList.remove('animate-hard-blink');
+        }
+
+        if (blinkTimeoutRef.current) clearTimeout(blinkTimeoutRef.current);
+        blinkTimeoutRef.current = setTimeout(() => {
+            const activeIndex = getCursorIndex(countRef.current);
+            if (cursors[activeIndex]) {
+                const cursorLine = cursors[activeIndex].querySelector('.cursor-line');
+                if (cursorLine) cursorLine.classList.add('animate-hard-blink');
+            }
+        }, 150);
+
+        // Atualiza os caracteres individualmente (apenas os que mudaram)
+        if (force) {
+            for (let i = 0; i < chars.length; i++) {
+                if (chars[i]) chars[i].style.opacity = i < newCount ? '1' : '0';
+            }
+        } else if (newCount > current) {
+            for (let i = current; i < newCount; i++) {
+                if (chars[i]) chars[i].style.opacity = '1';
+            }
+        } else {
+            for (let i = current - 1; i >= newCount; i--) {
+                if (chars[i]) chars[i].style.opacity = '0';
+            }
+        }
+        
+        countRef.current = newCount;
+    };
 
     // MODO AUTO
     useEffect(() => {
         if (mode !== 'auto') return;
         if (isLoadingPhase) return;
 
-        setCount(0);
-        setTypingState('idle');
+        if (animationType === 'selection') setSelectionCount(0);
+        else renderFrame(0, true);
 
         let i = 0;
         let intervalId: NodeJS.Timeout;
 
         const startTyping = () => {
-            setTypingState('typing');
             intervalId = setInterval(() => {
                 i++;
-                setCount(i);
+                if (animationType === 'selection') {
+                    setSelectionCount(i);
+                } else {
+                    renderFrame(i);
+                }
+                
                 if (i >= text.length) {
                     clearInterval(intervalId);
-                    setTypingState('finished');
                     if (onFinishedRef.current) onFinishedRef.current();
                 }
             }, speed);
         };
 
-        const effectiveDelay = isLoadingPhase ? 0 : delay; // If we wait for loading, we start immediately after. Wait! We need to check if we WERE in loading phase.
-        // Se isLoadingPhase acabou de virar false e antes era true, o effect roda e effectiveDelay seria bom ser 0.
-        // Como o effect re-roda quando isLoadingPhase muda, se for false ele executa. 
-        // Vamos apenas usar 0 delay. Ou o original delay.
-        // Vamos usar 0 delay se ele foi acionado apó o loading (ou seja, se delay é passado mas isLoadingPhase é a dependência, 
-        // na real se renderiza a tela com loading, delay = 0 depois. Mas pode ser que queira zero mesmo.
-        const timeoutId = setTimeout(startTyping, 0); // Sempre inicia instantâneo pq o delay real é o load.
+        const timeoutId = setTimeout(startTyping, 0);
 
         return () => {
             clearTimeout(timeoutId);
             clearInterval(intervalId);
         };
-    }, [text, mode, speed, delay, isLoadingPhase]);
+    }, [text, mode, speed, delay, isLoadingPhase, animationType]);
 
     // MODO SCROLL
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: scrollOffset
     });
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         if (mode !== 'scroll') return;
-
         const newCount = Math.floor(latest * text.length);
-        setCount(newCount);
-        setTypingState('typing');
-
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-        timeoutRef.current = setTimeout(() => {
-            if (latest === 0) {
-                setTypingState('idle');
-            } else if (latest >= 0.99) {
-                setTypingState('finished');
-            } else {
-                setTypingState('paused');
-            }
-        }, 150);
+        
+        if (animationType === 'selection') {
+            setSelectionCount(newCount);
+        } else {
+            renderFrame(newCount);
+        }
     });
 
     // TOKENIZATION (para estilos heterogêneos)
@@ -137,7 +200,6 @@ export function AnimatedTypingText({
             if (typeof target.text === 'string') {
                 regex = new RegExp(`(${target.text})`, 'gi');
             } else {
-                // Ensure the global flag is present to prevent infinite loops in regex.exec
                 const flags = target.text.flags.includes('g') ? target.text.flags : target.text.flags + 'g';
                 regex = new RegExp(target.text.source, flags);
             }
@@ -172,17 +234,6 @@ export function AnimatedTypingText({
     }
 
     let globalIndex = 0;
-    
-    // Descobre qual é o índice da última letra visível que NÃO seja um espaço
-    let lastVisibleNonSpaceIndex = -1;
-    for (let i = count - 1; i >= 0; i--) {
-        if (text[i] !== ' ') {
-            lastVisibleNonSpaceIndex = i;
-            break;
-        }
-    }
-
-    const isBlinking = typingState !== 'typing';
 
     return (
         <Component ref={ref} className={`${className || ''} pr-2`}>
@@ -196,8 +247,21 @@ export function AnimatedTypingText({
                 }
             `}} />
             
+            {animationType === 'typing' && (
+                <span 
+                    className="type-cursor relative inline-block w-0 h-0 overflow-visible align-baseline"
+                    style={{ opacity: 1 }}
+                >
+                    <span className="cursor-line absolute left-0 bottom-[-0.1em] bg-current w-[4px] animate-hard-blink" style={{ height: '0.85em' }} />
+                    {isLoadingPhase && loadingProgress !== undefined && (
+                        <span className="absolute left-[12px] bottom-[-0.1em] h-[0.85em] flex items-center whitespace-nowrap text-step--2 md:text-step--1 opacity-100 text-black font-normal tracking-widest">
+                            {loadingProgress.toString().padStart(2, '0')}%
+                        </span>
+                    )}
+                </span>
+            )}
+            
             {tokens.map((token, tokenIdx) => {
-                // Divide em palavras inteiras
                 const words = token.text.split(/(\s+)/);
                 
                 return (
@@ -206,17 +270,15 @@ export function AnimatedTypingText({
                             if (!word) return null;
 
                             const wordStartIndex = globalIndex;
-                            const wordEndIndex = globalIndex + word.length;
                             globalIndex += word.length;
-
-                            const typedLength = Math.max(0, Math.min(word.length, count - wordStartIndex));
-                            const typedStr = word.substring(0, typedLength);
-                            const untypedStr = word.substring(typedLength);
-                            
                             const wrapperClass = word.trim() === '' ? '' : 'whitespace-nowrap';
 
-                            // --- MODO SELEÇÃO ---
+                            // --- MODO SELEÇÃO (Usa React State) ---
                             if (animationType === 'selection') {
+                                const typedLength = Math.max(0, Math.min(word.length, selectionCount - wordStartIndex));
+                                const typedStr = word.substring(0, typedLength);
+                                const untypedStr = word.substring(typedLength);
+
                                 return (
                                     <span key={wordIdx} className={wrapperClass}>
                                         {typedStr && <span className={selectionClassName}>{typedStr}</span>}
@@ -225,38 +287,24 @@ export function AnimatedTypingText({
                                 );
                             }
 
-                            // --- MODO TYPING ---
+                            // --- MODO TYPING (Usa Vanilla JS DOM Mutations) ---
                             return (
                                 <span key={wordIdx} className={wrapperClass}>
                                     {word.split('').map((char, charIdx) => {
-                                        const charGlobalIdx = wordStartIndex + charIdx;
-                                        const isCharTyped = charGlobalIdx < count;
-                                        const showCursorBefore = count === 0 && charGlobalIdx === 0;
-                                        const showCursorAfter = count > 0 && charGlobalIdx === lastVisibleNonSpaceIndex;
-
                                         return (
                                             <span key={charIdx}>
-                                                {showCursorBefore && (
-                                                    <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
-                                                        <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />
-                                                        {isLoadingPhase && loadingProgress !== undefined && (
-                                                            <span className="absolute left-[12px] bottom-[-0.1em] h-[0.85em] flex items-center whitespace-nowrap text-step--2 md:text-step--1 type-body opacity-100 text-black font-normal tracking-widest">
-                                                                {loadingProgress.toString().padStart(2, '0')}%
-                                                            </span>
-                                                        )}
-                                                    </span>
-                                                )}
                                                 <span 
-                                                    className={isCharTyped ? 'opacity-100' : 'opacity-0'}
-                                                    style={{ willChange: "opacity, transform", transform: "translateZ(0)" }}
+                                                    className="type-char"
+                                                    style={{ opacity: 0, willChange: "opacity, transform", transform: "translateZ(0)" }}
                                                 >
                                                     {char}
                                                 </span>
-                                                {showCursorAfter && (
-                                                    <span className="relative inline-block w-0 h-0 overflow-visible align-baseline">
-                                                        <span className={`absolute left-0 bottom-[-0.1em] bg-current w-[4px] ${isBlinking ? 'animate-hard-blink' : ''}`} style={{ height: '0.85em' }} />
-                                                    </span>
-                                                )}
+                                                <span 
+                                                    className="type-cursor relative inline-block w-0 h-0 overflow-visible align-baseline"
+                                                    style={{ opacity: 0 }}
+                                                >
+                                                    <span className="cursor-line absolute left-0 bottom-[-0.1em] bg-current w-[4px] animate-hard-blink" style={{ height: '0.85em' }} />
+                                                </span>
                                             </span>
                                         );
                                     })}
