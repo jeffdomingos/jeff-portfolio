@@ -166,7 +166,7 @@ whileInView="show"
 whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: "some", margin: "0px" }}
                     transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-                    className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 font-light relative z-50 w-full"
+                    className="pt-4 lg:pt-fluid-s mt-auto border-t border-foreground/10 flex flex-row items-center justify-between text-step--2 md:text-step--1 type-body relative z-50 w-full"
                 >
                     <p className="shrink-0">© Jeff Domingos Studio</p>
                     <button 

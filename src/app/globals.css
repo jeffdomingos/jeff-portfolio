@@ -14,7 +14,7 @@
   }
 
   body {
-    @apply bg-background text-foreground tracking-tight overflow-x-hidden;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 
   /* Impede qualquer scroll nativo enquanto a página carrega */
@@ -60,11 +60,11 @@
   }
   
   .type-label {
-    @apply font-sans font-medium uppercase tracking-widest;
+    @apply font-mono font-medium uppercase tracking-widest;
   }
   
   .type-body {
-    @apply font-sans font-light tracking-tight leading-relaxed;
+    @apply font-sans font-normal leading-relaxed;
   }
 }
 

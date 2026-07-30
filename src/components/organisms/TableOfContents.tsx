@@ -52,7 +52,7 @@ export function TableOfContents({ toc, locale }: TableOfContentsProps) {
               <a
                 href={`#${item.id}`}
                 className={`relative block py-1 type-body text-step--2 no-underline transition-colors group
-                  ${isActive ? 'text-foreground font-medium' : 'text-foreground font-light hover:font-medium'}
+                  ${isActive ? 'text-foreground font-medium' : 'text-foreground font-normal hover:font-medium'}
                 `}
                 onClick={(e) => {
                   e.preventDefault();

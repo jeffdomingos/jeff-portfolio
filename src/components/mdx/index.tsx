@@ -28,7 +28,7 @@ whileInView={{ opacity: 1, y: 0 }}
                         />
                     </div>
                 </div>
-                {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
+                {alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{alt}</figcaption>}
             </m.figure>
         );
     }
@@ -65,7 +65,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0" />
                 </div>
             </div>
-            {alt && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{alt}</figcaption>}
+            {alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{alt}</figcaption>}
         </m.figure>
     );
 }
@@ -100,7 +100,7 @@ export function Quote({ children, author }: { children: ReactNode; author?: stri
 export function Metric({ label, value }: { label: string; value: string }) {
     return (
         <div className="flex flex-col items-center justify-center p-6 bg-muted rounded-xl border border-border text-center my-6">
-            <span className="text-4xl font-extrabold text-foreground tracking-tighter mb-1">{value}</span>
+            <span className="text-step-4 type-display text-foreground mb-1">{value}</span>
             <span className="text-sm uppercase tracking-widest text-subtle font-semibold">{label}</span>
         </div>
     );
@@ -129,7 +129,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     )}
                 </div>
             </div>
-            {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
+            {title && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{title}</figcaption>}
         </m.figure>
     );
 }
@@ -157,7 +157,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     />
                 </div>
             </div>
-            {title && <figcaption className="text-center text-sm text-foreground font-light italic mt-6">{title}</figcaption>}
+            {title && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{title}</figcaption>}
         </m.figure>
     );
 }

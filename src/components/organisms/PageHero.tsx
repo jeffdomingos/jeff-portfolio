@@ -41,7 +41,7 @@ export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLab
                                         {tags.map((tag: string, i: number) => (
                                             <span 
                                                 key={i} 
-                                                className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 type-label text-foreground font-light"
+                                                className="px-4 py-1.5 bg-transparent border border-foreground border-dashed rounded-full text-step--2 type-label text-foreground"
                                             >
                                                 {tag}
                                             </span>
@@ -49,7 +49,7 @@ export function PageHero({ title, slug, overline, subtitle, tags, readingTimeLab
                                     </div>
                                 )}
                                 {readingTimeLabel && (
-                                    <div className="mt-6 flex items-center gap-2 text-foreground type-body text-step--1 font-light">
+                                    <div className="mt-6 flex items-center gap-2 text-foreground type-body text-step--1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                         <span>{readingTimeLabel}</span>
                                     </div>

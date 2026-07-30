@@ -45,7 +45,7 @@ function ContactCard({ item, index }: { item: any, index: number }) {
                     {item.icon === 'calendar' && <Calendar className="w-8 h-8 md:w-10 md:h-10 shrink-0 stroke-1" />}
                     <h3 className="text-step-2 md:text-step-3 type-subheading">{item.platformName}</h3>
                 </div>
-                <p className="font-light opacity-80 mb-12 text-step--1">{item.description}</p>
+                <p className="type-body opacity-80 mb-12 text-step--1">{item.description}</p>
                 
                 {/* CTA Line */}
                 <div className="mt-auto flex items-center justify-between w-full type-label text-step--1 border-t border-foreground/20 pt-6">

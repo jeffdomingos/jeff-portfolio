@@ -20,6 +20,7 @@ const config = {
 			fontFamily: {
 				sans: ['var(--font-barlow)', 'Tahoma', 'Verdana', 'sans-serif'],
 				heading: ['var(--font-barlow-condensed)', '"Arial Narrow"', '"Helvetica Neue Condensed"', 'Tahoma', 'Verdana', 'sans-serif'],
+				mono: ['var(--font-mono)', 'monospace'],
 			},
 			colors: {
 				border: 'oklch(var(--color-border) / <alpha-value>)',

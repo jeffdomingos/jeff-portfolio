@@ -57,7 +57,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
                     </div>
                     <div>
                         <p className="font-bold text-step-0 text-background">{item.author}</p>
-                        <p className="text-step--1 font-light">{item.role}</p>
+                        <p className="text-step--1 type-body opacity-80">{item.role}</p>
                     </div>
                 </div>
                 
@@ -69,7 +69,7 @@ function TestimonialRow({ item, index, isLast }: { item: any, index: number, isL
 whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-step-3 md:text-step-4 text-background leading-tight italic tracking-tight font-light"
+                        className="text-step-3 md:text-step-4 text-background leading-tight italic"
                     >
                         &quot;{item.quote}&quot;
                     </m.p>
@@ -80,7 +80,7 @@ whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <p className="text-step-0 font-light text-background leading-relaxed pt-fluid-m max-w-4xl">
+                        <p className="text-step-0 type-body text-background pt-fluid-m max-w-4xl">
                             {item.details}
                         </p>
                     </m.div>
@@ -111,7 +111,7 @@ export function TestimonialsSection({ data }: TestimonialsSectionProps) {
                 />
                 <m.p 
                     style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden",  opacity: headerOpacity, y: headerY }}
-                    className="text-step-1 font-light max-w-4xl"
+                    className="text-step-1 type-body max-w-4xl"
                 >
                     {data.subtitle}
                 </m.p>

@@ -81,20 +81,20 @@ export function StudioHeader({ data, locale, otherLocale }: { data: GlobalHeader
 
                     {/* Desktop Nav */}
                     <nav className="hidden md:flex items-center gap-fluid-m text-current text-step--2 type-label pointer-events-auto transition-opacity duration-1000 [.is-loading_&]:opacity-0 [.is-loading_&]:pointer-events-none">
-                        <Link href={`/${locale}/studio`} data-text={data.navItemHome} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        <Link href={`/${locale}/studio`} data-text={data.navItemHome} className="hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemHome}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
-                        <Link href={`/${locale}/projects`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        <Link href={`/${locale}/projects`} data-text={locale === 'pt' ? 'Projetos' : 'Projects'} className="hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {locale === 'pt' ? 'Projetos' : 'Projects'}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
-                        <Link href={`/${locale}/journal`} data-text={data.navItemJournal} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        <Link href={`/${locale}/journal`} data-text={data.navItemJournal} className="hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemJournal}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>
                         {/* Resume Link Removido */}
-                        <Link href={`/${locale}/contact`} data-text={data.navItemContact} className="font-light hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
+                        <Link href={`/${locale}/contact`} data-text={data.navItemContact} className="hover:font-bold transition-colors relative group flex flex-col items-center after:content-[attr(data-text)] after:font-bold after:h-0 after:invisible after:overflow-hidden after:pointer-events-none after:select-none">
                             {data.navItemContact}
                             <span className="absolute -bottom-1 left-0 w-full h-px bg-current scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
                         </Link>

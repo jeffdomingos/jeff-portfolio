@@ -1,4 +1,4 @@
-import { Barlow, Barlow_Condensed } from "next/font/google";
+import { Barlow, Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -6,6 +6,11 @@ const barlow = Barlow({
     style: ["normal", "italic"],
     subsets: ["latin"],
     variable: "--font-barlow",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    variable: "--font-mono",
 });
 
 const barlowCondensed = Barlow_Condensed({
@@ -32,7 +37,7 @@ export default function RootLayout({
 }) {
     return (
         <ViewTransitions>
-            <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable}`}>
+            <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable}`}>
                 <head>
                     <script dangerouslySetInnerHTML={{ __html: `if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0); window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); }); window.addEventListener('load', function() { window.scrollTo(0, 0); });` }} />
                 </head>

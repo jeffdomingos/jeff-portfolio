@@ -23,15 +23,15 @@ export function LanguageSwitch({
         <div className="flex items-center gap-2 text-step--2">
             <button 
                 onClick={() => toggleLanguage('pt')} 
-                className={`transition-all ${currentLocale === 'pt' ? 'text-current font-bold' : 'text-current font-light hover:font-semibold'}`}
+                className={`transition-all ${currentLocale === 'pt' ? 'text-current font-bold' : 'text-current font-normal hover:font-semibold'}`}
                 aria-label="Português"
             >
                 PT
             </button>
-            <span className="text-current font-light">/</span>
+            <span className="text-current font-normal">/</span>
             <button 
                 onClick={() => toggleLanguage('en')} 
-                className={`transition-all ${currentLocale === 'en' ? 'text-current font-bold' : 'text-current font-light hover:font-semibold'}`}
+                className={`transition-all ${currentLocale === 'en' ? 'text-current font-bold' : 'text-current font-normal hover:font-semibold'}`}
                 aria-label="English"
             >
                 EN

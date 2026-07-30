@@ -79,7 +79,7 @@ export function HeroCarousel({ items, isActive = true }: { items: { src: string,
 
             {/* Dynamic Fading Caption via React Portal */}
             {mounted && document.getElementById('hero-caption-portal') ? createPortal(
-                <div className="text-right text-step-0 font-light italic text-foreground/80 pointer-events-none">
+                <div className="text-right text-step-0 type-body italic text-foreground/80 pointer-events-none">
                     <AnimatePresence mode="wait">
                         <m.div style={{ willChange: "transform, opacity", transform: "translateZ(0)", backfaceVisibility: "hidden" }}
                             key={currentIndex}
