@@ -1,6 +1,6 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
 import { generateTOC } from "@/utils/toc";
@@ -152,16 +152,17 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <AnimatedMetricsDashboard key={index} metrics={block.metrics} />;
                             case 'summary-card':
                                 return (
-                                    <div key={index} className="p-8 md:p-10 my-12 bg-muted/40 border-2 border-foreground/10 rounded-2xl relative">
-                                        <div className="absolute top-0 left-0 w-full h-2 bg-foreground rounded-t-xl"></div>
-                                        <div className="prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:mt-0 max-w-none">
-                                            <MDXRemote source={block.content || ''} components={mdxComponents} />
-                                        </div>
-                                        {block.metrics && (
-                                            <div className="mt-10">
-                                                <AnimatedMetricsDashboard metrics={block.metrics} />
+                                    <div key={index} className="my-12 w-full">
+                                        <MediaFrame className="flex flex-col w-full p-8 md:p-10 bg-muted/20 border-2 border-foreground relative">
+                                            <div className="prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:mt-0 max-w-none">
+                                                <MDXRemote source={block.content || ''} components={mdxComponents} />
                                             </div>
-                                        )}
+                                            {block.metrics && (
+                                                <div className="mt-10">
+                                                    <AnimatedMetricsDashboard metrics={block.metrics} />
+                                                </div>
+                                            )}
+                                        </MediaFrame>
                                     </div>
                                 );
                             default:
