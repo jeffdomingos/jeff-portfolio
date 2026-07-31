@@ -45,9 +45,9 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                         <div className="relative z-10 w-full flex flex-col items-center">
                             <span className="text-xs md:text-sm uppercase tracking-widest text-background/60 font-semibold mb-3">{metric.label}</span>
                             
-                            <div className="flex flex-wrap items-baseline justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight mb-2 text-background">
-                                {isPositive && <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 mr-1 opacity-70 stroke-[3px] shrink-0" />}
-                                {isNegative && <ArrowDownRight className="w-6 h-6 lg:w-8 lg:h-8 mr-1 opacity-70 stroke-[3px] shrink-0" />}
+                            <div className="flex flex-col items-center justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight mb-2 text-background">
+                                {isPositive && <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
+                                {isNegative && <ArrowDownRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
                                 <div className="flex items-baseline gap-1">
                                     {metric.prefix && <span className="text-xl lg:text-2xl font-medium">{metric.prefix}</span>}
                                     <AnimatedNumber value={metric.end} start={metric.start} isFloat={metric.end % 1 !== 0} />
