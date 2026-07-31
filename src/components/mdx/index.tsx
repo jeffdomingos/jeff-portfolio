@@ -6,6 +6,17 @@ import { m } from "framer-motion";
 
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 
+export function MediaFrame({ children, className = "flex flex-col w-full overflow-hidden border-2 border-foreground bg-background", style }: { children: ReactNode, className?: string, style?: React.CSSProperties }) {
+    return (
+        <div className="relative">
+            <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+            <div className={`relative z-10 ${className}`} style={style}>
+                {children}
+            </div>
+        </div>
+    );
+}
+
 export function MDXImage({ src, alt, invertInDark, lightBgInDark, cleanLayout, scrollingMockup }: { src: string; alt: string; invertInDark?: boolean; lightBgInDark?: boolean; cleanLayout?: boolean; scrollingMockup?: boolean }) {
     if (scrollingMockup) {
         return (
@@ -17,17 +28,14 @@ whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-                <div className="relative">
-                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                    <div className="relative z-10 flex flex-col w-full h-[300px] md:h-[400px] overflow-hidden border-2 border-foreground bg-background">
-                        <Image 
-                            src={src}
-                            alt={alt || "Scrolling Mockup"}
-                            fill
-                            className="object-cover object-top animate-scroll-vertical-image"
-                        />
-                    </div>
-                </div>
+                <MediaFrame className="flex flex-col w-full h-[300px] md:h-[400px] overflow-hidden border-2 border-foreground bg-background">
+                    <Image 
+                        src={src}
+                        alt={alt || "Scrolling Mockup"}
+                        fill
+                        className="object-cover object-top animate-scroll-vertical-image"
+                    />
+                </MediaFrame>
                 {alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{alt}</figcaption>}
             </m.figure>
         );
@@ -63,18 +71,15 @@ whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="relative">
-                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                    <Image 
-                        src={src} 
-                        alt={alt || "Illustration"} 
-                        width={1920} 
-                        height={1080} 
-                        className="w-full h-auto block !m-0" 
-                    />
-                </div>
-            </div>
+            <MediaFrame>
+                <Image 
+                    src={src} 
+                    alt={alt || "Illustration"} 
+                    width={1920} 
+                    height={1080} 
+                    className="w-full h-auto block !m-0" 
+                />
+            </MediaFrame>
             {alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{alt}</figcaption>}
         </m.figure>
     );
@@ -127,18 +132,15 @@ whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="relative">
-                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                    {isDirectVideo ? (
-                        <video src={src} title={title} controls className="w-full h-auto block !m-0" autoPlay muted loop playsInline />
-                    ) : (
-                        <div className="relative w-full overflow-hidden !m-0" style={{ paddingTop: '56.25%' }}>
-                            <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full block !m-0" frameBorder="0" allowFullScreen />
-                        </div>
-                    )}
-                </div>
-            </div>
+            <MediaFrame>
+                {isDirectVideo ? (
+                    <video src={src} title={title} controls className="w-full h-auto block !m-0" autoPlay muted loop playsInline />
+                ) : (
+                    <div className="relative w-full overflow-hidden !m-0" style={{ paddingTop: '56.25%' }}>
+                        <iframe src={src} title={title || "Video player"} className="absolute top-0 left-0 w-full h-full block !m-0" frameBorder="0" allowFullScreen />
+                    </div>
+                )}
+            </MediaFrame>
             {title && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{title}</figcaption>}
         </m.figure>
     );
@@ -154,19 +156,16 @@ whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="relative">
-                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 flex w-full overflow-hidden border-2 border-foreground bg-background" style={{ height: '600px' }}>
-                    <iframe 
-                        src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}&scaling=scale-down-width`} 
-                        title={title || "Figma Prototype"} 
-                        width="100%" 
-                        height="100%" 
-                        className="w-full h-full border-none block" 
-                        allowFullScreen 
-                    />
-                </div>
-            </div>
+            <MediaFrame className="flex w-full overflow-hidden border-2 border-foreground bg-background" style={{ height: '600px' }}>
+                <iframe 
+                    src={`https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(src)}&scaling=scale-down-width`} 
+                    title={title || "Figma Prototype"} 
+                    width="100%" 
+                    height="100%" 
+                    className="w-full h-full border-none block" 
+                    allowFullScreen 
+                />
+            </MediaFrame>
             {title && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{title}</figcaption>}
         </m.figure>
     );
@@ -179,18 +178,15 @@ export function BeforeAfter({ before, after }: { before: any, after: any }) {
         <div className="flex flex-col md:flex-row w-full gap-8 my-10">
             <div className="flex-1 flex flex-col">
                 {before.label && <div className="bg-muted text-foreground text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest border border-border">{before.label}</div>}
-                <div className="relative">
-                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                        <Image 
-                            src={before.src} 
-                            alt={before.label || "Antes"} 
-                            width={1920} 
-                            height={1080} 
-                            className="w-full h-auto block !m-0" 
-                        />
-                    </div>
-                </div>
+                <MediaFrame>
+                    <Image 
+                        src={before.src} 
+                        alt={before.label || "Antes"} 
+                        width={1920} 
+                        height={1080} 
+                        className="w-full h-auto block !m-0" 
+                    />
+                </MediaFrame>
                 {before.bullets && (
                     <ul className="mt-4 list-disc pl-5 marker:text-foreground/50">
                         {before.bullets.map((b: string, i: number) => (
@@ -201,18 +197,15 @@ export function BeforeAfter({ before, after }: { before: any, after: any }) {
             </div>
             <div className="flex-1 flex flex-col">
                 {after.label && <div className="bg-foreground text-background text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest">{after.label}</div>}
-                <div className="relative">
-                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                        <Image 
-                            src={after.src} 
-                            alt={after.label || "Depois"} 
-                            width={1920} 
-                            height={1080} 
-                            className="w-full h-auto block !m-0" 
-                        />
-                    </div>
-                </div>
+                <MediaFrame>
+                    <Image 
+                        src={after.src} 
+                        alt={after.label || "Depois"} 
+                        width={1920} 
+                        height={1080} 
+                        className="w-full h-auto block !m-0" 
+                    />
+                </MediaFrame>
                 {after.bullets && (
                     <ul className="mt-4 list-disc pl-5 marker:text-foreground/50">
                         {after.bullets.map((b: string, i: number) => (
