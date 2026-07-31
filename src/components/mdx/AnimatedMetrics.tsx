@@ -30,6 +30,8 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
     return (
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 my-10 not-prose">
             {metrics.map((metric, i) => {
+                const isPositive = metric.trend === 'up';
+                const isNegative = metric.trend === 'down';
                 
                 return (
                     <m.div 
