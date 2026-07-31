@@ -1,6 +1,7 @@
 "use client";
 
 import { m } from "framer-motion";
+import { MediaFrame } from "./index";
 
 export function ProductTrioDiagram({ locale = "pt" }: { locale?: string }) {
     const isEn = locale === "en";
@@ -25,9 +26,7 @@ whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="relative">
-                <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
-                <div className="relative z-10 w-full flex justify-center py-16 md:py-24 bg-background border-2 border-foreground overflow-hidden">
+            <MediaFrame className="flex justify-center py-16 md:py-24 bg-background border-2 border-foreground overflow-hidden w-full">
                     <div className="relative w-full max-w-[320px] md:max-w-[480px] aspect-square flex items-center justify-center mt-4">
                 
                 {/* SVG for Dashed Lines */}
@@ -90,8 +89,7 @@ whileInView={{ opacity: 1, y: 0 }}
                     <span className="block type-body text-[10px] md:text-sm lg:text-base font-semibold leading-tight text-foreground">{t.feasibility}</span>
                 </div>
             </div>
-                </div>
-            </div>
+            </MediaFrame>
         </m.figure>
     );
 }
