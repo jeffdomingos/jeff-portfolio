@@ -158,7 +158,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                                 <MDXRemote source={block.content || ''} components={mdxComponents} />
                                             </div>
                                             {block.metrics && (
-                                                <div className="mt-10">
+                                                <div className="mt-4 md:mt-6">
                                                     <AnimatedMetricsDashboard metrics={block.metrics} />
                                                 </div>
                                             )}
