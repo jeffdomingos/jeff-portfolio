@@ -20,11 +20,11 @@ whileInView={{ opacity: 1, y: 0 }}
                 <div className="relative">
                     <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
                     <div className="relative z-10 flex flex-col w-full h-[300px] md:h-[400px] overflow-hidden border-2 border-foreground bg-background">
-                        <div 
-                            className="w-full h-full bg-cover bg-no-repeat animate-scroll-vertical"
-                            style={{ backgroundImage: `url(${src})`, backgroundSize: '100% auto' }}
-                            aria-label={alt || "Scrolling Mockup"}
-                            role="img"
+                        <Image 
+                            src={src}
+                            alt={alt || "Scrolling Mockup"}
+                            fill
+                            className="object-cover object-top animate-scroll-vertical-image"
                         />
                     </div>
                 </div>
@@ -43,8 +43,13 @@ whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: "some", margin: "-10% 0px" }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0 rounded-lg" />
+                <Image 
+                    src={src} 
+                    alt={alt || "Illustration"} 
+                    width={1920} 
+                    height={1080} 
+                    className="w-full h-auto block !m-0 rounded-lg" 
+                />
             </m.figure>
         );
     }
@@ -61,8 +66,13 @@ whileInView={{ opacity: 1, y: 0 }}
             <div className="relative">
                 <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
                 <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={src} alt={alt || "Illustration"} className="w-full h-auto block !m-0" />
+                    <Image 
+                        src={src} 
+                        alt={alt || "Illustration"} 
+                        width={1920} 
+                        height={1080} 
+                        className="w-full h-auto block !m-0" 
+                    />
                 </div>
             </div>
             {alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8">{alt}</figcaption>}

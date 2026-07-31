@@ -145,3 +145,19 @@
 .animate-scroll-vertical {
   animation: scroll-vertical 15s ease-in-out infinite;
 }
+
+@keyframes scroll-vertical-image {
+  0% {
+    object-position: top center;
+  }
+  85% {
+    object-position: bottom center;
+  }
+  100% {
+    object-position: top center;
+  }
+}
+
+.animate-scroll-vertical-image {
+  animation: scroll-vertical-image 15s ease-in-out infinite;
+}
