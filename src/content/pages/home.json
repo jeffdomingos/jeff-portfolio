@@ -47,11 +47,10 @@
     "title_pt": "Projetos",
     "title_en": "Projects",
     "case_order": [
+      "voltz-motors",
       "ciclic",
       "intelie-performance-report",
-      "intelie-annotations-list",
-      "aprendin",
-      "voltz-motors"
+      "intelie-annotations-list"
     ]
   },
   "approach": {
