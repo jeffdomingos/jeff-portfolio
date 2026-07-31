@@ -33,10 +33,27 @@ pt:
         **A Solução:** Em negociação dura com a diretoria, provei a necessidade de frear métricas de vaidade. Implementei fricção intencional no checkout B2C para alinhar expectativas e criei uma plataforma interna (Queue Manager) para gestão autônoma do back office.
         
         **O Impacto:** Otimização operacional com eliminação da dependência de engenharia para liberação de pagamentos, reduzindo o SLA de dias para minutos e acelerando a entrada de receita no caixa:
-        * **SLA Logístico:** De 48h para 5 minutos
-        * **Fluxo de Caixa:** +R$ 1.3 Milhão desbloqueados por semana
-        * **Engenharia:** Economia de 30h/mês
-
+    - type: metrics-dashboard
+      metrics:
+        - label: SLA Logístico
+          start: 48
+          end: 5
+          suffix: " min"
+          description: "tempo de espera reduzido (antes 48h)"
+          trend: down
+        - label: Fluxo de Caixa
+          prefix: "+R$ "
+          start: 0
+          end: 1.3
+          suffix: " Milhão"
+          description: "desbloqueados por semana"
+          trend: up
+        - label: Esforço de Engenharia
+          start: 30
+          end: 0
+          suffix: " h/mês"
+          description: "gastos em tarefas manuais (economia de 30h)"
+          trend: down
     - type: text
       content: |
         ## Contexto e Descoberta
@@ -124,10 +141,27 @@ en:
         **The Solution:** In tough negotiations with the board of directors, I proved the need to curb vanity metrics. I implemented intentional friction in the B2C checkout to align expectations and created an internal platform (Queue Manager) for autonomous back-office management.
         
         **The Impact:** Operational optimization that eliminated the dependency on engineering for payment releases, reducing SLA from days to minutes and accelerating revenue inflow:
-        * **Logistics SLA:** From 48h to 5 minutes
-        * **Cash Flow:** +R$ 1.3 Million unlocked per week
-        * **Engineering:** 30h/month saved
-
+    - type: metrics-dashboard
+      metrics:
+        - label: Logistics SLA
+          start: 48
+          end: 5
+          suffix: " min"
+          description: "wait time reduced (was 48h)"
+          trend: down
+        - label: Cash Flow
+          prefix: "+R$ "
+          start: 0
+          end: 1.3
+          suffix: " Million"
+          description: "unlocked per week"
+          trend: up
+        - label: Engineering Effort
+          start: 30
+          end: 0
+          suffix: " h/month"
+          description: "spent on manual tasks (30h saved)"
+          trend: down
     - type: text
       content: |
         ## Context and Discovery
