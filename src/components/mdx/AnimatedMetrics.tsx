@@ -36,7 +36,7 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                 return (
                     <m.div 
                         key={i}
-                        className="flex flex-col items-start text-left relative group"
+                        className="flex flex-col items-center text-center relative group"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-10% 0px" }}
