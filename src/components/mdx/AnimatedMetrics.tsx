@@ -29,9 +29,6 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
     return (
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 my-10 not-prose">
             {metrics.map((metric, i) => {
-                const isPositive = metric.trend === 'up';
-                const isNegative = metric.trend === 'down';
-                const trendColor = isPositive ? "text-green-600 dark:text-green-400" : isNegative ? "text-red-600 dark:text-red-400" : "text-foreground";
                 
                 return (
                     <m.div 
@@ -48,7 +45,7 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                         <div className="relative z-10 w-full flex flex-col items-center">
                             <span className="text-sm uppercase tracking-widest text-subtle font-semibold mb-3">{metric.label}</span>
                             
-                            <div className={`flex items-baseline justify-center font-display font-bold text-4xl lg:text-5xl tracking-tight mb-2 ${trendColor}`}>
+                            <div className={`flex items-baseline justify-center font-display font-bold text-4xl lg:text-5xl tracking-tight mb-2 text-foreground`}>
                                 {metric.prefix && <span className="text-2xl lg:text-3xl mr-1 font-medium">{metric.prefix}</span>}
                                 <AnimatedNumber value={metric.end} start={metric.start} isFloat={metric.end % 1 !== 0} />
                                 {metric.suffix && <span className="text-xl lg:text-2xl ml-1 font-medium">{metric.suffix}</span>}
