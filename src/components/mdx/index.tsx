@@ -180,8 +180,8 @@ export function BeforeAfter({ before, after }: { before: any, after: any }) {
             <div className="flex-1 flex flex-col">
                 {before.label && <div className="bg-muted text-foreground text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest border border-border">{before.label}</div>}
                 <div className="relative">
-                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0 rounded-lg"></div>
-                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background rounded-lg shadow-sm">
+                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
                         <Image 
                             src={before.src} 
                             alt={before.label || "Antes"} 
@@ -202,8 +202,8 @@ export function BeforeAfter({ before, after }: { before: any, after: any }) {
             <div className="flex-1 flex flex-col">
                 {after.label && <div className="bg-foreground text-background text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest">{after.label}</div>}
                 <div className="relative">
-                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0 rounded-lg"></div>
-                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background rounded-lg shadow-sm">
+                    <div className="absolute top-3 left-3 w-full h-full bg-halftone z-0"></div>
+                    <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background">
                         <Image 
                             src={after.src} 
                             alt={after.label || "Depois"} 
