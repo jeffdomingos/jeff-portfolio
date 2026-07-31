@@ -35,7 +35,7 @@ pt:
         **O Impacto:** Otimização operacional com eliminação da dependência de engenharia para liberação de pagamentos, reduzindo o SLA de dias para minutos e acelerando a entrada de receita no caixa:
       metrics:
         - label: SLA Logístico
-          start: 48
+          start: 60
           end: 5
           suffix: " min"
           description: "tempo de espera reduzido (antes 48h)"
@@ -45,13 +45,14 @@ pt:
           start: 0
           end: 1.3
           suffix: " Milhão"
-          description: "desbloqueados por semana"
+          description: "capital antecipado por semana"
           trend: up
         - label: Esforço de Engenharia
-          start: 30
-          end: 0
-          suffix: " h/mês"
-          description: "gastos em tarefas manuais (economia de 30h)"
+          prefix: "-"
+          start: 0
+          end: 30
+          suffix: "h/mês"
+          description: "tempo ganho em tarefas manuais"
           trend: down
     - type: text
       content: |
@@ -142,7 +143,7 @@ en:
         **The Impact:** Operational optimization that eliminated the dependency on engineering for payment releases, reducing SLA from days to minutes and accelerating revenue inflow:
       metrics:
         - label: Logistics SLA
-          start: 48
+          start: 60
           end: 5
           suffix: " min"
           description: "wait time reduced (was 48h)"
@@ -152,13 +153,14 @@ en:
           start: 0
           end: 1.3
           suffix: " Million"
-          description: "unlocked per week"
+          description: "capital advanced per week"
           trend: up
         - label: Engineering Effort
-          start: 30
-          end: 0
-          suffix: " h/month"
-          description: "spent on manual tasks (30h saved)"
+          prefix: "-"
+          start: 0
+          end: 30
+          suffix: "h/month"
+          description: "time saved on manual tasks"
           trend: down
     - type: text
       content: |
