@@ -153,7 +153,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                             case 'summary-card':
                                 return (
                                     <div key={index} className="my-12 w-full">
-                                        <MediaFrame className="flex flex-col w-full p-8 md:p-10 bg-muted/20 border-2 border-foreground relative">
+                                        <MediaFrame className="flex flex-col w-full p-8 md:p-10 bg-background border-2 border-foreground relative">
                                             <div className="prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:mt-0 max-w-none">
                                                 <MDXRemote source={block.content || ''} components={mdxComponents} />
                                             </div>
