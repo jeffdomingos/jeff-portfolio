@@ -150,6 +150,20 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <BeforeAfter key={index} before={block.before} after={block.after} />;
                             case 'metrics-dashboard':
                                 return <AnimatedMetricsDashboard key={index} metrics={block.metrics} />;
+                            case 'summary-card':
+                                return (
+                                    <div key={index} className="p-8 md:p-10 my-12 bg-muted/40 border-2 border-foreground/10 rounded-2xl relative">
+                                        <div className="absolute top-0 left-0 w-full h-2 bg-foreground rounded-t-xl"></div>
+                                        <div className="prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:mt-0 max-w-none">
+                                            <MDXRemote source={block.content || ''} components={mdxComponents} />
+                                        </div>
+                                        {block.metrics && (
+                                            <div className="mt-10">
+                                                <AnimatedMetricsDashboard metrics={block.metrics} />
+                                            </div>
+                                        )}
+                                    </div>
+                                );
                             default:
                                 return null;
                         }
