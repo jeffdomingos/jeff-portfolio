@@ -44,15 +44,13 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                     >
                         <span className="text-xs md:text-sm uppercase tracking-widest text-foreground font-semibold mb-3">{metric.label}</span>
                         
-                        <div className="flex flex-col items-center justify-center w-full py-6 px-4 bg-foreground rounded-xl shadow-sm mb-3 relative overflow-hidden">
-                            <div className="relative z-10 flex flex-col items-center justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight text-background">
-                                {isPositive && <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
-                                {isNegative && <ArrowDownRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
-                                <div className="flex items-baseline gap-1">
-                                    {metric.prefix && <span className="text-xl lg:text-2xl font-medium">{metric.prefix}</span>}
-                                    <AnimatedNumber value={metric.end} start={metric.start} isFloat={metric.end % 1 !== 0} />
-                                    {metric.suffix && <span className="text-base lg:text-lg font-medium">{metric.suffix}</span>}
-                                </div>
+                        <div className="flex flex-col items-center justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight text-foreground mb-3">
+                            {isPositive && <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
+                            {isNegative && <ArrowDownRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
+                            <div className="flex items-baseline gap-1">
+                                {metric.prefix && <span className="text-xl lg:text-2xl font-medium">{metric.prefix}</span>}
+                                <AnimatedNumber value={metric.end} start={metric.start} isFloat={metric.end % 1 !== 0} />
+                                {metric.suffix && <span className="text-base lg:text-lg font-medium">{metric.suffix}</span>}
                             </div>
                         </div>
                         
