@@ -28,7 +28,7 @@ export function AnimatedNumber({ value, start = 0, isFloat = false }: { value: n
 
 export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
     return (
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 my-10 not-prose">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 my-10 not-prose divide-y md:divide-y-0 md:divide-x divide-border">
             {metrics.map((metric, i) => {
                 const isPositive = metric.trend === 'up';
                 const isNegative = metric.trend === 'down';
@@ -36,7 +36,7 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                 return (
                     <m.div 
                         key={i}
-                        className="flex flex-col items-center text-center relative group"
+                        className="flex flex-col items-center text-center relative group py-8 md:py-0 md:px-8 first:pt-0 md:first:pl-0 last:pb-0 md:last:pr-0"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-10% 0px" }}
