@@ -36,16 +36,16 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                 return (
                     <m.div 
                         key={i}
-                        className="flex flex-col items-center justify-center p-6 bg-foreground rounded-xl border border-border text-center shadow-sm relative overflow-hidden group"
+                        className="flex flex-col items-center text-center relative group"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-10% 0px" }}
                         transition={{ duration: 0.5, delay: i * 0.1 }}
                     >
-                        <div className="relative z-10 w-full flex flex-col items-center">
-                            <span className="text-xs md:text-sm uppercase tracking-widest text-background/60 font-semibold mb-3">{metric.label}</span>
-                            
-                            <div className="flex flex-col items-center justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight mb-2 text-background">
+                        <span className="text-xs md:text-sm uppercase tracking-widest text-foreground font-semibold mb-3">{metric.label}</span>
+                        
+                        <div className="flex flex-col items-center justify-center w-full py-6 px-4 bg-foreground rounded-xl shadow-sm mb-3 relative overflow-hidden">
+                            <div className="relative z-10 flex flex-col items-center justify-center font-display font-bold text-3xl lg:text-4xl tracking-tight text-background">
                                 {isPositive && <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
                                 {isNegative && <ArrowDownRight className="w-6 h-6 lg:w-8 lg:h-8 mb-1 opacity-70 stroke-[3px]" />}
                                 <div className="flex items-baseline gap-1">
@@ -54,11 +54,11 @@ export function AnimatedMetricsDashboard({ metrics }: { metrics: any[] }) {
                                     {metric.suffix && <span className="text-base lg:text-lg font-medium">{metric.suffix}</span>}
                                 </div>
                             </div>
-                            
-                            {metric.description && (
-                                <span className="text-xs md:text-sm text-background/80 font-light mt-1">{metric.description}</span>
-                            )}
                         </div>
+                        
+                        {metric.description && (
+                            <span className="text-xs md:text-sm text-foreground/80 font-light mt-1">{metric.description}</span>
+                        )}
                     </m.div>
                 );
             })}
