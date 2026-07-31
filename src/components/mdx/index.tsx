@@ -174,4 +174,47 @@ whileInView={{ opacity: 1, y: 0 }}
 
 export { ProductTrioDiagram } from "./ProductTrioDiagram";
 
-
+export function BeforeAfter({ before, after }: { before: any, after: any }) {
+    return (
+        <div className="flex flex-col md:flex-row w-full gap-8 my-10">
+            <div className="flex-1 flex flex-col">
+                {before.label && <div className="bg-muted text-foreground text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest border border-border">{before.label}</div>}
+                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background rounded-lg shadow-sm">
+                    <Image 
+                        src={before.src} 
+                        alt={before.label || "Antes"} 
+                        width={1920} 
+                        height={1080} 
+                        className="w-full h-auto block !m-0" 
+                    />
+                </div>
+                {before.bullets && (
+                    <ul className="mt-4 list-disc pl-5 marker:text-foreground/50">
+                        {before.bullets.map((b: string, i: number) => (
+                            <li key={i} className="text-foreground text-[15px] leading-relaxed my-1 font-light">{b}</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+            <div className="flex-1 flex flex-col">
+                {after.label && <div className="bg-foreground text-background text-xs font-bold py-1 px-3 rounded w-fit mb-4 uppercase tracking-widest">{after.label}</div>}
+                <div className="relative z-10 flex flex-col w-full overflow-hidden border-2 border-foreground bg-background rounded-lg shadow-sm">
+                    <Image 
+                        src={after.src} 
+                        alt={after.label || "Depois"} 
+                        width={1920} 
+                        height={1080} 
+                        className="w-full h-auto block !m-0" 
+                    />
+                </div>
+                {after.bullets && (
+                    <ul className="mt-4 list-disc pl-5 marker:text-foreground/50">
+                        {after.bullets.map((b: string, i: number) => (
+                            <li key={i} className="text-foreground text-[15px] leading-relaxed my-1 font-light">{b}</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        </div>
+    );
+}

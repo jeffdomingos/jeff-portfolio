@@ -1,6 +1,6 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
 import { generateTOC } from "@/utils/toc";
@@ -21,6 +21,7 @@ const mdxComponents = {
     Ref,
     Footnotes,
     FootnoteItem,
+    BeforeAfter,
     h2: (props: any) => {
         const textContent = React.Children.toArray(props.children).join('');
         return <h2 id={slugify(textContent)} className="text-3xl font-bold mt-12 mb-6 text-foreground scroll-mt-32" {...props} />;
@@ -145,6 +146,8 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <ProductTrioDiagram key={index} locale={locale} />;
                             case 'links':
                                 return <LinksBlock key={index} title={block.title} items={block.items} />;
+                            case 'before-after':
+                                return <BeforeAfter key={index} before={block.before} after={block.after} />;
                             default:
                                 return null;
                         }
