@@ -28,45 +28,40 @@ const PRESET_PROMPTS = [
   {
     label: "B94 vs S. boulardii",
     query: "How does B94 compare to Saccharomyces boulardii in gastroenteritis?",
-    response: "*Bifidobacterium lactis* B94 proved to be significantly more effective in reducing the duration of diarrhea in children with rotavirus gastroenteritis. In a comparative clinical study, the mean duration of diarrhea was **4.1 ± 1.3 days** in the B94 group vs **6.6 ± 1.7 days** in the *Saccharomyces boulardii* group (p < 0.01).\n\nAdditionally, the B94 group showed an improvement in stool consistency 2 to 3 days faster than the control groups.",
-    source: "Floracol_Monograph_Formatted.pdf (Erdoğan et al., 2012)",
+    response: "In a comparative clinical study in pediatric rotavirus gastroenteritis, *Bifidobacterium lactis* B94 significantly reduced diarrhea duration compared to *Saccharomyces boulardii*:\n\n* **B. lactis B94 group:** 4.1 ± 1.3 days\n* **S. boulardii group:** 6.6 ± 1.7 days (p < 0.01)\n\nAdditionally, patients in the B94 group achieved normal stool consistency 2 to 3 days faster than control groups.",
+    source: "Floracol Monograph (Erdoğan et al., 2012)",
     linkPreview: {
-      title: "Comparative Efficacy of B. lactis B94",
-      description: "Clinical evaluation in pediatric patients with acute gastroenteritis.",
+      title: "Comparative Efficacy of B. lactis B94 in Pediatric Acute Gastroenteritis",
+      description: "Clinical evaluation in pediatric rotavirus gastroenteritis.",
       url: "https://rxpro.com.br/estudos/erdogan-2012",
       imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=200&auto=format&fit=crop"
-    }
+    },
+    followUp: "Would you like to explore additional clinical trial data or dosage guidelines?"
   },
   {
     label: "Dosage & Indication",
     query: "What is the dosage and age indication for Floracol?",
-    response: "Floracol (symbiotic containing *Bifidobacterium lactis* B94 + inulin) is indicated for children and adolescents **from 4 years of age**.\n\n**Recommended dosage:** 1 sachet (5x10⁹ CFU) twice a day, administered for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
-    source: "Floracol_Monograph_Formatted.pdf (Baştürk et al., 2016)",
+    response: "Floracol is indicated for patients from 4 years of age through adolescence and adulthood.\n\n**Recommended Dosage:** 1 sachet (5 × 10⁹ CFU) twice daily for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
+    source: "Floracol Monograph (Baştürk et al., 2016)",
     linkPreview: {
-      title: "Official Monograph - Floracol",
-      description: "Complete dosage guidelines, age indications, and safety profile.",
+      title: "Official Monograph: Complete Dosage, Indications, and Safety Profile",
+      description: "Official guidelines for dosage and age indications.",
       url: "https://rxpro.com.br/bula/floracol.pdf"
-    }
+    },
+    followUp: "Let me know if you would like more details on antibiotic co-prescription or clinical safety data!"
   },
   {
     label: "Use with Antibiotics",
     query: "Is there clinical evidence on co-prescribing Floracol during antibiotic therapy?",
-    response: "Clinical trial data (İşlek et al., 2015) demonstrates that the adjuvant use of *Bifidobacterium lactis* B94 during antibiotic treatment for *H. pylori* was well tolerated and **reduced the incidence of treatment side effects from 63% (control group) to 17% (symbiotic group)** with statistical significance (p < 0.01).",
-    source: "9. İşlek_Bifidobacterium_lactis_B94_inulin_H_pylori.pdf",
+    response: "Yes. In a clinical trial evaluated during *H. pylori* antibiotic eradication therapy (İşlek et al., 2015), adjuvant use of *Bifidobacterium lactis* B94 + inulin significantly reduced treatment-related side effects:\n\n* **Control Group:** 63% side effect incidence\n* **Synbiotic Group:** 17% side effect incidence (p < 0.01)",
+    source: "İşlek et al., 2015",
     linkPreview: {
-      title: "Bifidobacterium lactis B94 plus inulin for Treatment of H. pylori...",
+      title: "Bifidobacterium lactis B94 + Inulin in Tolerability of H. pylori Eradication Therapy",
       description: "Clinical study regarding the reduction of antibiotic-related side effects using B94.",
       url: "https://rxpro.com.br/estudos/islek-2015.pdf",
-    }
+    },
+    followUp: "I can provide further trial details or help request additional sample kits for your practice if needed."
   }
-];
-
-const FOLLOWUP_MESSAGES = [
-  "Is there anything else I can assist you with regarding Floracol?",
-  "Would you like to explore more clinical trial data or dosage guidelines?",
-  "Let me know if you have any other questions about Floracol's indication or efficacy!",
-  "Can I help clarify any other clinical aspects for your practice?",
-  "Feel free to select another topic above or let me know if you need additional study references."
 ];
 
 function RotatingTextRing() {
@@ -166,7 +161,7 @@ export function RxProAiDemo() {
         {
           id: "step-1-msg",
           role: "assistant",
-          content: "Hello! I'm Thiago, a digital agent from RX PRO - Afya representing Apsen. Am I speaking with Dr. Laura Souza?"
+          content: "Hello! I'm Thiago, a digital agent from RX PRO representing Apsen. Am I speaking with Dr. Laura Souza?"
         }
       ]);
 
@@ -199,7 +194,7 @@ export function RxProAiDemo() {
         {
           id: "step-2-msg",
           role: "assistant",
-          content: "Great to speak with you, Dr. Laura! I see in the system that you received 1 box with samples of **FLORACOL CX C2 SACHETS AG**. Did it arrive safely?"
+          content: "Great to connect with you, Dr. Laura. Our system shows you recently received 1 box of samples for FLORACOL (Sachês 5g). Did everything arrive safely?"
         }
       ]);
 
@@ -232,7 +227,7 @@ export function RxProAiDemo() {
         {
           id: "step-3-msg",
           role: "assistant",
-          content: "Wonderful! Floracol is our evidence-backed symbiotic formula combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate recovery in acute gastroenteritis.\n\nFeel free to ask me any clinical questions regarding dosage, indications, or trial data — or select one of the suggested topics below to get started!"
+          content: "Excellent. Floracol is an evidence-backed synbiotic combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate mucosal recovery during acute gastroenteritis.\n\nFeel free to ask any clinical questions regarding dosage, indications, or trial data, or select one of the suggested topics below to get started."
         }
       ]);
       setIsOnboardingComplete(true);
@@ -264,6 +259,7 @@ export function RxProAiDemo() {
     setTimeout(() => {
       setIsThinking(false);
       let botMsg: Message;
+      let followUpText: string;
 
       if (matchedPreset) {
         botMsg = {
@@ -273,29 +269,30 @@ export function RxProAiDemo() {
           source: matchedPreset.source,
           linkPreview: matchedPreset.linkPreview
         };
+        followUpText = matchedPreset.followUp;
       } else {
         botMsg = {
           id: `bot-${Date.now()}`,
           role: "assistant",
-          content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 symbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
-          source: "Floracol_Monograph_Formatted.pdf (Clinical Studies)"
+          content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 synbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
+          source: "Floracol Monograph (Clinical Studies)"
         };
+        followUpText = "I can provide further trial details or help request additional sample kits for your practice if needed.";
       }
 
       setMessages((prev) => [...prev, botMsg]);
 
-      // Automatic polite follow-up inquiry
+      // Automatic tailored follow-up inquiry
       setTimeout(() => {
         setIsThinking(true);
         setTimeout(() => {
           setIsThinking(false);
-          const randomFollowup = FOLLOWUP_MESSAGES[Math.floor(Math.random() * FOLLOWUP_MESSAGES.length)];
           setMessages((prev) => [
             ...prev,
             {
               id: `followup-${Date.now()}`,
               role: "assistant",
-              content: randomFollowup
+              content: followUpText
             }
           ]);
         }, 900);
