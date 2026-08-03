@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Send, Sparkles, FileText, RotateCcw, Bot, User, FlaskConical, Info, Lock } from "lucide-react";
+import { Send, Sparkles, FileText, RotateCcw, Info, Lock } from "lucide-react";
 import { RxProLinkPreview } from "./RxProLinkPreview";
 import { RxProErrorBubble } from "./RxProErrorBubble";
 import Image from "next/image";
@@ -61,30 +61,148 @@ const PRESET_PROMPTS = [
   }
 ];
 
-const TEST_COMMANDS = [
-  "formatting", "richtext", "citation", "article", "document", "long", "error", "complete"
-];
-
-const INITIAL_MESSAGES: Message[] = [
-  {
-    id: "init-1",
-    role: "assistant",
-    content: "Hello! I'm Thiago, a digital agent from RX Pro - Afya representing Apsen. Am I speaking with Dr. Laura Souza?\n\nI see in the system that you received 1 box with samples of **FLORACOL CX C2 SACHETS AG**. Did it arrive safely?\n\nYou can ask me any clinical questions about Floracol.",
-  }
-];
-
 export function RxProAiDemo() {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const [showDemoNotice, setShowDemoNotice] = useState(false);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Onboarding sequence state
+  const [onboardingStep, setOnboardingStep] = useState(0); // 0: idle, 1: step 1, 2: step 2, 3: completed
+  const [canSendStep, setCanSendStep] = useState(0); // 0: none, 1: send step 1, 2: send step 2
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
+  const [hasStartedViewport, setHasStartedViewport] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto scroll chat to bottom
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, isThinking]);
+
+  // Viewport intersection observer to start onboarding when scrolled into view
+  useEffect(() => {
+    if (hasStartedViewport) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setHasStartedViewport(true);
+          startOnboardingStep1();
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasStartedViewport]);
+
+  const typeTextIntoInput = (text: string, onComplete?: () => void) => {
+    setInput("");
+    let idx = 0;
+    if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+
+    typingTimerRef.current = setInterval(() => {
+      if (idx < text.length) {
+        setInput(text.substring(0, idx + 1));
+        idx++;
+      } else {
+        if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+        if (onComplete) onComplete();
+      }
+    }, 35);
+  };
+
+  const startOnboardingStep1 = () => {
+    setOnboardingStep(1);
+    setIsThinking(true);
+
+    setTimeout(() => {
+      setIsThinking(false);
+      setMessages([
+        {
+          id: "step-1-msg",
+          role: "assistant",
+          content: "Hello! I'm Thiago, a digital agent from RX Pro - Afya representing Apsen. Am I speaking with Dr. Laura Souza?"
+        }
+      ]);
+
+      setTimeout(() => {
+        typeTextIntoInput("Yes, it's me", () => {
+          setCanSendStep(1);
+        });
+      }, 300);
+    }, 1200);
+  };
+
+  const startOnboardingStep2 = () => {
+    setCanSendStep(0);
+    setOnboardingStep(2);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-confirm-1-${Date.now()}`,
+        role: "user",
+        content: "Yes, it's me"
+      }
+    ]);
+    setInput("");
+    setIsThinking(true);
+
+    setTimeout(() => {
+      setIsThinking(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: "step-2-msg",
+          role: "assistant",
+          content: "Great to speak with you, Dr. Laura! I see in the system that you received 1 box with samples of **FLORACOL CX C2 SACHETS AG**. Did it arrive safely?"
+        }
+      ]);
+
+      setTimeout(() => {
+        typeTextIntoInput("Yes, it arrived safely!", () => {
+          setCanSendStep(2);
+        });
+      }, 300);
+    }, 1200);
+  };
+
+  const completeOnboardingStep3 = () => {
+    setCanSendStep(0);
+    setOnboardingStep(3);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: `user-confirm-2-${Date.now()}`,
+        role: "user",
+        content: "Yes, it arrived safely!"
+      }
+    ]);
+    setInput("");
+    setIsThinking(true);
+
+    setTimeout(() => {
+      setIsThinking(false);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: "step-3-msg",
+          role: "assistant",
+          content: "Wonderful! I'm here to provide scientific details, clinical evidence, and dosage guidelines for Floracol. Feel free to explore any of the topics below!"
+        }
+      ]);
+      setIsOnboardingComplete(true);
+    }, 1200);
+  };
 
   const handleSend = (textToSend?: string) => {
     setShowDemoNotice(false);
@@ -98,7 +216,7 @@ export function RxProAiDemo() {
     };
 
     setMessages((prev) => [...prev, userMsg]);
-    if (!textToSend) setInput("");
+    setInput("");
     setIsThinking(true);
 
     const lowerInput = queryText.toLowerCase();
@@ -121,107 +239,47 @@ export function RxProAiDemo() {
           linkPreview: matchedPreset.linkPreview
         };
       } else {
-        // Test Commands
-        switch (true) {
-          case lowerInput.includes('formatting'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'Here is all the supported Markdown:\n\n# H1 Title\n## H2 Title\n\n**Bold**, *italic*, and `inline code`.\n\n* Bullet item 1\n* Bullet item 2\n\n1. Numbered item 1\n2. Numbered item 2\n\n> A blockquote example.\n\nAnd, of course, [visit our portal](https://rxpro.com.br).'
-            };
-            break;
-          case lowerInput.includes('richtext') || lowerInput.includes('rich-text'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: '# 📋 Rich Text Demo\n\nThis is an example of **rich formatting** with multiple elements:\n\n## Text Styles\n- **Important bold**\n- *Italics for emphasis*\n- `inline code` for technical terms\n\n## Lists\n1. First numbered item\n2. Second item with **highlight**\n3. Third item with *emphasis*\n\n## Quotes\n> "The right information at the right time saves lives."\n\nVisit our [RX PRO Portal](https://rxpro.com.br) for more info.'
-            };
-            break;
-          case lowerInput.includes('citation'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'The symbiotic demonstrated significant reduction in symptoms (p<0.001).',
-              source: 'Baştürk et al., 2016 - Journal of Medicine'
-            };
-            break;
-          case lowerInput.includes('article'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'I found this relevant article on the topic:',
-              linkPreview: {
-                title: 'Comparative Study: Efficacy of B. lactis B94',
-                description: 'Efficacy of B. lactis B94 vs. S. boulardii in rotavirus gastroenteritis.',
-                url: 'https://rxpro.com.br/estudos',
-                imageUrl: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=200&auto=format&fit=crop'
-              }
-            };
-            break;
-          case lowerInput.includes('document'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'Here is the official product leaflet (PDF):',
-              linkPreview: {
-                title: 'Official Leaflet - Product X (PDF)',
-                description: 'Official document with all safety and dosage information.',
-                url: 'https://rxpro.com.br/bula.pdf'
-              }
-            };
-            break;
-          case lowerInput.includes('long'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'Here is a long response to test scrolling and line breaks. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Repeating: Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            };
-            break;
-          case lowerInput.includes('error'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              type: 'error',
-              content: 'Sorry, I encountered an internal error while consulting the medical database. Please try again later.'
-            };
-            break;
-          case lowerInput.includes('complete'):
-            botMsg = {
-              id: `bot_${Date.now()}`,
-              role: 'assistant',
-              content: 'Here is a complete summary. The treatment is effective and recommended by recent guidelines.\n\n* Reduces diarrhea duration.\n* Excellent safety profile.',
-              source: 'Clinical Guidelines 2024',
-              linkPreview: {
-                title: 'Complete Study Guide',
-                description: 'A comprehensive review of recent findings.',
-                url: 'https://rxpro.com.br/guia',
-                imageUrl: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=200&auto=format&fit=crop'
-              }
-            };
-            break;
-          default:
-            botMsg = {
-              id: `bot-${Date.now()}`,
-              role: "assistant",
-              content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 symbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
-              source: "Floracol_Monograph_Formatted.pdf (Clinical Studies)"
-            };
-            break;
-        }
+        botMsg = {
+          id: `bot-${Date.now()}`,
+          role: "assistant",
+          content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 symbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
+          source: "Floracol_Monograph_Formatted.pdf (Clinical Studies)"
+        };
       }
 
       setMessages((prev) => [...prev, botMsg]);
     }, 1100);
   };
 
+  const handleSendClick = () => {
+    if (canSendStep === 1) {
+      startOnboardingStep2();
+    } else if (canSendStep === 2) {
+      completeOnboardingStep3();
+    } else if (isOnboardingComplete) {
+      setShowDemoNotice(true);
+    }
+  };
+
   const handleReset = () => {
-    setMessages(INITIAL_MESSAGES);
+    if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+    setMessages([]);
     setInput("");
     setIsThinking(false);
+    setShowDemoNotice(false);
+    setOnboardingStep(0);
+    setCanSendStep(0);
+    setIsOnboardingComplete(false);
+    setHasStartedViewport(false);
+
+    setTimeout(() => {
+      setHasStartedViewport(true);
+      startOnboardingStep1();
+    }, 200);
   };
 
   return (
-    <div className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-hidden ${inter.className}`}>
+    <div ref={containerRef} className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-hidden ${inter.className}`}>
       {/* Interactive Widget Bar Header */}
       <div className="bg-neutral-50 text-neutral-800 px-4 md:px-6 py-3 flex items-center justify-between border-b border-neutral-200">
         <div className="flex items-center gap-3">
@@ -259,7 +317,7 @@ export function RxProAiDemo() {
       </div>
 
       {/* Main Chat Body */}
-      <div ref={chatContainerRef} className="p-4 md:p-6 bg-neutral-50/50 min-h-[400px] max-h-[500px] overflow-y-auto space-y-4">
+      <div ref={chatContainerRef} className="p-4 md:p-6 bg-neutral-50/50 min-h-[380px] max-h-[500px] overflow-y-auto space-y-4">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -338,31 +396,33 @@ export function RxProAiDemo() {
           <div className="flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300 ease-out fill-mode-both">
             <div className="bg-white border border-neutral-200 rounded-2xl rounded-tl-none px-4 py-3 text-xs text-neutral-500 flex items-center gap-2 shadow-sm">
               <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-              Consulting clinical studies...
+              Thiago is typing...
             </div>
           </div>
         )}
       </div>
 
       {/* Preset Action Chips */}
-      <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200">
-        <div className="flex items-center gap-1 mb-2">
-          <Sparkles className="w-3 h-3 text-red-500" />
-          <span className="text-xs text-neutral-500 font-medium">Explore Topics:</span>
+      {isOnboardingComplete && (
+        <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200 animate-in fade-in slide-in-from-bottom-2 duration-500">
+          <div className="flex items-center gap-1 mb-2">
+            <Sparkles className="w-3 h-3 text-red-500" />
+            <span className="text-xs text-neutral-500 font-medium">Explore Topics:</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {PRESET_PROMPTS.map((p, index) => (
+              <button
+                key={`preset-${index}`}
+                onClick={() => handleSend(p.query)}
+                disabled={isThinking}
+                className="text-xs bg-white hover:bg-red-50 hover:border-red-300 text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded-full transition-all text-left disabled:opacity-50 shadow-sm"
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          {PRESET_PROMPTS.map((p, index) => (
-            <button
-              key={`preset-${index}`}
-              onClick={() => handleSend(p.query)}
-              disabled={isThinking}
-              className="text-xs bg-white hover:bg-red-50 hover:border-red-300 text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded-full transition-all text-left disabled:opacity-50"
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-      </div>
+      )}
 
       {/* Demo Notice Banner */}
       {showDemoNotice && (
@@ -388,31 +448,62 @@ export function RxProAiDemo() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setShowDemoNotice(true);
+          handleSendClick();
         }}
-        onClick={() => setShowDemoNotice(true)}
-        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2 cursor-pointer"
+        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2"
       >
-        <div className="relative flex-1 flex items-center">
+        <div className="relative flex-1 flex items-center" onClick={handleSendClick}>
           <input
             type="text"
             readOnly
-            value=""
-            onClick={() => setShowDemoNotice(true)}
-            onFocus={() => setShowDemoNotice(true)}
-            placeholder="Custom typing disabled in this demo. Click a topic above!"
-            className="w-full bg-neutral-100 border border-neutral-200 text-neutral-500 placeholder:text-neutral-400 text-sm rounded-lg pl-4 pr-9 py-2.5 focus:outline-none cursor-pointer"
+            value={input}
+            onClick={handleSendClick}
+            onFocus={handleSendClick}
+            placeholder={
+              canSendStep > 0
+                ? "Click 'Send' to confirm response..."
+                : isOnboardingComplete
+                ? "Custom typing disabled in this demo. Click a topic above!"
+                : "Waiting for response..."
+            }
+            className={`w-full border text-sm rounded-lg pl-4 pr-9 py-2.5 focus:outline-none transition-colors ${
+              canSendStep > 0
+                ? "bg-red-50/50 border-red-200 text-red-900 font-medium cursor-pointer"
+                : "bg-neutral-100 border-neutral-200 text-neutral-500 placeholder:text-neutral-400 cursor-pointer"
+            }`}
           />
-          <Lock className="w-4 h-4 text-neutral-400 absolute right-3 pointer-events-none" />
+          {isOnboardingComplete ? (
+            <Lock className="w-4 h-4 text-neutral-400 absolute right-3 pointer-events-none" />
+          ) : (
+            <Sparkles className="w-4 h-4 text-red-400 absolute right-3 pointer-events-none animate-pulse" />
+          )}
         </div>
-        <button
-          type="button"
-          onClick={() => setShowDemoNotice(true)}
-          className="bg-neutral-200 text-neutral-500 font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm cursor-pointer hover:bg-neutral-300 transition-colors"
-        >
-          <span>Send</span>
-          <Send className="w-3.5 h-3.5" />
-        </button>
+
+        <div className="relative">
+          {canSendStep > 0 && (
+            <span className="absolute -top-9 right-0 bg-red-600 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full shadow-lg flex items-center gap-1 animate-bounce z-30 whitespace-nowrap pointer-events-none">
+              <Sparkles className="w-3 h-3 text-yellow-300" /> Click here!
+            </span>
+          )}
+          <button
+            type="button"
+            onClick={handleSendClick}
+            disabled={isThinking && canSendStep === 0}
+            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative ${
+              canSendStep > 0
+                ? "bg-red-600 hover:bg-red-700 text-white ring-4 ring-red-400/50 scale-105"
+                : isOnboardingComplete
+                ? "bg-neutral-200 text-neutral-500 hover:bg-neutral-300"
+                : "bg-red-600 opacity-60 text-white cursor-not-allowed"
+            }`}
+          >
+            {canSendStep > 0 && (
+              <span className="absolute -inset-1 rounded-lg border-2 border-dashed border-red-400 animate-spin opacity-75"></span>
+            )}
+            <span>Send</span>
+            <Send className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </form>
     </div>
   );
