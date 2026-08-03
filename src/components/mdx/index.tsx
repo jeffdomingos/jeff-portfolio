@@ -6,6 +6,7 @@ import { m } from "framer-motion";
 
 export { Ref, Footnotes, FootnoteItem } from "./Footnotes";
 export { AnimatedMetricsDashboard } from "./AnimatedMetrics";
+export { RxProAiDemo } from "./RxProAiDemo";
 
 export function MediaFrame({ children, className = "flex flex-col w-full overflow-hidden border-2 border-foreground bg-background", style }: { children: ReactNode, className?: string, style?: React.CSSProperties }) {
     return (

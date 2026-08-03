@@ -1,6 +1,6 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
 import { generateTOC } from "@/utils/toc";
@@ -148,6 +148,8 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <LinksBlock key={index} title={block.title} items={block.items} />;
                             case 'before-after':
                                 return <BeforeAfter key={index} before={block.before} after={block.after} />;
+                            case 'rxpro-demo':
+                                return <RxProAiDemo key={index} />;
                             case 'metrics-dashboard':
                                 return <AnimatedMetricsDashboard key={index} metrics={block.metrics} />;
                             case 'summary-card':
