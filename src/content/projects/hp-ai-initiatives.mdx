@@ -106,12 +106,39 @@ en:
 
         To maintain methodological clarity, the table below outlines the division between human design leadership and AI-assisted execution throughout this project:
 
-        | Dimension | Human Product Designer Role (Jeff) | AI Assistants Role (Copilot / LLMs) |
-        | :--- | :--- | :--- |
-        | **Vision & Strategy** | Defined product premises, UX metric frameworks, and human handoff rules. | Suggested technical code approaches to implement logic. |
-        | **Design System & UI** | Specified RX PRO tokens, header layouts, component hierarchy, and accessibility focus states. | Converted UI specs into Tailwind CSS classes and React JSX components. |
-        | **Handoff Architecture** | Decided to isolate `MockChat` components from production threads to prevent code pollution. | Automated physical file structuring (`MockChat.tsx` and `index.tsx`). |
-        | **QA & Debugging** | Identified visual bugs, broken Tailwind v4 theme variables, and interaction flaws. | Analyzed syntax errors and refactored CSS configuration files. |
+        <div className="overflow-x-auto my-8 rounded-lg border border-foreground/10 bg-background shadow-sm">
+          <table className="w-full text-left border-collapse text-[16px] md:text-[18px]">
+            <thead className="bg-muted text-foreground">
+              <tr>
+                <th className="px-6 py-4 font-semibold border-b border-foreground/10">Dimension</th>
+                <th className="px-6 py-4 font-semibold border-b border-foreground/10">Human Product Designer Role (Jeff)</th>
+                <th className="px-6 py-4 font-semibold border-b border-foreground/10">AI Assistants Role (Copilot / LLMs)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-foreground/10 text-foreground/80">
+              <tr className="hover:bg-muted/50 transition-colors">
+                <td className="px-6 py-4 font-medium text-foreground">Vision & Strategy</td>
+                <td className="px-6 py-4">Defined product premises, UX metric frameworks, and human handoff rules.</td>
+                <td className="px-6 py-4">Suggested technical code approaches to implement logic.</td>
+              </tr>
+              <tr className="hover:bg-muted/50 transition-colors">
+                <td className="px-6 py-4 font-medium text-foreground">Design System & UI</td>
+                <td className="px-6 py-4">Specified RX PRO tokens, header layouts, component hierarchy, and accessibility focus states.</td>
+                <td className="px-6 py-4">Converted UI specs into Tailwind CSS classes and React JSX components.</td>
+              </tr>
+              <tr className="hover:bg-muted/50 transition-colors">
+                <td className="px-6 py-4 font-medium text-foreground">Handoff Architecture</td>
+                <td className="px-6 py-4">Decided to isolate <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">MockChat</code> components from production threads to prevent code pollution.</td>
+                <td className="px-6 py-4">Automated physical file structuring (<code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">MockChat.tsx</code> and <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">index.tsx</code>).</td>
+              </tr>
+              <tr className="hover:bg-muted/50 transition-colors">
+                <td className="px-6 py-4 font-medium text-foreground">QA & Debugging</td>
+                <td className="px-6 py-4">Identified visual bugs, broken Tailwind v4 theme variables, and interaction flaws.</td>
+                <td className="px-6 py-4">Analyzed syntax errors and refactored CSS configuration files.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
     - type: text
       content: |
