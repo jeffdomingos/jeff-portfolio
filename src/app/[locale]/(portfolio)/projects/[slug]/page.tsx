@@ -149,7 +149,14 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                             case 'before-after':
                                 return <BeforeAfter key={index} before={block.before} after={block.after} />;
                             case 'rxpro-demo':
-                                return <RxProAiDemo key={index} />;
+                                return (
+                                    <div key={index} className="my-10 w-full">
+                                        <MediaFrame className="flex w-full overflow-hidden border-2 border-foreground bg-background rounded-lg">
+                                            <RxProAiDemo />
+                                        </MediaFrame>
+                                        {block.alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8 max-w-xl mx-auto">{block.alt}</figcaption>}
+                                    </div>
+                                );
                             case 'metrics-dashboard':
                                 return <AnimatedMetricsDashboard key={index} metrics={block.metrics} />;
                             case 'summary-card':

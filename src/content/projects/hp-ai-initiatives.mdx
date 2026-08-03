@@ -67,6 +67,10 @@ en:
         ### Phase 1: Figma Make & Design System Integration
         I started by experimenting with **Figma Make** directly inside our team's standard design environment. This allowed us to test how AI-generated layout concepts could connect with our existing Design System tokens, evaluate asset sharing dynamics, and maintain a centralized single source of truth for design assets.
 
+    - type: image
+      src: /images/projects/afya-ai/rxpro-ai-assistant.png
+      alt: Interface prototype generated via Figma Make for the RX PRO AI Digital Assistant (Thiago) interacting with Dra. Laura.
+
         ### Phase 2: NLU-First Interactive Prototype (Lovable)
         To test dynamic conversational flows without building a full backend, I migrated to **Lovable** to construct an interactive React/TypeScript web prototype mirroring the RX PRO UI. The prototype validated 5 key conversational states:
         * **Screen 1 (NLU Immediate):** Sample delivery confirmation with open text input (no forced buttons).
@@ -79,16 +83,13 @@ en:
       src: /images/projects/afya-ai/lovable-prototype.jpeg
       alt: NLU Interactive Prototype built with Lovable validating conversational states.
 
-    - type: image
-      src: /images/projects/afya-ai/rxpro-ai-assistant.png
-      alt: Interface of the RX PRO AI Digital Assistant (Thiago) answering clinical queries with physician Dra. Laura.
-
-    - type: rxpro-demo
-
     - type: text
       content: |
         ### Phase 3: Code Migration via VS Code & GitHub Copilot
         When engineering selected **LangChain** (`agent-chat-ui`) for backend observability via LangSmith, I stepped into a Design Engineering role. Using **VS Code + GitHub Copilot**, I refactored the UI code into the production repository, creating a clean separation between mock testing components (`MockChat.tsx`) and the real production thread.
+
+    - type: rxpro-demo
+      alt: Interactive Live Prototype of the RX PRO AI Assistant running in React.
 
         ### Reflection on Workflow Maturity
         This intensive phase of tool experimentation was essential during an era of rapid technological shift. By testing Figma Make, Lovable, Copilot, and local LLMs firsthand, I gained deep clarity on where each tool excels. Today, I operate with a refined, highly streamlined AI design workflow, utilizing a validated set of favorite tools for each specific stage of discovery, prototyping, and handoff.
