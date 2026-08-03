@@ -61,6 +61,28 @@ const PRESET_PROMPTS = [
   }
 ];
 
+function RotatingTextRing() {
+  return (
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 w-[110px] h-[110px]">
+      <svg
+        viewBox="0 0 120 120"
+        className="w-full h-full animate-[spin_8s_linear_infinite]"
+      >
+        <path
+          id="clickHereCirclePath"
+          d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
+          fill="none"
+        />
+        <text className="text-[9.5px] font-black uppercase tracking-widest fill-black">
+          <textPath href="#clickHereCirclePath" startOffset="0%">
+            • CLICK HERE • CLICK HERE • CLICK HERE
+          </textPath>
+        </text>
+      </svg>
+    </div>
+  );
+}
+
 export function RxProAiDemo() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -279,9 +301,9 @@ export function RxProAiDemo() {
   };
 
   return (
-    <div ref={containerRef} className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-hidden ${inter.className}`}>
+    <div ref={containerRef} className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-visible relative ${inter.className}`}>
       {/* Interactive Widget Bar Header */}
-      <div className="bg-neutral-50 text-neutral-800 px-4 md:px-6 py-3 flex items-center justify-between border-b border-neutral-200">
+      <div className="bg-neutral-50 text-neutral-800 px-4 md:px-6 py-3 flex items-center justify-between border-b border-neutral-200 rounded-t-xl">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full border border-neutral-200 bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-sm p-1">
             <Image 
@@ -391,12 +413,13 @@ export function RxProAiDemo() {
           </div>
         ))}
 
-        {/* Thinking Indicator */}
+        {/* Animated 3-Dots Typing Indicator Bubble */}
         {isThinking && (
           <div className="flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-300 ease-out fill-mode-both">
-            <div className="bg-white border border-neutral-200 rounded-2xl rounded-tl-none px-4 py-3 text-xs text-neutral-500 flex items-center gap-2 shadow-sm">
-              <span className="inline-block w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-              Thiago is typing...
+            <div className="bg-white border border-neutral-200 rounded-2xl rounded-tl-none px-4 py-3.5 flex items-center gap-1.5 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-neutral-400 animate-bounce [animation-delay:-0.3s]"></span>
+              <span className="w-2 h-2 rounded-full bg-neutral-400 animate-bounce [animation-delay:-0.15s]"></span>
+              <span className="w-2 h-2 rounded-full bg-neutral-400 animate-bounce"></span>
             </div>
           </div>
         )}
@@ -450,7 +473,7 @@ export function RxProAiDemo() {
           e.preventDefault();
           handleSendClick();
         }}
-        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2"
+        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2 overflow-visible relative rounded-b-xl"
       >
         <div className="relative flex-1 flex items-center" onClick={handleSendClick}>
           <input
@@ -479,27 +502,20 @@ export function RxProAiDemo() {
           )}
         </div>
 
-        <div className="relative">
-          {canSendStep > 0 && (
-            <span className="absolute -top-9 right-0 bg-red-600 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full shadow-lg flex items-center gap-1 animate-bounce z-30 whitespace-nowrap pointer-events-none">
-              <Sparkles className="w-3 h-3 text-yellow-300" /> Click here!
-            </span>
-          )}
+        <div className="relative flex items-center justify-center overflow-visible">
+          {canSendStep > 0 && <RotatingTextRing />}
           <button
             type="button"
             onClick={handleSendClick}
             disabled={isThinking && canSendStep === 0}
-            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative ${
+            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative z-30 ${
               canSendStep > 0
-                ? "bg-red-600 hover:bg-red-700 text-white ring-4 ring-red-400/50 scale-105"
+                ? "bg-red-600 hover:bg-red-700 text-white ring-2 ring-neutral-900 scale-105"
                 : isOnboardingComplete
                 ? "bg-neutral-200 text-neutral-500 hover:bg-neutral-300"
                 : "bg-red-600 opacity-60 text-white cursor-not-allowed"
             }`}
           >
-            {canSendStep > 0 && (
-              <span className="absolute -inset-1 rounded-lg border-2 border-dashed border-red-400 animate-spin opacity-75"></span>
-            )}
             <span>Send</span>
             <Send className="w-3.5 h-3.5" />
           </button>
