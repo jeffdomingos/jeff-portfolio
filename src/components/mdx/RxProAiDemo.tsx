@@ -69,7 +69,7 @@ const INITIAL_MESSAGES: Message[] = [
   {
     id: "init-1",
     role: "assistant",
-    content: "Hello! I'm Thiago, a digital agent from RX Pro - Afya representing Apsen. Am I speaking with Dr. Laura Souza?\n\nI see in the system that you received 1 box with samples of **FLORACOL CX C2 SACHETS AG**. Did it arrive safely?\n\nYou can ask me any clinical questions about Floracol, or test my UI components using commands like `article`, `error`, `citation`, `document`, `formatting`.",
+    content: "Hello! I'm Thiago, a digital agent from RX Pro - Afya representing Apsen. Am I speaking with Dr. Laura Souza?\n\nI see in the system that you received 1 box with samples of **FLORACOL CX C2 SACHETS AG**. Did it arrive safely?\n\nYou can ask me any clinical questions about Floracol.",
   }
 ];
 
