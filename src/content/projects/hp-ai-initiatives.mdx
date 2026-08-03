@@ -7,14 +7,14 @@ tags: [AI Product Design, Design Engineering, RAG Architecture, Enterprise B2B, 
 home_card:
   context_en: Afya B2B Solutions
   title_en: "AI-Powered Enterprise Experiences & Rapid Prototyping Workflows"
-  summary_en: "Pioneering AI design integration, RAG-grounded conversational assistants, and establishing an AI-assisted prototyping stack connecting Figma, code, and pharma compliance."
+  summary_en: "Establishing enterprise AI design pipelines, RAG-grounded conversational assistants, and a multi-stage prototyping stack connecting Figma, code, and pharma compliance."
   tags_en: [AI Copilots, Enterprise B2B, RAG & LLM QA, AI Prototyping, Design Engineering]
 en:
   context: Afya B2B Solutions
   title: "AI-Powered Enterprise Experiences & Rapid Prototyping Workflows"
   role: Senior Product Designer (B2B Solutions / Design Engineering Lead)
   timeline: Sep 2024 - Feb 2026
-  summary: "During my tenure at Afya, corporate leadership issued a strategic directive to prioritize AI solutions across our B2B healthcare portfolio. Acting as a pioneer in AI workflow adoption within the company, I led the exploration and design engineering for an AI Digital Representative (Apsen/Floracol MVP), defined AI product metrics, and built an end-to-end rapid prototyping stack moving from Figma Make to Lovable and production code."
+  summary: "During my tenure at Afya, corporate leadership issued a strategic directive to prioritize AI solutions across our B2B healthcare portfolio. Leading the adoption of AI prototyping workflows within the company, I led the exploration and design engineering for an AI Digital Representative (Apsen/Floracol MVP), defined AI product metrics, and built an end-to-end rapid prototyping stack moving from Figma Make to Lovable and production code."
   blocks:
     - type: callout
       content: |-
@@ -25,24 +25,23 @@ en:
       content: |
         ## Executive Summary (Senior UX & Design Engineering Alignment)
 
-        **The Strategic Challenge:** Pharmaceutical client Apsen needed to engage physicians who received physical medication sample boxes (such as Floracol and Atentah) but did not receive in-person sales representative visits. The goal was to establish "Virtual Coverage" through a 24/7 RAG-grounded conversational agent (via Web and WhatsApp), providing verified clinical data and sample support.
-
-        **The Pioneering Solution:** As the lead design experimenter for AI adoption across the company, I drove the initiative across three pillars:
-        1. **AI UX & Metrics Strategy:** Shifted measurement from low-level infrastructure metrics to product UX metrics, establishing "Qualified Engagement" (physicians completing 3+ conversation turns or requesting clinical deep dives) and post-processing log analytics.
-        2. **Multi-Stage Prototyping Pipeline:** Spearheaded rapid prototyping exploration using Figma Make (connecting to the corporate Design System), Lovable (interactive NLU web flows), and VS Code + GitHub Copilot (migrating UI components directly into the LangChain production repository).
-        3. **RAG QA & Compliance Guardrails:** Solved critical healthcare LLM challenges alongside engineering, including PDF OCR extraction, posology hallucination fixes, input token limit handling, and mandatory physician identity authentication locks.
-
-        **Outcome & Legacy:** Following a temporary strategic hold during leadership transitions, former colleagues confirmed that the technical architecture, RAG grounding frameworks, and UX patterns we established were unpaused, officially launched to production, and received very positive feedback from users and stakeholders.
+        * **The Strategic Challenge:** Delivering "Virtual Coverage" for unvisited physicians via a 24/7 RAG-grounded conversational agent (integrated into Web and WhatsApp) providing verified clinical data and sample support.
+        * **UX & Metrics Strategy:** Shifting from low-level infrastructure logs to product UX metrics, defining "Qualified Engagement" (3+ conversation turns or clinical deep dives) and post-processing log analytics.
+        * **Design Engineering Execution:** Building a multi-stage prototyping pipeline connecting Figma Make (Design System tokens), Lovable (interactive web flows), and VS Code + Copilot (direct LangChain repository integration).
+        * **RAG Safety & Compliance:** Solving critical healthcare LLM challenges alongside engineering, including PDF OCR extraction, posology hallucination fixes, input token limit handling, and mandatory physician identity locks.
+        * **Outcome & Legacy:** Establishing a resilient technical architecture and UX pattern system that was unpaused after leadership transitions and successfully launched to production.
 
     - type: text
       content: |
-        ## Overview & AI Directive: Pioneering AI Workflows
+        ## Overview & AI Strategy: Establishing AI Workflows
 
         During my tenure as Senior Product Designer for B2B Solutions at Afya (Brazil’s leading medical education and healthcare software platform), corporate leadership issued an executive directive to prioritize AI-powered solutions.
 
-        At the time, AI tool integration was brand new to our design, product, and engineering teams. I took on a pioneering role within the design organization, leading hands-on experimentation with emerging AI tools to establish a viable workflow for rapid ideation, user testing, and developer handoff.
+        At the time, AI tool integration was brand new to our design, product, and engineering teams. I led the exploration within the design organization, conducting hands-on experimentation with emerging AI tools to establish a viable workflow for rapid ideation, user testing, and developer handoff.
 
-        Within the RX PRO enterprise platform (connecting pharmaceutical companies directly with physicians), we identified a critical business gap: a significant segment of physicians received physical sample boxes but received zero in-person visits from sales representatives. To solve this, we designed an AI Digital Representative to provide continuous, evidence-backed "Virtual Coverage."
+        Within the RX PRO enterprise platform (connecting pharmaceutical companies directly with physicians), we identified a critical business gap: a significant segment of physicians received physical sample boxes but received zero in-person visits from sales representatives. 
+        
+        To solve this, we designed an AI Digital Representative (Apsen / Floracol MVP) offering continuous, evidence-backed "Virtual Coverage". Structurally, the experience was designed to live as a **contextual slide-over drawer on the RX PRO Web portal** and as a **dedicated conversational thread on WhatsApp**, seamlessly matching our core platform design language.
 
     - type: text
       content: |
@@ -60,15 +59,15 @@ en:
 
     - type: text
       content: |
-        ## Prototyping Evolution: From Figma Make to Production Code
+        ## Multi-Stage Prototyping Stack
 
-        Because AI tools were rapidly evolving, I deliberately tested multiple prototyping environments to evaluate how design assets, interactive logic, and code generation could best serve our team.
+        Because AI tools were rapidly evolving, I deliberately built a multi-stage prototyping pipeline to evaluate how design assets, interactive logic, and code generation could best serve our team from early discovery to final handoff.
 
-        ### Phase 1: NLU-First Interactive Prototype (Lovable)
-        To test dynamic conversational flows without building a full backend, I started with **Lovable**, as it was the AI tool delivering the best results for interactive prototypes in my previous tests. Here I constructed an interactive React/TypeScript web prototype mirroring the RX PRO UI to validate 5 key conversational states:
+        ### Stage 1: NLU-First Interactive Prototype (Lovable)
+        To test dynamic conversational flows without building a full backend, I started with **Lovable** to construct an interactive React/TypeScript web prototype mirroring the RX PRO UI. This allowed us to quickly validate 5 key conversational states:
         * **Screen 1 (NLU Immediate):** Sample delivery confirmation with open text input (no forced buttons).
-        * **Screen 2 (Post-Confirmation):** Dynamic display of 7 interactive clinical suggestion pills (posology, adverse effects, trial data).
-        * **Screen 3 (RAG Interaction):** Natural language processing handling complex queries (e.g., dosage calculation for a 70kg patient) with inline document citations (e.g., official product monograph PDFs).
+        * **Screen 2 (Post-Confirmation):** Dynamic display of interactive clinical suggestion pills (posology, adverse effects, trial data).
+        * **Screen 3 (RAG Interaction):** Natural language processing handling complex queries with inline document citations (e.g., official product monograph PDFs).
         * **Screen 4 (Human Handoff):** Triaged escalation flow (Scientific Query, Logistics Issue, Other).
         * **Screen 5 (Unhappy Path):** Empathetic non-delivery handling ("Didn't receive sample") with automated address verification sub-flows.
 
@@ -78,8 +77,8 @@ en:
 
     - type: text
       content: |
-        ### Phase 2: Figma Make & Design System Integration
-        With the launch of **Figma Make**, I migrated the prototype into our team's standard design environment. This allowed us to evolve the UI closer to our existing Design System tokens, refine the components, and make the assets significantly more accessible for other team members under the same corporate account, maintaining a centralized single source of truth.
+        ### Stage 2: Figma Make & Design System Integration
+        With the launch of **Figma Make**, I migrated the prototype into our team's standard design environment. This enabled us to evolve the UI closer to our existing Design System tokens, refine component states, and make the assets directly accessible to cross-functional team members under our corporate Figma account.
 
     - type: image
       src: /images/projects/afya-ai/rxpro-ai-assistant.png
@@ -87,12 +86,12 @@ en:
 
     - type: text
       content: |
-        ### Phase 3: Code Migration, Technical Pivot & Production Handoff
-        Stepping into a Design Engineering role with **VS Code + GitHub Copilot**, I led the code handoff through an evolving technical architecture:
+        ### Stage 3: Code Migration & LangChain Handoff
+        Stepping into a Design Engineering role with **VS Code + GitHub Copilot**, I led the frontend code integration using AI-assisted component generation:
 
-        * **Initial Handoff (OpenAI UI Chat Kit):** Engineering initially selected OpenAI's UI Chat Kit starter template. Using AI-assisted coding (vibecoding), I ported the interface into the Chat Kit template structure and delivered a fully functional code package, which was approved by the engineering team.
-        * **Architecture Pivot to LangChain:** Shortly after, engineering pivoted to **LangChain's web UI framework**. This strategic shift was driven by Afya's corporate AI stack standardization and the need for strict RAG observability via tools like **LangSmith**.
-        * **Refactoring & Final Delivery:** Adapting to the new stack, I forked the LangChain repository, refactored our UI components and mock testing states from the Chat Kit architecture into the LangChain structure, and delivered the final code package directly into the production testing pipeline.
+        * **Initial Handoff (OpenAI UI Chat Kit):** Engineering initially selected OpenAI's UI Chat Kit starter template. Using AI-assisted development, I ported the web interface into the Chat Kit structure and delivered a fully functional code package approved by the team.
+        * **Architecture Pivot to LangChain:** Shortly after, engineering pivoted to **LangChain's web UI framework** to align with Afya's corporate AI stack and enable strict RAG observability via **LangSmith**.
+        * **Refactoring & Final Delivery:** Adapting seamlessly to the shift, I forked the LangChain repository, refactored our UI components and mock testing states from the Chat Kit architecture into the LangChain structure, and delivered the final code package directly into the production testing pipeline.
 
     - type: rxpro-demo
       alt: Interactive Live Prototype of the RX PRO AI Assistant running in React.
@@ -104,10 +103,11 @@ en:
 
     - type: text
       content: |
-        ## Healthcare RAG Refinement & Regulatory QA
+        ## Healthcare RAG Refinement & Clinical QA Beta Testing
 
-        Designing conversational AI for regulated pharmaceutical products requires zero tolerance for medical hallucination. In collaboration with QA and engineering leads, we conducted 23+ evaluation scenarios to harden the RAG pipeline:
+        Designing conversational AI for regulated pharmaceutical products requires zero tolerance for medical hallucination. In collaboration with QA, medical advisors, and engineering leads, we conducted 23+ evaluation scenarios to harden the RAG pipeline:
 
+        * **Technical & Clinical QA Beta Testing:** Executed pre-launch beta validation with subject matter experts (medical advisors and clinical QA leads) to evaluate conversational accuracy, source citation relevance, and fallback safety before pilot deployment.
         * **PDF Document Sanitization:** Identified that original monograph PDFs contained heavy image layers causing text extraction failures in the vector store. The engineering team converted source documents into clean text structures prior to PDF re-generation, dramatically improving retrieval accuracy.
         * **Posology Hallucination Prevention:** Corrected model errors where acute diarrhea and irritable bowel syndrome dosages were merged under a single recommendation. Prompt engineering was adjusted to strictly segregate clinical conditions.
         * **Identity Authentication Lock:** Enforced a mandatory conditional gate requiring the agent to confirm the user's physician identity before disclosing sensitive product data.
@@ -158,8 +158,7 @@ en:
         ## Outcome & Strategic Learnings
 
         * **The Result:** We delivered a fully functional, RAG-grounded web and WhatsApp chatbot prototype with source citations, anti-hallucination guardrails, and automated analytics.
-        * **Organizational Shift:** During development, a major leadership transition occurred across Product and Design departments, placing a temporary hold on active pilot rollouts for strategic re-evaluation.
-        * **Post-Departure Validation & Launch:** Following my departure, former colleagues confirmed that the technical architecture, RAG grounding frameworks, and UX patterns we established were unpaused, officially launched to production, and received very positive feedback.
+        * **Organizational Resilience:** Despite a temporary strategic hold during a leadership transition, the technical architecture, RAG grounding frameworks, and UX patterns we established proved resilient. Following my departure, the engineering team unpaused the initiative and successfully launched it to production using the exact foundation we built.
         * **The Key Lesson: *"Resilient Systems Outlast Organizational Shifts"***:
           > Building modular, code-backed prototypes and clear technical documentation ensures that discovery work holds long-term value. When design and engineering are deeply aligned from day one, the foundation remains strong enough to survive leadership transitions and eventually deliver real business impact.
 
@@ -167,7 +166,7 @@ en:
       content: |
         ## Summary of Relevance to Senior UX & Design Engineering Roles
 
-        * **AI Workflow Leadership:** Demonstrated ability to pioneer AI tool adoption across Design, Product, and Engineering teams, establishing structured exploration processes.
+        * **AI Workflow Leadership:** Demonstrated ability to lead AI tool adoption across Design, Product, and Engineering teams, establishing structured exploration processes.
         * **Copilots & RAG Conversational Design:** Proven track record designing multi-turn AI assistants, LangChain RAG citation interfaces, and complex conversational workflows.
         * **Enterprise Compliance & Safety Guardrails:** Deep experience designing AI features in heavily regulated, high-stakes healthtech environments.
         * **Design Engineering & Prototyping:** Mastery of multi-stage prototyping stacks (Figma Make, Lovable, VS Code, Copilot) to bridge UX design and frontend code implementation.
