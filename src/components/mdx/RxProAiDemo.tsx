@@ -275,6 +275,22 @@ export function RxProAiDemo() {
       }
 
       setMessages((prev) => [...prev, botMsg]);
+
+      // Automatic polite follow-up inquiry
+      setTimeout(() => {
+        setIsThinking(true);
+        setTimeout(() => {
+          setIsThinking(false);
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `followup-${Date.now()}`,
+              role: "assistant",
+              content: "Is there anything else I can assist you with regarding Floracol?"
+            }
+          ]);
+        }, 900);
+      }, 1200);
     }, 1100);
   };
 
