@@ -5,19 +5,19 @@ tags: [B2B, Internal Tools, Service Design, E-commerce]
 featured: true
 home_card:
   context_pt: Voltz Motors
-  title_pt: Otimização Operacional e Mitigação de Riscos
-  summary_pt: Como implementei fricção intencional no checkout e criei ferramentas de back office para reduzir o SLA logístico de dias para minutos durante uma crise severa.
-  tags_pt: [B2B, Ferramentas Internas, Design de Serviço, Ecommerce]
+  title_pt: De CRO à Sustentabilidade Operacional
+  summary_pt: Como reestruturei a jornada B2C e criei ferramentas B2B de liberação em lote para reduzir o tempo de espera operacional e acelerar o fluxo de caixa.
+  tags_pt: [E-commerce, Operações, B2B2C]
   context_en: Voltz Motors
-  title_en: Operational Optimization and Risk Mitigation
-  summary_en: How I implemented intentional checkout friction and built back-office tools to reduce logistics SLA from days to minutes during a severe crisis.
-  tags_en: [B2B, Internal Tools, Service Design, E-commerce]
+  title_en: From CRO to Operational Sustainability
+  summary_en: How I restructured the B2C journey and built B2B batch release tools to reduce operational SLA and accelerate cash flow.
+  tags_en: [E-commerce, Operations, B2B2C]
 pt:
   context: Voltz Motors
-  title: "Otimização Operacional e Mitigação de Riscos em Operação Logística Complexa"
+  title: "Alinhando a promessa comercial à capacidade operacional: o redesenho do e-commerce e do back-office"
   role: Senior Product Designer
   timeline: Jun 2022 a Fev 2023
-  summary: "O Desafio: Com um backlog de 24.000 reservas e o fracasso de uma captação de Série B, a VOLTZ Motors enfrentou uma severa crise de caixa. O descompasso entre a alta conversão de vendas e a capacidade logística real gerou uma avalanche de litígios e custos operacionais."
+  summary: "Fui contratado para otimizar a conversão de vendas. Descobri que precisávamos introduzir fricção intencional no checkout para alinhar expectativas e construir ferramentas internas de liberação para destravar a logística.\"
   blocks:
     - type: callout
       content: |-
@@ -28,11 +28,11 @@ pt:
       content: |
         ## Resumo Executivo
         
-        **O Desafio:** Com um backlog de 24.000 reservas e o fracasso de uma captação de Série B, a VOLTZ Motors enfrentou uma severa crise de caixa. O descompasso entre a alta conversão de vendas e a capacidade logística real gerou uma avalanche de litígios e custos operacionais.
+        **O Desafio:** Com um backlog elevado de reservas e o congelamento de rodadas de investimento, a Voltz enfrentava forte pressão de caixa. O descompasso entre a alta conversão de vendas digitais e a capacidade logística real gerava um volume crescente de chamados de suporte e custos operacionais.
         
-        **A Solução:** Alinhando os riscos operacionais com a liderança, ajustamos a estratégia do produto. Implementamos clareza e fricção intencional no checkout B2C para alinhar expectativas de entrega, e criamos a funcionalidade de liberação em lote de pedidos (menu Priorizado no Portal do Parceiro), dando autonomia para a operação gerenciar a fila sem depender da engenharia.
+        **A Solução:** Alinhando os riscos operacionais com a liderança do squad, ajustamos a estratégia do produto. Implementamos clareza e fricção intencional no checkout B2C para alinhar expectativas de entrega, e criamos a funcionalidade de liberação em lote de pedidos (menu Priorizado no Portal do Parceiro), dando autonomia para a operação gerenciar a fila sem depender da engenharia.
         
-        **O Impacto:** Otimização operacional com eliminação da dependência de engenharia para liberação de pagamentos, reduzindo o SLA de dias para minutos e acelerando a entrada de receita no caixa:
+        **O Impacto:** Redução do tempo de espera operacional de 48 horas para menos de 5 minutos na etapa final de liberação, acelerando o ciclo de caixa e economizando 30 horas mensais de engenharia.
       metrics:
         - label: SLA Logístico
           start: 60
@@ -58,27 +58,35 @@ pt:
       content: |
         ## Contexto e Descoberta
         
-        Em meados de 2022 a companhia liderava o mercado com expectativa de hipercrescimento. Minha missão inicial no squad de Commerce era otimizar a conversão do e-commerce. Contudo, ao mergulhar nos processos internos, concluí que acelerar vendas apenas agravaria o risco de ruína do negócio.
+        Em meados de 2022 a companhia liderava o mercado com expectativa de hipercrescimento. Minha missão inicial no squad de Commerce era otimizar a conversão do e-commerce. Contudo, ao mergulhar nos processos internos, concluí que acelerar vendas sem ajustar a infraestrutura operacional apenas agravaria a saúde financeira do negócio.
         
-        Iniciei um diagnóstico pragmático. Implementei pop-ups para recrutamento de pesquisa de usuários (Hotjar) no site, analisei redes sociais e auditei as interações no CRM e centralizador de mensagens da equipe comercial (Bitrix24). As evidências foram claras: o discurso comercial vendia prazos irreais, gerando um passivo jurídico insustentável. Nos bastidores, grande parte da capacidade do nosso time de tecnologia estava sequestrada operando liberações manuais de pedidos no banco de dados para liberar cobranças, em vez de evoluir o produto.
+        Iniciei um diagnóstico pragmático triangulando dados de diferentes frentes:
+        1. Implementei pop-ups para recrutamento de pesquisa com usuários no site via Hotjar.
+        2. Analisei o sentimento e os comentários em redes sociais.
+        3. Auditei as interações de vendas no CRM e no centralizador de mensagens do time comercial (Bitrix24).
+        
+        As evidências foram claras: a comunicação comercial vendia prazos irreais, gerando frustração no pós-venda. Nos bastidores, parte relevante da capacidade do time de tecnologia estava comprometida executando liberações manuais de pedidos no banco de dados para liberar cobranças, em vez de evoluir a plataforma.
         
     - type: image
       src: /images/projects/voltz-motors/hotjar_interviews.jpg
       alt: Recortes de entrevistas com usuários recrutados através de pop-ups do Hotjar no site.
-
+        
     - type: text
       content: |
         ## Execução Estratégica e Colaboração
         
-        O trabalho foi orquestrado pela tríade de liderança do squad: eu na liderança de Design, a liderança de Produto (PM) e a liderança técnica (Tech Lead).
+        O trabalho foi orquestrado pela liderança do squad em uma atuação próxima entre Design, Produto (PM) e Engenharia (Tech Lead).
         
-        ### 1. Fricção Intencional e Reestruturação de Pagamento (B2C)
+        ### 1. Fricção Intencional e Transparência no Checkout (B2C)
         
-        O modelo anterior exigia R$ 500,00 de sinal para reduzir a barreira de entrada, mas omitia a complexidade logística. Para garantir fôlego financeiro, a diretoria determinou o aumento da entrada para R$ 4.222,00. Nossa responsabilidade foi ancorar essa decisão em uma jornada transparente.
+        O modelo anterior exigia R$ 500,00 de sinal para reduzir a barreira de entrada, mas omitia a complexidade logística. Para garantir fôlego financeiro e filtrar a intenção real de compra, a diretoria estabeleceu o aumento da entrada para R$ 4.222,00. Nossa responsabilidade foi ancorar essa decisão em uma jornada transparente.
         
-        Houve forte resistência das lideranças de Marketing e Comercial por receio de que destacar o prazo real de 24 semanas derrubaria a conversão. Venci o argumento traduzindo dados qualitativos em risco financeiro. Demonstrei que omitir o prazo gerava "ilusão de caixa": a receita entrava, mas evaporava semanas depois com estornos, taxas irrecuperáveis e processos judiciais.
+        Havia um receio natural de que destacar o prazo real de 24 semanas derrubaria a conversão. Sustentei a necessidade da mudança traduzindo dados qualitativos em risco financeiro. Demonstrei que ocultar o prazo gerava uma ilusão de caixa: a receita entrava no curto prazo, mas evaporava semanas depois com estornos, taxas operacionais e custos de atendimento.
         
-        Provamos ser mais sustentável sacrificar a conversão de leads desqualificados. O novo fluxo foi desenhado com uma "fricção intencional", garantindo total consciência do usuário sobre as etapas de importação e produção antes do pagamento.
+        Demonstramos que era mais sustentável priorizar a retenção de clientes qualificados. O novo fluxo foi desenhado com uma fricção intencional, garantindo total consciência do usuário sobre as etapas de importação e produção antes da confirmação do pagamento.
+        
+        * **Fluxo Anterior:** Prazo de entrega inserido de forma discreta em um card informativo, com pouca clareza sobre as etapas de montagem.
+        * **Novo Fluxo:** Título do card destacando o prazo total de semanas em tom visual de destaque e explicação clara das fases da cadeia de suprimentos.
         
     - type: before-after
       before:
@@ -91,51 +99,50 @@ pt:
         src: /images/projects/voltz-motors/voltz-prazo-new.png
         label: Depois
         bullets:
-          - Título do card destacando "Prazo"
-          - Total de semanas em destaque e cor highlight.
+          - Título do card destacando o prazo total de semanas.
           - Transparência quanto a etapas de logística.
-      
+          
     - type: text
       content: |
-        ### 2. Queue Manager: Estruturando o Back Office (B2B)
+        ### 2. Módulo Priorizado: Estruturando o Back-Office (B2B)
         
-        Para resolver a ineficiência nos bastidores, investiguei o fluxo logístico e descobri um processo manual crítico. A equipe cruzava variáveis em planilhas externas por até dois dias para formar um lote de liberação. O gargalo ocorria no final: a operação abria um ticket no Zendesk e nossos desenvolvedores precisavam parar o trabalho para fazer as liberações via ERP ou direto no banco de dados. Isso adicionava até 48 horas de espera.
+        Para resolver a ineficiência nos bastidores, investiguei o fluxo logístico e identifiquei um gargalo crítico. A equipe de operações cruzava variáveis em planilhas por até dois dias para formar um lote de liberação. Ao final, dependia de um ticket no Zendesk para que os desenvolvedores executassem as liberações via ERP ou diretamente no banco de dados, adicionando até 48 horas de espera.
         
-        **A Decisão Estratégica e o Trade-off do MVP:** O cenário ideal exigia filtros combinados, sistematização de regras e integração com a fábrica (itens enviados ao backlog). Contudo, para justificar o escopo enxuto do MVP perante a diretoria, levantei dados internos em diferentes frentes para embasar a nossa decisão matemática:
+        **A Decisão Estratégica do MVP:** O cenário ideal exigia automação completa e filtros complexos no sistema, escopo inviável para o momento. Para embasar a versão simplificada do MVP (Menu Priorizado no Portal do Parceiro), reuni dados internos das áreas afetadas:
         
-        * **O Atraso Operacional:** Analisando os relatórios de atendimento interno no Zendesk, auditei o tempo médio de resolução (SLA) e constatei que a espera entre a abertura do chamado e a execução técnica levava até 48 horas.
-        * **O Capital Retido:** Cruzei os dados de capacidade produtiva (cerca de 90 motos finalizadas por semana) com o valor do ticket médio do saldo devedor (aproximadamente R$ 15.000,00). A matemática revelou o tamanho do problema: toda semana, lotes equivalentes a mais de R$ 1,3 milhão ficavam represados aguardando uma simples ação manual.
-        * **O Custo Técnico:** De acordo com estimativas passadas pelo Tech Lead, a interrupção de contexto para execução das rotinas de liberação de pedidos consumia cerca de 30 horas mensais da engenharia.
+        * **O Atraso Operacional:** A análise dos chamados no Zendesk indicou que o tempo médio de resolução (SLA) para a execução técnica levava até 48 horas.
+        * **O Capital Retido:** Cruzando a capacidade de montagem (cerca de 90 motos por semana) com o valor médio do saldo devedor (aproximadamente R$ 15.000,00), identificamos que lotes equivalentes a mais de R$ 1,3 milhão ficavam represados semanalmente aguardando a intervenção técnica.
+        * **O Custo de Engenharia:** Em alinhamento com o Tech Lead, estimamos que a interrupção de contexto para executar scripts de liberação consumia cerca de 30 horas mensais dos desenvolvedores.
         
-        Guiado por essa análise, definimos que a V1 do Queue Manager atacaria exclusivamente o final da esteira. Projetei um módulo onde a operação apenas importava em lote os IDs (previamente triados em planilha) e a interface disparava a mudança de status. Escolhemos absorver o esforço manual inicial para garantir faturamento imediato na etapa final.
+        Com esses números, definimos que a V1 da funcionalidade focaria exclusivamente no gargalo final. Projetei uma interface onde a operação importava a lista de IDs em lote (previamente organizada em planilha) e disparava a mudança de status do pedido de forma automática. Absorvemos a triagem manual inicial para garantir o faturamento imediato dos lotes prontos.
         
     - type: image
       src: /images/projects/voltz-motors/Queue_FIGMA.png
-      alt: Visão do canvas no Figma detalhando os fluxos e wireframes do protótipo do Queue Manager.
-      
+      alt: Visão do canvas no Figma detalhando os fluxos do protótipo no Portal do Parceiro.
+        
     - type: image
       src: /images/projects/voltz-motors/queue-manager.png
-      alt: Interface do Queue Manager para a gestão de lotes no Back Office.
-      
+      alt: Interface do recurso Priorizado para gestão de lotes no Back-Office.
+        
     - type: text
       content: |
         ## Resultados e Visão de Impacto
         
-        Em fevereiro de 2023 o cenário macroeconômico forçou um corte de 70% do time de tecnologia, marcando o fim do meu ciclo e sinalizando a futura Recuperação Judicial da empresa.
+        Em fevereiro de 2023, restrições do cenário macroeconômico levaram a uma reestruturação severa da empresa, encerrando o meu ciclo no projeto.
         
-        Apesar do desfecho abrupto, o projeto entregou valor fundamental no momento mais crítico ao isolar o principal gargalo técnico e financeiro. Os impactos diretos foram:
+        Apesar do desfecho organizacional, o trabalho entregou valor tangível no momento mais crítico ao isolar o principal gargalo técnico e financeiro do squad:
         
-        * **Economia de 30 horas mensais de engenharia:** Eliminação total de tickets no Zendesk para esta rotina, devolvendo tempo para o time focar no produto.
-        * **Redução do SLA em até 48 horas:** A espera técnica caiu de dois dias úteis para menos de cinco minutos, dando autonomia à equipe de logística.
-        * **Aceleração do Ciclo de Caixa:** Ao remover o gargalo que represava lotes de mais de R$ 1 milhão, a empresa passou a disparar a cobrança imediatamente, antecipando a injeção de capital vital para a operação.
+        * **Autonomia e Redução de SLA:** A espera técnica para liberação de pedidos caiu de até dois dias úteis para menos de cinco minutos, dando autonomia total ao time de logística.
+        * **Economia de Recursos Técnicos:** Eliminação total de tickets no Zendesk para essa rotina, devolvendo 30 horas mensais de engenharia para o desenvolvimento do core product.
+        * **Aceleração do Ciclo de Caixa:** Remoção do obstáculo que represava lotes de mais de R$ 1,3 milhão por semana, permitindo cobranças imediatas e injeção rápida de capital na operação.
         
-        **Aprendizado Executivo:** Investigar gargalos de forma empírica consolidou minha crença no poder da visão sistêmica. Hoje inicio projetos de alta complexidade auditando ativamente as engrenagens que sustentam o produto nos bastidores. Isso garante que meu trabalho não siga direcionamentos de forma passiva, mas atue como uma ponte estratégica conectando a experiência do usuário à viabilidade do negócio.
+        **Aprendizado Executivo:** Investigar processos operacionais de forma empírica consolidou minha visão sobre o impacto do Service Design. Hoje inicio projetos de alta complexidade auditando as engrenagens que sustentam o produto nos bastidores, garantindo que o design atue como uma ponte estratégica entre a experiência do usuário e a viabilidade do negócio.
 en:
   context: Voltz Motors
-  title: "Operational Optimization and Risk Mitigation in a Complex Logistics Operation"
+  title: "Aligning commercial promise with operational capacity: the redesign of e-commerce and back-office"
   role: Senior Product Designer
   timeline: Jun 2022 to Feb 2023
-  summary: "The Challenge: With a backlog of 24,000 reservations and the failure of a Series B funding round, VOLTZ Motors faced a severe cash crisis. The mismatch between high sales conversion and actual logistical capacity generated an avalanche of lawsuits and operational costs."
+  summary: "I was hired to optimize sales conversion. I discovered we needed to introduce intentional friction at checkout to align expectations and build internal release tools to unlock logistics.\"
   blocks:
     - type: callout
       content: |-
@@ -146,11 +153,11 @@ en:
       content: |
         ## Executive Summary
         
-        **The Challenge:** With a backlog of 24,000 reservations and the failure of a Series B funding round, VOLTZ Motors faced a severe cash crisis. The mismatch between high sales conversion and actual logistical capacity generated an avalanche of lawsuits and operational costs.
+        **The Challenge:** With a high backlog of reservations and the freeze on investment rounds, Voltz faced strong cash pressure. The mismatch between high digital sales conversion and actual logistics capacity generated a growing volume of support tickets and operational costs.
         
-        **The Solution:** Aligning operational risks with leadership, we adjusted the product strategy. We implemented clarity and intentional friction in the B2C checkout to align delivery expectations, and created the batch order release functionality (Prioritized menu in the Partner Portal), giving the operation autonomy to manage the queue without depending on engineering.
+        **The Solution:** Aligning operational risks with the squad leadership, we adjusted the product strategy. We implemented clarity and intentional friction in the B2C checkout to align delivery expectations, and created the batch order release functionality (Prioritized menu in the Partner Portal), giving the operation autonomy to manage the queue without depending on engineering.
         
-        **The Impact:** Operational optimization that eliminated the dependency on engineering for payment releases, reducing SLA from days to minutes and accelerating revenue inflow:
+        **The Impact:** Reduction of operational wait time from 48 hours to less than 5 minutes in the final release stage, accelerating the cash cycle and saving 30 monthly hours of engineering.
       metrics:
         - label: Logistics SLA
           start: 60
@@ -176,76 +183,82 @@ en:
       content: |
         ## Context and Discovery
         
-        By mid-2022, the company led the market with hyper-growth expectations. My initial mission in the Commerce squad was to optimize e-commerce conversion. However, upon diving into internal processes, I concluded that accelerating sales would only aggravate the risk of business ruin.
+        In mid-2022, the company led the market with hyper-growth expectations. My initial mission in the Commerce squad was to optimize e-commerce conversion. However, when diving into internal processes, I concluded that accelerating sales without adjusting the operational infrastructure would only worsen the business's financial health.
         
-        I initiated a pragmatic diagnosis. I implemented user recruitment pop-ups for usability research (Hotjar) on the site, analyzed social networks, and audited interactions in the commercial team's CRM and omnichannel messaging hub (Bitrix24). The evidence was clear: the commercial narrative sold unrealistic deadlines, generating an unsustainable legal liability. Behind the scenes, a large part of our technology team's capacity was hijacked by manually releasing orders in the database to enable billing, instead of evolving the product.
+        I initiated a pragmatic diagnosis by triangulating data from different fronts:
+        1. I implemented pop-ups for user research recruitment on the site via Hotjar.
+        2. I analyzed sentiment and comments on social networks.
+        3. I audited sales interactions in the CRM and the commercial team's message centralizer (Bitrix24).
+        
+        The evidence was clear: commercial communication sold unrealistic deadlines, generating frustration post-sale. Behind the scenes, a relevant part of the technology team's capacity was compromised executing manual order releases in the database to clear billing, instead of evolving the platform.
         
     - type: image
       src: /images/projects/voltz-motors/hotjar_interviews.jpg
-      alt: Snippets of user interviews recruited via Hotjar pop-ups on the website.
-
+      alt: Snippets of user interviews recruited through Hotjar pop-ups on the site.
+        
     - type: text
       content: |
         ## Strategic Execution and Collaboration
         
-        The work was orchestrated by the squad's leadership triad: me leading Design, the Product Lead (PM), and the Technical Lead (Tech Lead).
+        The work was orchestrated by the squad's leadership in close collaboration between Design, Product (PM), and Engineering (Tech Lead).
         
-        ### 1. Intentional Friction and Payment Restructuring (B2C)
+        ### 1. Intentional Friction and Transparency at Checkout (B2C)
         
-        The previous model required a R$ 500.00 down payment to lower the entry barrier but omitted the logistical complexity. To ensure financial breathing room, the board mandated increasing the down payment to R$ 4,222.00. Our responsibility was to anchor this decision in a transparent journey.
+        The previous model required a R$ 500.00 down payment to reduce the entry barrier but omitted logistical complexity. To ensure financial breathing room and filter actual purchase intent, the board established the down payment increase to R$ 4,222.00. Our responsibility was to anchor this decision in a transparent journey.
         
-        There was strong resistance from Marketing and Sales leadership, fearing that highlighting the real 24-week deadline would tank conversion. I won the argument by translating qualitative data into financial risk. I demonstrated that omitting the deadline created a "cash flow illusion": revenue came in, but evaporated weeks later with chargebacks, unrecoverable fees, and lawsuits.
+        There was a natural fear that highlighting the real 24-week deadline would drop conversion. I supported the need for change by translating qualitative data into financial risk. I demonstrated that hiding the deadline generated a cash illusion: revenue entered in the short term but evaporated weeks later with chargebacks, operational fees, and support costs.
         
-        We proved it was more sustainable to sacrifice the conversion of unqualified leads. The new flow was designed with "intentional friction," ensuring the user was fully aware of the import and production stages prior to payment.
+        We demonstrated that it was more sustainable to prioritize the retention of qualified customers. The new flow was designed with intentional friction, ensuring full user awareness of the import and production stages before payment confirmation.
+        
+        * **Previous Flow:** Delivery time discretely inserted in an informative card, with little clarity about the assembly stages.
+        * **New Flow:** Card title highlighting the total weeks timeframe in a prominent visual tone and clear explanation of the supply chain phases.
         
     - type: before-after
       before:
         src: /images/projects/voltz-motors/voltz-prazo-old.png
         label: Before
         bullets:
-          - Deadline “hidden” inside a card about reserve mode.
+          - Deadline "hidden" inside a card about reserve mode.
           - Little transparency regarding logistics stages.
       after:
         src: /images/projects/voltz-motors/voltz-prazo-new.png
         label: After
         bullets:
-          - Card title highlighting "Deadline"
-          - Total weeks highlighted in accent color.
+          - Card title highlighting the total weeks deadline.
           - Transparency regarding logistics stages.
-      
+          
     - type: text
       content: |
-        ### 2. Queue Manager: Structuring the Back Office (B2B)
+        ### 2. Prioritized Module: Structuring the Back-Office (B2B)
         
-        To solve back-stage inefficiency, I investigated the logistical flow and uncovered a critical manual process. The team cross-referenced variables in external spreadsheets for up to two days to form a release batch. The bottleneck occurred at the end: the operation opened a Zendesk ticket and our developers had to stop their work to make the releases via ERP or directly in the database. This added up to 48 hours of wait time.
+        To solve the inefficiency behind the scenes, I investigated the logistics flow and identified a critical bottleneck. The operations team crossed variables in spreadsheets for up to two days to form a release batch. In the end, it depended on a Zendesk ticket for developers to execute the releases via ERP or directly in the database, adding up to 48 hours of wait time.
         
-        **The Strategic Decision and MVP Trade-off:** The ideal scenario required combined filters, rule systematization, and factory integration (items sent to the backlog). However, to justify the lean MVP scope to the board, I gathered internal data across different fronts to back our mathematical decision:
+        **The MVP Strategic Decision:** The ideal scenario required complete automation and complex filters in the system, an unfeasible scope for the moment. To support the simplified MVP version (Prioritized Menu in the Partner Portal), I gathered internal data from the affected areas:
         
-        * **Operational Delay:** Analyzing internal Zendesk support reports, I audited the average resolution time (SLA) and found that the wait between opening a ticket and technical execution took up to 48 hours.
-        * **Retained Capital:** I crossed production capacity data (about 90 motorcycles finished per week) with the average ticket value of the outstanding balance (approximately R$ 15,000.00). The math revealed the scale of the problem: every week, batches equivalent to over R$ 1.3 million were held up waiting for a simple manual action.
-        * **Technical Cost:** According to estimates provided by the Tech Lead, context switching to execute order release routines consumed about 30 engineering hours per month.
+        * **Operational Delay:** The analysis of Zendesk tickets indicated that the average resolution time (SLA) for technical execution took up to 48 hours.
+        * **Retained Capital:** Crossing assembly capacity (about 90 motorcycles per week) with the average value of the outstanding balance (approximately R$ 15,000.00), we identified that batches equivalent to more than R$ 1.3 million were retained weekly awaiting technical intervention.
+        * **Engineering Cost:** In alignment with the Tech Lead, we estimated that context switching to execute release scripts consumed about 30 monthly hours from developers.
         
-        Guided by this analysis, we determined that the V1 of the Queue Manager would exclusively tackle the end of the pipeline. I designed a module where the operation merely batch-imported IDs (previously sorted in a spreadsheet) and the interface triggered the status change. We chose to absorb the initial manual effort to ensure immediate billing in the final stage.
+        With these numbers, we defined that the V1 of the feature would focus exclusively on the final bottleneck. I designed an interface where the operation imported the list of batch IDs (previously organized in a spreadsheet) and automatically triggered the order status change. We absorbed the initial manual triage to ensure immediate billing for ready batches.
         
     - type: image
       src: /images/projects/voltz-motors/Queue_FIGMA.png
-      alt: Figma canvas overview detailing the flows and wireframes for the Queue Manager prototype.
-
+      alt: Figma canvas view detailing the prototype flows in the Partner Portal.
+        
     - type: image
       src: /images/projects/voltz-motors/queue-manager.png
-      alt: Queue Manager interface for batch management in the Back Office.
-      
+      alt: Interface of the Prioritized feature for batch management in the Back-Office.
+        
     - type: text
       content: |
         ## Results and Impact Vision
         
-        In February 2023, the macroeconomic scenario forced a 70% cut in the technology team, marking the end of my cycle and signaling the company's future Judicial Recovery.
+        In February 2023, macroeconomic scenario restrictions led to a severe restructuring of the company, ending my cycle in the project.
         
-        Despite the abrupt ending, the project delivered fundamental value at the most critical moment by isolating the main technical and financial bottleneck. The direct impacts were:
+        Despite the organizational outcome, the work delivered tangible value in the most critical moment by isolating the squad's main technical and financial bottleneck:
         
-        * **Savings of 30 engineering hours per month:** Total elimination of Zendesk tickets for this routine, giving time back for the team to focus on the product.
-        * **SLA reduction of up to 48 hours:** Technical wait time dropped from two business days to less than five minutes, giving autonomy to the logistics team.
-        * **Cash Cycle Acceleration:** By removing the bottleneck holding up batches of over R$ 1 million, the company was able to trigger billing immediately, anticipating a vital capital injection for the operation.
+        * **Autonomy and SLA Reduction:** Technical wait time for order release dropped from up to two business days to less than five minutes, giving total autonomy to the logistics team.
+        * **Technical Resource Savings:** Total elimination of Zendesk tickets for this routine, returning 30 monthly engineering hours for core product development.
+        * **Cash Cycle Acceleration:** Removal of the obstacle that retained batches of over R$ 1.3 million per week, allowing immediate billing and quick capital injection into the operation.
         
-        **Executive Learning:** Investigating bottlenecks empirically consolidated my belief in the power of systemic vision. Today, I kick off highly complex projects by actively auditing the gears that support the product behind the scenes. This ensures my work isn't passively following directions, but acting as a strategic bridge connecting user experience to business viability.
----
+        **Executive Learning:** Investigating operational processes empirically consolidated my vision regarding the impact of Service Design. Today I start highly complex projects by auditing the gears that support the product behind the scenes, ensuring that design acts as a strategic bridge between user experience and business viability.
