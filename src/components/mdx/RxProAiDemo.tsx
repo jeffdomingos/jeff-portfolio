@@ -50,8 +50,8 @@ const PRESET_PROMPTS = [
   },
   {
     label: "Use with Antibiotics",
-    query: "Can I prescribe Floracol along with antibiotic treatment?",
-    response: "Yes, doctor! The clinical study conducted by İşlek et al. (2015) demonstrated that the adjuvant use of *B. lactis* B94 during antibiotic therapy for *H. pylori* was completely safe and **reduced the incidence of side effects from 63% (control group) to 17% (symbiotic group)** with statistical significance (p < 0.01).",
+    query: "Is there clinical evidence on co-prescribing Floracol during antibiotic therapy?",
+    response: "Clinical trial data (İşlek et al., 2015) demonstrates that the adjuvant use of *Bifidobacterium lactis* B94 during antibiotic treatment for *H. pylori* was well tolerated and **reduced the incidence of treatment side effects from 63% (control group) to 17% (symbiotic group)** with statistical significance (p < 0.01).",
     source: "9. İşlek_Bifidobacterium_lactis_B94_inulin_H_pylori.pdf",
     linkPreview: {
       title: "Bifidobacterium lactis B94 plus inulin for Treatment of H. pylori...",
