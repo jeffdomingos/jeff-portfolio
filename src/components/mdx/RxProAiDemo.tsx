@@ -63,19 +63,24 @@ const PRESET_PROMPTS = [
 
 function RotatingTextRing() {
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-30 w-[110px] h-[110px]">
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50 w-[118px] h-[118px]">
       <svg
         viewBox="0 0 120 120"
         className="w-full h-full animate-[spin_8s_linear_infinite]"
       >
         <path
           id="clickHereCirclePath"
-          d="M 60, 60 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0"
+          d="M 60, 60 m -46, 0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
           fill="none"
         />
-        <text className="text-[9.5px] font-black uppercase tracking-widest fill-black">
-          <textPath href="#clickHereCirclePath" startOffset="0%">
-            • CLICK HERE • CLICK HERE • CLICK HERE
+        <text className="text-[9px] font-black uppercase fill-black tracking-widest">
+          <textPath
+            href="#clickHereCirclePath"
+            startOffset="0%"
+            textLength="289"
+            lengthAdjust="spacing"
+          >
+            CLICK HERE • CLICK HERE • CLICK HERE • CLICK HERE • 
           </textPath>
         </text>
       </svg>
@@ -508,7 +513,7 @@ export function RxProAiDemo() {
             type="button"
             onClick={handleSendClick}
             disabled={isThinking && canSendStep === 0}
-            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative z-30 ${
+            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative z-10 ${
               canSendStep > 0
                 ? "bg-red-600 hover:bg-red-700 text-white ring-2 ring-neutral-900 scale-105"
                 : isOnboardingComplete
