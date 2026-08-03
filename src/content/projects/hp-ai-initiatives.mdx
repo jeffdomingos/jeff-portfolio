@@ -64,17 +64,8 @@ en:
 
         Because AI tools were rapidly evolving, I deliberately tested multiple prototyping environments to evaluate how design assets, interactive logic, and code generation could best serve our team.
 
-        ### Phase 1: Figma Make & Design System Integration
-        I started by experimenting with **Figma Make** directly inside our team's standard design environment. This allowed us to test how AI-generated layout concepts could connect with our existing Design System tokens, evaluate asset sharing dynamics, and maintain a centralized single source of truth for design assets.
-
-    - type: image
-      src: /images/projects/afya-ai/rxpro-ai-assistant.png
-      alt: Interface prototype generated via Figma Make for the RX PRO AI Digital Assistant (Thiago) interacting with Dra. Laura.
-
-    - type: text
-      content: |
-        ### Phase 2: NLU-First Interactive Prototype (Lovable)
-        To test dynamic conversational flows without building a full backend, I migrated to **Lovable** to construct an interactive React/TypeScript web prototype mirroring the RX PRO UI. The prototype validated 5 key conversational states:
+        ### Phase 1: NLU-First Interactive Prototype (Lovable)
+        To test dynamic conversational flows without building a full backend, I started with **Lovable**, as it was the AI tool delivering the best results for interactive prototypes in my previous tests. Here I constructed an interactive React/TypeScript web prototype mirroring the RX PRO UI to validate 5 key conversational states:
         * **Screen 1 (NLU Immediate):** Sample delivery confirmation with open text input (no forced buttons).
         * **Screen 2 (Post-Confirmation):** Dynamic display of 7 interactive clinical suggestion pills (posology, adverse effects, trial data).
         * **Screen 3 (RAG Interaction):** Natural language processing handling complex queries (e.g., dosage calculation for a 70kg patient) with inline document citations (`Bula_Oficial_Atentah.pdf`).
@@ -84,6 +75,15 @@ en:
     - type: image
       src: /images/projects/afya-ai/lovable-prototype.jpeg
       alt: NLU Interactive Prototype built with Lovable validating conversational states.
+
+    - type: text
+      content: |
+        ### Phase 2: Figma Make & Design System Integration
+        With the launch of **Figma Make**, I migrated the prototype into our team's standard design environment. This allowed us to evolve the UI closer to our existing Design System tokens, refine the components, and make the assets significantly more accessible for other team members under the same corporate account, maintaining a centralized single source of truth.
+
+    - type: image
+      src: /images/projects/afya-ai/rxpro-ai-assistant.png
+      alt: Interface prototype generated via Figma Make for the RX PRO AI Digital Assistant (Thiago) interacting with Dra. Laura.
 
     - type: text
       content: |
