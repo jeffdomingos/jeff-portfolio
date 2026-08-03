@@ -513,7 +513,8 @@ export function RxProAiDemo() {
             type="button"
             onClick={handleSendClick}
             disabled={isThinking && canSendStep === 0}
-            className={`font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all text-sm shadow-sm relative z-10 ${
+            aria-label="Send"
+            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm relative z-10 shrink-0 ${
               canSendStep > 0
                 ? "bg-red-600 hover:bg-red-700 text-white ring-2 ring-neutral-900 scale-105"
                 : isOnboardingComplete
@@ -521,8 +522,7 @@ export function RxProAiDemo() {
                 : "bg-red-600 opacity-60 text-white cursor-not-allowed"
             }`}
           >
-            <span>Send</span>
-            <Send className="w-3.5 h-3.5" />
+            <Send className="w-4 h-4" />
           </button>
         </div>
       </form>
