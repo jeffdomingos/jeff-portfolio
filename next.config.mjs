@@ -5,6 +5,15 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ['lucide-react', 'framer-motion'],
     },
+    async redirects() {
+        return [
+            {
+                source: '/hp',
+                destination: '/en/hp',
+                permanent: false,
+            }
+        ];
+    },
     async rewrites() {
         return [
             // Tracking URLs (English - Default)
