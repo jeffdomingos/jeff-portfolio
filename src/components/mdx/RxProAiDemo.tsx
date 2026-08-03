@@ -166,7 +166,7 @@ export function RxProAiDemo() {
         {
           id: "step-1-msg",
           role: "assistant",
-          content: "Hello! I'm Thiago, a digital agent from RX Pro - Afya representing Apsen. Am I speaking with Dr. Laura Souza?"
+          content: "Hello! I'm Thiago, a digital agent from RX PRO - Afya representing Apsen. Am I speaking with Dr. Laura Souza?"
         }
       ]);
 
@@ -353,7 +353,7 @@ export function RxProAiDemo() {
             </div>
             <span className="text-xs text-neutral-500 flex items-center gap-1.5 mt-0.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Online • Medical Assistant
+              Online • AI Medical Assistant
             </span>
           </div>
         </div>
