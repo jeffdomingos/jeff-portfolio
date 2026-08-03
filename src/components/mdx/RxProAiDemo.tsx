@@ -61,6 +61,14 @@ const PRESET_PROMPTS = [
   }
 ];
 
+const FOLLOWUP_MESSAGES = [
+  "Is there anything else I can assist you with regarding Floracol?",
+  "Would you like to explore more clinical trial data or dosage guidelines?",
+  "Let me know if you have any other questions about Floracol's indication or efficacy!",
+  "Can I help clarify any other clinical aspects for your practice?",
+  "Feel free to select another topic above or let me know if you need additional study references."
+];
+
 function RotatingTextRing() {
   return (
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50 w-[118px] h-[118px]">
@@ -281,12 +289,13 @@ export function RxProAiDemo() {
         setIsThinking(true);
         setTimeout(() => {
           setIsThinking(false);
+          const randomFollowup = FOLLOWUP_MESSAGES[Math.floor(Math.random() * FOLLOWUP_MESSAGES.length)];
           setMessages((prev) => [
             ...prev,
             {
               id: `followup-${Date.now()}`,
               role: "assistant",
-              content: "Is there anything else I can assist you with regarding Floracol?"
+              content: randomFollowup
             }
           ]);
         }, 900);
