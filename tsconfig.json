@@ -34,6 +34,8 @@
         ".next/types/**/*.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "Apsen MVP",
+        "tmp_antigravity_fix"
     ]
 }
