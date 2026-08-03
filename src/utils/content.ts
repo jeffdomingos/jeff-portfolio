@@ -203,6 +203,7 @@ export function getProject(locale: string, slug: string) {
         slug,
         context: data.home_card?.[`context_${effectiveLang}`] ?? langData.context ?? undefined,
         featured: data.featured ?? false,
+        unlisted: data.unlisted ?? false,
         thumbnail: data.thumbnail ?? data.home_card?.thumbnail ?? '',
         tags: data.home_card?.[`tags_${effectiveLang}`] ?? data[`tags_${effectiveLang}`] ?? langData.tags ?? data.tags ?? [],
         title: langData.title ?? data.home_card?.[`title_${effectiveLang}`] ?? slug,
@@ -227,10 +228,12 @@ export function getAllProjects(locale: string) {
         orderList = homeData.cases?.case_order || [];
     }
 
-    const projects = files.map(file => {
-        const slug = file.replace(/\.mdx$/, '');
-        return getProject(locale, slug);
-    });
+    const projects = files
+        .map(file => {
+            const slug = file.replace(/\.mdx$/, '');
+            return getProject(locale, slug);
+        })
+        .filter(p => !p.meta.unlisted);
 
     projects.sort((a, b) => {
         const indexA = orderList.indexOf(a.meta.slug);

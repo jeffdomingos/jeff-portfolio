@@ -191,6 +191,7 @@ export interface ProjectMeta {
   thumbnail: string;
   tags: string[];
   featured?: boolean;
+  unlisted?: boolean;
   summary?: string;
   readingTime?: number;
 }
