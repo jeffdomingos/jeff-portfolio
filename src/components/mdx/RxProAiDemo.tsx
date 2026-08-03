@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Send, Sparkles, FileText, RotateCcw, Bot, User, FlaskConical } from "lucide-react";
+import { Send, Sparkles, FileText, RotateCcw, Bot, User, FlaskConical, Info, Lock } from "lucide-react";
 import { RxProLinkPreview } from "./RxProLinkPreview";
 import { RxProErrorBubble } from "./RxProErrorBubble";
 import Image from "next/image";
@@ -77,6 +77,7 @@ export function RxProAiDemo() {
   const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
+  const [showDemoNotice, setShowDemoNotice] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ export function RxProAiDemo() {
   }, [messages, isThinking]);
 
   const handleSend = (textToSend?: string) => {
+    setShowDemoNotice(false);
     const queryText = (textToSend || input).trim();
     if (!queryText || isThinking) return;
 
@@ -362,26 +364,51 @@ export function RxProAiDemo() {
         </div>
       </div>
 
+      {/* Demo Notice Banner */}
+      {showDemoNotice && (
+        <div className="bg-amber-50 border-t border-amber-200 px-4 py-2.5 text-xs text-amber-900 flex items-center justify-between animate-in fade-in duration-200">
+          <div className="flex items-center gap-2">
+            <Info className="w-4 h-4 text-amber-600 shrink-0" />
+            <span>This is an interactive UI demo without an active LLM/RAG backend. Please select a topic from <strong>Explore Topics</strong> above to test scenarios!</span>
+          </div>
+          <button 
+            type="button" 
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDemoNotice(false);
+            }} 
+            className="text-amber-700 hover:text-amber-950 font-bold px-2 py-0.5 shrink-0"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Input Form */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSend();
+          setShowDemoNotice(true);
         }}
-        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2"
+        onClick={() => setShowDemoNotice(true)}
+        className="p-3 bg-white border-t border-neutral-200 flex items-center gap-2 cursor-pointer"
       >
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask a question about Floracol or try a test command..."
-          className="flex-1 bg-neutral-50 border border-neutral-300 text-neutral-900 placeholder:text-neutral-400 text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-red-500 transition-colors"
-          disabled={isThinking}
-        />
+        <div className="relative flex-1 flex items-center">
+          <input
+            type="text"
+            readOnly
+            value=""
+            onClick={() => setShowDemoNotice(true)}
+            onFocus={() => setShowDemoNotice(true)}
+            placeholder="Custom typing disabled in this demo. Click a topic above!"
+            className="w-full bg-neutral-100 border border-neutral-200 text-neutral-500 placeholder:text-neutral-400 text-sm rounded-lg pl-4 pr-9 py-2.5 focus:outline-none cursor-pointer"
+          />
+          <Lock className="w-4 h-4 text-neutral-400 absolute right-3 pointer-events-none" />
+        </div>
         <button
-          type="submit"
-          disabled={!input.trim() || isThinking}
-          className="bg-red-600 hover:bg-red-700 disabled:opacity-40 text-white font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 transition-colors text-sm shadow-sm"
+          type="button"
+          onClick={() => setShowDemoNotice(true)}
+          className="bg-neutral-200 text-neutral-500 font-medium px-4 py-2.5 rounded-lg flex items-center gap-2 text-sm cursor-pointer hover:bg-neutral-300 transition-colors"
         >
           <span>Send</span>
           <Send className="w-3.5 h-3.5" />
