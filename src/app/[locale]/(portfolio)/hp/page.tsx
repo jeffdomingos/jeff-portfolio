@@ -1,5 +1,9 @@
 import ProjectDetail, { generateMetadata as generateProjectMetadata } from "../projects/[slug]/page";
 
+export async function generateStaticParams() {
+    return [{ locale: 'en' }, { locale: 'pt' }];
+}
+
 export async function generateMetadata({ params }: { params: { locale: string } }) {
     return generateProjectMetadata({ params: { locale: params.locale, slug: "hp-ai-initiatives" } });
 }
