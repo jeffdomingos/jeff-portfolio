@@ -219,7 +219,7 @@ export function RxProAiDemo() {
   };
 
   return (
-    <div className={`w-full my-10 not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-hidden ${inter.className}`}>
+    <div className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-hidden ${inter.className}`}>
       {/* Interactive Widget Bar Header */}
       <div className="bg-neutral-50 text-neutral-800 px-4 md:px-6 py-3 flex items-center justify-between border-b border-neutral-200">
         <div className="flex items-center gap-3">
