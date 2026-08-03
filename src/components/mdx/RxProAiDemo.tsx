@@ -346,7 +346,7 @@ export function RxProAiDemo() {
       <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200">
         <div className="flex items-center gap-1 mb-2">
           <Sparkles className="w-3 h-3 text-red-500" />
-          <span className="text-xs text-neutral-500 font-medium">Medical Scenarios:</span>
+          <span className="text-xs text-neutral-500 font-medium">Suggested Questions:</span>
         </div>
         <div className="flex flex-wrap items-center gap-2 mb-3">
           {PRESET_PROMPTS.map((p, index) => (
