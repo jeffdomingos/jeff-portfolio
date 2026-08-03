@@ -68,7 +68,7 @@ en:
         To test dynamic conversational flows without building a full backend, I started with **Lovable**, as it was the AI tool delivering the best results for interactive prototypes in my previous tests. Here I constructed an interactive React/TypeScript web prototype mirroring the RX PRO UI to validate 5 key conversational states:
         * **Screen 1 (NLU Immediate):** Sample delivery confirmation with open text input (no forced buttons).
         * **Screen 2 (Post-Confirmation):** Dynamic display of 7 interactive clinical suggestion pills (posology, adverse effects, trial data).
-        * **Screen 3 (RAG Interaction):** Natural language processing handling complex queries (e.g., dosage calculation for a 70kg patient) with inline document citations (`Bula_Oficial_Atentah.pdf`).
+        * **Screen 3 (RAG Interaction):** Natural language processing handling complex queries (e.g., dosage calculation for a 70kg patient) with inline document citations (e.g., official product monograph PDFs).
         * **Screen 4 (Human Handoff):** Triaged escalation flow (Scientific Query, Logistics Issue, Other).
         * **Screen 5 (Unhappy Path):** Empathetic non-delivery handling ("Didn't receive sample") with automated address verification sub-flows.
 
@@ -90,9 +90,9 @@ en:
         ### Phase 3: Code Migration, Technical Pivot & Production Handoff
         Stepping into a Design Engineering role with **VS Code + GitHub Copilot**, I led the code handoff through an evolving technical architecture:
 
-        * **Initial Handoff (OpenAI UI Chat Kit):** Engineering initially selected OpenAI's UI Chat Kit (`chatkit-nextjs`). Using AI-assisted coding (vibecoding), I ported the interface into `chatkit-nextjs` and delivered a fully functional `.zip` package, which was approved by the engineering team.
-        * **Architecture Pivot to LangChain:** Shortly after, engineering pivoted to **LangChain** (`agent-chat-ui`). This strategic shift was driven by Afya's corporate AI stack standardization and the need for strict RAG observability via tools like **LangSmith**.
-        * **Refactoring & Final Delivery:** Adapting to the new stack, I forked the `agent-chat-ui` repository, refactored our UI components and mock states (`MockChat.tsx`) from the Chat Kit architecture into the LangChain structure, and delivered the final `.zip` package directly into the production testing pipeline.
+        * **Initial Handoff (OpenAI UI Chat Kit):** Engineering initially selected OpenAI's UI Chat Kit starter template. Using AI-assisted coding (vibecoding), I ported the interface into the Chat Kit template structure and delivered a fully functional code package, which was approved by the engineering team.
+        * **Architecture Pivot to LangChain:** Shortly after, engineering pivoted to **LangChain's web UI framework**. This strategic shift was driven by Afya's corporate AI stack standardization and the need for strict RAG observability via tools like **LangSmith**.
+        * **Refactoring & Final Delivery:** Adapting to the new stack, I forked the LangChain repository, refactored our UI components and mock testing states from the Chat Kit architecture into the LangChain structure, and delivered the final code package directly into the production testing pipeline.
 
     - type: rxpro-demo
       alt: Interactive Live Prototype of the RX PRO AI Assistant running in React.
@@ -141,8 +141,8 @@ en:
               </tr>
               <tr className="hover:bg-muted/30 transition-colors">
                 <td className="px-6 md:px-8 py-5 font-medium text-foreground">Handoff Architecture</td>
-                <td className="px-6 md:px-8 py-5">Decided to isolate <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">MockChat</code> components from production threads to prevent code pollution.</td>
-                <td className="px-6 md:px-8 py-5">Automated physical file structuring (<code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">MockChat.tsx</code> and <code className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground">index.tsx</code>).</td>
+                <td className="px-6 md:px-8 py-5">Decided to isolate mock testing components from production threads to prevent code pollution.</td>
+                <td className="px-6 md:px-8 py-5">Automated component file structuring (mock UI testing modules and production entry points).</td>
               </tr>
               <tr className="hover:bg-muted/30 transition-colors">
                 <td className="px-6 md:px-8 py-5 font-medium text-foreground">QA & Debugging</td>
