@@ -2,34 +2,34 @@
 slug: hp-ai-initiatives
 unlisted: true
 featured: false
-thumbnail: /images/home/voltz-thumb.png
+thumbnail: /images/projects/afya-ai/rxpro-ai-assistant.png
 tags: [AI, Enterprise SaaS, B2B, Prototyping]
 home_card:
   context_en: Afya B2B Solutions
   title_en: "AI-Powered Enterprise Experiences & Rapid Prototyping Workflows"
-  summary_en: "Designing AI-driven B2B tools, conversational assistants, and establishing an AI-assisted rapid prototyping methodology to bridge UX, tech architecture, and product strategy."
+  summary_en: "Designing AI-driven B2B tools, RAG conversational assistants, and establishing an AI-assisted rapid prototyping methodology to bridge UX, tech architecture, and product strategy."
   tags_en: [AI Copilots, Enterprise B2B, Workflow Automation, AI Prototyping]
 en:
   context: Afya B2B Solutions
   title: "AI-Powered Enterprise Experiences & Rapid Prototyping Workflows"
   role: Senior Product Designer (B2B Solutions)
   timeline: Sep 2024 - Feb 2026
-  summary: "During my tenure at Afya, corporate leadership issued a directive to prioritize AI solutions. My work focused on integrating AI both as a product offering (conversational assistants and workflow automation) and as a design methodology to accelerate product exploration."
+  summary: "During my tenure at Afya, corporate leadership issued a directive to prioritize AI solutions. My work focused on integrating AI both as a product offering (RAG conversational assistants, LangChain backend exploration, and compliance guardrails) and as a design methodology to accelerate product exploration."
   blocks:
     - type: callout
       content: |-
         <strong>In collaboration with:</strong><br/>
           - Corporate Leadership & B2B Product Leads<br/>
-          - Engineering & Technical Architecture Teams
+          - Engineering, MLR Compliance & Technical Architecture Teams
     - type: summary-card
       content: |
         ## Executive Summary (HP Senior UX Role Alignment)
 
         **The Directive & Challenge:** Corporate leadership issued a strategic mandate to prioritize AI solutions across Afya's B2B healthcare portfolio. The core UX challenge was balancing rapid AI exploration with operational delivery in a high-demand enterprise environment with shifting strategic priorities.
 
-        **The Solution:** I drove AI integration on two fronts: (1) **As a Product Offering**, designing an interactive AI Digital Pharmaceutical Representative to reduce friction in drug information and sample requests; and (2) **As a Prototyping Stack**, pioneering an AI-assisted workflow (Figma Make, Lovable, GitHub Copilot, Antigravity) that significantly reduced time-to-prototype.
+        **The Solution:** I drove AI integration on two fronts: (1) **As a Product Offering**, exploring 5 strategic AI avenues and building an interactive, RAG-grounded AI Digital Pharmaceutical Representative (LangChain backend) to reduce friction in drug information and sample requests; and (2) **As a Prototyping Stack**, pioneering an AI-assisted workflow (Figma Make, Lovable, GitHub Copilot, Antigravity) that significantly reduced time-to-prototype.
 
-        **Strategic Takeaway:** *"AI is an Amplifier, Not a Savior."* While AI-assisted tools dramatically accelerate prototyping and technical validation, AI capabilities cannot bypass the need for a clear value proposition and business model.
+        **Strategic Takeaway:** *"AI is an Amplifier, Not a Savior."* While AI-assisted tools and RAG architectures dramatically accelerate prototyping and technical validation, AI capabilities cannot bypass the need for a clear value proposition and validated business model.
 
     - type: text
       content: |
@@ -40,7 +40,19 @@ en:
         The core challenge was navigating the exploration of emerging AI opportunities while maintaining velocity on core operational B2B SaaS features. My response was to integrate AI on two distinct levels:
         
         1. **Methodological Integration:** Leveraging AI tools to dramatically accelerate design ideation, technical validation, and code-level prototyping.
-        2. **Product Feature Integration:** Designing AI-driven conversational assistants and intelligent workflow automation directly into Afya's enterprise healthcare ecosystem.
+        2. **Product Feature Integration:** Designing AI-driven conversational assistants, RAG architectures, and intelligent workflow automation directly into Afya's enterprise healthcare ecosystem.
+
+    - type: text
+      content: |
+        ## AI Opportunity Exploration: 5 Strategic Paths
+
+        To map where AI could deliver the highest ROI across our B2B ecosystem (linking pharmaceutical companies, sales representatives, and physicians), I led the discovery and UX framework for 5 strategic initiative paths:
+
+        1. **AI Rep Training via Interactive Role-Play:** Simulating diverse physician personas (skeptical, receptive, critical) to provide real-time sales pitch and compliance feedback.
+        2. **Real-Visit Transcript Analysis:** AI evaluation of physical visit audio transcripts against Medical/Legal/Regulatory (MLR) brand guidelines.
+        3. **24/7 Medical Science Assistant (Farma Assist):** An instant, RAG-grounded conversational interface for physicians to answer complex clinical questions, dosage, and sample delivery status.
+        4. **Gamified Microlearning for Reps:** Daily AI-generated micro-training quizzes delivered directly in the rep's workflow.
+        5. **Intent-Driven Contextual Cards:** AI triggers matching physician search patterns and CME courses with evidence-based product cards.
 
     - type: text
       content: |
@@ -64,7 +76,7 @@ en:
 
     - type: text
       content: |
-        ## Key Case: AI-Powered Digital Pharmaceutical Representative
+        ## Key Case: AI-Powered Digital Pharmaceutical Representative (Apsen MVP)
 
         ### The Hypothesis & Product Goals
         
@@ -74,18 +86,24 @@ en:
         * **Physician Engagement:** Serving as a first-level conversational interface for doctors seeking instant information outside business hours.
         * **Workflow Friction Reduction:** Automating sample requests and drug documentation distribution directly within the platform.
 
-        ### Execution & Technical Collaboration
+    - type: image
+      src: /images/projects/afya-ai/rxpro-ai-assistant.png
+      alt: Interface of the RX PRO AI Digital Assistant (Thiago) answering clinical queries with physician Dra. Laura.
 
-        Using my AI-assisted prototyping stack, I took hands-on ownership of both the UX design and the functional validation:
+    - type: text
+      content: |
+        ### Execution, RAG Architecture & MLR Guardrails
 
-        * **Conversational Interaction Design:** Designed multi-turn user flows, prompt structures, and fallback states simulating realistic physician interactions.
-        * **Technical Feasibility & Architecture:** Researched frontend/backend libraries and collaborated with engineering leads to define API boundaries and data pipelines.
-        * **AI Guardrails & Safety Constraints:** Designed strict conversational boundaries and evidence-based response rules to prevent hallucinations in compliance with medical regulations.
-        * **Functional Prototype Delivery:** Managed frontend code generation to deliver a fully working web chatbot prototype for user testing.
+        Using my AI-assisted prototyping stack alongside engineering, I took hands-on ownership of the UX design, technical grounding, and safety constraints:
+
+        * **LangChain & RAG Vector Backend:** Collaborated with developers on a **LangChain** backend architecture fetching verified data from clinical trial documents and official product monographs (`Monografia Floracol.pdf`).
+        * **23 QA & Grounding Test Scenarios:** Designed and validated 23 rigorous QA evaluation scenarios testing clinical evidence accuracy (e.g. Erdoğan 2012, Tremblay 2023, Baştürk 2016, İşlek 2015 clinical trials) with inline source citation badges (`[1 fonte]`).
+        * **Anti-Hallucination & Out-of-Scope Constraints:** Designed strict conversational guardrails that politely correct false prompt assumptions without agreeing with errors, and automatically decline off-label / out-of-scope medical requests.
+        * **Functional Prototype Delivery:** Delivered a working React chatbot prototype simulating real-time sample follow-ups and scientific comparisons.
 
         ### Outcome & Strategic Learnings
 
-        * **The Result:** We delivered a functional, interactive web chatbot prototype that demonstrated real-time conversational capabilities and evidence-backed responses.
+        * **The Result:** We delivered a functional, interactive web chatbot prototype that demonstrated real-time conversational capabilities, evidence-backed responses, and source citation.
         * **The Reality:** Despite technical success, the project lacked a validated commercial model and clear B2B value proposition. It was placed on hold pending strategic realignment.
         * **The Key Lesson — *"AI is an Amplifier, Not a Savior"***:
           > AI-assisted development is extraordinary for accelerating validation and turning ideas into code. However, an AI agent cannot solve strategic ambiguity. Technical capability does not equal product viability if the underlying user need and business model are not clearly validated.
@@ -97,8 +115,8 @@ en:
         While the primary AI product feature was paused due to strategic shifts, the **process** of building it left a lasting organizational legacy. The adoption of AI tools fundamentally transformed how quickly ideas could be visualized, coded, and tested—elevating design maturity and technical fluency across the B2B organization.
 
         ### Direct Relevance to HP Senior UX Designer Role:
-        * **Copilots & Conversational Design:** Proven experience designing multi-turn AI assistants, guardrails, and complex conversational workflows.
-        * **Enterprise B2B SaaS Complexity:** Deep background navigating regulated, multi-stakeholder SaaS environments.
-        * **AI-Assisted Acceleration:** Expertise using cutting-edge AI tools (Figma Make, Copilot, Antigravity) to accelerate design systems, ideation, and functional prototyping.
+        * **Copilots & RAG Conversational Design:** Proven experience designing multi-turn AI assistants, LangChain RAG citation interfaces, and complex conversational workflows.
+        * **Enterprise Compliance & Safety Guardrails:** Expertise designing AI features in heavily regulated, high-stakes environments (medical/pharma compliance, anti-hallucination QA).
+        * **AI-Assisted Acceleration:** Mastery of cutting-edge AI tools (Figma Make, Copilot, Antigravity) to accelerate design systems, ideation, and functional prototyping.
         * **Product Strategy Maturity:** A pragmatic approach that balances technological innovation with business viability and user-centered design principles.
 ---
