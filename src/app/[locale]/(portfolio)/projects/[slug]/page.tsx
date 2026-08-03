@@ -151,7 +151,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                             case 'rxpro-demo':
                                 return (
                                     <div key={index} className="my-10 w-full">
-                                        <MediaFrame className="flex w-full overflow-hidden border-2 border-foreground bg-background rounded-lg">
+                                        <MediaFrame className="flex w-full border-2 border-foreground bg-background p-4 md:p-8">
                                             <RxProAiDemo />
                                         </MediaFrame>
                                         {block.alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8 max-w-xl mx-auto">{block.alt}</figcaption>}
