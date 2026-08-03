@@ -224,7 +224,7 @@ export function RxProAiDemo() {
         {
           id: "step-3-msg",
           role: "assistant",
-          content: "Wonderful! Floracol is our evidence-backed symbiotic formula combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate recovery in acute gastroenteritis.\n\nFeel free to ask me any clinical questions regarding dosage, indications, or trial data — or select one of the suggested topics below to test our RAG responses!"
+          content: "Wonderful! Floracol is our evidence-backed symbiotic formula combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate recovery in acute gastroenteritis.\n\nFeel free to ask me any clinical questions regarding dosage, indications, or trial data — or select one of the suggested topics below to get started!"
         }
       ]);
       setIsOnboardingComplete(true);
