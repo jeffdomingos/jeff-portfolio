@@ -87,8 +87,12 @@ en:
 
     - type: text
       content: |
-        ### Phase 3: Code Migration via VS Code & GitHub Copilot
-        When engineering selected **LangChain** (`agent-chat-ui`) for backend observability via LangSmith, I stepped into a Design Engineering role. Using **VS Code + GitHub Copilot**, I refactored the UI code into the production repository, creating a clean separation between mock testing components (`MockChat.tsx`) and the real production thread.
+        ### Phase 3: Code Migration, Technical Pivot & Production Handoff
+        Stepping into a Design Engineering role with **VS Code + GitHub Copilot**, I led the code handoff through an evolving technical architecture:
+
+        * **Initial Handoff (OpenAI UI Chat Kit):** Engineering initially selected OpenAI's UI Chat Kit (`chatkit-nextjs`). Using AI-assisted coding (vibecoding), I ported the interface into `chatkit-nextjs` and delivered a fully functional `.zip` package, which was approved by the engineering team.
+        * **Architecture Pivot to LangChain:** Shortly after, engineering pivoted to **LangChain** (`agent-chat-ui`). This strategic shift was driven by Afya's corporate AI stack standardization and the need for strict RAG observability via tools like **LangSmith**.
+        * **Refactoring & Final Delivery:** Adapting to the new stack, I forked the `agent-chat-ui` repository, refactored our UI components and mock states (`MockChat.tsx`) from the Chat Kit architecture into the LangChain structure, and delivered the final `.zip` package directly into the production testing pipeline.
 
     - type: rxpro-demo
       alt: Interactive Live Prototype of the RX PRO AI Assistant running in React.
