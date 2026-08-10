@@ -1,6 +1,6 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo, AfyaDiscovery } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo, AfyaDiscovery, IntelieDualPersona } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
 import { ScrollToDemoButton } from "@/components/mdx/ScrollToDemoButton";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
@@ -185,6 +185,15 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                     <div key={index} className="my-12 w-full">
                                         <MediaFrame className="flex flex-col w-full bg-background border-2 border-foreground relative">
                                             <AfyaDiscovery locale={requestedLocale} />
+                                        </MediaFrame>
+                                        {block.alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8 max-w-xl mx-auto">{block.alt}</figcaption>}
+                                    </div>
+                                );
+                            case 'intelie-dual-persona':
+                                return (
+                                    <div key={index} className="my-12 w-full">
+                                        <MediaFrame className="flex flex-col w-full bg-background border-2 border-foreground relative">
+                                            <IntelieDualPersona locale={requestedLocale} />
                                         </MediaFrame>
                                         {block.alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8 max-w-xl mx-auto">{block.alt}</figcaption>}
                                     </div>
