@@ -8,8 +8,8 @@ const MiroFrame = ({ title, children, className = "" }: { title: string, childre
 );
 
 const SmallPostIt = ({ children, colorClass, className = "" }: { children: React.ReactNode, colorClass: string, className?: string }) => (
-  <div className={`${colorClass} p-3 md:p-4 shadow-sm text-sm text-foreground/90 font-medium leading-relaxed ${className}`}>
-    {children}
+  <div className={`${colorClass} p-3 md:p-4 shadow-md text-xs md:text-sm text-foreground/90 font-medium leading-snug flex items-center justify-center text-center aspect-square w-full ${className}`}>
+    <div>{children}</div>
   </div>
 );
 
