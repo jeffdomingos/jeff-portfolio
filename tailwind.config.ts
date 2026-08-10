@@ -104,11 +104,21 @@ const config = {
 					to: {
 						height: '0'
 					}
+				},
+				'pulse-scale': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.08)' }
+				},
+				'pulse-button': {
+					'0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(220, 38, 38, 0)' },
+					'50%': { transform: 'scale(1.08)', boxShadow: '0 0 25px 8px rgba(220, 38, 38, 0.5)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'pulse-scale': 'pulse-scale 2s ease-in-out infinite',
+				'pulse-button': 'pulse-button 2s ease-in-out infinite'
 			}
 		}
 	},

@@ -17,10 +17,10 @@ export function RxProLinkPreview({
 }: RxProLinkPreviewProps) {
   return (
     <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block mt-3 overflow-hidden rounded-lg border border-neutral-200 hover:border-red-500 transition-colors bg-white shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-300 ease-out fill-mode-both"
+      href="#"
+      onClick={(e) => { e.preventDefault(); }}
+      title={url}
+      className="block mt-3 overflow-hidden rounded-lg border border-neutral-200 hover:border-red-500 transition-colors bg-white shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-300 ease-out fill-mode-both cursor-pointer"
     >
       <div className="flex">
         {imageUrl && (

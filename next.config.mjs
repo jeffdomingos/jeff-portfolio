@@ -8,6 +8,16 @@ const nextConfig = {
     async redirects() {
         return [
             {
+                source: '/:locale/cases/hp-ai-initiatives',
+                destination: '/:locale/cases/afya-ai-initiatives',
+                permanent: true,
+            },
+            {
+                source: '/cases/hp-ai-initiatives',
+                destination: '/cases/afya-ai-initiatives',
+                permanent: true,
+            },
+            {
                 source: '/hp',
                 destination: '/en/hp',
                 permanent: false,

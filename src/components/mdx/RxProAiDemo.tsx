@@ -7,6 +7,7 @@ import { RxProErrorBubble } from "./RxProErrorBubble";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Inter } from "next/font/google";
+import { useParams } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -24,53 +25,89 @@ interface Message {
   };
 }
 
-const PRESET_PROMPTS = [
-  {
-    label: "B94 vs S. boulardii",
-    query: "How does B94 compare to Saccharomyces boulardii in gastroenteritis?",
-    response: "In a comparative clinical study in pediatric rotavirus gastroenteritis, *Bifidobacterium lactis* B94 significantly reduced diarrhea duration compared to *Saccharomyces boulardii*:\n\n* **B. lactis B94 group:** 4.1 ± 1.3 days\n* **S. boulardii group:** 6.6 ± 1.7 days (p < 0.01)\n\nAdditionally, patients in the B94 group achieved normal stool consistency 2 to 3 days faster than control groups.",
-    source: "FloraNova Monograph (Erdoğan et al., 2012)",
-    linkPreview: {
-      title: "Comparative Efficacy of B. lactis B94 in Pediatric Acute Gastroenteritis",
-      description: "Clinical evaluation in pediatric rotavirus gastroenteritis.",
-      url: "https://rxpro.com.br/estudos/erdogan-2012",
-      imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=200&auto=format&fit=crop"
+const getPresets = (locale: string) => {
+  const isPt = locale === "pt";
+  return [
+    {
+      label: isPt ? "B94 vs S. boulardii" : "B94 vs S. boulardii",
+      query: isPt ? "Como o B94 se compara ao Saccharomyces boulardii na gastroenterite?" : "How does B94 compare to Saccharomyces boulardii in gastroenteritis?",
+      response: isPt
+        ? "Em um estudo clínico comparativo em gastroenterite por rotavírus pediátrico, o *Bifidobacterium lactis* B94 reduziu significativamente a duração da diarreia comparado ao *Saccharomyces boulardii*:\n\n* **Grupo B. lactis B94:** 4.1 ± 1.3 dias\n* **Grupo S. boulardii:** 6.6 ± 1.7 dias (p < 0.01)\n\nAlém disso, pacientes no grupo B94 alcançaram consistência fecal normal 2 a 3 dias mais rápido que os grupos de controle."
+        : "In a comparative clinical study in pediatric rotavirus gastroenteritis, *Bifidobacterium lactis* B94 significantly reduced diarrhea duration compared to *Saccharomyces boulardii*:\n\n* **B. lactis B94 group:** 4.1 ± 1.3 days\n* **S. boulardii group:** 6.6 ± 1.7 days (p < 0.01)\n\nAdditionally, patients in the B94 group achieved normal stool consistency 2 to 3 days faster than control groups.",
+      source: isPt ? "Bula FloraNova (Erdoğan et al., 2012)" : "FloraNova Monograph (Erdoğan et al., 2012)",
+      linkPreview: {
+        title: isPt ? "Eficácia Comparativa do B. lactis B94 na Gastroenterite Aguda Pediátrica" : "Comparative Efficacy of B. lactis B94 in Pediatric Acute Gastroenteritis",
+        description: isPt ? "Avaliação clínica em gastroenterite pediátrica por rotavírus." : "Clinical evaluation in pediatric rotavirus gastroenteritis.",
+        url: "https://rxpro.com.br/estudos/erdogan-2012",
+        imageUrl: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=200&auto=format&fit=crop"
+      },
+      followUp: isPt ? "Gostaria de explorar dados adicionais de estudos clínicos ou diretrizes de posologia?" : "Would you like to explore additional clinical trial data or dosage guidelines?"
     },
-    followUp: "Would you like to explore additional clinical trial data or dosage guidelines?"
-  },
-  {
-    label: "Dosage & Indication",
-    query: "What is the dosage and age indication for FloraNova?",
-    response: "FloraNova is indicated for patients from 4 years of age through adolescence and adulthood.\n\n**Recommended Dosage:** 1 sachet (5 × 10⁹ CFU) twice daily for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
-    source: "FloraNova Monograph (Baştürk et al., 2016)",
-    linkPreview: {
-      title: "Official Monograph: Complete Dosage, Indications, and Safety Profile",
-      description: "Official guidelines for dosage and age indications.",
-      url: "https://rxpro.com.br/bula/floranova.pdf"
+    {
+      label: isPt ? "Posologia & Indicação" : "Dosage & Indication",
+      query: isPt ? "Qual é a posologia e indicação etária para FloraNova?" : "What is the dosage and age indication for FloraNova?",
+      response: isPt
+        ? "FloraNova é indicado para pacientes a partir dos 4 anos de idade, adolescentes e adultos.\n\n**Posologia Recomendada:** 1 sachê (5 × 10⁹ UFC) duas vezes ao dia por até 4 semanas em condições como gastroenterite aguda ou Síndrome do Intestino Irritável (SII)."
+        : "FloraNova is indicated for patients from 4 years of age through adolescence and adulthood.\n\n**Recommended Dosage:** 1 sachet (5 × 10⁹ CFU) twice daily for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
+      source: isPt ? "Bula FloraNova (Baştürk et al., 2016)" : "FloraNova Monograph (Baştürk et al., 2016)",
+      linkPreview: {
+        title: isPt ? "Bula Oficial: Posologia, Indicações e Perfil de Segurança" : "Official Monograph: Complete Dosage, Indications, and Safety Profile",
+        description: isPt ? "Diretrizes oficiais para indicações de posologia e idade." : "Official guidelines for dosage and age indications.",
+        url: "https://rxpro.com.br/bula/floranova.pdf"
+      },
+      followUp: isPt ? "Avise-me se quiser mais detalhes sobre co-prescrição com antibióticos ou dados de segurança clínica!" : "Let me know if you would like more details on antibiotic co-prescription or clinical safety data!"
     },
-    followUp: "Let me know if you would like more details on antibiotic co-prescription or clinical safety data!"
-  },
-  {
-    label: "Use with Antibiotics",
-    query: "Is there clinical evidence on co-prescribing FloraNova during antibiotic therapy?",
-    response: "Yes. In a clinical trial evaluated during *H. pylori* antibiotic eradication therapy (İşlek et al., 2015), adjuvant use of *Bifidobacterium lactis* B94 + inulin significantly reduced treatment-related side effects:\n\n* **Control Group:** 63% side effect incidence\n* **Synbiotic Group:** 17% side effect incidence (p < 0.01)",
-    source: "İşlek et al., 2015",
-    linkPreview: {
-      title: "Bifidobacterium lactis B94 + Inulin in Tolerability of H. pylori Eradication Therapy",
-      description: "Clinical study regarding the reduction of antibiotic-related side effects using B94.",
-      url: "https://rxpro.com.br/estudos/islek-2015.pdf",
-    },
-    followUp: "I can provide further trial details or help request additional sample kits for your practice if needed."
-  }
-];
+    {
+      label: isPt ? "Uso com Antibióticos" : "Use with Antibiotics",
+      query: isPt ? "Existe evidência clínica sobre a co-prescrição de FloraNova durante terapia antibiótica?" : "Is there clinical evidence on co-prescribing FloraNova during antibiotic therapy?",
+      response: isPt
+        ? "Sim. Em um ensaio clínico avaliado durante a terapia de erradicação de *H. pylori* (İşlek et al., 2015), o uso adjuvante de *Bifidobacterium lactis* B94 + inulina reduziu significativamente os efeitos colaterais relacionados ao tratamento:\n\n* **Grupo Controle:** 63% de incidência de efeitos colaterais\n* **Grupo Simbiótico:** 17% de incidência de efeitos colaterais (p < 0.01)"
+        : "Yes. In a clinical trial evaluated during *H. pylori* antibiotic eradication therapy (İşlek et al., 2015), adjuvant use of *Bifidobacterium lactis* B94 + inulin significantly reduced treatment-related side effects:\n\n* **Control Group:** 63% side effect incidence\n* **Synbiotic Group:** 17% side effect incidence (p < 0.01)",
+      source: "İşlek et al., 2015",
+      linkPreview: {
+        title: isPt ? "Bifidobacterium lactis B94 + Inulina na Tolerabilidade da Terapia de H. pylori" : "Bifidobacterium lactis B94 + Inulin in Tolerability of H. pylori Eradication Therapy",
+        description: isPt ? "Estudo clínico sobre a redução de efeitos colaterais relacionados a antibióticos usando B94." : "Clinical study regarding the reduction of antibiotic-related side effects using B94.",
+        url: "https://rxpro.com.br/estudos/islek-2015.pdf",
+      },
+      followUp: isPt ? "Posso fornecer mais detalhes do estudo ou ajudar a solicitar kits de amostras adicionais para a sua clínica, se necessário." : "I can provide further trial details or help request additional sample kits for your practice if needed."
+    }
+  ];
+};
 
-function RotatingTextRing() {
+const getLocales = (locale: string) => {
+  const isPt = locale === "pt";
+  return {
+    clickHere: isPt ? "CLIQUE AQUI • CLIQUE AQUI • CLIQUE AQUI • CLIQUE AQUI • " : "CLICK HERE • CLICK HERE • CLICK HERE • CLICK HERE • ",
+    botIntro: isPt ? "Olá! Sou o Thiago, agente digital da RX PRO representando a NovaPharma. Falo com a Dra. Laura Souza?" : "Hello! I'm Thiago, a digital agent from RX PRO representing NovaPharma. Am I speaking with Dr. Laura Souza?",
+    userConfirm1: isPt ? "Sim, sou eu" : "Yes, it's me",
+    botConfirmArrival: isPt ? "Ótimo falar com você, Dra. Laura. Nosso sistema mostra que você recebeu recentemente 1 caixa de amostras de FLORANOVA (Sachês 5g). Chegou tudo certo?" : "Great to connect with you, Dr. Laura. Our system shows you recently received 1 box of samples for FLORANOVA (Sachês 5g). Did everything arrive safely?",
+    userConfirm2: isPt ? "Sim, chegou certinho!" : "Yes, it arrived safely!",
+    botOfferTopics: isPt ? "Excelente. FloraNova é um simbiótico baseado em evidências que combina *Bifidobacterium lactis* B94 e inulina para apoiar a saúde intestinal e acelerar a recuperação da mucosa durante a gastroenterite aguda.\n\nFique à vontade para fazer qualquer pergunta clínica sobre posologia, indicações ou dados de estudos, ou selecione um dos tópicos sugeridos abaixo para começar." : "Excellent. FloraNova is an evidence-backed synbiotic combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate mucosal recovery during acute gastroenteritis.\n\nFeel free to ask any clinical questions regarding dosage, indications, or trial data, or select one of the suggested topics below to get started.",
+    fallbackResponse: isPt ? (query: string) => `Para a questão sobre **"${query}"**, os dados da bula indicam eficácia clínica no manejo da microbiota intestinal e sintomas associados. Em estudos pediátricos, o simbiótico B94 demonstrou excelente tolerabilidade e redução de sintomas em 31 horas, em média.` : (query: string) => `For the question regarding **"${query}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 synbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
+    fallbackSource: isPt ? "Bula FloraNova (Estudos Clínicos)" : "FloraNova Monograph (Clinical Studies)",
+    fallbackFollowUp: isPt ? "Posso fornecer mais detalhes do estudo ou ajudar a solicitar kits de amostras adicionais para a sua clínica, se necessário." : "I can provide further trial details or help request additional sample kits for your practice if needed.",
+    assistantName: isPt ? "Afya | Assistente NovaPharma" : "Afya | NovaPharma Assistant",
+    liveDemo: isPt ? "Demo Ao Vivo" : "Live Demo",
+    statusOnline: isPt ? "Online • Assistente Médico de IA" : "Online • AI Medical Assistant",
+    reset: isPt ? "Reiniciar" : "Reset",
+    exploreTopics: isPt ? "Explorar Tópicos:" : "Explore Topics:",
+    demoNotice: isPt ? "Esta é uma demo interativa de UI sem backend ativo de LLM/RAG. Por favor, selecione um tópico em **Explorar Tópicos** acima para testar os cenários!" : "This is an interactive UI demo without an active LLM/RAG backend. Please select a topic from **Explore Topics** above to test scenarios!",
+    demoNoticeNDA: isPt ? "* Nota: O laboratório farmacêutico e os nomes dos produtos neste protótipo foram anonimizados para fins de NDA." : "* Note: The pharmaceutical laboratory and product names in this prototype have been anonymized for NDA purposes.",
+    inputPlaceholderSend: isPt ? "Clique em 'Enviar' para confirmar..." : "Click 'Send' to confirm response...",
+    inputPlaceholderDisabled: isPt ? "Digitação desabilitada na demo. Clique em um tópico acima!" : "Custom typing disabled in this demo. Click a topic above!",
+    inputPlaceholderWait: isPt ? "Aguardando resposta..." : "Waiting for response...",
+    referencePrefix: isPt ? "Referência:" : "Reference:"
+  };
+};
+
+function RotatingTextRing({ text }: { text: string }) {
   return (
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50 w-[118px] h-[118px]">
-      <svg
-        viewBox="0 0 120 120"
-        className="w-full h-full animate-[spin_8s_linear_infinite]"
-      >
+      <div className="w-full h-full animate-pulse-scale">
+        <svg
+          viewBox="0 0 120 120"
+          className="w-full h-full animate-[spin_8s_linear_infinite]"
+        >
         <path
           id="clickHereCirclePath"
           d="M 60, 60 m -46, 0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"
@@ -83,15 +120,21 @@ function RotatingTextRing() {
             textLength="289"
             lengthAdjust="spacing"
           >
-            CLICK HERE • CLICK HERE • CLICK HERE • CLICK HERE • 
+            {text}
           </textPath>
         </text>
       </svg>
+      </div>
     </div>
   );
 }
 
 export function RxProAiDemo() {
+  const params = useParams();
+  const locale = params?.locale === 'en' ? 'en' : 'pt';
+  const textStrings = getLocales(locale);
+  const presets = getPresets(locale);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
@@ -161,12 +204,12 @@ export function RxProAiDemo() {
         {
           id: "step-1-msg",
           role: "assistant",
-          content: "Hello! I'm Thiago, a digital agent from RX PRO representing NovaPharma. Am I speaking with Dr. Laura Souza?"
+          content: textStrings.botIntro
         }
       ]);
 
       setTimeout(() => {
-        typeTextIntoInput("Yes, it's me", () => {
+        typeTextIntoInput(textStrings.userConfirm1, () => {
           setCanSendStep(1);
         });
       }, 300);
@@ -181,7 +224,7 @@ export function RxProAiDemo() {
       {
         id: `user-confirm-1-${Date.now()}`,
         role: "user",
-        content: "Yes, it's me"
+        content: textStrings.userConfirm1
       }
     ]);
     setInput("");
@@ -194,12 +237,12 @@ export function RxProAiDemo() {
         {
           id: "step-2-msg",
           role: "assistant",
-          content: "Great to connect with you, Dr. Laura. Our system shows you recently received 1 box of samples for FLORANOVA (Sachês 5g). Did everything arrive safely?"
+          content: textStrings.botConfirmArrival
         }
       ]);
 
       setTimeout(() => {
-        typeTextIntoInput("Yes, it arrived safely!", () => {
+        typeTextIntoInput(textStrings.userConfirm2, () => {
           setCanSendStep(2);
         });
       }, 300);
@@ -214,7 +257,7 @@ export function RxProAiDemo() {
       {
         id: `user-confirm-2-${Date.now()}`,
         role: "user",
-        content: "Yes, it arrived safely!"
+        content: textStrings.userConfirm2
       }
     ]);
     setInput("");
@@ -227,7 +270,7 @@ export function RxProAiDemo() {
         {
           id: "step-3-msg",
           role: "assistant",
-          content: "Excellent. FloraNova is an evidence-backed synbiotic combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate mucosal recovery during acute gastroenteritis.\n\nFeel free to ask any clinical questions regarding dosage, indications, or trial data, or select one of the suggested topics below to get started."
+          content: textStrings.botOfferTopics
         }
       ]);
       setIsOnboardingComplete(true);
@@ -252,7 +295,7 @@ export function RxProAiDemo() {
     const lowerInput = queryText.toLowerCase();
 
     // Find matching preset
-    const matchedPreset = PRESET_PROMPTS.find(
+    const matchedPreset = presets.find(
       (p) => p.query.toLowerCase() === lowerInput || p.label.toLowerCase() === lowerInput
     );
 
@@ -274,10 +317,10 @@ export function RxProAiDemo() {
         botMsg = {
           id: `bot-${Date.now()}`,
           role: "assistant",
-          content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 synbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
-          source: "FloraNova Monograph (Clinical Studies)"
+          content: textStrings.fallbackResponse(queryText),
+          source: textStrings.fallbackSource
         };
-        followUpText = "I can provide further trial details or help request additional sample kits for your practice if needed.";
+        followUpText = textStrings.fallbackFollowUp;
       }
 
       setMessages((prev) => [...prev, botMsg]);
@@ -343,14 +386,14 @@ export function RxProAiDemo() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-sm text-neutral-900">Afya | NovaPharma Assistant</span>
+              <span className="font-semibold text-sm text-neutral-900">{textStrings.assistantName}</span>
               <span className="inline-flex items-center gap-1 text-[10px] bg-red-50 text-red-600 font-medium px-2 py-0.5 rounded-full border border-red-200">
-                <Sparkles className="w-3 h-3" /> Live Demo
+                <Sparkles className="w-3 h-3" /> {textStrings.liveDemo}
               </span>
             </div>
             <span className="text-xs text-neutral-500 flex items-center gap-1.5 mt-0.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Online • AI Medical Assistant
+              {textStrings.statusOnline}
             </span>
           </div>
         </div>
@@ -358,10 +401,10 @@ export function RxProAiDemo() {
         <button
           onClick={handleReset}
           className="text-xs text-neutral-500 hover:text-neutral-800 flex items-center gap-1 px-2.5 py-1.5 rounded-lg hover:bg-neutral-200 transition-colors"
-          title="Reset Prototype"
+          title={textStrings.reset}
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Reset</span>
+          <span className="hidden sm:inline">{textStrings.reset}</span>
         </button>
       </div>
 
@@ -398,11 +441,12 @@ export function RxProAiDemo() {
                       em: ({ node, ...props }) => <em className="italic" {...props} />,
                       a: ({ node, ...props }) => (
                         <a 
-                          className="font-medium underline hover:opacity-80 transition-colors" 
+                          className="font-medium underline hover:opacity-80 transition-colors cursor-pointer" 
                           style={{ color: msg.role === 'user' ? 'white' : '#ED2025' }}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          onClick={(e) => e.preventDefault()}
+                          title={props.href}
                           {...props} 
+                          href="#"
                         />
                       ),
                       blockquote: ({ node, ...props }) => (
@@ -428,7 +472,7 @@ export function RxProAiDemo() {
               {msg.source && (
                 <div className="flex items-center gap-1.5 text-[11px] mt-2 text-neutral-500 w-fit animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <FileText className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-                  <span>Reference: <strong className="text-neutral-600 font-medium">{msg.source}</strong></span>
+                  <span>{textStrings.referencePrefix} <strong className="text-neutral-600 font-medium">{msg.source}</strong></span>
                 </div>
               )}
 
@@ -453,7 +497,6 @@ export function RxProAiDemo() {
       </div>
 
       {/* Preset Action Chips */}
-      {/* Preset Action Chips */}
       <div 
         className={`px-4 py-3 bg-neutral-50 border-t border-neutral-200 transition-all duration-500 ${
           isOnboardingComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
@@ -462,10 +505,10 @@ export function RxProAiDemo() {
       >
         <div className="flex items-center gap-1 mb-2">
           <Sparkles className="w-3 h-3 text-red-500" />
-          <span className="text-xs text-neutral-500 font-medium">Explore Topics:</span>
+          <span className="text-xs text-neutral-500 font-medium">{textStrings.exploreTopics}</span>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {PRESET_PROMPTS.map((p, index) => (
+          {presets.map((p, index) => (
             <button
               key={`preset-${index}`}
               onClick={() => handleSend(p.query)}
@@ -484,7 +527,15 @@ export function RxProAiDemo() {
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-2">
               <Info className="w-4 h-4 text-amber-600 shrink-0" />
-              <span>This is an interactive UI demo without an active LLM/RAG backend. Please select a topic from <strong>Explore Topics</strong> above to test scenarios!</span>
+              <span>
+                <ReactMarkdown
+                  components={{
+                    strong: ({ node, ...props }) => <strong className="font-bold" {...props} />
+                  }}
+                >
+                  {textStrings.demoNotice}
+                </ReactMarkdown>
+              </span>
             </div>
             <button 
               type="button" 
@@ -498,7 +549,7 @@ export function RxProAiDemo() {
             </button>
           </div>
           <div className="pl-6 text-[11px] opacity-80 font-medium">
-            * Note: The pharmaceutical laboratory and product names in this prototype have been anonymized for NDA purposes.
+            {textStrings.demoNoticeNDA}
           </div>
         </div>
       )}
@@ -520,10 +571,10 @@ export function RxProAiDemo() {
             onFocus={handleSendClick}
             placeholder={
               canSendStep > 0
-                ? "Click 'Send' to confirm response..."
+                ? textStrings.inputPlaceholderSend
                 : isOnboardingComplete
-                ? "Custom typing disabled in this demo. Click a topic above!"
-                : "Waiting for response..."
+                ? textStrings.inputPlaceholderDisabled
+                : textStrings.inputPlaceholderWait
             }
             className={`w-full border text-sm rounded-lg pl-4 pr-9 py-2.5 focus:outline-none transition-colors ${
               canSendStep > 0
@@ -539,15 +590,17 @@ export function RxProAiDemo() {
         </div>
 
         <div className="relative flex items-center justify-center overflow-visible">
-          {canSendStep > 0 && <RotatingTextRing />}
+          {canSendStep === 1 && <RotatingTextRing text={textStrings.clickHere} />}
           <button
             type="button"
             onClick={handleSendClick}
             disabled={isThinking && canSendStep === 0}
             aria-label="Send"
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm relative z-10 shrink-0 ${
-              canSendStep > 0
-                ? "bg-red-600 hover:bg-red-700 text-white ring-2 ring-neutral-900 scale-105"
+            className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all shadow-sm relative z-10 shrink-0 ${
+              canSendStep === 1
+                ? "bg-red-600 hover:bg-red-700 text-white animate-pulse-button"
+                : canSendStep > 1
+                ? "bg-red-600 hover:bg-red-700 text-white scale-105"
                 : isOnboardingComplete
                 ? "bg-neutral-200 text-neutral-500 hover:bg-neutral-300"
                 : "bg-red-600 opacity-60 text-white cursor-not-allowed"
