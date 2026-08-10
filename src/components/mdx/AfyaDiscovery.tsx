@@ -13,11 +13,7 @@ const SmallPostIt = ({ children, colorClass, className = "" }: { children: React
   </div>
 );
 
-const SquarePostIt = ({ text, colorClass }: { text: string, colorClass: string }) => (
-  <div className={`w-28 h-28 md:w-32 md:h-32 p-3 ${colorClass} shadow-md flex items-center justify-center text-center text-xs font-bold text-foreground leading-snug mx-auto`}>
-    {text}
-  </div>
-);
+
 
 export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
   const isPt = locale === 'pt';
@@ -79,26 +75,43 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
 
         {/* Frame 2: Flow Architecture */}
         <MiroFrame title={isPt ? "Arquitetura do Fluxo" : "Flow Architecture"}>
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 w-full pt-2">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 w-full py-6 relative z-10">
              
-             <SquarePostIt text={isPt ? "Amostra Entregue" : "Sample Delivered"} colorClass="bg-[#FEF08A]" />
+             {/* Node 1 */}
+             <div className="px-5 py-3 bg-white border-2 border-foreground/20 rounded-full shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+               {isPt ? "Amostra Entregue" : "Sample Delivered"}
+             </div>
              
-             <div className="hidden lg:block text-foreground/40 font-light text-xl">→</div>
-             <div className="block lg:hidden text-foreground/40 font-light text-xl">↓</div>
+             {/* Arrow */}
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
              
-             <SquarePostIt text={isPt ? "Disparo WhatsApp" : "WhatsApp Trigger"} colorClass="bg-[#BFDBFE]" />
+             {/* Node 2 */}
+             <div className="px-5 py-3 bg-[#BFDBFE] border-2 border-blue-300 rounded-lg shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+               {isPt ? "Disparo WhatsApp" : "WhatsApp Trigger"}
+             </div>
              
-             <div className="hidden lg:block text-foreground/40 font-light text-xl">→</div>
-             <div className="block lg:hidden text-foreground/40 font-light text-xl">↓</div>
+             {/* Arrow */}
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
              
-             <SquarePostIt text="NLU / LLM Intent" colorClass="bg-[#E0E7FF]" />
+             {/* Node 3 */}
+             <div className="px-5 py-3 bg-[#E0E7FF] border-2 border-indigo-300 rounded-lg shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+               NLU / LLM Intent
+             </div>
              
-             <div className="hidden lg:block text-foreground/40 font-light text-xl">→</div>
-             <div className="block lg:hidden text-foreground/40 font-light text-xl">↓</div>
+             {/* Arrow */}
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
              
-             <div className="flex flex-row lg:flex-col gap-4 lg:gap-6 justify-center">
-               <SquarePostIt text={isPt ? "Sucesso / Tracking" : "Success / Tracking"} colorClass="bg-[#D1FAE5]" />
-               <SquarePostIt text={isPt ? "Suporte (RAG)" : "Support (RAG)"} colorClass="bg-[#FEF3C7]" />
+             {/* Node 4 Split */}
+             <div className="flex flex-col gap-3 justify-center">
+               <div className="px-5 py-2.5 bg-[#D1FAE5] border-2 border-emerald-300 rounded-lg shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
+                 {isPt ? "Sucesso / Tracking" : "Success / Tracking"}
+               </div>
+               <div className="px-5 py-2.5 bg-[#FEF3C7] border-2 border-amber-300 rounded-lg shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
+                 {isPt ? "Suporte (RAG)" : "Support (RAG)"}
+               </div>
              </div>
 
           </div>
