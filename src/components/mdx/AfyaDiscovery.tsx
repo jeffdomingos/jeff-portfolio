@@ -1,9 +1,8 @@
 import React from 'react';
 
-export function AfyaDiscovery() {
+export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
   return (
     <div className="w-full bg-neutral-100 p-2 md:p-4 relative">
-      <div className="absolute top-0 left-0 text-[10px] md:text-xs font-mono text-foreground/50 tracking-widest uppercase">Discovery Canvas / Estratégia</div>
       
       {/* Title */}
       <div className="mt-6 mb-8 text-center max-w-2xl mx-auto">
@@ -37,7 +36,9 @@ export function AfyaDiscovery() {
 
         {/* Escolha do MVP */}
         <div className="bg-[#BBF7D0] p-5 shadow-md flex flex-col gap-4 relative">
-           <div className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">Selected MVP</div>
+           <div className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">
+             {locale === 'pt' ? 'MVP Selecionado' : 'Selected MVP'}
+           </div>
            <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-2">Pharma Partner (MVP)</div>
            <div className="text-sm text-foreground/90 leading-relaxed font-medium space-y-3">
              <p><strong>Público:</strong> Médicos não-visitados c/ opt-in.</p>
@@ -49,18 +50,24 @@ export function AfyaDiscovery() {
       </div>
 
       {/* Arquitetura Conceitual */}
-      <div className="mt-8 bg-white p-6 border border-foreground/20">
-        <div className="text-xs font-bold text-foreground/60 uppercase mb-6 text-center tracking-widest">Fluxo de Integração (WhatsApp / RX Pro)</div>
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-3 text-xs md:text-sm font-bold text-foreground w-full">
-           <div className="px-4 py-2 bg-white border border-foreground/20 text-center w-full lg:w-auto">Amostra Entregue</div>
+      <div className="mt-8 p-6">
+        <div className="text-xs font-bold text-foreground/60 uppercase mb-8 text-center tracking-widest">Fluxo de Integração (WhatsApp / RX Pro)</div>
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-6 text-xs font-bold text-foreground w-full">
+           <div className="w-32 h-32 p-4 bg-[#FEF08A] shadow-md flex items-center justify-center text-center">Amostra Entregue</div>
            <div className="hidden lg:block text-foreground/40">→</div>
-           <div className="px-4 py-2 bg-white border border-foreground/20 text-center w-full lg:w-auto">Disparo WhatsApp</div>
+           <div className="block lg:hidden text-foreground/40">↓</div>
+           
+           <div className="w-32 h-32 p-4 bg-[#BFDBFE] shadow-md flex items-center justify-center text-center">Disparo WhatsApp</div>
            <div className="hidden lg:block text-foreground/40">→</div>
-           <div className="px-4 py-2 bg-[#E0E7FF] border border-foreground/20 text-center w-full lg:w-auto">NLU / LLM Intent</div>
+           <div className="block lg:hidden text-foreground/40">↓</div>
+           
+           <div className="w-32 h-32 p-4 bg-[#E0E7FF] shadow-md flex items-center justify-center text-center">NLU / LLM Intent</div>
            <div className="hidden lg:block text-foreground/40">→</div>
-           <div className="flex flex-col gap-2 w-full lg:w-auto">
-             <div className="px-3 py-2 bg-[#D1FAE5] border border-foreground/20 text-center">Sucesso / Tracking</div>
-             <div className="px-3 py-2 bg-[#FEF3C7] border border-foreground/20 text-center">Suporte (RAG)</div>
+           <div className="block lg:hidden text-foreground/40">↓</div>
+           
+           <div className="flex flex-row lg:flex-col gap-4 lg:gap-6 w-full lg:w-auto justify-center">
+             <div className="w-32 h-32 p-4 bg-[#D1FAE5] shadow-md flex items-center justify-center text-center mx-auto">Sucesso / Tracking</div>
+             <div className="w-32 h-32 p-4 bg-[#FEF3C7] shadow-md flex items-center justify-center text-center mx-auto">Suporte (RAG)</div>
            </div>
         </div>
       </div>
