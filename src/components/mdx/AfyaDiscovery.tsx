@@ -74,61 +74,74 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
         </MiroFrame>
 
         {/* Frame 2: Flow Architecture */}
-        <MiroFrame title={isPt ? "Arquitetura do Fluxo" : "Flow Architecture"}>
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 w-full py-6 relative z-10">
-             
-             {/* Node 1 */}
-             <div className="px-5 py-3 bg-white border-2 border-foreground/20 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
-               {isPt ? "Amostra Entregue" : "Sample Delivered"}
-             </div>
-             
-             {/* Arrow */}
-             <div className="hidden lg:flex items-center w-8 text-foreground/40"><div className="h-0.5 bg-foreground/40 w-full"></div><div className="w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-4 border-l-foreground/40 -ml-1"></div></div>
-             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40"><div className="w-0.5 bg-foreground/40 h-full"></div><div className="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-foreground/40 -mt-1"></div></div>
-             
-             {/* Node 2 */}
-             <div className="px-5 py-3 bg-[#BFDBFE] border-2 border-blue-300 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
-               {isPt ? "Disparo WhatsApp" : "WhatsApp Trigger"}
-             </div>
-             
-             {/* Arrow */}
-             <div className="hidden lg:flex items-center w-8 text-foreground/40"><div className="h-0.5 bg-foreground/40 w-full"></div><div className="w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-4 border-l-foreground/40 -ml-1"></div></div>
-             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40"><div className="w-0.5 bg-foreground/40 h-full"></div><div className="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-foreground/40 -mt-1"></div></div>
-             
-             {/* Node 3 */}
-             <div className="px-5 py-3 bg-[#E0E7FF] border-2 border-indigo-300 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
-               NLU / LLM Intent
-             </div>
-             
-             {/* Arrow to Split */}
-             <div className="hidden lg:flex items-center w-8 text-foreground/40 relative">
-               <div className="h-0.5 bg-foreground/40 w-full"></div>
-               {/* Fork lines */}
-               <div className="absolute right-0 top-1/2 -translate-y-[26px] w-0.5 h-[52px] bg-foreground/40"></div>
-               <div className="absolute right-0 -translate-y-[26px] w-2 h-0.5 bg-foreground/40"></div>
-               <div className="absolute right-0 translate-y-[24px] w-2 h-0.5 bg-foreground/40"></div>
-               <div className="absolute -right-[6px] -translate-y-[29px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/40"></div>
-               <div className="absolute -right-[6px] translate-y-[21px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/40"></div>
-             </div>
-             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40 relative">
-               <div className="w-0.5 bg-foreground/40 h-full"></div>
-               <div className="absolute bottom-0 left-1/2 -translate-x-[75px] h-0.5 w-[150px] bg-foreground/40"></div>
-               <div className="absolute bottom-0 left-1/2 -translate-x-[75px] w-0.5 h-2 bg-foreground/40"></div>
-               <div className="absolute bottom-0 left-1/2 translate-x-[74px] w-0.5 h-2 bg-foreground/40"></div>
-               <div className="absolute bottom-[-6px] left-1/2 -translate-x-[78px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/40"></div>
-               <div className="absolute bottom-[-6px] left-1/2 translate-x-[71px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/40"></div>
-             </div>
-             
-             {/* Node 4 Split */}
-             <div className="flex flex-row lg:flex-col gap-3 justify-center z-10 relative">
-               <div className="px-5 py-2.5 bg-[#D1FAE5] border-2 border-emerald-300 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
-                 {isPt ? "Sucesso / Tracking" : "Success / Tracking"}
-               </div>
-               <div className="px-5 py-2.5 bg-[#FEF3C7] border-2 border-amber-300 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
-                 {isPt ? "Suporte (RAG)" : "Support (RAG)"}
-               </div>
-             </div>
+        <MiroFrame title={isPt ? "Arquitetura do Fluxo (Ilustrativa)" : "Flow Architecture (Illustrative)"}>
+          <div className="w-full overflow-x-auto py-4 hidden-scrollbar flex justify-center">
+            <div className="w-[620px] h-[280px] min-w-[620px] relative bg-white/30 border border-foreground/10 rounded-md overflow-hidden">
+              
+              {/* Complex SVG Connectors */}
+              <svg className="absolute inset-0 w-full h-full" stroke="currentColor" fill="none" strokeWidth="1.5">
+                 {/* Entry */}
+                 <path d="M 60 52 L 170 102" className="text-foreground/20" />
+                 <path d="M 60 152 L 170 102" className="text-foreground/20" />
+                 <path d="M 170 102 L 270 102" className="text-foreground/40" />
+                 
+                 {/* Router Splits */}
+                 <path d="M 270 102 L 350 62" className="text-foreground/30" />
+                 <path d="M 270 102 L 350 142" className="text-foreground/30" />
+                 <path d="M 270 102 L 350 222" className="text-foreground/30" />
+                 
+                 {/* Processing */}
+                 <path d="M 350 62 L 450 62" className="text-blue-300" />
+                 <path d="M 350 142 L 450 142" className="text-indigo-300" />
+                 <path d="M 350 222 L 450 222" className="text-amber-300" />
+                 
+                 {/* DB connect */}
+                 <path d="M 350 142 L 350 182" className="text-foreground/20 border-dashed" strokeDasharray="3 3" />
+                 
+                 {/* Merging to Response */}
+                 <path d="M 450 62 L 540 102" className="text-blue-300" />
+                 <path d="M 450 142 L 540 102" className="text-indigo-300" />
+                 
+                 {/* Logging */}
+                 <path d="M 540 102 L 540 222" className="text-foreground/20 border-dashed" strokeDasharray="2 2" />
+                 <path d="M 450 222 L 540 222" className="text-foreground/20 border-dashed" strokeDasharray="2 2" />
+                 
+                 {/* External feedback loop noise */}
+                 <path d="M 540 222 L 540 260 L 170 260 L 170 102" className="text-foreground/10" strokeDasharray="4 4" />
+              </svg>
 
+              {/* Helper for Nodes */}
+              {(() => {
+                const MiniNode = ({ text, color = "bg-white", border = "border-foreground/20", textColor = "text-foreground", top, left }: any) => (
+                  <div className={`absolute px-2 py-1.5 ${color} border ${border} rounded-[4px] shadow-sm text-[8px] font-bold ${textColor} text-center w-20 leading-tight z-10`} style={{ top: `${top}px`, left: `${left}px` }}>
+                    {text}
+                  </div>
+                );
+                return (
+                  <>
+                    <MiniNode text="WhatsApp API" color="bg-emerald-50" border="border-emerald-200" top={40} left={20} />
+                    <MiniNode text="Web Widget" top={140} left={20} />
+                    
+                    <MiniNode text="API Gateway" color="bg-neutral-800" border="border-neutral-900" textColor="text-white" top={90} left={130} />
+                    
+                    <MiniNode text="NLU Router" color="bg-indigo-50" border="border-indigo-200" top={90} left={230} />
+                    
+                    <MiniNode text="FAQ Cache" top={50} left={310} />
+                    <MiniNode text="Vector DB" color="bg-neutral-100" top={170} left={310} />
+                    <MiniNode text="RAG Search" color="bg-blue-50" border="border-blue-200" top={130} left={310} />
+                    <MiniNode text="Intent Fallback" color="bg-amber-50" border="border-amber-200" top={210} left={310} />
+                    
+                    <MiniNode text="Match Found" top={50} left={410} />
+                    <MiniNode text="LLM Generator" color="bg-purple-50" border="border-purple-200" top={130} left={410} />
+                    <MiniNode text="Human Agent" top={210} left={410} />
+                    
+                    <MiniNode text="Response Build" color="bg-emerald-50" border="border-emerald-200" top={90} left={500} />
+                    <MiniNode text="CSAT / Logs" color="bg-neutral-100" top={210} left={500} />
+                  </>
+                )
+              })()}
+
+            </div>
           </div>
         </MiroFrame>
 
