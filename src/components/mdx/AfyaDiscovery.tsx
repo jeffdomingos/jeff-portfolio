@@ -78,38 +78,53 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
           <div className="flex flex-col lg:flex-row items-center justify-center gap-2 lg:gap-4 w-full py-6 relative z-10">
              
              {/* Node 1 */}
-             <div className="px-5 py-3 bg-white border-2 border-foreground/20 rounded-full shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+             <div className="px-5 py-3 bg-white border-2 border-foreground/20 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
                {isPt ? "Amostra Entregue" : "Sample Delivered"}
              </div>
              
              {/* Arrow */}
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+             <div className="hidden lg:flex items-center w-8 text-foreground/40"><div className="h-0.5 bg-foreground/40 w-full"></div><div className="w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-4 border-l-foreground/40 -ml-1"></div></div>
+             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40"><div className="w-0.5 bg-foreground/40 h-full"></div><div className="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-foreground/40 -mt-1"></div></div>
              
              {/* Node 2 */}
-             <div className="px-5 py-3 bg-[#BFDBFE] border-2 border-blue-300 rounded-lg shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+             <div className="px-5 py-3 bg-[#BFDBFE] border-2 border-blue-300 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
                {isPt ? "Disparo WhatsApp" : "WhatsApp Trigger"}
              </div>
              
              {/* Arrow */}
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+             <div className="hidden lg:flex items-center w-8 text-foreground/40"><div className="h-0.5 bg-foreground/40 w-full"></div><div className="w-0 h-0 border-t-4 border-t-transparent border-b-4 border-b-transparent border-l-4 border-l-foreground/40 -ml-1"></div></div>
+             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40"><div className="w-0.5 bg-foreground/40 h-full"></div><div className="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-foreground/40 -mt-1"></div></div>
              
              {/* Node 3 */}
-             <div className="px-5 py-3 bg-[#E0E7FF] border-2 border-indigo-300 rounded-lg shadow-sm text-xs font-bold text-foreground text-center min-w-[140px]">
+             <div className="px-5 py-3 bg-[#E0E7FF] border-2 border-indigo-300 rounded-md shadow-sm text-xs font-bold text-foreground text-center min-w-[140px] z-10 relative">
                NLU / LLM Intent
              </div>
              
-             {/* Arrow */}
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+             {/* Arrow to Split */}
+             <div className="hidden lg:flex items-center w-8 text-foreground/40 relative">
+               <div className="h-0.5 bg-foreground/40 w-full"></div>
+               {/* Fork lines */}
+               <div className="absolute right-0 top-1/2 -translate-y-[26px] w-0.5 h-[52px] bg-foreground/40"></div>
+               <div className="absolute right-0 -translate-y-[26px] w-2 h-0.5 bg-foreground/40"></div>
+               <div className="absolute right-0 translate-y-[24px] w-2 h-0.5 bg-foreground/40"></div>
+               <div className="absolute -right-[6px] -translate-y-[29px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/40"></div>
+               <div className="absolute -right-[6px] translate-y-[21px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/40"></div>
+             </div>
+             <div className="flex lg:hidden flex-col items-center h-8 text-foreground/40 relative">
+               <div className="w-0.5 bg-foreground/40 h-full"></div>
+               <div className="absolute bottom-0 left-1/2 -translate-x-[75px] h-0.5 w-[150px] bg-foreground/40"></div>
+               <div className="absolute bottom-0 left-1/2 -translate-x-[75px] w-0.5 h-2 bg-foreground/40"></div>
+               <div className="absolute bottom-0 left-1/2 translate-x-[74px] w-0.5 h-2 bg-foreground/40"></div>
+               <div className="absolute bottom-[-6px] left-1/2 -translate-x-[78px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/40"></div>
+               <div className="absolute bottom-[-6px] left-1/2 translate-x-[71px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/40"></div>
+             </div>
              
              {/* Node 4 Split */}
-             <div className="flex flex-col gap-3 justify-center">
-               <div className="px-5 py-2.5 bg-[#D1FAE5] border-2 border-emerald-300 rounded-lg shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
+             <div className="flex flex-row lg:flex-col gap-3 justify-center z-10 relative">
+               <div className="px-5 py-2.5 bg-[#D1FAE5] border-2 border-emerald-300 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
                  {isPt ? "Sucesso / Tracking" : "Success / Tracking"}
                </div>
-               <div className="px-5 py-2.5 bg-[#FEF3C7] border-2 border-amber-300 rounded-lg shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
+               <div className="px-5 py-2.5 bg-[#FEF3C7] border-2 border-amber-300 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[140px]">
                  {isPt ? "Suporte (RAG)" : "Support (RAG)"}
                </div>
              </div>
