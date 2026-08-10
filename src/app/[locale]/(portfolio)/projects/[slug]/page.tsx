@@ -150,7 +150,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                 return <BeforeAfter key={index} before={block.before} after={block.after} />;
                             case 'rxpro-demo':
                                 return (
-                                    <div key={index} className="my-10 w-full">
+                                    <div key={index} id="interactive-demo" className="my-10 w-full scroll-mt-24">
                                         <MediaFrame className="flex w-full border-2 border-foreground bg-background p-4 md:p-8">
                                             <RxProAiDemo />
                                         </MediaFrame>
