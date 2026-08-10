@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MiroFrame = ({ title, children, className = "" }: { title?: string, children: React.ReactNode, className?: string }) => (
-  <div className={`relative border-2 border-foreground/10 bg-white/40 p-4 md:p-6 mt-4 ${className}`}>
+  <div className={`relative border-2 border-foreground/10 bg-white p-4 md:p-6 mt-4 ${className}`}>
     {title && <div className="absolute -top-[10px] left-4 bg-neutral-100 px-2 text-[11px] font-bold text-foreground/60 uppercase tracking-wider">{title}</div>}
     {children}
   </div>
@@ -82,7 +82,7 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
         {/* Frame 2: Flow Architecture */}
         <MiroFrame>
           <div className="w-full overflow-x-auto py-4 hidden-scrollbar flex justify-center">
-            <div className="w-[620px] h-[280px] min-w-[620px] relative bg-white/30 border border-foreground/10 rounded-md overflow-hidden">
+            <div className="w-[620px] h-[280px] min-w-[620px] relative bg-white border border-foreground/10 rounded-md overflow-hidden">
               
               {/* Complex SVG Connectors */}
               <svg className="absolute inset-0 w-full h-full" stroke="currentColor" fill="none" strokeWidth="1.5">
