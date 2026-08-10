@@ -202,7 +202,8 @@ export function InteractiveListSection({ items, locale }: InteractiveListSection
         return items.filter(item => {
             const matchesSearch = !searchQuery || 
                 item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                (item.summary && item.summary.toLowerCase().includes(searchQuery.toLowerCase()));
+                (item.summary && item.summary.toLowerCase().includes(searchQuery.toLowerCase())) ||
+                (item.context && item.context.toLowerCase().includes(searchQuery.toLowerCase()));
             
             const matchesTags = selectedTags.length === 0 || 
                 selectedTags.every(tag => item.tags && item.tags.includes(tag));
