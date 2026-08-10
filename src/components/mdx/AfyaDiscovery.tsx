@@ -28,16 +28,7 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
       style={{ backgroundImage: 'radial-gradient(#d4d4d8 1px, transparent 1px)', backgroundSize: '20px 20px' }}
     >
       
-      {/* Canvas Main Title */}
-      <div className="mb-10 text-left max-w-2xl bg-white p-6 shadow-sm border border-foreground/5 inline-block">
-         <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2 tracking-tight">Assistente / Representante IA</h3>
-         <p className="text-sm text-foreground/70 font-light">
-           {isPt 
-             ? "Revolucionar a relação da indústria farmacêutica com médicos, criando conexões ágeis e eficazes via WhatsApp, com ou sem a intermediação do representante."
-             : "Revolutionize the pharmaceutical industry's relationship with doctors, creating agile and effective connections via WhatsApp, with or without representative intermediation."
-           }
-         </p>
-      </div>
+
 
       <div className="flex flex-col gap-8">
         
