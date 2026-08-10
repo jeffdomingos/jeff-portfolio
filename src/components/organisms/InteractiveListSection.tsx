@@ -225,19 +225,21 @@ export function InteractiveListSection({ items, locale }: InteractiveListSection
             {/* Toolbar: Search and Filters */}
             <div className="flex flex-col md:flex-row gap-4 mb-8 w-full items-start md:items-center justify-between px-fluid-xs md:px-fluid-m">
                 <div className="relative w-full md:w-1/3 shrink-0">
-                    <input 
-                        type="text" 
-                        placeholder={locale === 'pt' ? 'Buscar...' : 'Search...'}
-                        value={searchQuery}
-                        onChange={(e) => {
-                            setSearchQuery(e.target.value);
-                            setDisplayCount(10);
-                        }}
-                        className="w-full bg-transparent border-b border-foreground/20 focus:border-foreground py-2 pl-8 pr-4 outline-none transition-colors type-body text-step--1 text-foreground placeholder:text-foreground/40"
-                    />
-                    <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
+                    <div className="relative w-full border-2 border-foreground bg-background focus-within:bg-foreground/5 transition-colors">
+                        <input 
+                            type="text" 
+                            placeholder={locale === 'pt' ? 'BUSCAR...' : 'SEARCH...'}
+                            value={searchQuery}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                                setDisplayCount(10);
+                            }}
+                            className="w-full bg-transparent py-2.5 pl-10 pr-4 outline-none type-label uppercase tracking-wider text-xs font-semibold text-foreground placeholder:text-foreground/50"
+                        />
+                        <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </div>
                 </div>
                 
                 {uniqueTags.length > 0 && (
