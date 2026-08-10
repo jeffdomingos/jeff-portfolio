@@ -180,6 +180,8 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                         )}
                                     </div>
                                 );
+                            case 'afya-discovery':
+                                return <AfyaDiscovery key={index} />;
                             default:
                                 return null;
                         }
