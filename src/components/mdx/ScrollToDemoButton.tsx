@@ -15,7 +15,7 @@ export const ScrollToDemoButton = ({ label }: ScrollToDemoButtonProps) => {
         const el = document.getElementById('interactive-demo');
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }}
-      className="w-full py-3.5 px-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-semibold text-xs md:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 no-underline group cursor-pointer"
+      className="w-full py-3.5 px-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-semibold text-xs md:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-colors duration-200 no-underline group cursor-pointer"
     >
       <span>{label}</span>
       <svg className="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
