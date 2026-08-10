@@ -1,6 +1,6 @@
 import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo } from "@/components/mdx";
+import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo, AfyaDiscovery } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
 import { ScrollToDemoButton } from "@/components/mdx/ScrollToDemoButton";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
@@ -23,6 +23,7 @@ const mdxComponents = {
     Footnotes,
     FootnoteItem,
     BeforeAfter,
+    AfyaDiscovery,
     h2: (props: any) => {
         const textContent = React.Children.toArray(props.children).join('');
         return <h2 id={slugify(textContent)} className="text-3xl font-bold mt-12 mb-6 text-foreground scroll-mt-32" {...props} />;
