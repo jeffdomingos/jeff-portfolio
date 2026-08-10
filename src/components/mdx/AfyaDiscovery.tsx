@@ -14,7 +14,7 @@ export function AfyaDiscovery() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
         
         {/* Personas & Premissas */}
-        <div className="bg-[#FEF08A] p-5 border border-foreground/20 flex flex-col gap-4">
+        <div className="bg-[#FEF08A] p-5 shadow-md flex flex-col gap-4">
            <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-2">Personas & Premissas</div>
            <div className="text-sm text-foreground/90 leading-relaxed font-medium space-y-3">
              <p><strong>Reps:</strong> Têm pouco tempo, muitos apps e alta pressão por performance. Qualquer solução precisa ser leve e integrada.</p>
@@ -24,7 +24,7 @@ export function AfyaDiscovery() {
         </div>
 
         {/* Estratégia de Entrada */}
-        <div className="bg-[#BFDBFE] p-5 border border-foreground/20 flex flex-col gap-4">
+        <div className="bg-[#BFDBFE] p-5 shadow-md flex flex-col gap-4">
            <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-2">Desafios Explorados</div>
            <ul className="text-sm text-foreground/90 space-y-3 list-disc pl-4 font-medium">
              <li>Treinamento de reps via Role Play IA</li>
@@ -36,7 +36,7 @@ export function AfyaDiscovery() {
         </div>
 
         {/* Escolha do MVP */}
-        <div className="bg-[#BBF7D0] p-5 border border-foreground/20 flex flex-col gap-4 relative">
+        <div className="bg-[#BBF7D0] p-5 shadow-md flex flex-col gap-4 relative">
            <div className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest z-10">Selected MVP</div>
            <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-2">Pharma Partner (MVP)</div>
            <div className="text-sm text-foreground/90 leading-relaxed font-medium space-y-3">
