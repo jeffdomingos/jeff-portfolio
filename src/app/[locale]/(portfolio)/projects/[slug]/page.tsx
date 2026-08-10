@@ -160,8 +160,9 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                             case 'metrics-dashboard':
                                 return <AnimatedMetricsDashboard key={index} metrics={block.metrics} />;
                             case 'summary-card':
+                                const hasDemo = blocks.some(b => b.type === 'rxpro-demo');
                                 return (
-                                    <div key={index} className="my-12 w-full">
+                                    <div key={index} className="my-12 w-full flex flex-col gap-4">
                                         <MediaFrame className="flex flex-col w-full p-8 md:p-10 bg-background border-2 border-foreground relative">
                                             <div className="prose prose-lg md:prose-xl prose-headings:font-bold prose-headings:mt-0 max-w-none text-left">
                                                 <MDXRemote source={block.content || ''} components={mdxComponents} />
@@ -172,6 +173,17 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                                 </div>
                                             )}
                                         </MediaFrame>
+                                        {hasDemo && (
+                                            <a
+                                                href="#interactive-demo"
+                                                className="w-full py-3.5 px-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-semibold text-xs md:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 no-underline group cursor-pointer"
+                                            >
+                                                <span>{requestedLocale === 'pt' ? 'Pular para protótipo Interativo' : 'Skip to Interactive Prototype'}</span>
+                                                <svg className="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                                                </svg>
+                                            </a>
+                                        )}
                                     </div>
                                 );
                             default:
