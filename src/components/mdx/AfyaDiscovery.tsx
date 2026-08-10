@@ -7,8 +7,8 @@ const MiroFrame = ({ title, children, className = "" }: { title: string, childre
   </div>
 );
 
-const PostIt = ({ children, colorClass, className = "" }: { children: React.ReactNode, colorClass: string, className?: string }) => (
-  <div className={`${colorClass} p-4 md:p-5 shadow-md flex flex-col gap-3 text-sm text-foreground/90 font-medium leading-relaxed ${className}`}>
+const SmallPostIt = ({ children, colorClass, className = "" }: { children: React.ReactNode, colorClass: string, className?: string }) => (
+  <div className={`${colorClass} p-3 md:p-4 shadow-sm text-sm text-foreground/90 font-medium leading-relaxed ${className}`}>
     {children}
   </div>
 );
@@ -28,41 +28,46 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
       style={{ backgroundImage: 'radial-gradient(#d4d4d8 1px, transparent 1px)', backgroundSize: '20px 20px' }}
     >
       
-
-
       <div className="flex flex-col gap-8">
         
         {/* Frame 1: Discovery Phase */}
         <MiroFrame title={isPt ? "Fase de Discovery" : "Discovery Phase"}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <PostIt colorClass="bg-[#FEF08A]">
-              <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-1 mb-1">Personas & Premissas</div>
-              <p><strong>Reps:</strong> Têm pouco tempo, muitos apps e alta pressão. Solução precisa ser leve e integrada.</p>
-              <p><strong>Médicos:</strong> Agilidade, conteúdo técnico e autonomia.</p>
-              <p><strong>Contexto:</strong> A indústria já investe em CRM. Não queremos competir, mas potencializar.</p>
-            </PostIt>
+            {/* Column 1: Personas & Premissas */}
+            <div>
+              <h4 className="text-xs font-bold text-foreground uppercase mb-4 tracking-widest text-foreground/70">Personas & Premissas</h4>
+              <div className="flex flex-col gap-3">
+                 <SmallPostIt colorClass="bg-[#FEF08A]"><strong>Reps:</strong> Têm pouco tempo, muitos apps e alta pressão. Solução precisa ser leve e integrada.</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#FEF08A]"><strong>Médicos:</strong> Agilidade, conteúdo técnico e autonomia.</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#FEF08A]"><strong>Contexto:</strong> A indústria já investe em CRM. Não queremos competir, mas potencializar.</SmallPostIt>
+              </div>
+            </div>
 
-            <PostIt colorClass="bg-[#BFDBFE]">
-              <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-1 mb-1">Desafios Explorados</div>
-              <ul className="list-disc pl-4 space-y-2">
-                <li>Treinamento via Role Play IA</li>
-                <li>Avaliação de transcrições reais</li>
-                <li>Assistente Científico 24/7</li>
-                <li>Pílulas diárias gamificadas</li>
-                <li>Micro-engajamento contextual</li>
-              </ul>
-            </PostIt>
+            {/* Column 2: Desafios Explorados */}
+            <div>
+              <h4 className="text-xs font-bold text-foreground uppercase mb-4 tracking-widest text-foreground/70">Desafios Explorados</h4>
+              <div className="flex flex-col gap-3">
+                 <SmallPostIt colorClass="bg-[#BFDBFE]">Treinamento via Role Play IA</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BFDBFE]">Avaliação de transcrições reais</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BFDBFE]">Assistente Científico 24/7</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BFDBFE]">Pílulas diárias gamificadas</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BFDBFE]">Micro-engajamento contextual</SmallPostIt>
+              </div>
+            </div>
 
-            <PostIt colorClass="bg-[#BBF7D0]" className="relative">
-              <div className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-sm">
+            {/* Column 3: Pharma Partner (MVP) */}
+            <div className="relative">
+              <div className="absolute -top-3 -right-3 bg-[#EF4444] text-white text-[10px] font-bold px-2 py-1 uppercase tracking-widest shadow-sm z-10">
                 {isPt ? 'MVP Selecionado' : 'Selected MVP'}
               </div>
-              <div className="text-xs font-bold text-foreground uppercase border-b border-foreground/10 pb-1 mb-1">Pharma Partner (MVP)</div>
-              <p><strong>Público:</strong> Médicos não-visitados c/ opt-in.</p>
-              <p><strong>Canal:</strong> Disparo via WhatsApp Meta + Webhook RX Pro.</p>
-              <p><strong>Objetivo:</strong> Simular um representante real, tirando dúvidas científicas via RAG de forma autônoma.</p>
-            </PostIt>
+              <h4 className="text-xs font-bold text-foreground uppercase mb-4 tracking-widest text-foreground/70">Pharma Partner (MVP)</h4>
+              <div className="flex flex-col gap-3">
+                 <SmallPostIt colorClass="bg-[#BBF7D0]"><strong>Público:</strong> Médicos não-visitados c/ opt-in.</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BBF7D0]"><strong>Canal:</strong> Disparo via WhatsApp Meta + Webhook RX Pro.</SmallPostIt>
+                 <SmallPostIt colorClass="bg-[#BBF7D0]"><strong>Objetivo:</strong> Simular um representante real, tirando dúvidas científicas via RAG de forma autônoma.</SmallPostIt>
+              </div>
+            </div>
 
           </div>
         </MiroFrame>
