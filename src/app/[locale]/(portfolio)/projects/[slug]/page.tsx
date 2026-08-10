@@ -181,7 +181,14 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                     </div>
                                 );
                             case 'afya-discovery':
-                                return <AfyaDiscovery key={index} />;
+                                return (
+                                    <div key={index} className="my-12 w-full">
+                                        <MediaFrame className="flex flex-col w-full bg-background border-2 border-foreground relative">
+                                            <AfyaDiscovery />
+                                        </MediaFrame>
+                                        {block.alt && <figcaption className="text-center !text-[11px] text-foreground type-label !mt-8 max-w-xl mx-auto">{block.alt}</figcaption>}
+                                    </div>
+                                );
                             default:
                                 return null;
                         }
