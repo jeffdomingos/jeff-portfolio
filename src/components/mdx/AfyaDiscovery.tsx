@@ -81,73 +81,83 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
 
         {/* Frame 2: Flow Architecture */}
         <MiroFrame>
-          <div className="w-full overflow-x-auto py-4 hidden-scrollbar flex justify-center">
-            <div className="w-[620px] h-[280px] min-w-[620px] relative bg-white border border-foreground/10 rounded-md overflow-hidden">
-              
-              {/* Complex SVG Connectors */}
-              <svg className="absolute inset-0 w-full h-full" stroke="currentColor" fill="none" strokeWidth="1.5">
-                 {/* Entry */}
-                 <path d="M 60 52 L 170 102" className="text-foreground/20" />
-                 <path d="M 60 152 L 170 102" className="text-foreground/20" />
-                 <path d="M 170 102 L 270 102" className="text-foreground/40" />
-                 
-                 {/* Router Splits */}
-                 <path d="M 270 102 L 350 62" className="text-foreground/30" />
-                 <path d="M 270 102 L 350 142" className="text-foreground/30" />
-                 <path d="M 270 102 L 350 222" className="text-foreground/30" />
-                 
-                 {/* Processing */}
-                 <path d="M 350 62 L 450 62" className="text-blue-300" />
-                 <path d="M 350 142 L 450 142" className="text-indigo-300" />
-                 <path d="M 350 222 L 450 222" className="text-amber-300" />
-                 
-                 {/* DB connect */}
-                 <path d="M 350 142 L 350 182" className="text-foreground/20 border-dashed" strokeDasharray="3 3" />
-                 
-                 {/* Merging to Response */}
-                 <path d="M 450 62 L 540 102" className="text-blue-300" />
-                 <path d="M 450 142 L 540 102" className="text-indigo-300" />
-                 
-                 {/* Logging / Escalate */}
-                 <path d="M 540 102 L 540 222" className="text-foreground/20 border-dashed" strokeDasharray="2 2" />
-                 <path d="M 450 222 L 540 222" className="text-foreground/20 border-dashed" strokeDasharray="2 2" />
-                 
-                 {/* External feedback loop noise */}
-                 <path d="M 540 222 L 540 260 L 170 260 L 170 102" className="text-foreground/10" strokeDasharray="4 4" />
-              </svg>
+          <div className="w-full overflow-x-auto py-6 hidden-scrollbar flex justify-center">
+             <div className="flex flex-col lg:flex-row items-center justify-center w-full min-w-[700px] gap-2 lg:gap-3">
+               
+               {/* Step 1 */}
+               <div className="px-4 py-3 bg-emerald-50 border-2 border-emerald-200 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px] z-10">
+                 Ação Médico (WhatsApp)
+               </div>
+               
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden my-2 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="4" x2="12" y2="20"></line><polyline points="6 14 12 20 18 14"></polyline></svg>
+               
+               {/* Step 2 */}
+               <div className="px-4 py-3 bg-amber-50 border-2 border-amber-200 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px] z-10">
+                 Gatilho (RX Pro)
+               </div>
 
-              {/* Helper for Nodes */}
-              {(() => {
-                const MiniNode = ({ text, color = "bg-white", border = "border-foreground/20", textColor = "text-foreground", top, left }: any) => (
-                  <div className={`absolute px-2 py-1.5 ${color} border ${border} rounded-[4px] shadow-sm text-[8px] font-bold ${textColor} text-center w-20 leading-tight z-10 flex items-center justify-center`} style={{ top: `${top}px`, left: `${left}px`, minHeight: "24px" }}>
-                    {text}
-                  </div>
-                );
-                return (
-                  <>
-                    <MiniNode text="Ação Médico (WhatsApp)" color="bg-emerald-50" border="border-emerald-200" top={40} left={20} />
-                    <MiniNode text="Ação Rep (RX Pro / Web)" color="bg-amber-50" border="border-amber-200" top={140} left={20} />
-                    
-                    <MiniNode text="API Gateway" color="bg-neutral-800" border="border-neutral-900" textColor="text-white" top={90} left={130} />
-                    
-                    <MiniNode text="NLU Router" color="bg-indigo-50" border="border-indigo-200" top={90} left={230} />
-                    
-                    <MiniNode text="FAQ Cache" top={50} left={310} />
-                    <MiniNode text="Vector DB" color="bg-neutral-100" top={170} left={310} />
-                    <MiniNode text="RAG Search" color="bg-blue-50" border="border-blue-200" top={130} left={310} />
-                    <MiniNode text="Handoff p/ Rep" color="bg-rose-50" border="border-rose-200" top={210} left={310} />
-                    
-                    <MiniNode text="Match Found" top={50} left={410} />
-                    <MiniNode text="LLM Generator" color="bg-purple-50" border="border-purple-200" top={130} left={410} />
-                    <MiniNode text="Análise Humana" color="bg-rose-50" border="border-rose-200" top={210} left={410} />
-                    
-                    <MiniNode text="Resposta Médico" color="bg-emerald-50" border="border-emerald-200" top={90} left={500} />
-                    <MiniNode text="Follow-up Rep" color="bg-amber-50" border="border-amber-200" top={210} left={500} />
-                  </>
-                )
-              })()}
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 hidden lg:block shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground/30 block lg:hidden my-2 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="4" x2="12" y2="20"></line><polyline points="6 14 12 20 18 14"></polyline></svg>
+               
+               {/* Step 3 */}
+               <div className="px-4 py-3 bg-indigo-50 border-2 border-indigo-200 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px] z-10">
+                 NLU Router
+               </div>
+               
+               {/* Fork Line Desktop */}
+               <div className="hidden lg:flex items-center w-8 text-foreground/30 relative">
+                 <div className="h-0.5 bg-foreground/30 w-full"></div>
+                 <div className="absolute right-0 top-1/2 -translate-y-[26px] w-0.5 h-[52px] bg-foreground/30"></div>
+                 <div className="absolute right-0 -translate-y-[26px] w-2 h-0.5 bg-foreground/30"></div>
+                 <div className="absolute right-0 translate-y-[24px] w-2 h-0.5 bg-foreground/30"></div>
+                 <div className="absolute -right-[6px] -translate-y-[29px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/30"></div>
+                 <div className="absolute -right-[6px] translate-y-[21px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/30"></div>
+               </div>
+               {/* Fork Line Mobile */}
+               <div className="flex lg:hidden flex-col items-center h-8 text-foreground/30 relative">
+                 <div className="w-0.5 bg-foreground/30 h-full"></div>
+                 <div className="absolute bottom-0 left-1/2 -translate-x-[70px] h-0.5 w-[140px] bg-foreground/30"></div>
+                 <div className="absolute bottom-0 left-1/2 -translate-x-[70px] w-0.5 h-2 bg-foreground/30"></div>
+                 <div className="absolute bottom-0 left-1/2 translate-x-[69px] w-0.5 h-2 bg-foreground/30"></div>
+                 <div className="absolute bottom-[-6px] left-1/2 -translate-x-[73px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/30"></div>
+                 <div className="absolute bottom-[-6px] left-1/2 translate-x-[66px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/30"></div>
+               </div>
+               
+               {/* Step 4 Split */}
+               <div className="flex flex-row lg:flex-col gap-4 justify-center z-10 relative">
+                 <div className="px-4 py-3 bg-blue-50 border-2 border-blue-200 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px]">
+                   RAG + LLM Resposta
+                 </div>
+                 <div className="px-4 py-3 bg-rose-50 border-2 border-rose-200 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px]">
+                   Transbordo Humano
+                 </div>
+               </div>
+               
+               {/* Merge Line Desktop */}
+               <div className="hidden lg:flex items-center w-8 text-foreground/30 relative">
+                 <div className="absolute left-0 top-1/2 -translate-y-[26px] w-2 h-0.5 bg-foreground/30"></div>
+                 <div className="absolute left-0 translate-y-[24px] w-2 h-0.5 bg-foreground/30"></div>
+                 <div className="absolute left-2 top-1/2 -translate-y-[26px] w-0.5 h-[52px] bg-foreground/30"></div>
+                 <div className="absolute left-2 top-1/2 -translate-y-[1px] w-6 h-0.5 bg-foreground/30"></div>
+                 <div className="absolute right-[-6px] top-1/2 -translate-y-[5px] w-0 h-0 border-t-3 border-t-transparent border-b-3 border-b-transparent border-l-4 border-l-foreground/30"></div>
+               </div>
+               
+               {/* Merge Line Mobile */}
+               <div className="flex lg:hidden flex-col items-center h-8 text-foreground/30 relative">
+                 <div className="absolute top-0 left-1/2 -translate-x-[70px] w-0.5 h-2 bg-foreground/30"></div>
+                 <div className="absolute top-0 left-1/2 translate-x-[69px] w-0.5 h-2 bg-foreground/30"></div>
+                 <div className="absolute top-2 left-1/2 -translate-x-[70px] h-0.5 w-[140px] bg-foreground/30"></div>
+                 <div className="absolute top-2 left-1/2 -translate-x-[1px] w-0.5 h-6 bg-foreground/30"></div>
+                 <div className="absolute bottom-[-6px] left-1/2 -translate-x-[4px] w-0 h-0 border-l-3 border-l-transparent border-r-3 border-r-transparent border-t-4 border-t-foreground/30"></div>
+               </div>
 
-            </div>
+               {/* Step 5 */}
+               <div className="px-4 py-3 bg-neutral-100 border-2 border-foreground/20 rounded-md shadow-sm text-[11px] font-bold text-foreground text-center min-w-[120px] z-10">
+                 CSAT & Logs
+               </div>
+
+             </div>
           </div>
         </MiroFrame>
 
