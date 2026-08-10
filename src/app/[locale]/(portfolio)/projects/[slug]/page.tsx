@@ -2,6 +2,7 @@ import { getProject, getAllProjects } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem, BeforeAfter, AnimatedMetricsDashboard, MediaFrame, RxProAiDemo } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
+import { ScrollToDemoButton } from "@/components/mdx/ScrollToDemoButton";
 import { TableOfContents } from "@/components/organisms/TableOfContents";
 import { generateTOC } from "@/utils/toc";
 import React from 'react';
@@ -174,15 +175,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                                             )}
                                         </MediaFrame>
                                         {hasDemo && (
-                                            <a
-                                                href="#interactive-demo"
-                                                className="w-full py-3.5 px-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-semibold text-xs md:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-200 no-underline group cursor-pointer"
-                                            >
-                                                <span>{requestedLocale === 'pt' ? 'Pular para protótipo Interativo' : 'Skip to Interactive Prototype'}</span>
-                                                <svg className="w-4 h-4 transition-transform group-hover:translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                                                </svg>
-                                            </a>
+                                            <ScrollToDemoButton label={requestedLocale === 'pt' ? 'Pular para protótipo Interativo' : 'Skip to Interactive Prototype'} />
                                         )}
                                     </div>
                                 );
