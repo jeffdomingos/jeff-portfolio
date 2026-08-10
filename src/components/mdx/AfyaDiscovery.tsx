@@ -85,7 +85,7 @@ export function AfyaDiscovery({ locale = 'pt' }: { locale?: string }) {
 
         {/* Frame 2: Flow Architecture */}
         <MiroFrame>
-          <div className="w-full relative overflow-hidden h-[160px] md:h-[200px]">
+          <div className="w-full relative h-[160px] md:h-[200px]">
              {/* Absolute centering trick to prevent flexbox cropping on overflow */}
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center justify-center w-[740px] gap-2 transform scale-[0.40] sm:scale-[0.55] md:scale-[0.75] lg:scale-[0.85] xl:scale-100">
                
