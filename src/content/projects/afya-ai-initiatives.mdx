@@ -149,6 +149,30 @@ pt:
 
     - type: text
       content: |
+        ## Fluxo de Integração e Descoberta de Produto (Discovery)
+
+        Durante as sessões de discovery para o MVP com parceiros farmacêuticos, estruturamos toda a estratégia de contato ativo via WhatsApp para médicos não-visitados. Abaixo, o fluxograma arquitetural desenhado para balizar a integração entre o RX PRO, a infraestrutura da Meta e a camada de IA (NLU/LLM):
+
+        ```mermaid
+        flowchart TD
+            A([Pedido Atualizado: Entregue]) --> B{Celular Válido?}
+            B -->|SIM| C[Disparo via Meta/WhatsApp]
+            C --> D[(Segment / Telemetria)]
+            
+            G([Usuário Responde]) --> H[Webhook RX Pro]
+            H --> I{NLU / LLM Layer Identifica Intenção}
+            
+            I -->|Entregue, sem dúvidas| J[Tracking de Sucesso]
+            I -->|Não chegou| K[Aciona Logística]
+            I -->|Dúvidas do Produto| N[Fluxo de Suporte via RAG]
+            I -->|Opt-out| L[Remoção da Base]
+            
+            K --> O[Abre Ticket de Suporte]
+            N --> P[Consulta Base Científica]
+        ```
+
+    - type: text
+      content: |
         ## Resultados e Visão de Impacto
 
         * **O Resultado Escalável:** Entregamos um protótipo de chatbot robusto com integração Web e WhatsApp sustentado por RAG, garantindo citações sólidas das fontes originais, salvaguardas anti-alucinação e dados reais (capturados organicamente).
@@ -288,6 +312,30 @@ en:
             </tbody>
           </table>
         </div>
+
+    - type: text
+      content: |
+        ## Integration Flow & Product Discovery
+
+        During the discovery sessions for the MVP with pharmaceutical partners, we structured the entire active outreach strategy via WhatsApp for unvisited physicians. Below is the architectural flowchart designed to guide the integration between RX PRO, Meta's infrastructure, and the AI layer (NLU/LLM):
+
+        ```mermaid
+        flowchart TD
+            A([Order Updated: Delivered]) --> B{Valid Mobile?}
+            B -->|YES| C[Trigger via Meta/WhatsApp]
+            C --> D[(Segment / Telemetry)]
+            
+            G([User Replies]) --> H[RX Pro Webhook]
+            H --> I{NLU / LLM Layer Identifies Intent}
+            
+            I -->|Delivered, no questions| J[Success Tracking]
+            I -->|Not delivered| K[Trigger Logistics]
+            I -->|Product Questions| N[Support Flow via RAG]
+            I -->|Opt-out| L[Remove from Base]
+            
+            K --> O[Open Support Ticket]
+            N --> P[Query Scientific Base]
+        ```
 
     - type: text
       content: |
