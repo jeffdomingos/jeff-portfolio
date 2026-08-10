@@ -29,7 +29,7 @@ const PRESET_PROMPTS = [
     label: "B94 vs S. boulardii",
     query: "How does B94 compare to Saccharomyces boulardii in gastroenteritis?",
     response: "In a comparative clinical study in pediatric rotavirus gastroenteritis, *Bifidobacterium lactis* B94 significantly reduced diarrhea duration compared to *Saccharomyces boulardii*:\n\n* **B. lactis B94 group:** 4.1 ± 1.3 days\n* **S. boulardii group:** 6.6 ± 1.7 days (p < 0.01)\n\nAdditionally, patients in the B94 group achieved normal stool consistency 2 to 3 days faster than control groups.",
-    source: "Floracol Monograph (Erdoğan et al., 2012)",
+    source: "FloraNova Monograph (Erdoğan et al., 2012)",
     linkPreview: {
       title: "Comparative Efficacy of B. lactis B94 in Pediatric Acute Gastroenteritis",
       description: "Clinical evaluation in pediatric rotavirus gastroenteritis.",
@@ -40,19 +40,19 @@ const PRESET_PROMPTS = [
   },
   {
     label: "Dosage & Indication",
-    query: "What is the dosage and age indication for Floracol?",
-    response: "Floracol is indicated for patients from 4 years of age through adolescence and adulthood.\n\n**Recommended Dosage:** 1 sachet (5 × 10⁹ CFU) twice daily for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
-    source: "Floracol Monograph (Baştürk et al., 2016)",
+    query: "What is the dosage and age indication for FloraNova?",
+    response: "FloraNova is indicated for patients from 4 years of age through adolescence and adulthood.\n\n**Recommended Dosage:** 1 sachet (5 × 10⁹ CFU) twice daily for up to 4 weeks in conditions such as acute gastroenteritis or Irritable Bowel Syndrome (IBS).",
+    source: "FloraNova Monograph (Baştürk et al., 2016)",
     linkPreview: {
       title: "Official Monograph: Complete Dosage, Indications, and Safety Profile",
       description: "Official guidelines for dosage and age indications.",
-      url: "https://rxpro.com.br/bula/floracol.pdf"
+      url: "https://rxpro.com.br/bula/floranova.pdf"
     },
     followUp: "Let me know if you would like more details on antibiotic co-prescription or clinical safety data!"
   },
   {
     label: "Use with Antibiotics",
-    query: "Is there clinical evidence on co-prescribing Floracol during antibiotic therapy?",
+    query: "Is there clinical evidence on co-prescribing FloraNova during antibiotic therapy?",
     response: "Yes. In a clinical trial evaluated during *H. pylori* antibiotic eradication therapy (İşlek et al., 2015), adjuvant use of *Bifidobacterium lactis* B94 + inulin significantly reduced treatment-related side effects:\n\n* **Control Group:** 63% side effect incidence\n* **Synbiotic Group:** 17% side effect incidence (p < 0.01)",
     source: "İşlek et al., 2015",
     linkPreview: {
@@ -161,7 +161,7 @@ export function RxProAiDemo() {
         {
           id: "step-1-msg",
           role: "assistant",
-          content: "Hello! I'm Thiago, a digital agent from RX PRO representing Apsen. Am I speaking with Dr. Laura Souza?"
+          content: "Hello! I'm Thiago, a digital agent from RX PRO representing NovaPharma. Am I speaking with Dr. Laura Souza?"
         }
       ]);
 
@@ -194,7 +194,7 @@ export function RxProAiDemo() {
         {
           id: "step-2-msg",
           role: "assistant",
-          content: "Great to connect with you, Dr. Laura. Our system shows you recently received 1 box of samples for FLORACOL (Sachês 5g). Did everything arrive safely?"
+          content: "Great to connect with you, Dr. Laura. Our system shows you recently received 1 box of samples for FLORANOVA (Sachês 5g). Did everything arrive safely?"
         }
       ]);
 
@@ -227,7 +227,7 @@ export function RxProAiDemo() {
         {
           id: "step-3-msg",
           role: "assistant",
-          content: "Excellent. Floracol is an evidence-backed synbiotic combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate mucosal recovery during acute gastroenteritis.\n\nFeel free to ask any clinical questions regarding dosage, indications, or trial data, or select one of the suggested topics below to get started."
+          content: "Excellent. FloraNova is an evidence-backed synbiotic combining *Bifidobacterium lactis* B94 and inulin to support gut health and accelerate mucosal recovery during acute gastroenteritis.\n\nFeel free to ask any clinical questions regarding dosage, indications, or trial data, or select one of the suggested topics below to get started."
         }
       ]);
       setIsOnboardingComplete(true);
@@ -275,7 +275,7 @@ export function RxProAiDemo() {
           id: `bot-${Date.now()}`,
           role: "assistant",
           content: `For the question regarding **"${queryText}"**, the monograph data indicates clinical efficacy in managing intestinal microbiota and associated symptoms. In pediatric studies, the B94 synbiotic demonstrated excellent tolerability and reduction of symptoms within 31 hours on average.`,
-          source: "Floracol Monograph (Clinical Studies)"
+          source: "FloraNova Monograph (Clinical Studies)"
         };
         followUpText = "I can provide further trial details or help request additional sample kits for your practice if needed.";
       }
@@ -328,14 +328,14 @@ export function RxProAiDemo() {
   };
 
   return (
-    <div ref={containerRef} className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-visible relative ${inter.className}`}>
+    <div ref={containerRef} className={`w-full not-prose rounded-xl border border-neutral-200 bg-white shadow-xl overflow-visible relative flex flex-col h-[550px] md:h-[600px] ${inter.className}`}>
       {/* Interactive Widget Bar Header */}
       <div className="bg-neutral-50 text-neutral-800 px-4 md:px-6 py-3 flex items-center justify-between border-b border-neutral-200 rounded-t-xl">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full border border-neutral-200 bg-white flex items-center justify-center overflow-hidden shrink-0 shadow-sm p-1">
             <Image 
               src="/images/apsen-avatar.png" 
-              alt="Apsen Logo" 
+              alt="NovaPharma Logo" 
               width={40} 
               height={40} 
               className="object-contain"
@@ -343,7 +343,7 @@ export function RxProAiDemo() {
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-sm text-neutral-900">Afya | Apsen Assistant</span>
+              <span className="font-semibold text-sm text-neutral-900">Afya | NovaPharma Assistant</span>
               <span className="inline-flex items-center gap-1 text-[10px] bg-red-50 text-red-600 font-medium px-2 py-0.5 rounded-full border border-red-200">
                 <Sparkles className="w-3 h-3" /> Live Demo
               </span>
@@ -366,7 +366,7 @@ export function RxProAiDemo() {
       </div>
 
       {/* Main Chat Body */}
-      <div ref={chatContainerRef} className="p-4 md:p-6 bg-neutral-50/50 min-h-[380px] max-h-[500px] overflow-y-auto space-y-4">
+      <div ref={chatContainerRef} className="p-4 md:p-6 bg-neutral-50/50 flex-1 overflow-y-auto space-y-4">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -453,44 +453,53 @@ export function RxProAiDemo() {
       </div>
 
       {/* Preset Action Chips */}
-      {isOnboardingComplete && (
-        <div className="px-4 py-3 bg-neutral-50 border-t border-neutral-200 animate-in fade-in slide-in-from-bottom-2 duration-500">
-          <div className="flex items-center gap-1 mb-2">
-            <Sparkles className="w-3 h-3 text-red-500" />
-            <span className="text-xs text-neutral-500 font-medium">Explore Topics:</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            {PRESET_PROMPTS.map((p, index) => (
-              <button
-                key={`preset-${index}`}
-                onClick={() => handleSend(p.query)}
-                disabled={isThinking}
-                className="text-xs bg-white hover:bg-red-50 hover:border-red-300 text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded-full transition-all text-left disabled:opacity-50 shadow-sm"
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
+      {/* Preset Action Chips */}
+      <div 
+        className={`px-4 py-3 bg-neutral-50 border-t border-neutral-200 transition-all duration-500 ${
+          isOnboardingComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+        }`}
+        aria-hidden={!isOnboardingComplete}
+      >
+        <div className="flex items-center gap-1 mb-2">
+          <Sparkles className="w-3 h-3 text-red-500" />
+          <span className="text-xs text-neutral-500 font-medium">Explore Topics:</span>
         </div>
-      )}
+        <div className="flex flex-wrap items-center gap-2">
+          {PRESET_PROMPTS.map((p, index) => (
+            <button
+              key={`preset-${index}`}
+              onClick={() => handleSend(p.query)}
+              disabled={isThinking || !isOnboardingComplete}
+              className="text-xs bg-white hover:bg-red-50 hover:border-red-300 text-neutral-700 border border-neutral-300 px-3 py-1.5 rounded-full transition-all text-left disabled:opacity-50 shadow-sm"
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Demo Notice Banner */}
       {showDemoNotice && (
-        <div className="bg-amber-50 border-t border-amber-200 px-4 py-2.5 text-xs text-amber-900 flex items-center justify-between animate-in fade-in duration-200">
-          <div className="flex items-center gap-2">
-            <Info className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>This is an interactive UI demo without an active LLM/RAG backend. Please select a topic from <strong>Explore Topics</strong> above to test scenarios!</span>
+        <div className="bg-amber-50 border-t border-amber-200 px-4 py-2.5 text-xs text-amber-900 flex flex-col items-start gap-1 animate-in fade-in duration-200">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-2">
+              <Info className="w-4 h-4 text-amber-600 shrink-0" />
+              <span>This is an interactive UI demo without an active LLM/RAG backend. Please select a topic from <strong>Explore Topics</strong> above to test scenarios!</span>
+            </div>
+            <button 
+              type="button" 
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDemoNotice(false);
+              }} 
+              className="text-amber-700 hover:text-amber-950 font-bold px-2 py-0.5 shrink-0"
+            >
+              ✕
+            </button>
           </div>
-          <button 
-            type="button" 
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowDemoNotice(false);
-            }} 
-            className="text-amber-700 hover:text-amber-950 font-bold px-2 py-0.5 shrink-0"
-          >
-            ✕
-          </button>
+          <div className="pl-6 text-[11px] opacity-80 font-medium">
+            * Note: The pharmaceutical laboratory and product names in this prototype have been anonymized for NDA purposes.
+          </div>
         </div>
       )}
 
