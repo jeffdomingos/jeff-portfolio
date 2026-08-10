@@ -13,7 +13,10 @@ export const ScrollToDemoButton = ({ label }: ScrollToDemoButtonProps) => {
       onClick={(e) => {
         e.preventDefault();
         const el = document.getElementById('interactive-demo');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 100; // 100px offset for header
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
       }}
       className="w-full py-3.5 px-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground font-semibold text-xs md:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-colors duration-200 no-underline group cursor-pointer"
     >
