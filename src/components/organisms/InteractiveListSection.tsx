@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { useTransitionRouter } from "next-view-transitions";
+import { useRouter } from "next/navigation";
 import { TracingItem } from "@/components/atoms/TracingBorders";
 
 export interface ListItem {
@@ -33,7 +33,7 @@ function InteractiveRow({
     onMouseEnter: () => void, 
     onMouseLeave: () => void 
 }) {
-    const router = useTransitionRouter();
+    const router = useRouter();
     
     // Row hover trigger
     const isRowHovered = hoverState.startsWith("hover");

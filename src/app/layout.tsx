@@ -27,7 +27,7 @@ export const metadata = {
 import { PostHogProvider } from "@/components/PostHogProvider";
 import PostHogPageView from "@/components/PostHogPageView";
 import { Suspense } from "react";
-import { ViewTransitions } from "next-view-transitions";
+
 import { FramerMotionProvider } from "@/components/FramerMotionProvider";
 
 export default function RootLayout({
@@ -36,7 +36,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <ViewTransitions>
+        <>
             <html lang="en" suppressHydrationWarning className={`${barlow.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable}`}>
                 <head>
                     <script dangerouslySetInnerHTML={{ __html: `if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; } window.scrollTo(0, 0); window.addEventListener('DOMContentLoaded', function() { window.scrollTo(0, 0); }); window.addEventListener('load', function() { window.scrollTo(0, 0); });` }} />
@@ -52,6 +52,6 @@ export default function RootLayout({
                     </PostHogProvider>
                 </body>
             </html>
-        </ViewTransitions>
+        </>
     );
 }

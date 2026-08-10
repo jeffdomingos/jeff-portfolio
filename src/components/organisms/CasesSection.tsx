@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { m, useInView } from "framer-motion";
 import { CaseItem } from "@/content/schema";
 import { BELOW_FOLD_IMAGE, IMAGE_SIZES } from "@/lib/performance/image-hints";
@@ -13,7 +13,7 @@ interface CasesSectionProps {
 
 import { useRef, useState, useEffect } from "react";
 import { useLenis } from "lenis/react";
-import { useTransitionRouter } from "next-view-transitions";
+import { useRouter } from "next/navigation";
 
 import { TracingGrid, TracingItem } from "@/components/atoms/TracingBorders";
 
@@ -24,7 +24,7 @@ function CaseRow({ item, index, locale, hoverState, onMouseEnter, onMouseLeave }
     const isEven = index % 2 === 0;
     const indexStr = (index + 1).toString().padStart(2, "0");
     
-    const router = useTransitionRouter();
+    const router = useRouter();
     const ref = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const lenis = useLenis();

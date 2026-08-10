@@ -2,7 +2,7 @@ import { getJournalPost, getAllJournalPosts } from "@/utils/content";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { MDXImage, Callout, Quote, Metric, VideoEmbed, FigmaEmbed, ProductTrioDiagram, Ref, Footnotes, FootnoteItem } from "@/components/mdx";
 import { LinksBlock } from "@/components/mdx/LinksBlock";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { DMCommentForm } from "@/components/organisms/DMCommentForm";
 import { Linkedin, Instagram } from "lucide-react";
 import { AuthorBio } from "@/components/organisms/AuthorBio";

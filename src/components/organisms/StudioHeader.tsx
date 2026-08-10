@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { GlobalHeader } from "@/content/schema";
 import { LanguageSwitch } from "@/components/atoms/LanguageSwitch";
 import { usePathname } from "next/navigation";
