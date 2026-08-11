@@ -69,9 +69,11 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                 />
 
                 {subheadline && (
-                    <p className={`hidden md:block text-step-0 type-body text-foreground max-w-[700px] text-left transition-all duration-1000 transform ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
-                        {subheadline}
-                    </p>
+                    <div className={`hidden md:block transition-all duration-1000 transform z-20 relative ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
+                        <p className={`text-step-0 type-body text-foreground max-w-[700px] text-left bg-white/80 backdrop-blur-md py-2 px-4 -ml-4 rounded-xl`}>
+                            {subheadline}
+                        </p>
+                    </div>
                 )}
 
                 <div className={`w-full transition-all duration-1000 transform ${showButtons ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} flex flex-col items-start`}>
