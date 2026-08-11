@@ -71,7 +71,7 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                 {subheadline && (
                     <div className={`hidden md:block transition-all duration-1000 transform z-20 relative ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
                         <p className={`text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2`}>
-                            <span className="bg-white/80 backdrop-blur-md py-1 px-2 box-decoration-clone rounded">
+                            <span className="bg-white py-1 px-2 box-decoration-clone">
                                 {subheadline}
                             </span>
                         </p>
