@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { useLenis } from 'lenis/react'
 import { AnimatedTypingText } from "@/components/atoms/AnimatedTypingText"
-import { useMotionValue } from "framer-motion"
+import { useMotionValue, motion } from "framer-motion"
 import { IconAnimatedLogo } from "./IconAnimatedLogo"
 
 export function CompactHeroContent({ headline, subheadline }: { headline: string, subheadline?: string }) {
@@ -13,6 +13,7 @@ export function CompactHeroContent({ headline, subheadline }: { headline: string
     const mouseY = useMotionValue(0);
     const [isIdle, setIsIdle] = useState(true);
     const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const [showSubheadline, setShowSubheadline] = useState(false);
 
     useEffect(() => {
         const handleGlobalMouseMove = (e: MouseEvent) => {
@@ -74,17 +75,23 @@ export function CompactHeroContent({ headline, subheadline }: { headline: string
                         targets={typingTargets}
                         delay={0}
                         speed={30}
+                        onFinished={() => setShowSubheadline(true)}
                         className="text-step-4 md:text-step-5 type-display text-foreground w-full text-balance drop-shadow-sm z-40 relative text-left mb-3 md:mb-4"
                     />
 
-                    {/* Subheadline immediately visible without background badge */}
+                    {/* Subheadline animated reveal */}
                     {subheadline && (
-                        <div className="w-full z-40 relative">
-                            <p className="text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2">
-                                <span className="bg-white py-1 px-2 box-decoration-clone">
-                                    {subheadline}
-                                </span>
-                            </p>
+                        <div className="w-full z-40 relative mt-2 md:mt-3">
+                            <div 
+                                className={`transition-all ${showSubheadline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                                style={{ transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                            >
+                                <p className="text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2">
+                                    <span className="bg-white py-1 px-2 box-decoration-clone">
+                                        {subheadline}
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                     )}
                 </div>

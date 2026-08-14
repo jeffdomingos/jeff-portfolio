@@ -7,6 +7,34 @@ import { TracingItem } from "@/components/atoms/TracingBorders";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BoldReserver } from "@/components/atoms/BoldReserver";
+import { 
+    Activity, Zap, Target, TrendingUp, 
+    ClockArrowDown, FileCode, BotMessageSquare,
+    Banknote, Sparkles, ChartNoAxesCombined, Footprints, UserSearch 
+} from "lucide-react";
+
+const getIconForTitle = (title: string, index: number) => {
+    const t = title.toLowerCase();
+    
+    // Afya
+    if (t.includes("-75% cycle time") || t.includes("-75% no tempo")) return ClockArrowDown;
+    if (t.includes("80% react code") || t.includes("80% de código react")) return FileCode;
+    if (t.includes("zero hallucinations") || t.includes("0 alucinações")) return BotMessageSquare;
+    
+    // Voltz
+    if (t.includes("48h")) return Zap;
+    if (t.includes("1.3m") || t.includes("1,3 milhão")) return Banknote;
+    if (t.includes("-30h")) return Sparkles;
+    
+    // Ciclic
+    if (t.includes("17% sales") || t.includes("17% em conversão")) return ChartNoAxesCombined;
+    if (t.includes("2-week") || t.includes("sprint de 2")) return Footprints;
+    if (t.includes("5 prototypes") || t.includes("5 protótipos")) return UserSearch;
+
+    // Fallbacks
+    const fallbacks = [Activity, Target, TrendingUp];
+    return fallbacks[index % fallbacks.length];
+};
 
 export interface ListItem {
     id: string;
@@ -27,22 +55,28 @@ interface InteractiveListSectionProps {
 function InteractiveRow({ 
     item, 
     index, 
+    baseDelay,
     hoverState, 
     onMouseEnter, 
     onMouseLeave,
     isFadeItem,
-    locale
+    locale,
+    mounted = true
 }: { 
-    item: ListItem, 
-    index: number, 
-    hoverState: string, 
-    onMouseEnter: () => void, 
-    onMouseLeave: () => void,
-    isFadeItem?: boolean,
-    locale?: string
+    item: ListItem; 
+    index: number; 
+    baseDelay?: number;
+    hoverState: string; 
+    onMouseEnter: () => void; 
+    onMouseLeave: () => void; 
+    isFadeItem?: boolean; 
+    locale?: string; 
+    mounted?: boolean 
 }) {
     const router = useRouter();
     
+    const staggerBase = baseDelay !== undefined ? baseDelay : index * 120;
+
     // Row hover trigger
     const isRowHovered = hoverState.startsWith("hover");
     const isRowExiting = hoverState.startsWith("exit");
@@ -71,6 +105,7 @@ function InteractiveRow({
             }}
             className={`${!isFadeItem ? 'group' : ''} group/row w-full relative flex flex-col items-stretch -mt-[1px] first:mt-0`}
         >
+
             {/* 100vw Animated Borders */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-0 border-t border-foreground origin-right group-hover/row:origin-left scale-x-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] delay-100 group-hover/row:scale-x-100 group-hover/row:delay-0 z-[80] pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100vw] h-0 border-b border-foreground origin-right group-hover/row:origin-left scale-x-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] delay-0 group-hover/row:scale-x-100 group-hover/row:delay-100 z-[80] pointer-events-none" />
@@ -78,21 +113,27 @@ function InteractiveRow({
             <div className="relative z-10 flex flex-col md:flex-row md:items-stretch justify-between cursor-pointer transition-colors duration-500 rounded-xl md:rounded-none flex-1">
                 <div className="flex flex-row items-stretch w-full md:w-2/3 lg:w-[40%]">
                     {item.thumbnailImage && (
-                        <div className="relative w-24 md:w-[200px] shrink-0 overflow-hidden bg-muted hidden md:block my-[2px]">
+                        <div 
+                            className={`relative w-24 md:w-[200px] shrink-0 overflow-hidden bg-muted hidden md:block my-[2px] transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                            style={{ transitionDelay: `${staggerBase + 100}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                        >
                             <div className="absolute inset-0 z-10 bg-halftone-mask pointer-events-none opacity-100" />
                             <Image 
                                 src={item.thumbnailImage} 
                                 alt={item.title} 
                                 fill 
-                                className={`object-cover transition-transform duration-700 ease-[0.21,0.47,0.32,0.98] grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 ${isHovered ? 'scale-110' : 'scale-100'}`}
+                                className={`object-cover transition-all duration-700 ease-[0.21,0.47,0.32,0.98] grayscale contrast-125 group-hover:grayscale-0 group-hover:contrast-100 ${isHovered ? 'scale-110' : 'scale-100'}`}
                                 sizes="(max-width: 768px) 128px, 200px"
                             />
                         </div>
                     )}
                     
-                    <div className="flex flex-col justify-center gap-1 py-4 md:py-6 px-4 md:px-6">
+                    <div 
+                        className={`flex flex-col justify-center gap-1 py-4 md:py-6 px-4 md:px-6 transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                        style={{ transitionDelay: `${staggerBase + 200}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                    >
                         {item.context && (
-                            <span className="block type-label font-heading text-step--1 md:text-[0.875rem] opacity-80 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <span className="block type-label font-heading text-step-0 md:text-[0.9375rem] opacity-80 font-semibold uppercase tracking-widest shrink-0 transition-opacity duration-300 group-hover:opacity-100">
                                 {item.context}
                                 {item.tags && (() => {
                                     const year = item.tags.find((t: string) => /^\d{4}$/.test(String(t)));
@@ -106,18 +147,12 @@ function InteractiveRow({
                     </div>
                 </div>
                 
-                <div className="relative flex flex-col w-full lg:w-[45%] h-full">
+                <div 
+                    className={`relative flex flex-col w-full lg:w-[45%] h-full transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                    style={{ transitionDelay: `${staggerBase + 300}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                >
                     {item.summary && item.summary.includes(' • ') ? (
                         <>
-                            {/* BACKGROUND BORDERS */}
-                            <div className="absolute inset-0 py-2 lg:py-6 px-4 md:px-6 pointer-events-none">
-                                <div className="grid grid-cols-1 md:grid-cols-3 w-full h-full">
-                                    {item.summary.split(' • ').map((_, i, arr) => (
-                                        <div key={`border-${i}`} className={`h-full border-foreground/10 border-l ${i === arr.length - 1 ? 'md:border-r' : ''}`} />
-                                    ))}
-                                </div>
-                            </div>
-
                             {/* GHOST GRID */}
                             <div className="invisible pointer-events-none flex flex-col justify-center h-full w-full py-2 lg:py-6 px-4 md:px-6">
                                 <div className="grid grid-cols-1 md:grid-cols-3 w-full">
@@ -130,7 +165,15 @@ function InteractiveRow({
                                                 <div className={`${colClass} md:row-start-1 flex flex-col px-3 md:px-4 h-full`}>
                                                     <div className="w-fit max-w-full mr-auto text-left flex flex-col h-full">
                                                         <div className="grow" />
-                                                        <span className="type-label font-heading text-step--1 md:text-[0.875rem] font-semibold uppercase tracking-widest shrink-0">{title.trim()}</span>
+                                                        {(() => {
+                                                            const KpiIcon = getIconForTitle(title, i);
+                                                            return (
+                                                                <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest shrink-0 flex items-center gap-2">
+                                                                    <KpiIcon className="w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
+                                                                    {title.trim()}
+                                                                </span>
+                                                            );
+                                                        })()}
                                                         <div className="grow" />
                                                     </div>
                                                 </div>
@@ -159,9 +202,15 @@ function InteractiveRow({
                                                 <div className={`${colClass} md:row-start-1 flex flex-col h-full px-3 md:px-4`}>
                                                     <div className="flex flex-col h-full shrink-0 w-fit max-w-full mr-auto text-left">
                                                         <div className="transition-all duration-500 ease-[0.21,0.47,0.32,0.98] grow" />
-                                                        <span className="type-label font-heading text-step--1 md:text-[0.875rem] font-semibold uppercase tracking-widest text-foreground/50 transition-colors duration-500 lg:group-hover:text-foreground shrink-0">
-                                                            {title.trim()}
-                                                        </span>
+                                                        {(() => {
+                                                            const KpiIcon = getIconForTitle(title, i);
+                                                            return (
+                                                                <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest text-foreground/50 transition-colors duration-500 lg:group-hover:text-foreground shrink-0 flex items-center gap-2">
+                                                                    <KpiIcon className="w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
+                                                                    {title.trim()}
+                                                                </span>
+                                                            );
+                                                        })()}
                                                         <div className="transition-all duration-500 ease-[0.21,0.47,0.32,0.98] grow" />
                                                     </div>
                                                 </div>
@@ -197,7 +246,10 @@ function InteractiveRow({
                     )}
                 </div>
 
-                <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-1/3 lg:w-[15%] justify-start shrink-0 py-4 md:py-6 px-4 md:px-6">
+                <div 
+                    className={`flex flex-col md:flex-row md:items-center gap-4 w-full md:w-1/3 lg:w-[15%] justify-start shrink-0 py-4 md:py-6 px-4 md:px-6 transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                    style={{ transitionDelay: `${staggerBase + 400}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                >
                     {item.tags && item.tags.length > 0 && (() => {
                         const filteredTags = item.tags.filter((tag: string) => !/^\d{4}$/.test(String(tag)));
                         if (filteredTags.length === 0) return null;
@@ -245,6 +297,17 @@ function InteractiveRow({
 }
 
 export function InteractiveListSection({ items, locale, hideFilters = false }: InteractiveListSectionProps) {
+    const [mounted, setMounted] = useState(false);
+    const [isInteractive, setIsInteractive] = useState(false);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMounted(true);
+            setTimeout(() => setIsInteractive(true), 2500);
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, []);
+
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [displayCount, setDisplayCount] = useState(10);
@@ -340,8 +403,12 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
         setDisplayCount(10);
     };
 
+    const maxItems = hideFilters ? Math.min(visibleItems.length, 4) : visibleItems.length;
+    const maxBaseDelay = Math.max(0, maxItems - 1) * 150;
+    const maxTotalDuration = maxBaseDelay + 400 + 1200;
+
     return (
-        <div className="relative w-full mt-fluid-xl">
+        <div className={`relative w-full mt-fluid-xl ${isInteractive ? 'pointer-events-auto' : 'pointer-events-none'}`}>
             {!hideFilters && (
                 <>
                     {/* Toolbar: Search and Filters */}
@@ -391,7 +458,12 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
             {/* List and Pagination Wrapper */}
             <div className="flex flex-col w-full pb-fluid-2xl px-fluid-xs md:px-fluid-m">
                 {/* List */}
-                <div className="grid grid-cols-1 auto-rows-fr w-full bg-background/90 relative z-10" onMouseLeave={handleMouseLeaveSection}>
+                <div className="grid grid-cols-1 auto-rows-fr w-full relative z-10" onMouseLeave={handleMouseLeaveSection}>
+                    {/* Universal Background drawer effect for the entire block */}
+                    <div 
+                        className={`absolute inset-0 -z-10 bg-background/90 origin-bottom transition-transform ${mounted ? 'scale-y-100' : 'scale-y-0'}`} 
+                        style={{ transitionDuration: `${maxTotalDuration}ms`, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }} 
+                    />
                     {visibleItems.length === 0 ? (
                         <div className="w-full text-center py-20 text-foreground/50 italic bg-muted/30 rounded-xl border border-dashed mt-4">
                             {locale === 'pt' ? 'Nenhum resultado encontrado.' : 'No results found.'}
@@ -412,16 +484,21 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
                                 else state = "exit_external";
                             }
 
+                            const reverseIndex = arr.length - 1 - i;
+                            const baseDelay = reverseIndex * 150;
+
                             return (
                                 <InteractiveRow 
                                     key={item.id} 
                                     item={item} 
                                     index={i} 
+                                    baseDelay={baseDelay}
                                     hoverState={state} 
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={() => {}}
                                     isFadeItem={hideFilters && i === 3}
                                     locale={locale}
+                                    mounted={mounted}
                                 />
                             );
                         })

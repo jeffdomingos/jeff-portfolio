@@ -95,12 +95,21 @@ export function HeroAnimatedContent({ headline, subheadline, carouselItems, ctaL
                             />
 
                             {subheadline && (
-                                <div className={`hidden md:block transition-all duration-1000 transform z-20 relative ${showSubAndImage ? 'translate-y-0 opacity-100 mb-4 md:mb-fluid-m' : 'translate-y-10 opacity-0 mb-0'}`}>
-                                    <p className={`text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2`}>
-                                        <span className="bg-white py-1 px-2 box-decoration-clone">
-                                            {subheadline}
-                                        </span>
-                                    </p>
+                                <div className={`hidden md:block z-20 relative transition-all duration-1000 ${showSubAndImage ? 'mb-4 md:mb-fluid-m' : 'mb-0'}`}>
+                                    <div style={{ overflow: 'hidden', padding: '4px 0 8px 0' }}>
+                                        <div 
+                                            style={{ 
+                                                transform: showSubAndImage ? 'translateY(0)' : 'translateY(150%)',
+                                                transition: 'transform 1500ms cubic-bezier(0, 0, 0.2, 1)'
+                                            }}
+                                        >
+                                            <p className={`text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2`}>
+                                                <span className="bg-white py-1 px-2 box-decoration-clone">
+                                                    <BoldReserver text={subheadline} />
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>
