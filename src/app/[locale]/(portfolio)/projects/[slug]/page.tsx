@@ -124,6 +124,7 @@ export default function ProjectDetail({ params: { locale, slug } }: { params: { 
                     blocksToRender.map((block: any, index: number) => {
                         switch (block.type) {
                             case 'text':
+                            case 'full-width-text':
                                 return <MDXRemote key={index} source={block.content || ''} components={mdxComponents} />;
                             case 'image':
                                 return <MDXImage key={index} src={block.src} alt={block.alt} invertInDark={block.invertInDark} lightBgInDark={block.lightBgInDark} />;

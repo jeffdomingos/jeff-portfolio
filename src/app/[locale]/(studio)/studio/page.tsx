@@ -2,7 +2,7 @@ import { getStudioPageContent } from "@/utils/studio-content";
 import Link from "next/link";
 import Image from "next/image";
 
-import { HeroAnimatedContent } from "@/components/organisms/HeroAnimatedContent";
+import { StudioHeroContent } from "@/components/organisms/StudioHeroContent";
 import { MouseTiltBackground } from "@/components/atoms/MouseTiltBackground";
 import { CasesSection } from "@/components/organisms/CasesSection";
 import { IntermissionSVGs } from "@/components/organisms/IntermissionSVGs";
@@ -37,7 +37,7 @@ export default function StudioPage({ params: { locale } }: { params: { locale: s
                 <section className="relative w-full min-h-[100svh] h-auto flex flex-col items-center justify-start lg:justify-center text-center overflow-hidden pt-16 pb-12 lg:pt-14 lg:pb-0">
                     <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
                     <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
-                    <HeroAnimatedContent 
+                    <StudioHeroContent 
                         headline={content.hero.headline} 
                         subheadline={content.hero.subheadline}
                         carouselItems={content.hero.carousel} 

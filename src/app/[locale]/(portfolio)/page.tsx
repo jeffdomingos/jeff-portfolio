@@ -1,19 +1,12 @@
-import { getHomePageContent } from "@/utils/content";
-import Link from "next/link";
-import Image from "next/image";
-
-import { HeroAnimatedContent } from "@/components/organisms/HeroAnimatedContent";
-import { MouseTiltBackground } from "@/components/atoms/MouseTiltBackground";
-import { CasesSection } from "@/components/organisms/CasesSection";
+import { getHomePageContent, getAllProjects } from "@/utils/content";
+import { CompactHeroContent } from "@/components/organisms/CompactHeroContent";
+import { InteractiveListSection, ListItem } from "@/components/organisms/InteractiveListSection";
 import { IntermissionSVGs } from "@/components/organisms/IntermissionSVGs";
 import dynamic from 'next/dynamic';
 
 const ApproachSection = dynamic(() => import('@/components/organisms/ApproachSection').then(mod => mod.ApproachSection));
 const TestimonialsSection = dynamic(() => import('@/components/organisms/TestimonialsSection').then(mod => mod.TestimonialsSection));
 const AvailabilitySection = dynamic(() => import('@/components/organisms/AvailabilitySection').then(mod => mod.AvailabilitySection));
-import { TerminalTitle } from "@/components/atoms/TerminalTitle";
-import { m } from "framer-motion";
-import { BELOW_FOLD_IMAGE, IMAGE_SIZES } from "@/lib/performance/image-hints";
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
     return { title: `Jeff Domingos - ${locale.toUpperCase()}` };
@@ -21,36 +14,45 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 
 export default function HomePage({ params: { locale } }: { params: { locale: string } }) {
     const content = getHomePageContent(locale);
+    const allProjects = getAllProjects(locale);
+    
+    const items: ListItem[] = content.caseList.items.map((item: any, index: number) => {
+        const projectSlug = item.href.split('/').pop();
+        const fullProject = allProjects.find(p => p.meta.slug === projectSlug);
+
+        return {
+            id: `home-case-${index}`,
+            title: item.title,
+            context: item.context,
+            summary: item.summary || "",
+            href: item.href,
+            thumbnailImage: item.thumbnailImage,
+            tags: fullProject?.meta.tags || [],
+        };
+    });
 
     return (
         <div>
-            {/* Hero Section Wrapper para permitir o sticky mask */}
-            <div className="relative w-full hero-wrapper bg-background">
+            {/* Combined Hero and Cases Section to share the same background and fade mask */}
+            <div className="relative w-full bg-background hero-wrapper">
                 <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <section className="relative w-full min-h-[100svh] h-auto flex flex-col items-center justify-start lg:justify-center text-center overflow-hidden pt-16 pb-12 lg:pt-14 lg:pb-0">
-                    <MouseTiltBackground imageUrl={content.hero.backgroundMedia} />
-                    <div className="absolute inset-0 -z-10 bg-background/50 transition-colors duration-300"></div>
-                    <HeroAnimatedContent 
+                
+                <section className="w-full h-auto flex flex-col items-start justify-start text-left pt-20 pb-6 md:pt-24 md:pb-8">
+                    <CompactHeroContent 
                         headline={content.hero.headline} 
                         subheadline={content.hero.subheadline}
-                        carouselItems={content.hero.carousel} 
                         ctaLabel={content.hero.ctaLabel}
                         ctaHref={content.hero.ctaHref}
                     />
                 </section>
-            </div>
 
-            {/* Cases Section */}
-            <div id="cases" className="relative w-full bg-background pt-fluid-2xl">
-                <div className="absolute inset-0 pointer-events-none"><div className="fade-mask" /></div>
-                <div className="relative z-40 px-fluid-xs md:px-fluid-m mb-fluid-2xl w-full">
-                    <TerminalTitle 
-                        as="h2"
-                        text={content.sectionDividerCases.title}
-                        className="text-step-6 type-display mb-fluid-2xl"
-                    />
+                {/* Cases Section - Logo abaixo do Hero na primeira dobra */}
+                <div id="cases" className="relative w-full pt-2 md:pt-4">
+                    {/* The projects list immediately below hero */}
+                    <div className="relative z-40">
+                        <InteractiveListSection items={items} locale={locale} hideFilters={true} />
+                    </div>
                 </div>
-                <CasesSection items={content.caseList.items} locale={locale} />
             </div>
 
             <IntermissionSVGs />
