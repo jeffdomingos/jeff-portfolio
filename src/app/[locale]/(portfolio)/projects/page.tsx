@@ -24,18 +24,18 @@ export default function ProjectsPage({ params: { locale } }: { params: { locale:
             {/* Header Reading Protection Gradient */}
             <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[75]"></div>
             
-            <div className="px-fluid-xs md:px-fluid-m flex flex-col md:flex-row md:items-end justify-between mb-fluid-xl pb-fluid-s w-full">
-                <h1 className="text-step-4 md:text-step-5 type-display text-left m-0 p-0">
+            <div className="px-fluid-xs md:px-fluid-m flex flex-col md:flex-row md:items-end justify-between mb-4 md:mb-8 w-full">
+                <h1 className="text-step-4 md:text-step-5 type-display text-left m-0 p-0 shrink-0 mr-8">
                     {locale === 'pt' ? 'Projetos' : 'Projects'}
                 </h1>
-                <p className="text-step-0 type-body text-foreground/70 mt-2 md:mt-0 max-w-md text-left md:text-right">
+                <p className="text-step-0 type-body text-foreground/70 mt-4 md:mt-0 max-w-[600px] text-left md:text-right">
                     {locale === 'pt' 
                         ? 'Uma coleção de cases explorando UX, UI e estratégia de produto.' 
                         : 'A collection of cases exploring UX, UI, and product strategy.'}
                 </p>
             </div>
 
-            <InteractiveListSection items={items} locale={locale} />
+            <InteractiveListSection items={items} locale={locale} disableEntranceAnimation={true} />
         </div>
     );
 }

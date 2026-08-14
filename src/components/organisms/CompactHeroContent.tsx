@@ -64,7 +64,10 @@ export function CompactHeroContent({ headline, subheadline, ctaLabel, ctaHref }:
 
     return (
         <div className="w-full flex-1 grid-layout items-center">
-            <div className="col-span-12 lg:col-span-7 flex flex-col items-start text-left relative z-40 max-w-full lg:max-w-4xl">
+            <div 
+                className={`col-span-12 lg:col-span-7 flex flex-col items-start text-left relative z-40 max-w-full lg:max-w-4xl transition-transform ${showSubheadline ? 'translate-y-0' : 'translate-y-[30vh]'}`}
+                style={{ transitionDuration: '2000ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+            >
                 <div className="w-full pr-0 lg:pr-8">
                     {/* Headline with continuous non-blocking typing */}
                     <AnimatedTypingText 
@@ -84,7 +87,7 @@ export function CompactHeroContent({ headline, subheadline, ctaLabel, ctaHref }:
                         <div className="w-full z-40 relative mt-2 md:mt-3">
                             <div 
                                 className={`transition-all ${showSubheadline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                                style={{ transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                                style={{ transitionDelay: '300ms', transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
                             >
                                 <p className="text-step-0 type-body text-foreground max-w-[700px] text-left leading-[1.8] -ml-2">
                                     <span className="bg-white py-1 px-2 box-decoration-clone">
@@ -98,7 +101,10 @@ export function CompactHeroContent({ headline, subheadline, ctaLabel, ctaHref }:
             </div>
 
             {/* Logo expandido no canto direito escalando de forma dinâmica com respiros no topo e na base em relação ao hero-wrapper */}
-            <div className="hidden lg:block absolute right-[-20px] xl:right-[calc(50vw-680px)] top-[-40px] bottom-[140px] rotate-[24deg] z-20 pointer-events-none">
+            <div 
+                className={`hidden lg:block absolute right-[-20px] xl:right-[calc(50vw-680px)] top-[-40px] bottom-[140px] rotate-[24deg] z-20 pointer-events-none transition-all ${showSubheadline ? 'opacity-100 blur-none' : 'opacity-0 blur-md'}`}
+                style={{ transitionDuration: '2000ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+            >
                 <div className="h-full aspect-[220/326] text-foreground transition-all duration-1000">
                     <IconAnimatedLogo mouseX={mouseX} mouseY={mouseY} isIdle={isIdle} />
                 </div>

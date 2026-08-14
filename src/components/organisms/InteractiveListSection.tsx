@@ -10,7 +10,8 @@ import { BoldReserver } from "@/components/atoms/BoldReserver";
 import { 
     Activity, Zap, Target, TrendingUp, 
     ClockArrowDown, FileCode, BotMessageSquare,
-    Banknote, Sparkles, ChartNoAxesCombined, Footprints, UserSearch 
+    Banknote, Sparkles, ChartNoAxesCombined, Footprints, UserSearch,
+    Users, BrainCircuit, Radar, Database, Compass, LineChart
 } from "lucide-react";
 
 const getIconForTitle = (title: string, index: number) => {
@@ -31,6 +32,16 @@ const getIconForTitle = (title: string, index: number) => {
     if (t.includes("2-week") || t.includes("sprint de 2")) return Footprints;
     if (t.includes("5 prototypes") || t.includes("5 protótipos")) return UserSearch;
 
+    // Intelie Performance Report (Human-in-the-loop)
+    if (t.includes("human-in-the-loop")) return Users;
+    if (t.includes("ai model") || t.includes("treinamento de ia")) return BrainCircuit;
+    if (t.includes("autonomous") || t.includes("diagnóstico")) return Radar;
+
+    // Intelie Annotations
+    if (t.includes("data management") || t.includes("gestão de dados")) return Database;
+    if (t.includes("navigation") || t.includes("navegação")) return Compass;
+    if (t.includes("ux analytics")) return LineChart;
+
     // Fallbacks
     const fallbacks = [Activity, Target, TrendingUp];
     return fallbacks[index % fallbacks.length];
@@ -50,6 +61,7 @@ interface InteractiveListSectionProps {
     items: ListItem[];
     locale: string;
     hideFilters?: boolean;
+    disableEntranceAnimation?: boolean;
 }
 
 function InteractiveRow({ 
@@ -110,8 +122,8 @@ function InteractiveRow({
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-0 border-t border-foreground origin-right group-hover/row:origin-left scale-x-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] delay-100 group-hover/row:scale-x-100 group-hover/row:delay-0 z-[80] pointer-events-none" />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[100vw] h-0 border-b border-foreground origin-right group-hover/row:origin-left scale-x-0 transition-transform duration-500 ease-[0.21,0.47,0.32,0.98] delay-0 group-hover/row:scale-x-100 group-hover/row:delay-100 z-[80] pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row md:items-stretch justify-between cursor-pointer transition-colors duration-500 rounded-xl md:rounded-none flex-1">
-                <div className="flex flex-row items-stretch w-full md:w-2/3 lg:w-[40%]">
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-stretch justify-between cursor-pointer transition-colors duration-500 rounded-xl md:rounded-none flex-1">
+                <div className="flex flex-row items-stretch w-full lg:w-[40%] shrink-0">
                     {item.thumbnailImage && (
                         <div 
                             className={`relative w-24 md:w-[200px] shrink-0 overflow-hidden bg-muted hidden md:block my-[2px] transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
@@ -148,7 +160,7 @@ function InteractiveRow({
                 </div>
                 
                 <div 
-                    className={`relative flex flex-col w-full lg:w-[45%] h-full transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                    className={`relative flex flex-col w-full lg:w-[45%] shrink-0 h-full transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
                     style={{ transitionDelay: `${staggerBase + 300}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
                 >
                     {item.summary && item.summary.includes(' • ') ? (
@@ -162,23 +174,25 @@ function InteractiveRow({
                                         const colClass = i === 0 ? 'md:col-start-1' : i === 1 ? 'md:col-start-2' : 'md:col-start-3';
                                         return (
                                             <Fragment key={`ghost-${i}`}>
-                                                <div className={`${colClass} md:row-start-1 flex flex-col px-3 md:px-4 h-full`}>
+                                                <div className={`${colClass} md:row-start-1 flex flex-col px-3 md:px-4 pl-9 md:pl-11 h-full relative`}>
                                                     <div className="w-fit max-w-full mr-auto text-left flex flex-col h-full">
                                                         <div className="grow" />
                                                         {(() => {
                                                             const KpiIcon = getIconForTitle(title, i);
                                                             return (
-                                                                <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest shrink-0 flex items-center gap-2">
-                                                                    <KpiIcon className="w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
-                                                                    {title.trim()}
-                                                                </span>
+                                                                <>
+                                                                    <KpiIcon className="absolute left-3 md:left-4 top-[0.1rem] md:top-[0.15rem] w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
+                                                                    <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest shrink-0 block">
+                                                                        {title.trim()}
+                                                                    </span>
+                                                                </>
                                                             );
                                                         })()}
                                                         <div className="grow" />
                                                     </div>
                                                 </div>
                                                 {desc && (
-                                                    <div className={`${colClass} md:row-start-2 flex flex-col px-3 md:px-4`}>
+                                                    <div className={`${colClass} md:row-start-2 flex flex-col px-3 md:px-4 pl-9 md:pl-11`}>
                                                         <div className="w-fit max-w-full mr-auto text-left">
                                                             <span className="type-body text-step--1 leading-tight mt-1 block">{desc}</span>
                                                         </div>
@@ -199,23 +213,25 @@ function InteractiveRow({
                                         const colClass = i === 0 ? 'md:col-start-1' : i === 1 ? 'md:col-start-2' : 'md:col-start-3';
                                         return (
                                             <Fragment key={`active-${i}`}>
-                                                <div className={`${colClass} md:row-start-1 flex flex-col h-full px-3 md:px-4`}>
+                                                <div className={`${colClass} md:row-start-1 flex flex-col h-full px-3 md:px-4 pl-9 md:pl-11 relative`}>
                                                     <div className="flex flex-col h-full shrink-0 w-fit max-w-full mr-auto text-left">
                                                         <div className="transition-all duration-500 ease-[0.21,0.47,0.32,0.98] grow" />
                                                         {(() => {
                                                             const KpiIcon = getIconForTitle(title, i);
                                                             return (
-                                                                <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest text-foreground/50 transition-colors duration-500 lg:group-hover:text-foreground shrink-0 flex items-center gap-2">
-                                                                    <KpiIcon className="w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
-                                                                    {title.trim()}
-                                                                </span>
+                                                                <>
+                                                                    <KpiIcon className="absolute left-3 md:left-4 top-[0.1rem] md:top-[0.15rem] w-[1.125rem] h-[1.125rem] md:w-5 md:h-5 opacity-70" strokeWidth={2.5} />
+                                                                    <span className="type-label font-heading text-step-0 md:text-[0.9375rem] font-semibold uppercase tracking-widest text-foreground/50 transition-colors duration-500 lg:group-hover:text-foreground shrink-0 block">
+                                                                        {title.trim()}
+                                                                    </span>
+                                                                </>
                                                             );
                                                         })()}
                                                         <div className="transition-all duration-500 ease-[0.21,0.47,0.32,0.98] grow" />
                                                     </div>
                                                 </div>
                                                 {desc && (
-                                                    <div className={`${colClass} md:row-start-2 flex flex-col px-3 md:px-4`}>
+                                                    <div className={`${colClass} md:row-start-2 flex flex-col px-3 md:px-4 pl-9 md:pl-11`}>
                                                         <div className="w-fit max-w-full mr-auto text-left">
                                                             <div className="grid transition-[grid-template-rows] duration-500 ease-[0.21,0.47,0.32,0.98] grid-rows-[0fr] lg:group-hover:grid-rows-[1fr]">
                                                                 <div className="overflow-hidden">
@@ -247,7 +263,7 @@ function InteractiveRow({
                 </div>
 
                 <div 
-                    className={`flex flex-col md:flex-row md:items-center gap-4 w-full md:w-1/3 lg:w-[15%] justify-start shrink-0 py-4 md:py-6 px-4 md:px-6 transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+                    className={`flex flex-col lg:flex-row lg:items-center gap-4 w-full lg:w-[15%] min-w-0 justify-start shrink-0 py-4 md:py-6 px-4 md:px-6 transition-all ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
                     style={{ transitionDelay: `${staggerBase + 400}ms`, transitionDuration: '1200ms', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
                 >
                     {item.tags && item.tags.length > 0 && (() => {
@@ -255,13 +271,13 @@ function InteractiveRow({
                         if (filteredTags.length === 0) return null;
                         
                         return (
-                            <div className="flex flex-wrap flex-1 justify-start text-left text-step--2 md:text-[0.75rem] type-label opacity-70">
+                            <p className="flex-1 min-w-0 text-left text-step--2 md:text-[0.75rem] type-label opacity-70 line-clamp-3">
                                 {filteredTags.slice(0, 3).map((tag, tagIndex, arr) => (
-                                    <span key={tagIndex} className="whitespace-nowrap">
-                                        #{tag}{tagIndex < arr.length - 1 ? ', ' : ''}&nbsp;
+                                    <span key={tagIndex}>
+                                        #{tag}{tagIndex < arr.length - 1 ? ', ' : ''}
                                     </span>
                                 ))}
-                            </div>
+                            </p>
                         );
                     })()}
                     
@@ -296,9 +312,10 @@ function InteractiveRow({
     );
 }
 
-export function InteractiveListSection({ items, locale, hideFilters = false }: InteractiveListSectionProps) {
-    const [mounted, setMounted] = useState(false);
-    const [isInteractive, setIsInteractive] = useState(false);
+export function InteractiveListSection({ items, locale, hideFilters = false, disableEntranceAnimation = false }: InteractiveListSectionProps) {
+    const [mounted, setMounted] = useState(disableEntranceAnimation);
+    const [isInteractive, setIsInteractive] = useState(disableEntranceAnimation);
+    const [isTagsExpanded, setIsTagsExpanded] = useState(false);
     
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -374,11 +391,26 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
         const tags = new Set<string>();
         items.forEach(item => {
             if (item.tags) {
-                item.tags.forEach(tag => tags.add(tag));
+                item.tags.forEach(tag => {
+                    const strTag = String(tag);
+                    if (!/^\d{4}$/.test(strTag)) {
+                        tags.add(strTag);
+                    }
+                });
             }
         });
         return Array.from(tags).sort();
     }, [items]);
+
+    const sortedTags = useMemo(() => {
+        return [...uniqueTags].sort((a, b) => {
+            const aSelected = selectedTags.includes(a);
+            const bSelected = selectedTags.includes(b);
+            if (aSelected && !bSelected) return -1;
+            if (!aSelected && bSelected) return 1;
+            return String(a).localeCompare(String(b));
+        });
+    }, [uniqueTags, selectedTags]);
 
     const filteredItems = useMemo(() => {
         return items.filter(item => {
@@ -432,12 +464,12 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
                         </div>
                         
                         {uniqueTags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 items-center justify-start md:justify-end">
-                                {uniqueTags.map(tag => (
+                            <div className="flex flex-wrap gap-2 items-center justify-start md:justify-end flex-1 md:ml-8">
+                                {sortedTags.slice(0, isTagsExpanded ? sortedTags.length : 5).map(tag => (
                                     <button
                                         key={tag}
                                         onClick={() => handleTagToggle(tag)}
-                                        className={`px-3 py-1 rounded-full border border-dashed text-step--2 type-label transition-colors
+                                        className={`px-3 py-1 rounded-full border border-dashed text-step--2 type-label transition-colors shrink-0
                                             ${selectedTags.includes(tag) 
                                                 ? 'bg-foreground text-background border-foreground' 
                                                 : 'bg-transparent text-foreground/70 border-foreground/30 hover:border-foreground'}
@@ -446,6 +478,14 @@ export function InteractiveListSection({ items, locale, hideFilters = false }: I
                                         {tag}
                                     </button>
                                 ))}
+                                {sortedTags.length > 5 && (
+                                    <button
+                                        onClick={() => setIsTagsExpanded(!isTagsExpanded)}
+                                        className="px-3 py-1 rounded-full text-step--2 type-label text-foreground/60 hover:text-foreground transition-colors underline decoration-dashed underline-offset-4 shrink-0"
+                                    >
+                                        {isTagsExpanded ? (locale === 'pt' ? '- MENOS' : '- LESS') : `+ ${sortedTags.length - 5} TAGS`}
+                                    </button>
+                                )}
                             </div>
                         )}
                     </div>
