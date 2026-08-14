@@ -6,7 +6,7 @@ import { AnimatedTypingText } from "@/components/atoms/AnimatedTypingText"
 import { useMotionValue, motion } from "framer-motion"
 import { IconAnimatedLogo } from "./IconAnimatedLogo"
 
-export function CompactHeroContent({ headline, subheadline }: { headline: string, subheadline?: string }) {
+export function CompactHeroContent({ headline, subheadline, ctaLabel, ctaHref }: { headline: string, subheadline?: string, ctaLabel?: string, ctaHref?: string }) {
     const lenis = useLenis()
 
     const mouseX = useMotionValue(0);
